@@ -33223,7 +33223,7 @@ var hasRequiredTimestamp;
 function requireTimestamp () {
 	if (hasRequiredTimestamp) return timestamp;
 	hasRequiredTimestamp = 1;
-	Object.defineProperty(timestamp, '__esModule', { value: true });
+	Object.defineProperty(timestamp, "__esModule", { value: true });
 	timestamp.Timestamp = undefined;
 	const runtime_1 = require$$1$1;
 	const runtime_2 = require$$1$1;
@@ -33234,174 +33234,124 @@ function requireTimestamp () {
 	const runtime_7 = require$$1$1;
 	// @generated message type with reflection information, may provide speed optimized methods
 	class Timestamp$Type extends runtime_7.MessageType {
-	  constructor() {
-	    super('google.protobuf.Timestamp', [
-	      { no: 1, name: 'seconds', kind: 'scalar', T: 3 /*ScalarType.INT64*/ },
-	      { no: 2, name: 'nanos', kind: 'scalar', T: 5 /*ScalarType.INT32*/ }
-	    ]);
-	  }
-	  /**
-	   * Creates a new `Timestamp` for the current time.
-	   */
-	  now() {
-	    const msg = this.create();
-	    const ms = Date.now();
-	    msg.seconds = runtime_6.PbLong.from(Math.floor(ms / 1000)).toString();
-	    msg.nanos = (ms % 1000) * 1000000;
-	    return msg
-	  }
-	  /**
-	   * Converts a `Timestamp` to a JavaScript Date.
-	   */
-	  toDate(message) {
-	    return new Date(
-	      runtime_6.PbLong.from(message.seconds).toNumber() * 1000 +
-	        Math.ceil(message.nanos / 1000000)
-	    )
-	  }
-	  /**
-	   * Converts a JavaScript Date to a `Timestamp`.
-	   */
-	  fromDate(date) {
-	    const msg = this.create();
-	    const ms = date.getTime();
-	    msg.seconds = runtime_6.PbLong.from(Math.floor(ms / 1000)).toString();
-	    msg.nanos = (ms % 1000) * 1000000;
-	    return msg
-	  }
-	  /**
-	   * In JSON format, the `Timestamp` type is encoded as a string
-	   * in the RFC 3339 format.
-	   */
-	  internalJsonWrite(message, options) {
-	    let ms = runtime_6.PbLong.from(message.seconds).toNumber() * 1000;
-	    if (
-	      ms < Date.parse('0001-01-01T00:00:00Z') ||
-	      ms > Date.parse('9999-12-31T23:59:59Z')
-	    )
-	      throw new Error(
-	        'Unable to encode Timestamp to JSON. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.'
-	      )
-	    if (message.nanos < 0)
-	      throw new Error(
-	        'Unable to encode invalid Timestamp to JSON. Nanos must not be negative.'
-	      )
-	    let z = 'Z';
-	    if (message.nanos > 0) {
-	      let nanosStr = (message.nanos + 1000000000).toString().substring(1);
-	      if (nanosStr.substring(3) === '000000')
-	        z = '.' + nanosStr.substring(0, 3) + 'Z';
-	      else if (nanosStr.substring(6) === '000')
-	        z = '.' + nanosStr.substring(0, 6) + 'Z';
-	      else z = '.' + nanosStr + 'Z';
+	    constructor() {
+	        super("google.protobuf.Timestamp", [
+	            { no: 1, name: "seconds", kind: "scalar", T: 3 /*ScalarType.INT64*/ },
+	            { no: 2, name: "nanos", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
+	        ]);
 	    }
-	    return new Date(ms).toISOString().replace('.000Z', z)
-	  }
-	  /**
-	   * In JSON format, the `Timestamp` type is encoded as a string
-	   * in the RFC 3339 format.
-	   */
-	  internalJsonRead(json, options, target) {
-	    if (typeof json !== 'string')
-	      throw new Error(
-	        'Unable to parse Timestamp from JSON ' +
-	          (0, runtime_5.typeofJsonValue)(json) +
-	          '.'
-	      )
-	    let matches = json.match(
-	      /^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(?:Z|\.([0-9]{3,9})Z|([+-][0-9][0-9]:[0-9][0-9]))$/
-	    );
-	    if (!matches)
-	      throw new Error('Unable to parse Timestamp from JSON. Invalid format.')
-	    let ms = Date.parse(
-	      matches[1] +
-	        '-' +
-	        matches[2] +
-	        '-' +
-	        matches[3] +
-	        'T' +
-	        matches[4] +
-	        ':' +
-	        matches[5] +
-	        ':' +
-	        matches[6] +
-	        (matches[8] ? matches[8] : 'Z')
-	    );
-	    if (Number.isNaN(ms))
-	      throw new Error('Unable to parse Timestamp from JSON. Invalid value.')
-	    if (
-	      ms < Date.parse('0001-01-01T00:00:00Z') ||
-	      ms > Date.parse('9999-12-31T23:59:59Z')
-	    )
-	      throw new globalThis.Error(
-	        'Unable to parse Timestamp from JSON. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.'
-	      )
-	    if (!target) target = this.create();
-	    target.seconds = runtime_6.PbLong.from(ms / 1000).toString();
-	    target.nanos = 0;
-	    if (matches[7])
-	      target.nanos =
-	        parseInt('1' + matches[7] + '0'.repeat(9 - matches[7].length)) -
-	        1000000000;
-	    return target
-	  }
-	  create(value) {
-	    const message = { seconds: '0', nanos: 0 };
-	    globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, {
-	      enumerable: false,
-	      value: this
-	    });
-	    if (value !== undefined)
-	      (0, runtime_3.reflectionMergePartial)(this, message, value);
-	    return message
-	  }
-	  internalBinaryRead(reader, length, options, target) {
-	    let message = target !== null && target !== undefined ? target : this.create(),
-	      end = reader.pos + length;
-	    while (reader.pos < end) {
-	      let [fieldNo, wireType] = reader.tag();
-	      switch (fieldNo) {
-	        case /* int64 seconds */ 1:
-	          message.seconds = reader.int64().toString();
-	          break
-	        case /* int32 nanos */ 2:
-	          message.nanos = reader.int32();
-	          break
-	        default:
-	          let u = options.readUnknownField;
-	          if (u === 'throw')
-	            throw new globalThis.Error(
-	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-	            )
-	          let d = reader.skip(wireType);
-	          if (u !== false)
-	            (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(
-	              this.typeName,
-	              message,
-	              fieldNo,
-	              wireType,
-	              d
-	            );
-	      }
+	    /**
+	     * Creates a new `Timestamp` for the current time.
+	     */
+	    now() {
+	        const msg = this.create();
+	        const ms = Date.now();
+	        msg.seconds = runtime_6.PbLong.from(Math.floor(ms / 1000)).toString();
+	        msg.nanos = (ms % 1000) * 1000000;
+	        return msg;
 	    }
-	    return message
-	  }
-	  internalBinaryWrite(message, writer, options) {
-	    /* int64 seconds = 1; */
-	    if (message.seconds !== '0')
-	      writer.tag(1, runtime_1.WireType.Varint).int64(message.seconds);
-	    /* int32 nanos = 2; */
-	    if (message.nanos !== 0)
-	      writer.tag(2, runtime_1.WireType.Varint).int32(message.nanos);
-	    let u = options.writeUnknownFields;
-	    if (u !== false)
-	      (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(
-	        this.typeName,
-	        message,
-	        writer
-	      );
-	    return writer
-	  }
+	    /**
+	     * Converts a `Timestamp` to a JavaScript Date.
+	     */
+	    toDate(message) {
+	        return new Date(runtime_6.PbLong.from(message.seconds).toNumber() * 1000 + Math.ceil(message.nanos / 1000000));
+	    }
+	    /**
+	     * Converts a JavaScript Date to a `Timestamp`.
+	     */
+	    fromDate(date) {
+	        const msg = this.create();
+	        const ms = date.getTime();
+	        msg.seconds = runtime_6.PbLong.from(Math.floor(ms / 1000)).toString();
+	        msg.nanos = (ms % 1000) * 1000000;
+	        return msg;
+	    }
+	    /**
+	     * In JSON format, the `Timestamp` type is encoded as a string
+	     * in the RFC 3339 format.
+	     */
+	    internalJsonWrite(message, options) {
+	        let ms = runtime_6.PbLong.from(message.seconds).toNumber() * 1000;
+	        if (ms < Date.parse("0001-01-01T00:00:00Z") || ms > Date.parse("9999-12-31T23:59:59Z"))
+	            throw new Error("Unable to encode Timestamp to JSON. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.");
+	        if (message.nanos < 0)
+	            throw new Error("Unable to encode invalid Timestamp to JSON. Nanos must not be negative.");
+	        let z = "Z";
+	        if (message.nanos > 0) {
+	            let nanosStr = (message.nanos + 1000000000).toString().substring(1);
+	            if (nanosStr.substring(3) === "000000")
+	                z = "." + nanosStr.substring(0, 3) + "Z";
+	            else if (nanosStr.substring(6) === "000")
+	                z = "." + nanosStr.substring(0, 6) + "Z";
+	            else
+	                z = "." + nanosStr + "Z";
+	        }
+	        return new Date(ms).toISOString().replace(".000Z", z);
+	    }
+	    /**
+	     * In JSON format, the `Timestamp` type is encoded as a string
+	     * in the RFC 3339 format.
+	     */
+	    internalJsonRead(json, options, target) {
+	        if (typeof json !== "string")
+	            throw new Error("Unable to parse Timestamp from JSON " + (0, runtime_5.typeofJsonValue)(json) + ".");
+	        let matches = json.match(/^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(?:Z|\.([0-9]{3,9})Z|([+-][0-9][0-9]:[0-9][0-9]))$/);
+	        if (!matches)
+	            throw new Error("Unable to parse Timestamp from JSON. Invalid format.");
+	        let ms = Date.parse(matches[1] + "-" + matches[2] + "-" + matches[3] + "T" + matches[4] + ":" + matches[5] + ":" + matches[6] + (matches[8] ? matches[8] : "Z"));
+	        if (Number.isNaN(ms))
+	            throw new Error("Unable to parse Timestamp from JSON. Invalid value.");
+	        if (ms < Date.parse("0001-01-01T00:00:00Z") || ms > Date.parse("9999-12-31T23:59:59Z"))
+	            throw new globalThis.Error("Unable to parse Timestamp from JSON. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.");
+	        if (!target)
+	            target = this.create();
+	        target.seconds = runtime_6.PbLong.from(ms / 1000).toString();
+	        target.nanos = 0;
+	        if (matches[7])
+	            target.nanos = (parseInt("1" + matches[7] + "0".repeat(9 - matches[7].length)) - 1000000000);
+	        return target;
+	    }
+	    create(value) {
+	        const message = { seconds: "0", nanos: 0 };
+	        globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, { enumerable: false, value: this });
+	        if (value !== undefined)
+	            (0, runtime_3.reflectionMergePartial)(this, message, value);
+	        return message;
+	    }
+	    internalBinaryRead(reader, length, options, target) {
+	        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+	        while (reader.pos < end) {
+	            let [fieldNo, wireType] = reader.tag();
+	            switch (fieldNo) {
+	                case /* int64 seconds */ 1:
+	                    message.seconds = reader.int64().toString();
+	                    break;
+	                case /* int32 nanos */ 2:
+	                    message.nanos = reader.int32();
+	                    break;
+	                default:
+	                    let u = options.readUnknownField;
+	                    if (u === "throw")
+	                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+	                    let d = reader.skip(wireType);
+	                    if (u !== false)
+	                        (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+	            }
+	        }
+	        return message;
+	    }
+	    internalBinaryWrite(message, writer, options) {
+	        /* int64 seconds = 1; */
+	        if (message.seconds !== "0")
+	            writer.tag(1, runtime_1.WireType.Varint).int64(message.seconds);
+	        /* int32 nanos = 2; */
+	        if (message.nanos !== 0)
+	            writer.tag(2, runtime_1.WireType.Varint).int32(message.nanos);
+	        let u = options.writeUnknownFields;
+	        if (u !== false)
+	            (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+	        return writer;
+	    }
 	}
 	/**
 	 * @generated MessageType for protobuf message google.protobuf.Timestamp
@@ -33418,17 +33368,8 @@ var hasRequiredWrappers;
 function requireWrappers () {
 	if (hasRequiredWrappers) return wrappers;
 	hasRequiredWrappers = 1;
-	Object.defineProperty(wrappers, '__esModule', { value: true });
-	wrappers.BytesValue =
-	  wrappers.StringValue =
-	  wrappers.BoolValue =
-	  wrappers.UInt32Value =
-	  wrappers.Int32Value =
-	  wrappers.UInt64Value =
-	  wrappers.Int64Value =
-	  wrappers.FloatValue =
-	  wrappers.DoubleValue =
-	    undefined;
+	Object.defineProperty(wrappers, "__esModule", { value: true });
+	wrappers.BytesValue = wrappers.StringValue = wrappers.BoolValue = wrappers.UInt32Value = wrappers.Int32Value = wrappers.UInt64Value = wrappers.Int64Value = wrappers.FloatValue = wrappers.DoubleValue = undefined;
 	// @generated by protobuf-ts 2.9.1 with parameter long_type_string,client_none,generate_dependencies
 	// @generated from protobuf file "google/protobuf/wrappers.proto" (package "google.protobuf", syntax proto3)
 	// tslint:disable
@@ -33478,76 +33419,61 @@ function requireWrappers () {
 	const runtime_7 = require$$1$1;
 	// @generated message type with reflection information, may provide speed optimized methods
 	class DoubleValue$Type extends runtime_7.MessageType {
-	  constructor() {
-	    super('google.protobuf.DoubleValue', [
-	      { no: 1, name: 'value', kind: 'scalar', T: 1 /*ScalarType.DOUBLE*/ }
-	    ]);
-	  }
-	  /**
-	   * Encode `DoubleValue` to JSON number.
-	   */
-	  internalJsonWrite(message, options) {
-	    return this.refJsonWriter.scalar(2, message.value, 'value', false, true)
-	  }
-	  /**
-	   * Decode `DoubleValue` from JSON number.
-	   */
-	  internalJsonRead(json, options, target) {
-	    if (!target) target = this.create();
-	    target.value = this.refJsonReader.scalar(json, 1, undefined, 'value');
-	    return target
-	  }
-	  create(value) {
-	    const message = { value: 0 };
-	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
-	      enumerable: false,
-	      value: this
-	    });
-	    if (value !== undefined)
-	      (0, runtime_5.reflectionMergePartial)(this, message, value);
-	    return message
-	  }
-	  internalBinaryRead(reader, length, options, target) {
-	    let message = target !== null && target !== undefined ? target : this.create(),
-	      end = reader.pos + length;
-	    while (reader.pos < end) {
-	      let [fieldNo, wireType] = reader.tag();
-	      switch (fieldNo) {
-	        case /* double value */ 1:
-	          message.value = reader.double();
-	          break
-	        default:
-	          let u = options.readUnknownField;
-	          if (u === 'throw')
-	            throw new globalThis.Error(
-	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-	            )
-	          let d = reader.skip(wireType);
-	          if (u !== false)
-	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
-	              this.typeName,
-	              message,
-	              fieldNo,
-	              wireType,
-	              d
-	            );
-	      }
+	    constructor() {
+	        super("google.protobuf.DoubleValue", [
+	            { no: 1, name: "value", kind: "scalar", T: 1 /*ScalarType.DOUBLE*/ }
+	        ]);
 	    }
-	    return message
-	  }
-	  internalBinaryWrite(message, writer, options) {
-	    /* double value = 1; */
-	    if (message.value !== 0)
-	      writer.tag(1, runtime_3.WireType.Bit64).double(message.value);
-	    let u = options.writeUnknownFields;
-	    if (u !== false)
-	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
-	        this.typeName,
-	        message,
-	        writer
-	      );
-	    return writer
-	  }
+	    /**
+	     * Encode `DoubleValue` to JSON number.
+	     */
+	    internalJsonWrite(message, options) {
+	        return this.refJsonWriter.scalar(2, message.value, "value", false, true);
+	    }
+	    /**
+	     * Decode `DoubleValue` from JSON number.
+	     */
+	    internalJsonRead(json, options, target) {
+	        if (!target)
+	            target = this.create();
+	        target.value = this.refJsonReader.scalar(json, 1, undefined, "value");
+	        return target;
+	    }
+	    create(value) {
+	        const message = { value: 0 };
+	        globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, { enumerable: false, value: this });
+	        if (value !== undefined)
+	            (0, runtime_5.reflectionMergePartial)(this, message, value);
+	        return message;
+	    }
+	    internalBinaryRead(reader, length, options, target) {
+	        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+	        while (reader.pos < end) {
+	            let [fieldNo, wireType] = reader.tag();
+	            switch (fieldNo) {
+	                case /* double value */ 1:
+	                    message.value = reader.double();
+	                    break;
+	                default:
+	                    let u = options.readUnknownField;
+	                    if (u === "throw")
+	                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+	                    let d = reader.skip(wireType);
+	                    if (u !== false)
+	                        (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+	            }
+	        }
+	        return message;
+	    }
+	    internalBinaryWrite(message, writer, options) {
+	        /* double value = 1; */
+	        if (message.value !== 0)
+	            writer.tag(1, runtime_3.WireType.Bit64).double(message.value);
+	        let u = options.writeUnknownFields;
+	        if (u !== false)
+	            (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+	        return writer;
+	    }
 	}
 	/**
 	 * @generated MessageType for protobuf message google.protobuf.DoubleValue
@@ -33555,76 +33481,61 @@ function requireWrappers () {
 	wrappers.DoubleValue = new DoubleValue$Type();
 	// @generated message type with reflection information, may provide speed optimized methods
 	class FloatValue$Type extends runtime_7.MessageType {
-	  constructor() {
-	    super('google.protobuf.FloatValue', [
-	      { no: 1, name: 'value', kind: 'scalar', T: 2 /*ScalarType.FLOAT*/ }
-	    ]);
-	  }
-	  /**
-	   * Encode `FloatValue` to JSON number.
-	   */
-	  internalJsonWrite(message, options) {
-	    return this.refJsonWriter.scalar(1, message.value, 'value', false, true)
-	  }
-	  /**
-	   * Decode `FloatValue` from JSON number.
-	   */
-	  internalJsonRead(json, options, target) {
-	    if (!target) target = this.create();
-	    target.value = this.refJsonReader.scalar(json, 1, undefined, 'value');
-	    return target
-	  }
-	  create(value) {
-	    const message = { value: 0 };
-	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
-	      enumerable: false,
-	      value: this
-	    });
-	    if (value !== undefined)
-	      (0, runtime_5.reflectionMergePartial)(this, message, value);
-	    return message
-	  }
-	  internalBinaryRead(reader, length, options, target) {
-	    let message = target !== null && target !== undefined ? target : this.create(),
-	      end = reader.pos + length;
-	    while (reader.pos < end) {
-	      let [fieldNo, wireType] = reader.tag();
-	      switch (fieldNo) {
-	        case /* float value */ 1:
-	          message.value = reader.float();
-	          break
-	        default:
-	          let u = options.readUnknownField;
-	          if (u === 'throw')
-	            throw new globalThis.Error(
-	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-	            )
-	          let d = reader.skip(wireType);
-	          if (u !== false)
-	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
-	              this.typeName,
-	              message,
-	              fieldNo,
-	              wireType,
-	              d
-	            );
-	      }
+	    constructor() {
+	        super("google.protobuf.FloatValue", [
+	            { no: 1, name: "value", kind: "scalar", T: 2 /*ScalarType.FLOAT*/ }
+	        ]);
 	    }
-	    return message
-	  }
-	  internalBinaryWrite(message, writer, options) {
-	    /* float value = 1; */
-	    if (message.value !== 0)
-	      writer.tag(1, runtime_3.WireType.Bit32).float(message.value);
-	    let u = options.writeUnknownFields;
-	    if (u !== false)
-	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
-	        this.typeName,
-	        message,
-	        writer
-	      );
-	    return writer
-	  }
+	    /**
+	     * Encode `FloatValue` to JSON number.
+	     */
+	    internalJsonWrite(message, options) {
+	        return this.refJsonWriter.scalar(1, message.value, "value", false, true);
+	    }
+	    /**
+	     * Decode `FloatValue` from JSON number.
+	     */
+	    internalJsonRead(json, options, target) {
+	        if (!target)
+	            target = this.create();
+	        target.value = this.refJsonReader.scalar(json, 1, undefined, "value");
+	        return target;
+	    }
+	    create(value) {
+	        const message = { value: 0 };
+	        globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, { enumerable: false, value: this });
+	        if (value !== undefined)
+	            (0, runtime_5.reflectionMergePartial)(this, message, value);
+	        return message;
+	    }
+	    internalBinaryRead(reader, length, options, target) {
+	        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+	        while (reader.pos < end) {
+	            let [fieldNo, wireType] = reader.tag();
+	            switch (fieldNo) {
+	                case /* float value */ 1:
+	                    message.value = reader.float();
+	                    break;
+	                default:
+	                    let u = options.readUnknownField;
+	                    if (u === "throw")
+	                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+	                    let d = reader.skip(wireType);
+	                    if (u !== false)
+	                        (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+	            }
+	        }
+	        return message;
+	    }
+	    internalBinaryWrite(message, writer, options) {
+	        /* float value = 1; */
+	        if (message.value !== 0)
+	            writer.tag(1, runtime_3.WireType.Bit32).float(message.value);
+	        let u = options.writeUnknownFields;
+	        if (u !== false)
+	            (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+	        return writer;
+	    }
 	}
 	/**
 	 * @generated MessageType for protobuf message google.protobuf.FloatValue
@@ -33632,87 +33543,61 @@ function requireWrappers () {
 	wrappers.FloatValue = new FloatValue$Type();
 	// @generated message type with reflection information, may provide speed optimized methods
 	class Int64Value$Type extends runtime_7.MessageType {
-	  constructor() {
-	    super('google.protobuf.Int64Value', [
-	      { no: 1, name: 'value', kind: 'scalar', T: 3 /*ScalarType.INT64*/ }
-	    ]);
-	  }
-	  /**
-	   * Encode `Int64Value` to JSON string.
-	   */
-	  internalJsonWrite(message, options) {
-	    return this.refJsonWriter.scalar(
-	      runtime_1.ScalarType.INT64,
-	      message.value,
-	      'value',
-	      false,
-	      true
-	    )
-	  }
-	  /**
-	   * Decode `Int64Value` from JSON string.
-	   */
-	  internalJsonRead(json, options, target) {
-	    if (!target) target = this.create();
-	    target.value = this.refJsonReader.scalar(
-	      json,
-	      runtime_1.ScalarType.INT64,
-	      runtime_2.LongType.STRING,
-	      'value'
-	    );
-	    return target
-	  }
-	  create(value) {
-	    const message = { value: '0' };
-	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
-	      enumerable: false,
-	      value: this
-	    });
-	    if (value !== undefined)
-	      (0, runtime_5.reflectionMergePartial)(this, message, value);
-	    return message
-	  }
-	  internalBinaryRead(reader, length, options, target) {
-	    let message = target !== null && target !== undefined ? target : this.create(),
-	      end = reader.pos + length;
-	    while (reader.pos < end) {
-	      let [fieldNo, wireType] = reader.tag();
-	      switch (fieldNo) {
-	        case /* int64 value */ 1:
-	          message.value = reader.int64().toString();
-	          break
-	        default:
-	          let u = options.readUnknownField;
-	          if (u === 'throw')
-	            throw new globalThis.Error(
-	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-	            )
-	          let d = reader.skip(wireType);
-	          if (u !== false)
-	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
-	              this.typeName,
-	              message,
-	              fieldNo,
-	              wireType,
-	              d
-	            );
-	      }
+	    constructor() {
+	        super("google.protobuf.Int64Value", [
+	            { no: 1, name: "value", kind: "scalar", T: 3 /*ScalarType.INT64*/ }
+	        ]);
 	    }
-	    return message
-	  }
-	  internalBinaryWrite(message, writer, options) {
-	    /* int64 value = 1; */
-	    if (message.value !== '0')
-	      writer.tag(1, runtime_3.WireType.Varint).int64(message.value);
-	    let u = options.writeUnknownFields;
-	    if (u !== false)
-	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
-	        this.typeName,
-	        message,
-	        writer
-	      );
-	    return writer
-	  }
+	    /**
+	     * Encode `Int64Value` to JSON string.
+	     */
+	    internalJsonWrite(message, options) {
+	        return this.refJsonWriter.scalar(runtime_1.ScalarType.INT64, message.value, "value", false, true);
+	    }
+	    /**
+	     * Decode `Int64Value` from JSON string.
+	     */
+	    internalJsonRead(json, options, target) {
+	        if (!target)
+	            target = this.create();
+	        target.value = this.refJsonReader.scalar(json, runtime_1.ScalarType.INT64, runtime_2.LongType.STRING, "value");
+	        return target;
+	    }
+	    create(value) {
+	        const message = { value: "0" };
+	        globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, { enumerable: false, value: this });
+	        if (value !== undefined)
+	            (0, runtime_5.reflectionMergePartial)(this, message, value);
+	        return message;
+	    }
+	    internalBinaryRead(reader, length, options, target) {
+	        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+	        while (reader.pos < end) {
+	            let [fieldNo, wireType] = reader.tag();
+	            switch (fieldNo) {
+	                case /* int64 value */ 1:
+	                    message.value = reader.int64().toString();
+	                    break;
+	                default:
+	                    let u = options.readUnknownField;
+	                    if (u === "throw")
+	                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+	                    let d = reader.skip(wireType);
+	                    if (u !== false)
+	                        (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+	            }
+	        }
+	        return message;
+	    }
+	    internalBinaryWrite(message, writer, options) {
+	        /* int64 value = 1; */
+	        if (message.value !== "0")
+	            writer.tag(1, runtime_3.WireType.Varint).int64(message.value);
+	        let u = options.writeUnknownFields;
+	        if (u !== false)
+	            (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+	        return writer;
+	    }
 	}
 	/**
 	 * @generated MessageType for protobuf message google.protobuf.Int64Value
@@ -33720,87 +33605,61 @@ function requireWrappers () {
 	wrappers.Int64Value = new Int64Value$Type();
 	// @generated message type with reflection information, may provide speed optimized methods
 	class UInt64Value$Type extends runtime_7.MessageType {
-	  constructor() {
-	    super('google.protobuf.UInt64Value', [
-	      { no: 1, name: 'value', kind: 'scalar', T: 4 /*ScalarType.UINT64*/ }
-	    ]);
-	  }
-	  /**
-	   * Encode `UInt64Value` to JSON string.
-	   */
-	  internalJsonWrite(message, options) {
-	    return this.refJsonWriter.scalar(
-	      runtime_1.ScalarType.UINT64,
-	      message.value,
-	      'value',
-	      false,
-	      true
-	    )
-	  }
-	  /**
-	   * Decode `UInt64Value` from JSON string.
-	   */
-	  internalJsonRead(json, options, target) {
-	    if (!target) target = this.create();
-	    target.value = this.refJsonReader.scalar(
-	      json,
-	      runtime_1.ScalarType.UINT64,
-	      runtime_2.LongType.STRING,
-	      'value'
-	    );
-	    return target
-	  }
-	  create(value) {
-	    const message = { value: '0' };
-	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
-	      enumerable: false,
-	      value: this
-	    });
-	    if (value !== undefined)
-	      (0, runtime_5.reflectionMergePartial)(this, message, value);
-	    return message
-	  }
-	  internalBinaryRead(reader, length, options, target) {
-	    let message = target !== null && target !== undefined ? target : this.create(),
-	      end = reader.pos + length;
-	    while (reader.pos < end) {
-	      let [fieldNo, wireType] = reader.tag();
-	      switch (fieldNo) {
-	        case /* uint64 value */ 1:
-	          message.value = reader.uint64().toString();
-	          break
-	        default:
-	          let u = options.readUnknownField;
-	          if (u === 'throw')
-	            throw new globalThis.Error(
-	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-	            )
-	          let d = reader.skip(wireType);
-	          if (u !== false)
-	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
-	              this.typeName,
-	              message,
-	              fieldNo,
-	              wireType,
-	              d
-	            );
-	      }
+	    constructor() {
+	        super("google.protobuf.UInt64Value", [
+	            { no: 1, name: "value", kind: "scalar", T: 4 /*ScalarType.UINT64*/ }
+	        ]);
 	    }
-	    return message
-	  }
-	  internalBinaryWrite(message, writer, options) {
-	    /* uint64 value = 1; */
-	    if (message.value !== '0')
-	      writer.tag(1, runtime_3.WireType.Varint).uint64(message.value);
-	    let u = options.writeUnknownFields;
-	    if (u !== false)
-	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
-	        this.typeName,
-	        message,
-	        writer
-	      );
-	    return writer
-	  }
+	    /**
+	     * Encode `UInt64Value` to JSON string.
+	     */
+	    internalJsonWrite(message, options) {
+	        return this.refJsonWriter.scalar(runtime_1.ScalarType.UINT64, message.value, "value", false, true);
+	    }
+	    /**
+	     * Decode `UInt64Value` from JSON string.
+	     */
+	    internalJsonRead(json, options, target) {
+	        if (!target)
+	            target = this.create();
+	        target.value = this.refJsonReader.scalar(json, runtime_1.ScalarType.UINT64, runtime_2.LongType.STRING, "value");
+	        return target;
+	    }
+	    create(value) {
+	        const message = { value: "0" };
+	        globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, { enumerable: false, value: this });
+	        if (value !== undefined)
+	            (0, runtime_5.reflectionMergePartial)(this, message, value);
+	        return message;
+	    }
+	    internalBinaryRead(reader, length, options, target) {
+	        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+	        while (reader.pos < end) {
+	            let [fieldNo, wireType] = reader.tag();
+	            switch (fieldNo) {
+	                case /* uint64 value */ 1:
+	                    message.value = reader.uint64().toString();
+	                    break;
+	                default:
+	                    let u = options.readUnknownField;
+	                    if (u === "throw")
+	                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+	                    let d = reader.skip(wireType);
+	                    if (u !== false)
+	                        (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+	            }
+	        }
+	        return message;
+	    }
+	    internalBinaryWrite(message, writer, options) {
+	        /* uint64 value = 1; */
+	        if (message.value !== "0")
+	            writer.tag(1, runtime_3.WireType.Varint).uint64(message.value);
+	        let u = options.writeUnknownFields;
+	        if (u !== false)
+	            (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+	        return writer;
+	    }
 	}
 	/**
 	 * @generated MessageType for protobuf message google.protobuf.UInt64Value
@@ -33808,76 +33667,61 @@ function requireWrappers () {
 	wrappers.UInt64Value = new UInt64Value$Type();
 	// @generated message type with reflection information, may provide speed optimized methods
 	class Int32Value$Type extends runtime_7.MessageType {
-	  constructor() {
-	    super('google.protobuf.Int32Value', [
-	      { no: 1, name: 'value', kind: 'scalar', T: 5 /*ScalarType.INT32*/ }
-	    ]);
-	  }
-	  /**
-	   * Encode `Int32Value` to JSON string.
-	   */
-	  internalJsonWrite(message, options) {
-	    return this.refJsonWriter.scalar(5, message.value, 'value', false, true)
-	  }
-	  /**
-	   * Decode `Int32Value` from JSON string.
-	   */
-	  internalJsonRead(json, options, target) {
-	    if (!target) target = this.create();
-	    target.value = this.refJsonReader.scalar(json, 5, undefined, 'value');
-	    return target
-	  }
-	  create(value) {
-	    const message = { value: 0 };
-	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
-	      enumerable: false,
-	      value: this
-	    });
-	    if (value !== undefined)
-	      (0, runtime_5.reflectionMergePartial)(this, message, value);
-	    return message
-	  }
-	  internalBinaryRead(reader, length, options, target) {
-	    let message = target !== null && target !== undefined ? target : this.create(),
-	      end = reader.pos + length;
-	    while (reader.pos < end) {
-	      let [fieldNo, wireType] = reader.tag();
-	      switch (fieldNo) {
-	        case /* int32 value */ 1:
-	          message.value = reader.int32();
-	          break
-	        default:
-	          let u = options.readUnknownField;
-	          if (u === 'throw')
-	            throw new globalThis.Error(
-	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-	            )
-	          let d = reader.skip(wireType);
-	          if (u !== false)
-	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
-	              this.typeName,
-	              message,
-	              fieldNo,
-	              wireType,
-	              d
-	            );
-	      }
+	    constructor() {
+	        super("google.protobuf.Int32Value", [
+	            { no: 1, name: "value", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
+	        ]);
 	    }
-	    return message
-	  }
-	  internalBinaryWrite(message, writer, options) {
-	    /* int32 value = 1; */
-	    if (message.value !== 0)
-	      writer.tag(1, runtime_3.WireType.Varint).int32(message.value);
-	    let u = options.writeUnknownFields;
-	    if (u !== false)
-	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
-	        this.typeName,
-	        message,
-	        writer
-	      );
-	    return writer
-	  }
+	    /**
+	     * Encode `Int32Value` to JSON string.
+	     */
+	    internalJsonWrite(message, options) {
+	        return this.refJsonWriter.scalar(5, message.value, "value", false, true);
+	    }
+	    /**
+	     * Decode `Int32Value` from JSON string.
+	     */
+	    internalJsonRead(json, options, target) {
+	        if (!target)
+	            target = this.create();
+	        target.value = this.refJsonReader.scalar(json, 5, undefined, "value");
+	        return target;
+	    }
+	    create(value) {
+	        const message = { value: 0 };
+	        globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, { enumerable: false, value: this });
+	        if (value !== undefined)
+	            (0, runtime_5.reflectionMergePartial)(this, message, value);
+	        return message;
+	    }
+	    internalBinaryRead(reader, length, options, target) {
+	        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+	        while (reader.pos < end) {
+	            let [fieldNo, wireType] = reader.tag();
+	            switch (fieldNo) {
+	                case /* int32 value */ 1:
+	                    message.value = reader.int32();
+	                    break;
+	                default:
+	                    let u = options.readUnknownField;
+	                    if (u === "throw")
+	                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+	                    let d = reader.skip(wireType);
+	                    if (u !== false)
+	                        (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+	            }
+	        }
+	        return message;
+	    }
+	    internalBinaryWrite(message, writer, options) {
+	        /* int32 value = 1; */
+	        if (message.value !== 0)
+	            writer.tag(1, runtime_3.WireType.Varint).int32(message.value);
+	        let u = options.writeUnknownFields;
+	        if (u !== false)
+	            (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+	        return writer;
+	    }
 	}
 	/**
 	 * @generated MessageType for protobuf message google.protobuf.Int32Value
@@ -33885,76 +33729,61 @@ function requireWrappers () {
 	wrappers.Int32Value = new Int32Value$Type();
 	// @generated message type with reflection information, may provide speed optimized methods
 	class UInt32Value$Type extends runtime_7.MessageType {
-	  constructor() {
-	    super('google.protobuf.UInt32Value', [
-	      { no: 1, name: 'value', kind: 'scalar', T: 13 /*ScalarType.UINT32*/ }
-	    ]);
-	  }
-	  /**
-	   * Encode `UInt32Value` to JSON string.
-	   */
-	  internalJsonWrite(message, options) {
-	    return this.refJsonWriter.scalar(13, message.value, 'value', false, true)
-	  }
-	  /**
-	   * Decode `UInt32Value` from JSON string.
-	   */
-	  internalJsonRead(json, options, target) {
-	    if (!target) target = this.create();
-	    target.value = this.refJsonReader.scalar(json, 13, undefined, 'value');
-	    return target
-	  }
-	  create(value) {
-	    const message = { value: 0 };
-	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
-	      enumerable: false,
-	      value: this
-	    });
-	    if (value !== undefined)
-	      (0, runtime_5.reflectionMergePartial)(this, message, value);
-	    return message
-	  }
-	  internalBinaryRead(reader, length, options, target) {
-	    let message = target !== null && target !== undefined ? target : this.create(),
-	      end = reader.pos + length;
-	    while (reader.pos < end) {
-	      let [fieldNo, wireType] = reader.tag();
-	      switch (fieldNo) {
-	        case /* uint32 value */ 1:
-	          message.value = reader.uint32();
-	          break
-	        default:
-	          let u = options.readUnknownField;
-	          if (u === 'throw')
-	            throw new globalThis.Error(
-	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-	            )
-	          let d = reader.skip(wireType);
-	          if (u !== false)
-	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
-	              this.typeName,
-	              message,
-	              fieldNo,
-	              wireType,
-	              d
-	            );
-	      }
+	    constructor() {
+	        super("google.protobuf.UInt32Value", [
+	            { no: 1, name: "value", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
+	        ]);
 	    }
-	    return message
-	  }
-	  internalBinaryWrite(message, writer, options) {
-	    /* uint32 value = 1; */
-	    if (message.value !== 0)
-	      writer.tag(1, runtime_3.WireType.Varint).uint32(message.value);
-	    let u = options.writeUnknownFields;
-	    if (u !== false)
-	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
-	        this.typeName,
-	        message,
-	        writer
-	      );
-	    return writer
-	  }
+	    /**
+	     * Encode `UInt32Value` to JSON string.
+	     */
+	    internalJsonWrite(message, options) {
+	        return this.refJsonWriter.scalar(13, message.value, "value", false, true);
+	    }
+	    /**
+	     * Decode `UInt32Value` from JSON string.
+	     */
+	    internalJsonRead(json, options, target) {
+	        if (!target)
+	            target = this.create();
+	        target.value = this.refJsonReader.scalar(json, 13, undefined, "value");
+	        return target;
+	    }
+	    create(value) {
+	        const message = { value: 0 };
+	        globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, { enumerable: false, value: this });
+	        if (value !== undefined)
+	            (0, runtime_5.reflectionMergePartial)(this, message, value);
+	        return message;
+	    }
+	    internalBinaryRead(reader, length, options, target) {
+	        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+	        while (reader.pos < end) {
+	            let [fieldNo, wireType] = reader.tag();
+	            switch (fieldNo) {
+	                case /* uint32 value */ 1:
+	                    message.value = reader.uint32();
+	                    break;
+	                default:
+	                    let u = options.readUnknownField;
+	                    if (u === "throw")
+	                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+	                    let d = reader.skip(wireType);
+	                    if (u !== false)
+	                        (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+	            }
+	        }
+	        return message;
+	    }
+	    internalBinaryWrite(message, writer, options) {
+	        /* uint32 value = 1; */
+	        if (message.value !== 0)
+	            writer.tag(1, runtime_3.WireType.Varint).uint32(message.value);
+	        let u = options.writeUnknownFields;
+	        if (u !== false)
+	            (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+	        return writer;
+	    }
 	}
 	/**
 	 * @generated MessageType for protobuf message google.protobuf.UInt32Value
@@ -33962,76 +33791,61 @@ function requireWrappers () {
 	wrappers.UInt32Value = new UInt32Value$Type();
 	// @generated message type with reflection information, may provide speed optimized methods
 	class BoolValue$Type extends runtime_7.MessageType {
-	  constructor() {
-	    super('google.protobuf.BoolValue', [
-	      { no: 1, name: 'value', kind: 'scalar', T: 8 /*ScalarType.BOOL*/ }
-	    ]);
-	  }
-	  /**
-	   * Encode `BoolValue` to JSON bool.
-	   */
-	  internalJsonWrite(message, options) {
-	    return message.value
-	  }
-	  /**
-	   * Decode `BoolValue` from JSON bool.
-	   */
-	  internalJsonRead(json, options, target) {
-	    if (!target) target = this.create();
-	    target.value = this.refJsonReader.scalar(json, 8, undefined, 'value');
-	    return target
-	  }
-	  create(value) {
-	    const message = { value: false };
-	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
-	      enumerable: false,
-	      value: this
-	    });
-	    if (value !== undefined)
-	      (0, runtime_5.reflectionMergePartial)(this, message, value);
-	    return message
-	  }
-	  internalBinaryRead(reader, length, options, target) {
-	    let message = target !== null && target !== undefined ? target : this.create(),
-	      end = reader.pos + length;
-	    while (reader.pos < end) {
-	      let [fieldNo, wireType] = reader.tag();
-	      switch (fieldNo) {
-	        case /* bool value */ 1:
-	          message.value = reader.bool();
-	          break
-	        default:
-	          let u = options.readUnknownField;
-	          if (u === 'throw')
-	            throw new globalThis.Error(
-	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-	            )
-	          let d = reader.skip(wireType);
-	          if (u !== false)
-	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
-	              this.typeName,
-	              message,
-	              fieldNo,
-	              wireType,
-	              d
-	            );
-	      }
+	    constructor() {
+	        super("google.protobuf.BoolValue", [
+	            { no: 1, name: "value", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+	        ]);
 	    }
-	    return message
-	  }
-	  internalBinaryWrite(message, writer, options) {
-	    /* bool value = 1; */
-	    if (message.value !== false)
-	      writer.tag(1, runtime_3.WireType.Varint).bool(message.value);
-	    let u = options.writeUnknownFields;
-	    if (u !== false)
-	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
-	        this.typeName,
-	        message,
-	        writer
-	      );
-	    return writer
-	  }
+	    /**
+	     * Encode `BoolValue` to JSON bool.
+	     */
+	    internalJsonWrite(message, options) {
+	        return message.value;
+	    }
+	    /**
+	     * Decode `BoolValue` from JSON bool.
+	     */
+	    internalJsonRead(json, options, target) {
+	        if (!target)
+	            target = this.create();
+	        target.value = this.refJsonReader.scalar(json, 8, undefined, "value");
+	        return target;
+	    }
+	    create(value) {
+	        const message = { value: false };
+	        globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, { enumerable: false, value: this });
+	        if (value !== undefined)
+	            (0, runtime_5.reflectionMergePartial)(this, message, value);
+	        return message;
+	    }
+	    internalBinaryRead(reader, length, options, target) {
+	        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+	        while (reader.pos < end) {
+	            let [fieldNo, wireType] = reader.tag();
+	            switch (fieldNo) {
+	                case /* bool value */ 1:
+	                    message.value = reader.bool();
+	                    break;
+	                default:
+	                    let u = options.readUnknownField;
+	                    if (u === "throw")
+	                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+	                    let d = reader.skip(wireType);
+	                    if (u !== false)
+	                        (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+	            }
+	        }
+	        return message;
+	    }
+	    internalBinaryWrite(message, writer, options) {
+	        /* bool value = 1; */
+	        if (message.value !== false)
+	            writer.tag(1, runtime_3.WireType.Varint).bool(message.value);
+	        let u = options.writeUnknownFields;
+	        if (u !== false)
+	            (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+	        return writer;
+	    }
 	}
 	/**
 	 * @generated MessageType for protobuf message google.protobuf.BoolValue
@@ -34039,76 +33853,61 @@ function requireWrappers () {
 	wrappers.BoolValue = new BoolValue$Type();
 	// @generated message type with reflection information, may provide speed optimized methods
 	class StringValue$Type extends runtime_7.MessageType {
-	  constructor() {
-	    super('google.protobuf.StringValue', [
-	      { no: 1, name: 'value', kind: 'scalar', T: 9 /*ScalarType.STRING*/ }
-	    ]);
-	  }
-	  /**
-	   * Encode `StringValue` to JSON string.
-	   */
-	  internalJsonWrite(message, options) {
-	    return message.value
-	  }
-	  /**
-	   * Decode `StringValue` from JSON string.
-	   */
-	  internalJsonRead(json, options, target) {
-	    if (!target) target = this.create();
-	    target.value = this.refJsonReader.scalar(json, 9, undefined, 'value');
-	    return target
-	  }
-	  create(value) {
-	    const message = { value: '' };
-	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
-	      enumerable: false,
-	      value: this
-	    });
-	    if (value !== undefined)
-	      (0, runtime_5.reflectionMergePartial)(this, message, value);
-	    return message
-	  }
-	  internalBinaryRead(reader, length, options, target) {
-	    let message = target !== null && target !== undefined ? target : this.create(),
-	      end = reader.pos + length;
-	    while (reader.pos < end) {
-	      let [fieldNo, wireType] = reader.tag();
-	      switch (fieldNo) {
-	        case /* string value */ 1:
-	          message.value = reader.string();
-	          break
-	        default:
-	          let u = options.readUnknownField;
-	          if (u === 'throw')
-	            throw new globalThis.Error(
-	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-	            )
-	          let d = reader.skip(wireType);
-	          if (u !== false)
-	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
-	              this.typeName,
-	              message,
-	              fieldNo,
-	              wireType,
-	              d
-	            );
-	      }
+	    constructor() {
+	        super("google.protobuf.StringValue", [
+	            { no: 1, name: "value", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+	        ]);
 	    }
-	    return message
-	  }
-	  internalBinaryWrite(message, writer, options) {
-	    /* string value = 1; */
-	    if (message.value !== '')
-	      writer.tag(1, runtime_3.WireType.LengthDelimited).string(message.value);
-	    let u = options.writeUnknownFields;
-	    if (u !== false)
-	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
-	        this.typeName,
-	        message,
-	        writer
-	      );
-	    return writer
-	  }
+	    /**
+	     * Encode `StringValue` to JSON string.
+	     */
+	    internalJsonWrite(message, options) {
+	        return message.value;
+	    }
+	    /**
+	     * Decode `StringValue` from JSON string.
+	     */
+	    internalJsonRead(json, options, target) {
+	        if (!target)
+	            target = this.create();
+	        target.value = this.refJsonReader.scalar(json, 9, undefined, "value");
+	        return target;
+	    }
+	    create(value) {
+	        const message = { value: "" };
+	        globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, { enumerable: false, value: this });
+	        if (value !== undefined)
+	            (0, runtime_5.reflectionMergePartial)(this, message, value);
+	        return message;
+	    }
+	    internalBinaryRead(reader, length, options, target) {
+	        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+	        while (reader.pos < end) {
+	            let [fieldNo, wireType] = reader.tag();
+	            switch (fieldNo) {
+	                case /* string value */ 1:
+	                    message.value = reader.string();
+	                    break;
+	                default:
+	                    let u = options.readUnknownField;
+	                    if (u === "throw")
+	                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+	                    let d = reader.skip(wireType);
+	                    if (u !== false)
+	                        (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+	            }
+	        }
+	        return message;
+	    }
+	    internalBinaryWrite(message, writer, options) {
+	        /* string value = 1; */
+	        if (message.value !== "")
+	            writer.tag(1, runtime_3.WireType.LengthDelimited).string(message.value);
+	        let u = options.writeUnknownFields;
+	        if (u !== false)
+	            (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+	        return writer;
+	    }
 	}
 	/**
 	 * @generated MessageType for protobuf message google.protobuf.StringValue
@@ -34116,76 +33915,61 @@ function requireWrappers () {
 	wrappers.StringValue = new StringValue$Type();
 	// @generated message type with reflection information, may provide speed optimized methods
 	class BytesValue$Type extends runtime_7.MessageType {
-	  constructor() {
-	    super('google.protobuf.BytesValue', [
-	      { no: 1, name: 'value', kind: 'scalar', T: 12 /*ScalarType.BYTES*/ }
-	    ]);
-	  }
-	  /**
-	   * Encode `BytesValue` to JSON string.
-	   */
-	  internalJsonWrite(message, options) {
-	    return this.refJsonWriter.scalar(12, message.value, 'value', false, true)
-	  }
-	  /**
-	   * Decode `BytesValue` from JSON string.
-	   */
-	  internalJsonRead(json, options, target) {
-	    if (!target) target = this.create();
-	    target.value = this.refJsonReader.scalar(json, 12, undefined, 'value');
-	    return target
-	  }
-	  create(value) {
-	    const message = { value: new Uint8Array(0) };
-	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
-	      enumerable: false,
-	      value: this
-	    });
-	    if (value !== undefined)
-	      (0, runtime_5.reflectionMergePartial)(this, message, value);
-	    return message
-	  }
-	  internalBinaryRead(reader, length, options, target) {
-	    let message = target !== null && target !== undefined ? target : this.create(),
-	      end = reader.pos + length;
-	    while (reader.pos < end) {
-	      let [fieldNo, wireType] = reader.tag();
-	      switch (fieldNo) {
-	        case /* bytes value */ 1:
-	          message.value = reader.bytes();
-	          break
-	        default:
-	          let u = options.readUnknownField;
-	          if (u === 'throw')
-	            throw new globalThis.Error(
-	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-	            )
-	          let d = reader.skip(wireType);
-	          if (u !== false)
-	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
-	              this.typeName,
-	              message,
-	              fieldNo,
-	              wireType,
-	              d
-	            );
-	      }
+	    constructor() {
+	        super("google.protobuf.BytesValue", [
+	            { no: 1, name: "value", kind: "scalar", T: 12 /*ScalarType.BYTES*/ }
+	        ]);
 	    }
-	    return message
-	  }
-	  internalBinaryWrite(message, writer, options) {
-	    /* bytes value = 1; */
-	    if (message.value.length)
-	      writer.tag(1, runtime_3.WireType.LengthDelimited).bytes(message.value);
-	    let u = options.writeUnknownFields;
-	    if (u !== false)
-	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
-	        this.typeName,
-	        message,
-	        writer
-	      );
-	    return writer
-	  }
+	    /**
+	     * Encode `BytesValue` to JSON string.
+	     */
+	    internalJsonWrite(message, options) {
+	        return this.refJsonWriter.scalar(12, message.value, "value", false, true);
+	    }
+	    /**
+	     * Decode `BytesValue` from JSON string.
+	     */
+	    internalJsonRead(json, options, target) {
+	        if (!target)
+	            target = this.create();
+	        target.value = this.refJsonReader.scalar(json, 12, undefined, "value");
+	        return target;
+	    }
+	    create(value) {
+	        const message = { value: new Uint8Array(0) };
+	        globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, { enumerable: false, value: this });
+	        if (value !== undefined)
+	            (0, runtime_5.reflectionMergePartial)(this, message, value);
+	        return message;
+	    }
+	    internalBinaryRead(reader, length, options, target) {
+	        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+	        while (reader.pos < end) {
+	            let [fieldNo, wireType] = reader.tag();
+	            switch (fieldNo) {
+	                case /* bytes value */ 1:
+	                    message.value = reader.bytes();
+	                    break;
+	                default:
+	                    let u = options.readUnknownField;
+	                    if (u === "throw")
+	                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+	                    let d = reader.skip(wireType);
+	                    if (u !== false)
+	                        (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+	            }
+	        }
+	        return message;
+	    }
+	    internalBinaryWrite(message, writer, options) {
+	        /* bytes value = 1; */
+	        if (message.value.length)
+	            writer.tag(1, runtime_3.WireType.LengthDelimited).bytes(message.value);
+	        let u = options.writeUnknownFields;
+	        if (u !== false)
+	            (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+	        return writer;
+	    }
 	}
 	/**
 	 * @generated MessageType for protobuf message google.protobuf.BytesValue
@@ -35255,13 +35039,8 @@ function requireArtifact$1 () {
 	if (hasRequiredArtifact$1) return artifact;
 	hasRequiredArtifact$1 = 1;
 	(function (exports) {
-		Object.defineProperty(exports, '__esModule', { value: true });
-		exports.ArtifactService =
-		  exports.FinalizeArtifactResponse =
-		  exports.FinalizeArtifactRequest =
-		  exports.CreateArtifactResponse =
-		  exports.CreateArtifactRequest =
-		    undefined;
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.ArtifactService = exports.FinalizeArtifactResponse = exports.FinalizeArtifactRequest = exports.CreateArtifactResponse = exports.CreateArtifactRequest = undefined;
 		// @generated by protobuf-ts 2.9.1 with parameter long_type_string,client_none,generate_dependencies
 		// @generated from protobuf file "results/api/v1/artifact.proto" (package "github.actions.results.api.v1", syntax proto3)
 		// tslint:disable
@@ -35275,123 +35054,74 @@ function requireArtifact$1 () {
 		const timestamp_1 = requireTimestamp();
 		// @generated message type with reflection information, may provide speed optimized methods
 		class CreateArtifactRequest$Type extends runtime_5.MessageType {
-		  constructor() {
-		    super('github.actions.results.api.v1.CreateArtifactRequest', [
-		      {
-		        no: 1,
-		        name: 'workflow_run_backend_id',
-		        kind: 'scalar',
-		        T: 9 /*ScalarType.STRING*/
-		      },
-		      {
-		        no: 2,
-		        name: 'workflow_job_run_backend_id',
-		        kind: 'scalar',
-		        T: 9 /*ScalarType.STRING*/
-		      },
-		      { no: 3, name: 'name', kind: 'scalar', T: 9 /*ScalarType.STRING*/ },
-		      {
-		        no: 4,
-		        name: 'expires_at',
-		        kind: 'message',
-		        T: () => timestamp_1.Timestamp
-		      },
-		      { no: 5, name: 'version', kind: 'scalar', T: 5 /*ScalarType.INT32*/ }
-		    ]);
-		  }
-		  create(value) {
-		    const message = {
-		      workflowRunBackendId: '',
-		      workflowJobRunBackendId: '',
-		      name: '',
-		      version: 0
-		    };
-		    globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, {
-		      enumerable: false,
-		      value: this
-		    });
-		    if (value !== undefined)
-		      (0, runtime_3.reflectionMergePartial)(this, message, value);
-		    return message
-		  }
-		  internalBinaryRead(reader, length, options, target) {
-		    let message = target !== null && target !== undefined ? target : this.create(),
-		      end = reader.pos + length;
-		    while (reader.pos < end) {
-		      let [fieldNo, wireType] = reader.tag();
-		      switch (fieldNo) {
-		        case /* string workflow_run_backend_id */ 1:
-		          message.workflowRunBackendId = reader.string();
-		          break
-		        case /* string workflow_job_run_backend_id */ 2:
-		          message.workflowJobRunBackendId = reader.string();
-		          break
-		        case /* string name */ 3:
-		          message.name = reader.string();
-		          break
-		        case /* google.protobuf.Timestamp expires_at */ 4:
-		          message.expiresAt = timestamp_1.Timestamp.internalBinaryRead(
-		            reader,
-		            reader.uint32(),
-		            options,
-		            message.expiresAt
-		          );
-		          break
-		        case /* int32 version */ 5:
-		          message.version = reader.int32();
-		          break
-		        default:
-		          let u = options.readUnknownField;
-		          if (u === 'throw')
-		            throw new globalThis.Error(
-		              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-		            )
-		          let d = reader.skip(wireType);
-		          if (u !== false)
-		            (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(
-		              this.typeName,
-		              message,
-		              fieldNo,
-		              wireType,
-		              d
-		            );
-		      }
+		    constructor() {
+		        super("github.actions.results.api.v1.CreateArtifactRequest", [
+		            { no: 1, name: "workflow_run_backend_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+		            { no: 2, name: "workflow_job_run_backend_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+		            { no: 3, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+		            { no: 4, name: "expires_at", kind: "message", T: () => timestamp_1.Timestamp },
+		            { no: 5, name: "version", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
+		        ]);
 		    }
-		    return message
-		  }
-		  internalBinaryWrite(message, writer, options) {
-		    /* string workflow_run_backend_id = 1; */
-		    if (message.workflowRunBackendId !== '')
-		      writer
-		        .tag(1, runtime_1.WireType.LengthDelimited)
-		        .string(message.workflowRunBackendId);
-		    /* string workflow_job_run_backend_id = 2; */
-		    if (message.workflowJobRunBackendId !== '')
-		      writer
-		        .tag(2, runtime_1.WireType.LengthDelimited)
-		        .string(message.workflowJobRunBackendId);
-		    /* string name = 3; */
-		    if (message.name !== '')
-		      writer.tag(3, runtime_1.WireType.LengthDelimited).string(message.name);
-		    /* google.protobuf.Timestamp expires_at = 4; */
-		    if (message.expiresAt)
-		      timestamp_1.Timestamp.internalBinaryWrite(
-		        message.expiresAt,
-		        writer.tag(4, runtime_1.WireType.LengthDelimited).fork(),
-		        options
-		      ).join();
-		    /* int32 version = 5; */
-		    if (message.version !== 0)
-		      writer.tag(5, runtime_1.WireType.Varint).int32(message.version);
-		    let u = options.writeUnknownFields;
-		    if (u !== false)
-		      (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(
-		        this.typeName,
-		        message,
-		        writer
-		      );
-		    return writer
-		  }
+		    create(value) {
+		        const message = { workflowRunBackendId: "", workflowJobRunBackendId: "", name: "", version: 0 };
+		        globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, { enumerable: false, value: this });
+		        if (value !== undefined)
+		            (0, runtime_3.reflectionMergePartial)(this, message, value);
+		        return message;
+		    }
+		    internalBinaryRead(reader, length, options, target) {
+		        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+		        while (reader.pos < end) {
+		            let [fieldNo, wireType] = reader.tag();
+		            switch (fieldNo) {
+		                case /* string workflow_run_backend_id */ 1:
+		                    message.workflowRunBackendId = reader.string();
+		                    break;
+		                case /* string workflow_job_run_backend_id */ 2:
+		                    message.workflowJobRunBackendId = reader.string();
+		                    break;
+		                case /* string name */ 3:
+		                    message.name = reader.string();
+		                    break;
+		                case /* google.protobuf.Timestamp expires_at */ 4:
+		                    message.expiresAt = timestamp_1.Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.expiresAt);
+		                    break;
+		                case /* int32 version */ 5:
+		                    message.version = reader.int32();
+		                    break;
+		                default:
+		                    let u = options.readUnknownField;
+		                    if (u === "throw")
+		                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+		                    let d = reader.skip(wireType);
+		                    if (u !== false)
+		                        (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+		            }
+		        }
+		        return message;
+		    }
+		    internalBinaryWrite(message, writer, options) {
+		        /* string workflow_run_backend_id = 1; */
+		        if (message.workflowRunBackendId !== "")
+		            writer.tag(1, runtime_1.WireType.LengthDelimited).string(message.workflowRunBackendId);
+		        /* string workflow_job_run_backend_id = 2; */
+		        if (message.workflowJobRunBackendId !== "")
+		            writer.tag(2, runtime_1.WireType.LengthDelimited).string(message.workflowJobRunBackendId);
+		        /* string name = 3; */
+		        if (message.name !== "")
+		            writer.tag(3, runtime_1.WireType.LengthDelimited).string(message.name);
+		        /* google.protobuf.Timestamp expires_at = 4; */
+		        if (message.expiresAt)
+		            timestamp_1.Timestamp.internalBinaryWrite(message.expiresAt, writer.tag(4, runtime_1.WireType.LengthDelimited).fork(), options).join();
+		        /* int32 version = 5; */
+		        if (message.version !== 0)
+		            writer.tag(5, runtime_1.WireType.Varint).int32(message.version);
+		        let u = options.writeUnknownFields;
+		        if (u !== false)
+		            (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+		        return writer;
+		    }
 		}
 		/**
 		 * @generated MessageType for protobuf message github.actions.results.api.v1.CreateArtifactRequest
@@ -35399,76 +35129,53 @@ function requireArtifact$1 () {
 		exports.CreateArtifactRequest = new CreateArtifactRequest$Type();
 		// @generated message type with reflection information, may provide speed optimized methods
 		class CreateArtifactResponse$Type extends runtime_5.MessageType {
-		  constructor() {
-		    super('github.actions.results.api.v1.CreateArtifactResponse', [
-		      { no: 1, name: 'ok', kind: 'scalar', T: 8 /*ScalarType.BOOL*/ },
-		      {
-		        no: 2,
-		        name: 'signed_upload_url',
-		        kind: 'scalar',
-		        T: 9 /*ScalarType.STRING*/
-		      }
-		    ]);
-		  }
-		  create(value) {
-		    const message = { ok: false, signedUploadUrl: '' };
-		    globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, {
-		      enumerable: false,
-		      value: this
-		    });
-		    if (value !== undefined)
-		      (0, runtime_3.reflectionMergePartial)(this, message, value);
-		    return message
-		  }
-		  internalBinaryRead(reader, length, options, target) {
-		    let message = target !== null && target !== undefined ? target : this.create(),
-		      end = reader.pos + length;
-		    while (reader.pos < end) {
-		      let [fieldNo, wireType] = reader.tag();
-		      switch (fieldNo) {
-		        case /* bool ok */ 1:
-		          message.ok = reader.bool();
-		          break
-		        case /* string signed_upload_url */ 2:
-		          message.signedUploadUrl = reader.string();
-		          break
-		        default:
-		          let u = options.readUnknownField;
-		          if (u === 'throw')
-		            throw new globalThis.Error(
-		              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-		            )
-		          let d = reader.skip(wireType);
-		          if (u !== false)
-		            (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(
-		              this.typeName,
-		              message,
-		              fieldNo,
-		              wireType,
-		              d
-		            );
-		      }
+		    constructor() {
+		        super("github.actions.results.api.v1.CreateArtifactResponse", [
+		            { no: 1, name: "ok", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+		            { no: 2, name: "signed_upload_url", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+		        ]);
 		    }
-		    return message
-		  }
-		  internalBinaryWrite(message, writer, options) {
-		    /* bool ok = 1; */
-		    if (message.ok !== false)
-		      writer.tag(1, runtime_1.WireType.Varint).bool(message.ok);
-		    /* string signed_upload_url = 2; */
-		    if (message.signedUploadUrl !== '')
-		      writer
-		        .tag(2, runtime_1.WireType.LengthDelimited)
-		        .string(message.signedUploadUrl);
-		    let u = options.writeUnknownFields;
-		    if (u !== false)
-		      (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(
-		        this.typeName,
-		        message,
-		        writer
-		      );
-		    return writer
-		  }
+		    create(value) {
+		        const message = { ok: false, signedUploadUrl: "" };
+		        globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, { enumerable: false, value: this });
+		        if (value !== undefined)
+		            (0, runtime_3.reflectionMergePartial)(this, message, value);
+		        return message;
+		    }
+		    internalBinaryRead(reader, length, options, target) {
+		        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+		        while (reader.pos < end) {
+		            let [fieldNo, wireType] = reader.tag();
+		            switch (fieldNo) {
+		                case /* bool ok */ 1:
+		                    message.ok = reader.bool();
+		                    break;
+		                case /* string signed_upload_url */ 2:
+		                    message.signedUploadUrl = reader.string();
+		                    break;
+		                default:
+		                    let u = options.readUnknownField;
+		                    if (u === "throw")
+		                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+		                    let d = reader.skip(wireType);
+		                    if (u !== false)
+		                        (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+		            }
+		        }
+		        return message;
+		    }
+		    internalBinaryWrite(message, writer, options) {
+		        /* bool ok = 1; */
+		        if (message.ok !== false)
+		            writer.tag(1, runtime_1.WireType.Varint).bool(message.ok);
+		        /* string signed_upload_url = 2; */
+		        if (message.signedUploadUrl !== "")
+		            writer.tag(2, runtime_1.WireType.LengthDelimited).string(message.signedUploadUrl);
+		        let u = options.writeUnknownFields;
+		        if (u !== false)
+		            (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+		        return writer;
+		    }
 		}
 		/**
 		 * @generated MessageType for protobuf message github.actions.results.api.v1.CreateArtifactResponse
@@ -35476,118 +35183,74 @@ function requireArtifact$1 () {
 		exports.CreateArtifactResponse = new CreateArtifactResponse$Type();
 		// @generated message type with reflection information, may provide speed optimized methods
 		class FinalizeArtifactRequest$Type extends runtime_5.MessageType {
-		  constructor() {
-		    super('github.actions.results.api.v1.FinalizeArtifactRequest', [
-		      {
-		        no: 1,
-		        name: 'workflow_run_backend_id',
-		        kind: 'scalar',
-		        T: 9 /*ScalarType.STRING*/
-		      },
-		      {
-		        no: 2,
-		        name: 'workflow_job_run_backend_id',
-		        kind: 'scalar',
-		        T: 9 /*ScalarType.STRING*/
-		      },
-		      { no: 3, name: 'name', kind: 'scalar', T: 9 /*ScalarType.STRING*/ },
-		      { no: 4, name: 'size', kind: 'scalar', T: 3 /*ScalarType.INT64*/ },
-		      { no: 5, name: 'hash', kind: 'message', T: () => wrappers_1.StringValue }
-		    ]);
-		  }
-		  create(value) {
-		    const message = {
-		      workflowRunBackendId: '',
-		      workflowJobRunBackendId: '',
-		      name: '',
-		      size: '0'
-		    };
-		    globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, {
-		      enumerable: false,
-		      value: this
-		    });
-		    if (value !== undefined)
-		      (0, runtime_3.reflectionMergePartial)(this, message, value);
-		    return message
-		  }
-		  internalBinaryRead(reader, length, options, target) {
-		    let message = target !== null && target !== undefined ? target : this.create(),
-		      end = reader.pos + length;
-		    while (reader.pos < end) {
-		      let [fieldNo, wireType] = reader.tag();
-		      switch (fieldNo) {
-		        case /* string workflow_run_backend_id */ 1:
-		          message.workflowRunBackendId = reader.string();
-		          break
-		        case /* string workflow_job_run_backend_id */ 2:
-		          message.workflowJobRunBackendId = reader.string();
-		          break
-		        case /* string name */ 3:
-		          message.name = reader.string();
-		          break
-		        case /* int64 size */ 4:
-		          message.size = reader.int64().toString();
-		          break
-		        case /* google.protobuf.StringValue hash */ 5:
-		          message.hash = wrappers_1.StringValue.internalBinaryRead(
-		            reader,
-		            reader.uint32(),
-		            options,
-		            message.hash
-		          );
-		          break
-		        default:
-		          let u = options.readUnknownField;
-		          if (u === 'throw')
-		            throw new globalThis.Error(
-		              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-		            )
-		          let d = reader.skip(wireType);
-		          if (u !== false)
-		            (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(
-		              this.typeName,
-		              message,
-		              fieldNo,
-		              wireType,
-		              d
-		            );
-		      }
+		    constructor() {
+		        super("github.actions.results.api.v1.FinalizeArtifactRequest", [
+		            { no: 1, name: "workflow_run_backend_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+		            { no: 2, name: "workflow_job_run_backend_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+		            { no: 3, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+		            { no: 4, name: "size", kind: "scalar", T: 3 /*ScalarType.INT64*/ },
+		            { no: 5, name: "hash", kind: "message", T: () => wrappers_1.StringValue }
+		        ]);
 		    }
-		    return message
-		  }
-		  internalBinaryWrite(message, writer, options) {
-		    /* string workflow_run_backend_id = 1; */
-		    if (message.workflowRunBackendId !== '')
-		      writer
-		        .tag(1, runtime_1.WireType.LengthDelimited)
-		        .string(message.workflowRunBackendId);
-		    /* string workflow_job_run_backend_id = 2; */
-		    if (message.workflowJobRunBackendId !== '')
-		      writer
-		        .tag(2, runtime_1.WireType.LengthDelimited)
-		        .string(message.workflowJobRunBackendId);
-		    /* string name = 3; */
-		    if (message.name !== '')
-		      writer.tag(3, runtime_1.WireType.LengthDelimited).string(message.name);
-		    /* int64 size = 4; */
-		    if (message.size !== '0')
-		      writer.tag(4, runtime_1.WireType.Varint).int64(message.size);
-		    /* google.protobuf.StringValue hash = 5; */
-		    if (message.hash)
-		      wrappers_1.StringValue.internalBinaryWrite(
-		        message.hash,
-		        writer.tag(5, runtime_1.WireType.LengthDelimited).fork(),
-		        options
-		      ).join();
-		    let u = options.writeUnknownFields;
-		    if (u !== false)
-		      (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(
-		        this.typeName,
-		        message,
-		        writer
-		      );
-		    return writer
-		  }
+		    create(value) {
+		        const message = { workflowRunBackendId: "", workflowJobRunBackendId: "", name: "", size: "0" };
+		        globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, { enumerable: false, value: this });
+		        if (value !== undefined)
+		            (0, runtime_3.reflectionMergePartial)(this, message, value);
+		        return message;
+		    }
+		    internalBinaryRead(reader, length, options, target) {
+		        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+		        while (reader.pos < end) {
+		            let [fieldNo, wireType] = reader.tag();
+		            switch (fieldNo) {
+		                case /* string workflow_run_backend_id */ 1:
+		                    message.workflowRunBackendId = reader.string();
+		                    break;
+		                case /* string workflow_job_run_backend_id */ 2:
+		                    message.workflowJobRunBackendId = reader.string();
+		                    break;
+		                case /* string name */ 3:
+		                    message.name = reader.string();
+		                    break;
+		                case /* int64 size */ 4:
+		                    message.size = reader.int64().toString();
+		                    break;
+		                case /* google.protobuf.StringValue hash */ 5:
+		                    message.hash = wrappers_1.StringValue.internalBinaryRead(reader, reader.uint32(), options, message.hash);
+		                    break;
+		                default:
+		                    let u = options.readUnknownField;
+		                    if (u === "throw")
+		                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+		                    let d = reader.skip(wireType);
+		                    if (u !== false)
+		                        (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+		            }
+		        }
+		        return message;
+		    }
+		    internalBinaryWrite(message, writer, options) {
+		        /* string workflow_run_backend_id = 1; */
+		        if (message.workflowRunBackendId !== "")
+		            writer.tag(1, runtime_1.WireType.LengthDelimited).string(message.workflowRunBackendId);
+		        /* string workflow_job_run_backend_id = 2; */
+		        if (message.workflowJobRunBackendId !== "")
+		            writer.tag(2, runtime_1.WireType.LengthDelimited).string(message.workflowJobRunBackendId);
+		        /* string name = 3; */
+		        if (message.name !== "")
+		            writer.tag(3, runtime_1.WireType.LengthDelimited).string(message.name);
+		        /* int64 size = 4; */
+		        if (message.size !== "0")
+		            writer.tag(4, runtime_1.WireType.Varint).int64(message.size);
+		        /* google.protobuf.StringValue hash = 5; */
+		        if (message.hash)
+		            wrappers_1.StringValue.internalBinaryWrite(message.hash, writer.tag(5, runtime_1.WireType.LengthDelimited).fork(), options).join();
+		        let u = options.writeUnknownFields;
+		        if (u !== false)
+		            (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+		        return writer;
+		    }
 		}
 		/**
 		 * @generated MessageType for protobuf message github.actions.results.api.v1.FinalizeArtifactRequest
@@ -35595,69 +35258,53 @@ function requireArtifact$1 () {
 		exports.FinalizeArtifactRequest = new FinalizeArtifactRequest$Type();
 		// @generated message type with reflection information, may provide speed optimized methods
 		class FinalizeArtifactResponse$Type extends runtime_5.MessageType {
-		  constructor() {
-		    super('github.actions.results.api.v1.FinalizeArtifactResponse', [
-		      { no: 1, name: 'ok', kind: 'scalar', T: 8 /*ScalarType.BOOL*/ },
-		      { no: 2, name: 'artifact_id', kind: 'scalar', T: 3 /*ScalarType.INT64*/ }
-		    ]);
-		  }
-		  create(value) {
-		    const message = { ok: false, artifactId: '0' };
-		    globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, {
-		      enumerable: false,
-		      value: this
-		    });
-		    if (value !== undefined)
-		      (0, runtime_3.reflectionMergePartial)(this, message, value);
-		    return message
-		  }
-		  internalBinaryRead(reader, length, options, target) {
-		    let message = target !== null && target !== undefined ? target : this.create(),
-		      end = reader.pos + length;
-		    while (reader.pos < end) {
-		      let [fieldNo, wireType] = reader.tag();
-		      switch (fieldNo) {
-		        case /* bool ok */ 1:
-		          message.ok = reader.bool();
-		          break
-		        case /* int64 artifact_id */ 2:
-		          message.artifactId = reader.int64().toString();
-		          break
-		        default:
-		          let u = options.readUnknownField;
-		          if (u === 'throw')
-		            throw new globalThis.Error(
-		              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
-		            )
-		          let d = reader.skip(wireType);
-		          if (u !== false)
-		            (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(
-		              this.typeName,
-		              message,
-		              fieldNo,
-		              wireType,
-		              d
-		            );
-		      }
+		    constructor() {
+		        super("github.actions.results.api.v1.FinalizeArtifactResponse", [
+		            { no: 1, name: "ok", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+		            { no: 2, name: "artifact_id", kind: "scalar", T: 3 /*ScalarType.INT64*/ }
+		        ]);
 		    }
-		    return message
-		  }
-		  internalBinaryWrite(message, writer, options) {
-		    /* bool ok = 1; */
-		    if (message.ok !== false)
-		      writer.tag(1, runtime_1.WireType.Varint).bool(message.ok);
-		    /* int64 artifact_id = 2; */
-		    if (message.artifactId !== '0')
-		      writer.tag(2, runtime_1.WireType.Varint).int64(message.artifactId);
-		    let u = options.writeUnknownFields;
-		    if (u !== false)
-		      (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(
-		        this.typeName,
-		        message,
-		        writer
-		      );
-		    return writer
-		  }
+		    create(value) {
+		        const message = { ok: false, artifactId: "0" };
+		        globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, { enumerable: false, value: this });
+		        if (value !== undefined)
+		            (0, runtime_3.reflectionMergePartial)(this, message, value);
+		        return message;
+		    }
+		    internalBinaryRead(reader, length, options, target) {
+		        let message = target !== null && target !== undefined ? target : this.create(), end = reader.pos + length;
+		        while (reader.pos < end) {
+		            let [fieldNo, wireType] = reader.tag();
+		            switch (fieldNo) {
+		                case /* bool ok */ 1:
+		                    message.ok = reader.bool();
+		                    break;
+		                case /* int64 artifact_id */ 2:
+		                    message.artifactId = reader.int64().toString();
+		                    break;
+		                default:
+		                    let u = options.readUnknownField;
+		                    if (u === "throw")
+		                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+		                    let d = reader.skip(wireType);
+		                    if (u !== false)
+		                        (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+		            }
+		        }
+		        return message;
+		    }
+		    internalBinaryWrite(message, writer, options) {
+		        /* bool ok = 1; */
+		        if (message.ok !== false)
+		            writer.tag(1, runtime_1.WireType.Varint).bool(message.ok);
+		        /* int64 artifact_id = 2; */
+		        if (message.artifactId !== "0")
+		            writer.tag(2, runtime_1.WireType.Varint).int64(message.artifactId);
+		        let u = options.writeUnknownFields;
+		        if (u !== false)
+		            (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+		        return writer;
+		    }
 		}
 		/**
 		 * @generated MessageType for protobuf message github.actions.results.api.v1.FinalizeArtifactResponse
@@ -35666,23 +35313,10 @@ function requireArtifact$1 () {
 		/**
 		 * @generated ServiceType for protobuf service github.actions.results.api.v1.ArtifactService
 		 */
-		exports.ArtifactService = new runtime_rpc_1.ServiceType(
-		  'github.actions.results.api.v1.ArtifactService',
-		  [
-		    {
-		      name: 'CreateArtifact',
-		      options: {},
-		      I: exports.CreateArtifactRequest,
-		      O: exports.CreateArtifactResponse
-		    },
-		    {
-		      name: 'FinalizeArtifact',
-		      options: {},
-		      I: exports.FinalizeArtifactRequest,
-		      O: exports.FinalizeArtifactResponse
-		    }
-		  ]
-		);
+		exports.ArtifactService = new runtime_rpc_1.ServiceType("github.actions.results.api.v1.ArtifactService", [
+		    { name: "CreateArtifact", options: {}, I: exports.CreateArtifactRequest, O: exports.CreateArtifactResponse },
+		    { name: "FinalizeArtifact", options: {}, I: exports.FinalizeArtifactRequest, O: exports.FinalizeArtifactResponse }
+		]);
 		
 	} (artifact));
 	return artifact;
@@ -37451,371 +37085,233 @@ function requireArtifact_twirp () {
 	if (hasRequiredArtifact_twirp) return artifact_twirp;
 	hasRequiredArtifact_twirp = 1;
 	(function (exports) {
-		var __awaiter =
-		  (artifact_twirp.__awaiter) ||
-		  function (thisArg, _arguments, P, generator) {
-		    function adopt(value) {
-		      return value instanceof P
-		        ? value
-		        : new P(function (resolve) {
-		            resolve(value);
-		          })
-		    }
+		var __awaiter = (artifact_twirp.__awaiter) || function (thisArg, _arguments, P, generator) {
+		    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
 		    return new (P || (P = Promise))(function (resolve, reject) {
-		      function fulfilled(value) {
-		        try {
-		          step(generator.next(value));
-		        } catch (e) {
-		          reject(e);
-		        }
-		      }
-		      function rejected(value) {
-		        try {
-		          step(generator['throw'](value));
-		        } catch (e) {
-		          reject(e);
-		        }
-		      }
-		      function step(result) {
-		        result.done
-		          ? resolve(result.value)
-		          : adopt(result.value).then(fulfilled, rejected);
-		      }
-		      step((generator = generator.apply(thisArg, _arguments || [])).next());
-		    })
-		  };
-		Object.defineProperty(exports, '__esModule', { value: true });
-		exports.createArtifactServiceServer =
-		  exports.ArtifactServiceMethodList =
-		  exports.ArtifactServiceMethod =
-		  exports.ArtifactServiceClientProtobuf =
-		  exports.ArtifactServiceClientJSON =
-		    undefined;
+		        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+		        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+		        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+		        step((generator = generator.apply(thisArg, _arguments || [])).next());
+		    });
+		};
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.createArtifactServiceServer = exports.ArtifactServiceMethodList = exports.ArtifactServiceMethod = exports.ArtifactServiceClientProtobuf = exports.ArtifactServiceClientJSON = undefined;
 		const twirp_ts_1 = requireTwirp();
 		const artifact_1 = requireArtifact$1();
 		class ArtifactServiceClientJSON {
-		  constructor(rpc) {
-		    this.rpc = rpc;
-		    this.CreateArtifact.bind(this);
-		    this.FinalizeArtifact.bind(this);
-		  }
-		  CreateArtifact(request) {
-		    const data = artifact_1.CreateArtifactRequest.toJson(request, {
-		      useProtoFieldName: true,
-		      emitDefaultValues: false
-		    });
-		    const promise = this.rpc.request(
-		      'github.actions.results.api.v1.ArtifactService',
-		      'CreateArtifact',
-		      'application/json',
-		      data
-		    );
-		    return promise.then((data) =>
-		      artifact_1.CreateArtifactResponse.fromJson(data, {
-		        ignoreUnknownFields: true
-		      })
-		    )
-		  }
-		  FinalizeArtifact(request) {
-		    const data = artifact_1.FinalizeArtifactRequest.toJson(request, {
-		      useProtoFieldName: true,
-		      emitDefaultValues: false
-		    });
-		    const promise = this.rpc.request(
-		      'github.actions.results.api.v1.ArtifactService',
-		      'FinalizeArtifact',
-		      'application/json',
-		      data
-		    );
-		    return promise.then((data) =>
-		      artifact_1.FinalizeArtifactResponse.fromJson(data, {
-		        ignoreUnknownFields: true
-		      })
-		    )
-		  }
+		    constructor(rpc) {
+		        this.rpc = rpc;
+		        this.CreateArtifact.bind(this);
+		        this.FinalizeArtifact.bind(this);
+		    }
+		    CreateArtifact(request) {
+		        const data = artifact_1.CreateArtifactRequest.toJson(request, {
+		            useProtoFieldName: true,
+		            emitDefaultValues: false
+		        });
+		        const promise = this.rpc.request('github.actions.results.api.v1.ArtifactService', 'CreateArtifact', 'application/json', data);
+		        return promise.then(data => artifact_1.CreateArtifactResponse.fromJson(data, { ignoreUnknownFields: true }));
+		    }
+		    FinalizeArtifact(request) {
+		        const data = artifact_1.FinalizeArtifactRequest.toJson(request, {
+		            useProtoFieldName: true,
+		            emitDefaultValues: false
+		        });
+		        const promise = this.rpc.request('github.actions.results.api.v1.ArtifactService', 'FinalizeArtifact', 'application/json', data);
+		        return promise.then(data => artifact_1.FinalizeArtifactResponse.fromJson(data, {
+		            ignoreUnknownFields: true
+		        }));
+		    }
 		}
 		exports.ArtifactServiceClientJSON = ArtifactServiceClientJSON;
 		class ArtifactServiceClientProtobuf {
-		  constructor(rpc) {
-		    this.rpc = rpc;
-		    this.CreateArtifact.bind(this);
-		    this.FinalizeArtifact.bind(this);
-		  }
-		  CreateArtifact(request) {
-		    const data = artifact_1.CreateArtifactRequest.toBinary(request);
-		    const promise = this.rpc.request(
-		      'github.actions.results.api.v1.ArtifactService',
-		      'CreateArtifact',
-		      'application/protobuf',
-		      data
-		    );
-		    return promise.then((data) =>
-		      artifact_1.CreateArtifactResponse.fromBinary(data)
-		    )
-		  }
-		  FinalizeArtifact(request) {
-		    const data = artifact_1.FinalizeArtifactRequest.toBinary(request);
-		    const promise = this.rpc.request(
-		      'github.actions.results.api.v1.ArtifactService',
-		      'FinalizeArtifact',
-		      'application/protobuf',
-		      data
-		    );
-		    return promise.then((data) =>
-		      artifact_1.FinalizeArtifactResponse.fromBinary(data)
-		    )
-		  }
+		    constructor(rpc) {
+		        this.rpc = rpc;
+		        this.CreateArtifact.bind(this);
+		        this.FinalizeArtifact.bind(this);
+		    }
+		    CreateArtifact(request) {
+		        const data = artifact_1.CreateArtifactRequest.toBinary(request);
+		        const promise = this.rpc.request('github.actions.results.api.v1.ArtifactService', 'CreateArtifact', 'application/protobuf', data);
+		        return promise.then(data => artifact_1.CreateArtifactResponse.fromBinary(data));
+		    }
+		    FinalizeArtifact(request) {
+		        const data = artifact_1.FinalizeArtifactRequest.toBinary(request);
+		        const promise = this.rpc.request('github.actions.results.api.v1.ArtifactService', 'FinalizeArtifact', 'application/protobuf', data);
+		        return promise.then(data => artifact_1.FinalizeArtifactResponse.fromBinary(data));
+		    }
 		}
 		exports.ArtifactServiceClientProtobuf = ArtifactServiceClientProtobuf;
-		var ArtifactServiceMethod
-		;(function (ArtifactServiceMethod) {
-		  ArtifactServiceMethod['CreateArtifact'] = 'CreateArtifact';
-		  ArtifactServiceMethod['FinalizeArtifact'] = 'FinalizeArtifact';
-		})(
-		  (ArtifactServiceMethod =
-		    exports.ArtifactServiceMethod || (exports.ArtifactServiceMethod = {}))
-		);
+		var ArtifactServiceMethod;
+		(function (ArtifactServiceMethod) {
+		    ArtifactServiceMethod["CreateArtifact"] = "CreateArtifact";
+		    ArtifactServiceMethod["FinalizeArtifact"] = "FinalizeArtifact";
+		})(ArtifactServiceMethod = exports.ArtifactServiceMethod || (exports.ArtifactServiceMethod = {}));
 		exports.ArtifactServiceMethodList = [
-		  ArtifactServiceMethod.CreateArtifact,
-		  ArtifactServiceMethod.FinalizeArtifact
+		    ArtifactServiceMethod.CreateArtifact,
+		    ArtifactServiceMethod.FinalizeArtifact
 		];
 		function createArtifactServiceServer(service) {
-		  return new twirp_ts_1.TwirpServer({
-		    service,
-		    packageName: 'github.actions.results.api.v1',
-		    serviceName: 'ArtifactService',
-		    methodList: exports.ArtifactServiceMethodList,
-		    matchRoute: matchArtifactServiceRoute
-		  })
+		    return new twirp_ts_1.TwirpServer({
+		        service,
+		        packageName: 'github.actions.results.api.v1',
+		        serviceName: 'ArtifactService',
+		        methodList: exports.ArtifactServiceMethodList,
+		        matchRoute: matchArtifactServiceRoute
+		    });
 		}
 		exports.createArtifactServiceServer = createArtifactServiceServer;
 		function matchArtifactServiceRoute(method, events) {
-		  switch (method) {
-		    case 'CreateArtifact':
-		      return (ctx, service, data, interceptors) =>
-		        __awaiter(this, undefined, undefined, function* () {
-		          ctx = Object.assign(Object.assign({}, ctx), {
-		            methodName: 'CreateArtifact'
-		          });
-		          yield events.onMatch(ctx);
-		          return handleArtifactServiceCreateArtifactRequest(
-		            ctx,
-		            service,
-		            data,
-		            interceptors
-		          )
-		        })
-		    case 'FinalizeArtifact':
-		      return (ctx, service, data, interceptors) =>
-		        __awaiter(this, undefined, undefined, function* () {
-		          ctx = Object.assign(Object.assign({}, ctx), {
-		            methodName: 'FinalizeArtifact'
-		          });
-		          yield events.onMatch(ctx);
-		          return handleArtifactServiceFinalizeArtifactRequest(
-		            ctx,
-		            service,
-		            data,
-		            interceptors
-		          )
-		        })
-		    default:
-		      events.onNotFound();
-		      const msg = `no handler found`;
-		      throw new twirp_ts_1.TwirpError(twirp_ts_1.TwirpErrorCode.BadRoute, msg)
-		  }
+		    switch (method) {
+		        case 'CreateArtifact':
+		            return (ctx, service, data, interceptors) => __awaiter(this, undefined, undefined, function* () {
+		                ctx = Object.assign(Object.assign({}, ctx), { methodName: 'CreateArtifact' });
+		                yield events.onMatch(ctx);
+		                return handleArtifactServiceCreateArtifactRequest(ctx, service, data, interceptors);
+		            });
+		        case 'FinalizeArtifact':
+		            return (ctx, service, data, interceptors) => __awaiter(this, undefined, undefined, function* () {
+		                ctx = Object.assign(Object.assign({}, ctx), { methodName: 'FinalizeArtifact' });
+		                yield events.onMatch(ctx);
+		                return handleArtifactServiceFinalizeArtifactRequest(ctx, service, data, interceptors);
+		            });
+		        default:
+		            events.onNotFound();
+		            const msg = `no handler found`;
+		            throw new twirp_ts_1.TwirpError(twirp_ts_1.TwirpErrorCode.BadRoute, msg);
+		    }
 		}
-		function handleArtifactServiceCreateArtifactRequest(
-		  ctx,
-		  service,
-		  data,
-		  interceptors
-		) {
-		  switch (ctx.contentType) {
-		    case twirp_ts_1.TwirpContentType.JSON:
-		      return handleArtifactServiceCreateArtifactJSON(
-		        ctx,
-		        service,
-		        data,
-		        interceptors
-		      )
-		    case twirp_ts_1.TwirpContentType.Protobuf:
-		      return handleArtifactServiceCreateArtifactProtobuf(
-		        ctx,
-		        service,
-		        data,
-		        interceptors
-		      )
-		    default:
-		      const msg = 'unexpected Content-Type';
-		      throw new twirp_ts_1.TwirpError(twirp_ts_1.TwirpErrorCode.BadRoute, msg)
-		  }
+		function handleArtifactServiceCreateArtifactRequest(ctx, service, data, interceptors) {
+		    switch (ctx.contentType) {
+		        case twirp_ts_1.TwirpContentType.JSON:
+		            return handleArtifactServiceCreateArtifactJSON(ctx, service, data, interceptors);
+		        case twirp_ts_1.TwirpContentType.Protobuf:
+		            return handleArtifactServiceCreateArtifactProtobuf(ctx, service, data, interceptors);
+		        default:
+		            const msg = 'unexpected Content-Type';
+		            throw new twirp_ts_1.TwirpError(twirp_ts_1.TwirpErrorCode.BadRoute, msg);
+		    }
 		}
-		function handleArtifactServiceFinalizeArtifactRequest(
-		  ctx,
-		  service,
-		  data,
-		  interceptors
-		) {
-		  switch (ctx.contentType) {
-		    case twirp_ts_1.TwirpContentType.JSON:
-		      return handleArtifactServiceFinalizeArtifactJSON(
-		        ctx,
-		        service,
-		        data,
-		        interceptors
-		      )
-		    case twirp_ts_1.TwirpContentType.Protobuf:
-		      return handleArtifactServiceFinalizeArtifactProtobuf(
-		        ctx,
-		        service,
-		        data,
-		        interceptors
-		      )
-		    default:
-		      const msg = 'unexpected Content-Type';
-		      throw new twirp_ts_1.TwirpError(twirp_ts_1.TwirpErrorCode.BadRoute, msg)
-		  }
+		function handleArtifactServiceFinalizeArtifactRequest(ctx, service, data, interceptors) {
+		    switch (ctx.contentType) {
+		        case twirp_ts_1.TwirpContentType.JSON:
+		            return handleArtifactServiceFinalizeArtifactJSON(ctx, service, data, interceptors);
+		        case twirp_ts_1.TwirpContentType.Protobuf:
+		            return handleArtifactServiceFinalizeArtifactProtobuf(ctx, service, data, interceptors);
+		        default:
+		            const msg = 'unexpected Content-Type';
+		            throw new twirp_ts_1.TwirpError(twirp_ts_1.TwirpErrorCode.BadRoute, msg);
+		    }
 		}
-		function handleArtifactServiceCreateArtifactJSON(
-		  ctx,
-		  service,
-		  data,
-		  interceptors
-		) {
-		  return __awaiter(this, undefined, undefined, function* () {
-		    let request;
-		    let response;
-		    try {
-		      const body = JSON.parse(data.toString() || '{}');
-		      request = artifact_1.CreateArtifactRequest.fromJson(body, {
-		        ignoreUnknownFields: true
-		      });
-		    } catch (e) {
-		      if (e instanceof Error) {
-		        const msg = 'the json request could not be decoded';
-		        throw new twirp_ts_1.TwirpError(
-		          twirp_ts_1.TwirpErrorCode.Malformed,
-		          msg
-		        ).withCause(e, true)
-		      }
-		    }
-		    if (interceptors && interceptors.length > 0) {
-		      const interceptor = (0, twirp_ts_1.chainInterceptors)(...interceptors);
-		      response = yield interceptor(ctx, request, (ctx, inputReq) => {
-		        return service.CreateArtifact(ctx, inputReq)
-		      });
-		    } else {
-		      response = yield service.CreateArtifact(ctx, request);
-		    }
-		    return JSON.stringify(
-		      artifact_1.CreateArtifactResponse.toJson(response, {
-		        useProtoFieldName: true,
-		        emitDefaultValues: false
-		      })
-		    )
-		  })
+		function handleArtifactServiceCreateArtifactJSON(ctx, service, data, interceptors) {
+		    return __awaiter(this, undefined, undefined, function* () {
+		        let request;
+		        let response;
+		        try {
+		            const body = JSON.parse(data.toString() || '{}');
+		            request = artifact_1.CreateArtifactRequest.fromJson(body, { ignoreUnknownFields: true });
+		        }
+		        catch (e) {
+		            if (e instanceof Error) {
+		                const msg = 'the json request could not be decoded';
+		                throw new twirp_ts_1.TwirpError(twirp_ts_1.TwirpErrorCode.Malformed, msg).withCause(e, true);
+		            }
+		        }
+		        if (interceptors && interceptors.length > 0) {
+		            const interceptor = (0, twirp_ts_1.chainInterceptors)(...interceptors);
+		            response = yield interceptor(ctx, request, (ctx, inputReq) => {
+		                return service.CreateArtifact(ctx, inputReq);
+		            });
+		        }
+		        else {
+		            response = yield service.CreateArtifact(ctx, request);
+		        }
+		        return JSON.stringify(artifact_1.CreateArtifactResponse.toJson(response, {
+		            useProtoFieldName: true,
+		            emitDefaultValues: false
+		        }));
+		    });
 		}
-		function handleArtifactServiceFinalizeArtifactJSON(
-		  ctx,
-		  service,
-		  data,
-		  interceptors
-		) {
-		  return __awaiter(this, undefined, undefined, function* () {
-		    let request;
-		    let response;
-		    try {
-		      const body = JSON.parse(data.toString() || '{}');
-		      request = artifact_1.FinalizeArtifactRequest.fromJson(body, {
-		        ignoreUnknownFields: true
-		      });
-		    } catch (e) {
-		      if (e instanceof Error) {
-		        const msg = 'the json request could not be decoded';
-		        throw new twirp_ts_1.TwirpError(
-		          twirp_ts_1.TwirpErrorCode.Malformed,
-		          msg
-		        ).withCause(e, true)
-		      }
-		    }
-		    if (interceptors && interceptors.length > 0) {
-		      const interceptor = (0, twirp_ts_1.chainInterceptors)(...interceptors);
-		      response = yield interceptor(ctx, request, (ctx, inputReq) => {
-		        return service.FinalizeArtifact(ctx, inputReq)
-		      });
-		    } else {
-		      response = yield service.FinalizeArtifact(ctx, request);
-		    }
-		    return JSON.stringify(
-		      artifact_1.FinalizeArtifactResponse.toJson(response, {
-		        useProtoFieldName: true,
-		        emitDefaultValues: false
-		      })
-		    )
-		  })
+		function handleArtifactServiceFinalizeArtifactJSON(ctx, service, data, interceptors) {
+		    return __awaiter(this, undefined, undefined, function* () {
+		        let request;
+		        let response;
+		        try {
+		            const body = JSON.parse(data.toString() || '{}');
+		            request = artifact_1.FinalizeArtifactRequest.fromJson(body, {
+		                ignoreUnknownFields: true
+		            });
+		        }
+		        catch (e) {
+		            if (e instanceof Error) {
+		                const msg = 'the json request could not be decoded';
+		                throw new twirp_ts_1.TwirpError(twirp_ts_1.TwirpErrorCode.Malformed, msg).withCause(e, true);
+		            }
+		        }
+		        if (interceptors && interceptors.length > 0) {
+		            const interceptor = (0, twirp_ts_1.chainInterceptors)(...interceptors);
+		            response = yield interceptor(ctx, request, (ctx, inputReq) => {
+		                return service.FinalizeArtifact(ctx, inputReq);
+		            });
+		        }
+		        else {
+		            response = yield service.FinalizeArtifact(ctx, request);
+		        }
+		        return JSON.stringify(artifact_1.FinalizeArtifactResponse.toJson(response, {
+		            useProtoFieldName: true,
+		            emitDefaultValues: false
+		        }));
+		    });
 		}
-		function handleArtifactServiceCreateArtifactProtobuf(
-		  ctx,
-		  service,
-		  data,
-		  interceptors
-		) {
-		  return __awaiter(this, undefined, undefined, function* () {
-		    let request;
-		    let response;
-		    try {
-		      request = artifact_1.CreateArtifactRequest.fromBinary(data);
-		    } catch (e) {
-		      if (e instanceof Error) {
-		        const msg = 'the protobuf request could not be decoded';
-		        throw new twirp_ts_1.TwirpError(
-		          twirp_ts_1.TwirpErrorCode.Malformed,
-		          msg
-		        ).withCause(e, true)
-		      }
-		    }
-		    if (interceptors && interceptors.length > 0) {
-		      const interceptor = (0, twirp_ts_1.chainInterceptors)(...interceptors);
-		      response = yield interceptor(ctx, request, (ctx, inputReq) => {
-		        return service.CreateArtifact(ctx, inputReq)
-		      });
-		    } else {
-		      response = yield service.CreateArtifact(ctx, request);
-		    }
-		    return Buffer.from(artifact_1.CreateArtifactResponse.toBinary(response))
-		  })
+		function handleArtifactServiceCreateArtifactProtobuf(ctx, service, data, interceptors) {
+		    return __awaiter(this, undefined, undefined, function* () {
+		        let request;
+		        let response;
+		        try {
+		            request = artifact_1.CreateArtifactRequest.fromBinary(data);
+		        }
+		        catch (e) {
+		            if (e instanceof Error) {
+		                const msg = 'the protobuf request could not be decoded';
+		                throw new twirp_ts_1.TwirpError(twirp_ts_1.TwirpErrorCode.Malformed, msg).withCause(e, true);
+		            }
+		        }
+		        if (interceptors && interceptors.length > 0) {
+		            const interceptor = (0, twirp_ts_1.chainInterceptors)(...interceptors);
+		            response = yield interceptor(ctx, request, (ctx, inputReq) => {
+		                return service.CreateArtifact(ctx, inputReq);
+		            });
+		        }
+		        else {
+		            response = yield service.CreateArtifact(ctx, request);
+		        }
+		        return Buffer.from(artifact_1.CreateArtifactResponse.toBinary(response));
+		    });
 		}
-		function handleArtifactServiceFinalizeArtifactProtobuf(
-		  ctx,
-		  service,
-		  data,
-		  interceptors
-		) {
-		  return __awaiter(this, undefined, undefined, function* () {
-		    let request;
-		    let response;
-		    try {
-		      request = artifact_1.FinalizeArtifactRequest.fromBinary(data);
-		    } catch (e) {
-		      if (e instanceof Error) {
-		        const msg = 'the protobuf request could not be decoded';
-		        throw new twirp_ts_1.TwirpError(
-		          twirp_ts_1.TwirpErrorCode.Malformed,
-		          msg
-		        ).withCause(e, true)
-		      }
-		    }
-		    if (interceptors && interceptors.length > 0) {
-		      const interceptor = (0, twirp_ts_1.chainInterceptors)(...interceptors);
-		      response = yield interceptor(ctx, request, (ctx, inputReq) => {
-		        return service.FinalizeArtifact(ctx, inputReq)
-		      });
-		    } else {
-		      response = yield service.FinalizeArtifact(ctx, request);
-		    }
-		    return Buffer.from(artifact_1.FinalizeArtifactResponse.toBinary(response))
-		  })
+		function handleArtifactServiceFinalizeArtifactProtobuf(ctx, service, data, interceptors) {
+		    return __awaiter(this, undefined, undefined, function* () {
+		        let request;
+		        let response;
+		        try {
+		            request = artifact_1.FinalizeArtifactRequest.fromBinary(data);
+		        }
+		        catch (e) {
+		            if (e instanceof Error) {
+		                const msg = 'the protobuf request could not be decoded';
+		                throw new twirp_ts_1.TwirpError(twirp_ts_1.TwirpErrorCode.Malformed, msg).withCause(e, true);
+		            }
+		        }
+		        if (interceptors && interceptors.length > 0) {
+		            const interceptor = (0, twirp_ts_1.chainInterceptors)(...interceptors);
+		            response = yield interceptor(ctx, request, (ctx, inputReq) => {
+		                return service.FinalizeArtifact(ctx, inputReq);
+		            });
+		        }
+		        else {
+		            response = yield service.FinalizeArtifact(ctx, request);
+		        }
+		        return Buffer.from(artifact_1.FinalizeArtifactResponse.toBinary(response));
+		    });
 		}
 		
 	} (artifact_twirp));
@@ -37828,37 +37324,21 @@ function requireGenerated () {
 	if (hasRequiredGenerated) return generated;
 	hasRequiredGenerated = 1;
 	(function (exports) {
-		var __createBinding =
-		  (generated.__createBinding) ||
-		  (Object.create
-		    ? function (o, m, k, k2) {
-		        if (k2 === undefined) k2 = k;
-		        var desc = Object.getOwnPropertyDescriptor(m, k);
-		        if (
-		          !desc ||
-		          ('get' in desc ? !m.__esModule : desc.writable || desc.configurable)
-		        ) {
-		          desc = {
-		            enumerable: true,
-		            get: function () {
-		              return m[k]
-		            }
-		          };
-		        }
-		        Object.defineProperty(o, k2, desc);
-		      }
-		    : function (o, m, k, k2) {
-		        if (k2 === undefined) k2 = k;
-		        o[k2] = m[k];
-		      });
-		var __exportStar =
-		  (generated.__exportStar) ||
-		  function (m, exports) {
-		    for (var p in m)
-		      if (p !== 'default' && !Object.prototype.hasOwnProperty.call(exports, p))
-		        __createBinding(exports, m, p);
-		  };
-		Object.defineProperty(exports, '__esModule', { value: true });
+		var __createBinding = (generated.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+		    if (k2 === undefined) k2 = k;
+		    var desc = Object.getOwnPropertyDescriptor(m, k);
+		    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+		      desc = { enumerable: true, get: function() { return m[k]; } };
+		    }
+		    Object.defineProperty(o, k2, desc);
+		}) : (function(o, m, k, k2) {
+		    if (k2 === undefined) k2 = k;
+		    o[k2] = m[k];
+		}));
+		var __exportStar = (generated.__exportStar) || function(m, exports) {
+		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+		};
+		Object.defineProperty(exports, "__esModule", { value: true });
 		__exportStar(requireTimestamp(), exports);
 		__exportStar(requireWrappers(), exports);
 		__exportStar(requireArtifact$1(), exports);
@@ -37873,80 +37353,57 @@ var hasRequiredRetention;
 function requireRetention () {
 	if (hasRequiredRetention) return retention;
 	hasRequiredRetention = 1;
-	var __createBinding =
-	  (retention.__createBinding) ||
-	  (Object.create
-	    ? function (o, m, k, k2) {
-	        if (k2 === undefined) k2 = k;
-	        var desc = Object.getOwnPropertyDescriptor(m, k);
-	        if (
-	          !desc ||
-	          ('get' in desc ? !m.__esModule : desc.writable || desc.configurable)
-	        ) {
-	          desc = {
-	            enumerable: true,
-	            get: function () {
-	              return m[k]
-	            }
-	          };
-	        }
-	        Object.defineProperty(o, k2, desc);
-	      }
-	    : function (o, m, k, k2) {
-	        if (k2 === undefined) k2 = k;
-	        o[k2] = m[k];
-	      });
-	var __setModuleDefault =
-	  (retention.__setModuleDefault) ||
-	  (Object.create
-	    ? function (o, v) {
-	        Object.defineProperty(o, 'default', { enumerable: true, value: v });
-	      }
-	    : function (o, v) {
-	        o['default'] = v;
-	      });
-	var __importStar =
-	  (retention.__importStar) ||
-	  function (mod) {
-	    if (mod && mod.__esModule) return mod
+	var __createBinding = (retention.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    var desc = Object.getOwnPropertyDescriptor(m, k);
+	    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+	      desc = { enumerable: true, get: function() { return m[k]; } };
+	    }
+	    Object.defineProperty(o, k2, desc);
+	}) : (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    o[k2] = m[k];
+	}));
+	var __setModuleDefault = (retention.__setModuleDefault) || (Object.create ? (function(o, v) {
+	    Object.defineProperty(o, "default", { enumerable: true, value: v });
+	}) : function(o, v) {
+	    o["default"] = v;
+	});
+	var __importStar = (retention.__importStar) || function (mod) {
+	    if (mod && mod.__esModule) return mod;
 	    var result = {};
-	    if (mod != null)
-	      for (var k in mod)
-	        if (k !== 'default' && Object.prototype.hasOwnProperty.call(mod, k))
-	          __createBinding(result, mod, k);
+	    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
 	    __setModuleDefault(result, mod);
-	    return result
-	  };
-	Object.defineProperty(retention, '__esModule', { value: true });
+	    return result;
+	};
+	Object.defineProperty(retention, "__esModule", { value: true });
 	retention.getExpiration = undefined;
 	const generated_1 = requireGenerated();
 	const core = __importStar(requireCore());
 	function getExpiration(retentionDays) {
-	  if (!retentionDays) {
-	    return undefined
-	  }
-	  const maxRetentionDays = getRetentionDays();
-	  if (maxRetentionDays && maxRetentionDays < retentionDays) {
-	    core.warning(
-	      `Retention days cannot be greater than the maximum allowed retention set within the repository. Using ${maxRetentionDays} instead.`
-	    );
-	    retentionDays = maxRetentionDays;
-	  }
-	  const expirationDate = new Date();
-	  expirationDate.setDate(expirationDate.getDate() + retentionDays);
-	  return generated_1.Timestamp.fromDate(expirationDate)
+	    if (!retentionDays) {
+	        return undefined;
+	    }
+	    const maxRetentionDays = getRetentionDays();
+	    if (maxRetentionDays && maxRetentionDays < retentionDays) {
+	        core.warning(`Retention days cannot be greater than the maximum allowed retention set within the repository. Using ${maxRetentionDays} instead.`);
+	        retentionDays = maxRetentionDays;
+	    }
+	    const expirationDate = new Date();
+	    expirationDate.setDate(expirationDate.getDate() + retentionDays);
+	    return generated_1.Timestamp.fromDate(expirationDate);
 	}
 	retention.getExpiration = getExpiration;
 	function getRetentionDays() {
-	  const retentionDays = process.env['GITHUB_RETENTION_DAYS'];
-	  if (!retentionDays) {
-	    return undefined
-	  }
-	  const days = parseInt(retentionDays);
-	  if (isNaN(days)) {
-	    return undefined
-	  }
-	  return days
+	    const retentionDays = process.env['GITHUB_RETENTION_DAYS'];
+	    if (!retentionDays) {
+	        return undefined;
+	    }
+	    const days = parseInt(retentionDays);
+	    if (isNaN(days)) {
+	        return undefined;
+	    }
+	    return days;
 	}
 	
 	return retention;
@@ -37959,7 +37416,7 @@ var hasRequiredPathAndArtifactNameValidation;
 function requirePathAndArtifactNameValidation () {
 	if (hasRequiredPathAndArtifactNameValidation) return pathAndArtifactNameValidation;
 	hasRequiredPathAndArtifactNameValidation = 1;
-	Object.defineProperty(pathAndArtifactNameValidation, '__esModule', { value: true });
+	Object.defineProperty(pathAndArtifactNameValidation, "__esModule", { value: true });
 	pathAndArtifactNameValidation.validateFilePath = pathAndArtifactNameValidation.validateArtifactName = undefined;
 	const core_1 = requireCore();
 	/**
@@ -37971,63 +37428,57 @@ function requirePathAndArtifactNameValidation () {
 	 * FilePaths can include characters such as \ and / which are not permitted in the artifact name alone
 	 */
 	const invalidArtifactFilePathCharacters = new Map([
-	  ['"', ' Double quote "'],
-	  [':', ' Colon :'],
-	  ['<', ' Less than <'],
-	  ['>', ' Greater than >'],
-	  ['|', ' Vertical bar |'],
-	  ['*', ' Asterisk *'],
-	  ['?', ' Question mark ?'],
-	  ['\r', ' Carriage return \\r'],
-	  ['\n', ' Line feed \\n']
+	    ['"', ' Double quote "'],
+	    [':', ' Colon :'],
+	    ['<', ' Less than <'],
+	    ['>', ' Greater than >'],
+	    ['|', ' Vertical bar |'],
+	    ['*', ' Asterisk *'],
+	    ['?', ' Question mark ?'],
+	    ['\r', ' Carriage return \\r'],
+	    ['\n', ' Line feed \\n']
 	]);
 	const invalidArtifactNameCharacters = new Map([
-	  ...invalidArtifactFilePathCharacters,
-	  ['\\', ' Backslash \\'],
-	  ['/', ' Forward slash /']
+	    ...invalidArtifactFilePathCharacters,
+	    ['\\', ' Backslash \\'],
+	    ['/', ' Forward slash /']
 	]);
 	/**
 	 * Validates the name of the artifact to check to make sure there are no illegal characters
 	 */
 	function validateArtifactName(name) {
-	  if (!name) {
-	    throw new Error(`Provided artifact name input during validation is empty`)
-	  }
-	  for (const [
-	    invalidCharacterKey,
-	    errorMessageForCharacter
-	  ] of invalidArtifactNameCharacters) {
-	    if (name.includes(invalidCharacterKey)) {
-	      throw new Error(`The artifact name is not valid: ${name}. Contains the following character: ${errorMessageForCharacter}
+	    if (!name) {
+	        throw new Error(`Provided artifact name input during validation is empty`);
+	    }
+	    for (const [invalidCharacterKey, errorMessageForCharacter] of invalidArtifactNameCharacters) {
+	        if (name.includes(invalidCharacterKey)) {
+	            throw new Error(`The artifact name is not valid: ${name}. Contains the following character: ${errorMessageForCharacter}
           
 Invalid characters include: ${Array.from(invalidArtifactNameCharacters.values()).toString()}
           
-These characters are not allowed in the artifact name due to limitations with certain file systems such as NTFS. To maintain file system agnostic behavior, these characters are intentionally not allowed to prevent potential problems with downloads on different file systems.`)
+These characters are not allowed in the artifact name due to limitations with certain file systems such as NTFS. To maintain file system agnostic behavior, these characters are intentionally not allowed to prevent potential problems with downloads on different file systems.`);
+	        }
 	    }
-	  }
-(0, core_1.info)(`Artifact name is valid!`);
+	    (0, core_1.info)(`Artifact name is valid!`);
 	}
 	pathAndArtifactNameValidation.validateArtifactName = validateArtifactName;
 	/**
 	 * Validates file paths to check for any illegal characters that can cause problems on different file systems
 	 */
 	function validateFilePath(path) {
-	  if (!path) {
-	    throw new Error(`Provided file path input during validation is empty`)
-	  }
-	  for (const [
-	    invalidCharacterKey,
-	    errorMessageForCharacter
-	  ] of invalidArtifactFilePathCharacters) {
-	    if (path.includes(invalidCharacterKey)) {
-	      throw new Error(`The path for one of the files in artifact is not valid: ${path}. Contains the following character: ${errorMessageForCharacter}
+	    if (!path) {
+	        throw new Error(`Provided file path input during validation is empty`);
+	    }
+	    for (const [invalidCharacterKey, errorMessageForCharacter] of invalidArtifactFilePathCharacters) {
+	        if (path.includes(invalidCharacterKey)) {
+	            throw new Error(`The path for one of the files in artifact is not valid: ${path}. Contains the following character: ${errorMessageForCharacter}
           
 Invalid characters include: ${Array.from(invalidArtifactFilePathCharacters.values()).toString()}
           
 The following characters are not allowed in files that are uploaded due to limitations with certain file systems such as NTFS. To maintain file system agnostic behavior, these characters are intentionally not allowed to prevent potential problems with downloads on different file systems.
-          `)
+          `);
+	        }
 	    }
-	  }
 	}
 	pathAndArtifactNameValidation.validateFilePath = validateFilePath;
 	
@@ -38043,29 +37494,27 @@ var hasRequiredConfig;
 function requireConfig () {
 	if (hasRequiredConfig) return config;
 	hasRequiredConfig = 1;
-	Object.defineProperty(config, '__esModule', { value: true });
+	Object.defineProperty(config, "__esModule", { value: true });
 	config.isGhes = config.getResultsServiceUrl = config.getRuntimeToken = undefined;
 	function getRuntimeToken() {
-	  const token = process.env['ACTIONS_RUNTIME_TOKEN'];
-	  if (!token) {
-	    throw new Error('Unable to get the ACTIONS_RUNTIME_TOKEN env variable')
-	  }
-	  return token
+	    const token = process.env['ACTIONS_RUNTIME_TOKEN'];
+	    if (!token) {
+	        throw new Error('Unable to get the ACTIONS_RUNTIME_TOKEN env variable');
+	    }
+	    return token;
 	}
 	config.getRuntimeToken = getRuntimeToken;
 	function getResultsServiceUrl() {
-	  const resultsUrl = process.env['ACTIONS_RESULTS_URL'];
-	  if (!resultsUrl) {
-	    throw new Error('Unable to get the ACTIONS_RESULTS_URL env variable')
-	  }
-	  return resultsUrl
+	    const resultsUrl = process.env['ACTIONS_RESULTS_URL'];
+	    if (!resultsUrl) {
+	        throw new Error('Unable to get the ACTIONS_RESULTS_URL env variable');
+	    }
+	    return resultsUrl;
 	}
 	config.getResultsServiceUrl = getResultsServiceUrl;
 	function isGhes() {
-	  const ghUrl = new URL(
-	    process.env['GITHUB_SERVER_URL'] || 'https://github.com'
-	  );
-	  return ghUrl.hostname.toUpperCase() !== 'GITHUB.COM'
+	    const ghUrl = new URL(process.env['GITHUB_SERVER_URL'] || 'https://github.com');
+	    return ghUrl.hostname.toUpperCase() !== 'GITHUB.COM';
 	}
 	config.isGhes = isGhes;
 	
@@ -38077,40 +37526,16 @@ var hasRequiredArtifactTwirpClient;
 function requireArtifactTwirpClient () {
 	if (hasRequiredArtifactTwirpClient) return artifactTwirpClient;
 	hasRequiredArtifactTwirpClient = 1;
-	var __awaiter =
-	  (artifactTwirpClient.__awaiter) ||
-	  function (thisArg, _arguments, P, generator) {
-	    function adopt(value) {
-	      return value instanceof P
-	        ? value
-	        : new P(function (resolve) {
-	            resolve(value);
-	          })
-	    }
+	var __awaiter = (artifactTwirpClient.__awaiter) || function (thisArg, _arguments, P, generator) {
+	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
 	    return new (P || (P = Promise))(function (resolve, reject) {
-	      function fulfilled(value) {
-	        try {
-	          step(generator.next(value));
-	        } catch (e) {
-	          reject(e);
-	        }
-	      }
-	      function rejected(value) {
-	        try {
-	          step(generator['throw'](value));
-	        } catch (e) {
-	          reject(e);
-	        }
-	      }
-	      function step(result) {
-	        result.done
-	          ? resolve(result.value)
-	          : adopt(result.value).then(fulfilled, rejected);
-	      }
-	      step((generator = generator.apply(thisArg, _arguments || [])).next());
-	    })
-	  };
-	Object.defineProperty(artifactTwirpClient, '__esModule', { value: true });
+	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+	        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+	        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+	        step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    });
+	};
+	Object.defineProperty(artifactTwirpClient, "__esModule", { value: true });
 	artifactTwirpClient.createArtifactTwirpClient = undefined;
 	const http_client_1 = requireLib();
 	const auth_1 = requireAuth();
@@ -38118,137 +37543,115 @@ function requireArtifactTwirpClient () {
 	const generated_1 = requireGenerated();
 	const config_1 = requireConfig();
 	class ArtifactHttpClient {
-	  constructor(
-	    userAgent,
-	    maxAttempts,
-	    baseRetryIntervalMilliseconds,
-	    retryMultiplier
-	  ) {
-	    this.maxAttempts = 5;
-	    this.baseRetryIntervalMilliseconds = 3000;
-	    this.retryMultiplier = 1.5;
-	    const token = (0, config_1.getRuntimeToken)();
-	    this.baseUrl = (0, config_1.getResultsServiceUrl)();
-	    if (maxAttempts) {
-	      this.maxAttempts = maxAttempts;
-	    }
-	    if (baseRetryIntervalMilliseconds) {
-	      this.baseRetryIntervalMilliseconds = baseRetryIntervalMilliseconds;
-	    }
-	    if (retryMultiplier) {
-	      this.retryMultiplier = retryMultiplier;
-	    }
-	    this.httpClient = new http_client_1.HttpClient(userAgent, [
-	      new auth_1.BearerCredentialHandler(token)
-	    ]);
-	  }
-	  // This function satisfies the Rpc interface. It is compatible with the JSON
-	  // JSON generated client.
-	  request(service, method, contentType, data) {
-	    return __awaiter(this, undefined, undefined, function* () {
-	      const url = `${this.baseUrl}/twirp/${service}/${method}`;
-	      const headers = {
-	        'Content-Type': contentType
-	      };
-	      try {
-	        const response = yield this.retryableRequest(() =>
-	          __awaiter(this, void 0, void 0, function* () {
-	            return this.httpClient.post(url, JSON.stringify(data), headers)
-	          })
-	        );
-	        const body = yield response.readBody();
-	        return JSON.parse(body)
-	      } catch (error) {
-	        throw new Error(`Failed to ${method}: ${error.message}`)
-	      }
-	    })
-	  }
-	  retryableRequest(operation) {
-	    return __awaiter(this, undefined, undefined, function* () {
-	      let attempt = 0;
-	      let errorMessage = '';
-	      while (attempt < this.maxAttempts) {
-	        let isRetryable = false;
-	        try {
-	          const response = yield operation();
-	          const statusCode = response.message.statusCode;
-	          if (this.isSuccessStatusCode(statusCode)) {
-	            return response
-	          }
-	          isRetryable = this.isRetryableHttpStatusCode(statusCode);
-	          errorMessage = `Failed request: (${statusCode}) ${response.message.statusMessage}`;
-	        } catch (error) {
-	          isRetryable = true;
-	          errorMessage = error.message;
+	    constructor(userAgent, maxAttempts, baseRetryIntervalMilliseconds, retryMultiplier) {
+	        this.maxAttempts = 5;
+	        this.baseRetryIntervalMilliseconds = 3000;
+	        this.retryMultiplier = 1.5;
+	        const token = (0, config_1.getRuntimeToken)();
+	        this.baseUrl = (0, config_1.getResultsServiceUrl)();
+	        if (maxAttempts) {
+	            this.maxAttempts = maxAttempts;
 	        }
-	        if (!isRetryable) {
-	          throw new Error(`Received non-retryable error: ${errorMessage}`)
+	        if (baseRetryIntervalMilliseconds) {
+	            this.baseRetryIntervalMilliseconds = baseRetryIntervalMilliseconds;
 	        }
-	        if (attempt + 1 === this.maxAttempts) {
-	          throw new Error(
-	            `Failed to make request after ${this.maxAttempts} attempts: ${errorMessage}`
-	          )
+	        if (retryMultiplier) {
+	            this.retryMultiplier = retryMultiplier;
 	        }
-	        const retryTimeMilliseconds =
-	          this.getExponentialRetryTimeMilliseconds(attempt)
-	        ;(0, core_1.info)(
-	          `Attempt ${attempt + 1} of ${this.maxAttempts} failed with error: ${errorMessage}. Retrying request in ${retryTimeMilliseconds} ms...`
-	        );
-	        yield this.sleep(retryTimeMilliseconds);
-	        attempt++;
-	      }
-	      throw new Error(`Request failed`)
-	    })
-	  }
-	  isSuccessStatusCode(statusCode) {
-	    if (!statusCode) return false
-	    return statusCode >= 200 && statusCode < 300
-	  }
-	  isRetryableHttpStatusCode(statusCode) {
-	    if (!statusCode) return false
-	    const retryableStatusCodes = [
-	      http_client_1.HttpCodes.BadGateway,
-	      http_client_1.HttpCodes.GatewayTimeout,
-	      http_client_1.HttpCodes.InternalServerError,
-	      http_client_1.HttpCodes.ServiceUnavailable,
-	      http_client_1.HttpCodes.TooManyRequests,
-	      413 // Payload Too Large
-	    ];
-	    return retryableStatusCodes.includes(statusCode)
-	  }
-	  sleep(milliseconds) {
-	    return __awaiter(this, undefined, undefined, function* () {
-	      return new Promise((resolve) => setTimeout(resolve, milliseconds))
-	    })
-	  }
-	  getExponentialRetryTimeMilliseconds(attempt) {
-	    if (attempt < 0) {
-	      throw new Error('attempt should be a positive integer')
+	        this.httpClient = new http_client_1.HttpClient(userAgent, [
+	            new auth_1.BearerCredentialHandler(token)
+	        ]);
 	    }
-	    if (attempt === 0) {
-	      return this.baseRetryIntervalMilliseconds
+	    // This function satisfies the Rpc interface. It is compatible with the JSON
+	    // JSON generated client.
+	    request(service, method, contentType, data) {
+	        return __awaiter(this, undefined, undefined, function* () {
+	            const url = `${this.baseUrl}/twirp/${service}/${method}`;
+	            const headers = {
+	                'Content-Type': contentType
+	            };
+	            try {
+	                const response = yield this.retryableRequest(() => __awaiter(this, void 0, void 0, function* () { return this.httpClient.post(url, JSON.stringify(data), headers); }));
+	                const body = yield response.readBody();
+	                return JSON.parse(body);
+	            }
+	            catch (error) {
+	                throw new Error(`Failed to ${method}: ${error.message}`);
+	            }
+	        });
 	    }
-	    const minTime =
-	      this.baseRetryIntervalMilliseconds *
-	      Math.pow(this.retryMultiplier, attempt);
-	    const maxTime = minTime * this.retryMultiplier;
-	    // returns a random number between minTime and maxTime (exclusive)
-	    return Math.trunc(Math.random() * (maxTime - minTime) + minTime)
-	  }
+	    retryableRequest(operation) {
+	        return __awaiter(this, undefined, undefined, function* () {
+	            let attempt = 0;
+	            let errorMessage = '';
+	            while (attempt < this.maxAttempts) {
+	                let isRetryable = false;
+	                try {
+	                    const response = yield operation();
+	                    const statusCode = response.message.statusCode;
+	                    if (this.isSuccessStatusCode(statusCode)) {
+	                        return response;
+	                    }
+	                    isRetryable = this.isRetryableHttpStatusCode(statusCode);
+	                    errorMessage = `Failed request: (${statusCode}) ${response.message.statusMessage}`;
+	                }
+	                catch (error) {
+	                    isRetryable = true;
+	                    errorMessage = error.message;
+	                }
+	                if (!isRetryable) {
+	                    throw new Error(`Received non-retryable error: ${errorMessage}`);
+	                }
+	                if (attempt + 1 === this.maxAttempts) {
+	                    throw new Error(`Failed to make request after ${this.maxAttempts} attempts: ${errorMessage}`);
+	                }
+	                const retryTimeMilliseconds = this.getExponentialRetryTimeMilliseconds(attempt);
+	                (0, core_1.info)(`Attempt ${attempt + 1} of ${this.maxAttempts} failed with error: ${errorMessage}. Retrying request in ${retryTimeMilliseconds} ms...`);
+	                yield this.sleep(retryTimeMilliseconds);
+	                attempt++;
+	            }
+	            throw new Error(`Request failed`);
+	        });
+	    }
+	    isSuccessStatusCode(statusCode) {
+	        if (!statusCode)
+	            return false;
+	        return statusCode >= 200 && statusCode < 300;
+	    }
+	    isRetryableHttpStatusCode(statusCode) {
+	        if (!statusCode)
+	            return false;
+	        const retryableStatusCodes = [
+	            http_client_1.HttpCodes.BadGateway,
+	            http_client_1.HttpCodes.GatewayTimeout,
+	            http_client_1.HttpCodes.InternalServerError,
+	            http_client_1.HttpCodes.ServiceUnavailable,
+	            http_client_1.HttpCodes.TooManyRequests,
+	            413 // Payload Too Large
+	        ];
+	        return retryableStatusCodes.includes(statusCode);
+	    }
+	    sleep(milliseconds) {
+	        return __awaiter(this, undefined, undefined, function* () {
+	            return new Promise(resolve => setTimeout(resolve, milliseconds));
+	        });
+	    }
+	    getExponentialRetryTimeMilliseconds(attempt) {
+	        if (attempt < 0) {
+	            throw new Error('attempt should be a positive integer');
+	        }
+	        if (attempt === 0) {
+	            return this.baseRetryIntervalMilliseconds;
+	        }
+	        const minTime = this.baseRetryIntervalMilliseconds * Math.pow(this.retryMultiplier, attempt);
+	        const maxTime = minTime * this.retryMultiplier;
+	        // returns a random number between minTime and maxTime (exclusive)
+	        return Math.trunc(Math.random() * (maxTime - minTime) + minTime);
+	    }
 	}
-	function createArtifactTwirpClient(
-	  type,
-	  maxAttempts,
-	  baseRetryIntervalMilliseconds,
-	  retryMultiplier
-	) {
-	  const client = new ArtifactHttpClient(
-	    `@actions/artifact-${type}`,
-	    maxAttempts,
-	    baseRetryIntervalMilliseconds,
-	    retryMultiplier
-	  );
-	  return new generated_1.ArtifactServiceClientJSON(client)
+	function createArtifactTwirpClient(type, maxAttempts, baseRetryIntervalMilliseconds, retryMultiplier) {
+	    const client = new ArtifactHttpClient(`@actions/artifact-${type}`, maxAttempts, baseRetryIntervalMilliseconds, retryMultiplier);
+	    return new generated_1.ArtifactServiceClientJSON(client);
 	}
 	artifactTwirpClient.createArtifactTwirpClient = createArtifactTwirpClient;
 	
@@ -38262,51 +37665,30 @@ var hasRequiredUploadZipSpecification;
 function requireUploadZipSpecification () {
 	if (hasRequiredUploadZipSpecification) return uploadZipSpecification;
 	hasRequiredUploadZipSpecification = 1;
-	var __createBinding =
-	  (uploadZipSpecification.__createBinding) ||
-	  (Object.create
-	    ? function (o, m, k, k2) {
-	        if (k2 === undefined) k2 = k;
-	        var desc = Object.getOwnPropertyDescriptor(m, k);
-	        if (
-	          !desc ||
-	          ('get' in desc ? !m.__esModule : desc.writable || desc.configurable)
-	        ) {
-	          desc = {
-	            enumerable: true,
-	            get: function () {
-	              return m[k]
-	            }
-	          };
-	        }
-	        Object.defineProperty(o, k2, desc);
-	      }
-	    : function (o, m, k, k2) {
-	        if (k2 === undefined) k2 = k;
-	        o[k2] = m[k];
-	      });
-	var __setModuleDefault =
-	  (uploadZipSpecification.__setModuleDefault) ||
-	  (Object.create
-	    ? function (o, v) {
-	        Object.defineProperty(o, 'default', { enumerable: true, value: v });
-	      }
-	    : function (o, v) {
-	        o['default'] = v;
-	      });
-	var __importStar =
-	  (uploadZipSpecification.__importStar) ||
-	  function (mod) {
-	    if (mod && mod.__esModule) return mod
+	var __createBinding = (uploadZipSpecification.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    var desc = Object.getOwnPropertyDescriptor(m, k);
+	    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+	      desc = { enumerable: true, get: function() { return m[k]; } };
+	    }
+	    Object.defineProperty(o, k2, desc);
+	}) : (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    o[k2] = m[k];
+	}));
+	var __setModuleDefault = (uploadZipSpecification.__setModuleDefault) || (Object.create ? (function(o, v) {
+	    Object.defineProperty(o, "default", { enumerable: true, value: v });
+	}) : function(o, v) {
+	    o["default"] = v;
+	});
+	var __importStar = (uploadZipSpecification.__importStar) || function (mod) {
+	    if (mod && mod.__esModule) return mod;
 	    var result = {};
-	    if (mod != null)
-	      for (var k in mod)
-	        if (k !== 'default' && Object.prototype.hasOwnProperty.call(mod, k))
-	          __createBinding(result, mod, k);
+	    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
 	    __setModuleDefault(result, mod);
-	    return result
-	  };
-	Object.defineProperty(uploadZipSpecification, '__esModule', { value: true });
+	    return result;
+	};
+	Object.defineProperty(uploadZipSpecification, "__esModule", { value: true });
 	uploadZipSpecification.getUploadZipSpecification = uploadZipSpecification.validateRootDirectory = undefined;
 	const fs = __importStar(require$$1$2);
 	const core_1 = requireCore();
@@ -38317,17 +37699,13 @@ function requireUploadZipSpecification () {
 	 * @param rootDirectory an absolute root directory path common to all input files that that will be trimmed from the final zip structure
 	 */
 	function validateRootDirectory(rootDirectory) {
-	  if (!fs.existsSync(rootDirectory)) {
-	    throw new Error(
-	      `The provided rootDirectory ${rootDirectory} does not exist`
-	    )
-	  }
-	  if (!fs.statSync(rootDirectory).isDirectory()) {
-	    throw new Error(
-	      `The provided rootDirectory ${rootDirectory} is not a valid directory`
-	    )
-	  }
-(0, core_1.info)(`Root directory input is valid!`);
+	    if (!fs.existsSync(rootDirectory)) {
+	        throw new Error(`The provided rootDirectory ${rootDirectory} does not exist`);
+	    }
+	    if (!fs.statSync(rootDirectory).isDirectory()) {
+	        throw new Error(`The provided rootDirectory ${rootDirectory} is not a valid directory`);
+	    }
+	    (0, core_1.info)(`Root directory input is valid!`);
 	}
 	uploadZipSpecification.validateRootDirectory = validateRootDirectory;
 	/**
@@ -38336,11 +37714,11 @@ function requireUploadZipSpecification () {
 	 * @param rootDirectory an absolute root directory path common to all input files that that will be trimmed from the final zip structure
 	 */
 	function getUploadZipSpecification(filesToZip, rootDirectory) {
-	  const specification = [];
-	  // Normalize and resolve, this allows for either absolute or relative paths to be used
-	  rootDirectory = (0, path_1.normalize)(rootDirectory);
-	  rootDirectory = (0, path_1.resolve)(rootDirectory);
-	  /*
+	    const specification = [];
+	    // Normalize and resolve, this allows for either absolute or relative paths to be used
+	    rootDirectory = (0, path_1.normalize)(rootDirectory);
+	    rootDirectory = (0, path_1.resolve)(rootDirectory);
+	    /*
 	       Example
 	       
 	       Input:
@@ -38366,37 +37744,36 @@ function requireUploadZipSpecification () {
 	          - dir/
 	            - file3.txt
 	    */
-	  for (let file of filesToZip) {
-	    if (!fs.existsSync(file)) {
-	      throw new Error(`File ${file} does not exist`)
+	    for (let file of filesToZip) {
+	        if (!fs.existsSync(file)) {
+	            throw new Error(`File ${file} does not exist`);
+	        }
+	        if (!fs.statSync(file).isDirectory()) {
+	            // Normalize and resolve, this allows for either absolute or relative paths to be used
+	            file = (0, path_1.normalize)(file);
+	            file = (0, path_1.resolve)(file);
+	            if (!file.startsWith(rootDirectory)) {
+	                throw new Error(`The rootDirectory: ${rootDirectory} is not a parent directory of the file: ${file}`);
+	            }
+	            // Check for forbidden characters in file paths that may cause ambiguous behavior if downloaded on different file systems
+	            const uploadPath = file.replace(rootDirectory, '');
+	            (0, path_and_artifact_name_validation_1.validateFilePath)(uploadPath);
+	            specification.push({
+	                sourcePath: file,
+	                destinationPath: uploadPath
+	            });
+	        }
+	        else {
+	            // Empty directory
+	            const directoryPath = file.replace(rootDirectory, '');
+	            (0, path_and_artifact_name_validation_1.validateFilePath)(directoryPath);
+	            specification.push({
+	                sourcePath: null,
+	                destinationPath: directoryPath
+	            });
+	        }
 	    }
-	    if (!fs.statSync(file).isDirectory()) {
-	      // Normalize and resolve, this allows for either absolute or relative paths to be used
-	      file = (0, path_1.normalize)(file);
-	      file = (0, path_1.resolve)(file);
-	      if (!file.startsWith(rootDirectory)) {
-	        throw new Error(
-	          `The rootDirectory: ${rootDirectory} is not a parent directory of the file: ${file}`
-	        )
-	      }
-	      // Check for forbidden characters in file paths that may cause ambiguous behavior if downloaded on different file systems
-	      const uploadPath = file.replace(rootDirectory, '')
-	      ;(0, path_and_artifact_name_validation_1.validateFilePath)(uploadPath);
-	      specification.push({
-	        sourcePath: file,
-	        destinationPath: uploadPath
-	      });
-	    } else {
-	      // Empty directory
-	      const directoryPath = file.replace(rootDirectory, '')
-	      ;(0, path_and_artifact_name_validation_1.validateFilePath)(directoryPath);
-	      specification.push({
-	        sourcePath: null,
-	        destinationPath: directoryPath
-	      });
-	    }
-	  }
-	  return specification
+	    return specification;
 	}
 	uploadZipSpecification.getUploadZipSpecification = getUploadZipSpecification;
 	
@@ -38420,60 +37797,56 @@ var hasRequiredUtil;
 function requireUtil () {
 	if (hasRequiredUtil) return util;
 	hasRequiredUtil = 1;
-	var __importDefault =
-	  (util.__importDefault) ||
-	  function (mod) {
-	    return mod && mod.__esModule ? mod : { default: mod }
-	  };
-	Object.defineProperty(util, '__esModule', { value: true });
+	var __importDefault = (util.__importDefault) || function (mod) {
+	    return (mod && mod.__esModule) ? mod : { "default": mod };
+	};
+	Object.defineProperty(util, "__esModule", { value: true });
 	util.getBackendIdsFromToken = undefined;
 	const config_1 = requireConfig();
 	const jwt_decode_1 = __importDefault(require$$1);
-	const InvalidJwtError = new Error(
-	  'Failed to get backend IDs: The provided JWT token is invalid'
-	);
+	const InvalidJwtError = new Error('Failed to get backend IDs: The provided JWT token is invalid');
 	// uses the JWT token claims to get the
 	// workflow run and workflow job run backend ids
 	function getBackendIdsFromToken() {
-	  const token = (0, config_1.getRuntimeToken)();
-	  const decoded = (0, jwt_decode_1.default)(token);
-	  if (!decoded.scp) {
-	    throw InvalidJwtError
-	  }
-	  /*
-	   * example decoded:
-	   * {
-	   *   scp: "Actions.ExampleScope Actions.Results:ce7f54c7-61c7-4aae-887f-30da475f5f1a:ca395085-040a-526b-2ce8-bdc85f692774"
-	   * }
-	   */
-	  const scpParts = decoded.scp.split(' ');
-	  if (scpParts.length === 0) {
-	    throw InvalidJwtError
-	  }
-	  /*
-	   * example scpParts:
-	   * ["Actions.ExampleScope", "Actions.Results:ce7f54c7-61c7-4aae-887f-30da475f5f1a:ca395085-040a-526b-2ce8-bdc85f692774"]
-	   */
-	  for (const scopes of scpParts) {
-	    const scopeParts = scopes.split(':');
+	    const token = (0, config_1.getRuntimeToken)();
+	    const decoded = (0, jwt_decode_1.default)(token);
+	    if (!decoded.scp) {
+	        throw InvalidJwtError;
+	    }
 	    /*
-	     * example scopeParts:
-	     * ["Actions.Results", "ce7f54c7-61c7-4aae-887f-30da475f5f1a", "ca395085-040a-526b-2ce8-bdc85f692774"]
+	     * example decoded:
+	     * {
+	     *   scp: "Actions.ExampleScope Actions.Results:ce7f54c7-61c7-4aae-887f-30da475f5f1a:ca395085-040a-526b-2ce8-bdc85f692774"
+	     * }
 	     */
-	    if (scopeParts.length !== 3) {
-	      // not the Actions.Results scope
-	      continue
+	    const scpParts = decoded.scp.split(' ');
+	    if (scpParts.length === 0) {
+	        throw InvalidJwtError;
 	    }
-	    if (scopeParts[0] !== 'Actions.Results') {
-	      // not the Actions.Results scope
-	      continue
+	    /*
+	     * example scpParts:
+	     * ["Actions.ExampleScope", "Actions.Results:ce7f54c7-61c7-4aae-887f-30da475f5f1a:ca395085-040a-526b-2ce8-bdc85f692774"]
+	     */
+	    for (const scopes of scpParts) {
+	        const scopeParts = scopes.split(':');
+	        /*
+	         * example scopeParts:
+	         * ["Actions.Results", "ce7f54c7-61c7-4aae-887f-30da475f5f1a", "ca395085-040a-526b-2ce8-bdc85f692774"]
+	         */
+	        if (scopeParts.length !== 3) {
+	            // not the Actions.Results scope
+	            continue;
+	        }
+	        if (scopeParts[0] !== 'Actions.Results') {
+	            // not the Actions.Results scope
+	            continue;
+	        }
+	        return {
+	            workflowRunBackendId: scopeParts[1],
+	            workflowJobRunBackendId: scopeParts[2]
+	        };
 	    }
-	    return {
-	      workflowRunBackendId: scopeParts[1],
-	      workflowJobRunBackendId: scopeParts[2]
-	    }
-	  }
-	  throw InvalidJwtError
+	    throw InvalidJwtError;
 	}
 	util.getBackendIdsFromToken = getBackendIdsFromToken;
 	
@@ -38485,84 +37858,39 @@ var hasRequiredUploadArtifact;
 function requireUploadArtifact () {
 	if (hasRequiredUploadArtifact) return uploadArtifact;
 	hasRequiredUploadArtifact = 1;
-	var __createBinding =
-	  (uploadArtifact.__createBinding) ||
-	  (Object.create
-	    ? function (o, m, k, k2) {
-	        if (k2 === undefined) k2 = k;
-	        var desc = Object.getOwnPropertyDescriptor(m, k);
-	        if (
-	          !desc ||
-	          ('get' in desc ? !m.__esModule : desc.writable || desc.configurable)
-	        ) {
-	          desc = {
-	            enumerable: true,
-	            get: function () {
-	              return m[k]
-	            }
-	          };
-	        }
-	        Object.defineProperty(o, k2, desc);
-	      }
-	    : function (o, m, k, k2) {
-	        if (k2 === undefined) k2 = k;
-	        o[k2] = m[k];
-	      });
-	var __setModuleDefault =
-	  (uploadArtifact.__setModuleDefault) ||
-	  (Object.create
-	    ? function (o, v) {
-	        Object.defineProperty(o, 'default', { enumerable: true, value: v });
-	      }
-	    : function (o, v) {
-	        o['default'] = v;
-	      });
-	var __importStar =
-	  (uploadArtifact.__importStar) ||
-	  function (mod) {
-	    if (mod && mod.__esModule) return mod
-	    var result = {};
-	    if (mod != null)
-	      for (var k in mod)
-	        if (k !== 'default' && Object.prototype.hasOwnProperty.call(mod, k))
-	          __createBinding(result, mod, k);
-	    __setModuleDefault(result, mod);
-	    return result
-	  };
-	var __awaiter =
-	  (uploadArtifact.__awaiter) ||
-	  function (thisArg, _arguments, P, generator) {
-	    function adopt(value) {
-	      return value instanceof P
-	        ? value
-	        : new P(function (resolve) {
-	            resolve(value);
-	          })
+	var __createBinding = (uploadArtifact.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    var desc = Object.getOwnPropertyDescriptor(m, k);
+	    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+	      desc = { enumerable: true, get: function() { return m[k]; } };
 	    }
+	    Object.defineProperty(o, k2, desc);
+	}) : (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    o[k2] = m[k];
+	}));
+	var __setModuleDefault = (uploadArtifact.__setModuleDefault) || (Object.create ? (function(o, v) {
+	    Object.defineProperty(o, "default", { enumerable: true, value: v });
+	}) : function(o, v) {
+	    o["default"] = v;
+	});
+	var __importStar = (uploadArtifact.__importStar) || function (mod) {
+	    if (mod && mod.__esModule) return mod;
+	    var result = {};
+	    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+	    __setModuleDefault(result, mod);
+	    return result;
+	};
+	var __awaiter = (uploadArtifact.__awaiter) || function (thisArg, _arguments, P, generator) {
+	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
 	    return new (P || (P = Promise))(function (resolve, reject) {
-	      function fulfilled(value) {
-	        try {
-	          step(generator.next(value));
-	        } catch (e) {
-	          reject(e);
-	        }
-	      }
-	      function rejected(value) {
-	        try {
-	          step(generator['throw'](value));
-	        } catch (e) {
-	          reject(e);
-	        }
-	      }
-	      function step(result) {
-	        result.done
-	          ? resolve(result.value)
-	          : adopt(result.value).then(fulfilled, rejected);
-	      }
-	      step((generator = generator.apply(thisArg, _arguments || [])).next());
-	    })
-	  };
-	Object.defineProperty(uploadArtifact, '__esModule', { value: true });
+	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+	        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+	        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+	        step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    });
+	};
+	Object.defineProperty(uploadArtifact, "__esModule", { value: true });
 	uploadArtifact.uploadArtifact = undefined;
 	const core = __importStar(requireCore());
 	const retention_1 = requireRetention();
@@ -38571,76 +37899,68 @@ function requireUploadArtifact () {
 	const upload_zip_specification_1 = requireUploadZipSpecification();
 	const util_1 = requireUtil();
 	function uploadArtifact$1(name, files, rootDirectory, options) {
-	  return __awaiter(this, undefined, undefined, function* () {
-(0, path_and_artifact_name_validation_1.validateArtifactName)(name)
-	    ;(0, upload_zip_specification_1.validateRootDirectory)(rootDirectory);
-	    const zipSpecification = (0, upload_zip_specification_1.getUploadZipSpecification)(files, rootDirectory);
-	    if (zipSpecification.length === 0) {
-	      core.warning(`No files were found to upload`);
-	      return {
-	        success: false
-	      }
-	    }
-	    // get the IDs needed for the artifact creation
-	    const backendIds = (0, util_1.getBackendIdsFromToken)();
-	    if (
-	      !backendIds.workflowRunBackendId ||
-	      !backendIds.workflowJobRunBackendId
-	    ) {
-	      core.warning(`Failed to get backend ids`);
-	      return {
-	        success: false
-	      }
-	    }
-	    core.debug(`Workflow Run Backend ID: ${backendIds.workflowRunBackendId}`);
-	    core.debug(
-	      `Workflow Job Run Backend ID: ${backendIds.workflowJobRunBackendId}`
-	    );
-	    // create the artifact client
-	    const artifactClient = (0, artifact_twirp_client_1.createArtifactTwirpClient)('upload');
-	    // create the artifact
-	    const createArtifactReq = {
-	      workflowRunBackendId: backendIds.workflowRunBackendId,
-	      workflowJobRunBackendId: backendIds.workflowJobRunBackendId,
-	      name,
-	      version: 4
-	    };
-	    // if there is a retention period, add it to the request
-	    const expiresAt = (0, retention_1.getExpiration)(
-	      options === null || options === undefined ? undefined : options.retentionDays
-	    );
-	    if (expiresAt) {
-	      createArtifactReq.expiresAt = expiresAt;
-	    }
-	    const createArtifactResp =
-	      yield artifactClient.CreateArtifact(createArtifactReq);
-	    if (!createArtifactResp.ok) {
-	      core.warning(`Failed to create artifact`);
-	      return {
-	        success: false
-	      }
-	    }
-	    // TODO - Implement upload functionality
-	    // finalize the artifact
-	    const finalizeArtifactResp = yield artifactClient.FinalizeArtifact({
-	      workflowRunBackendId: backendIds.workflowRunBackendId,
-	      workflowJobRunBackendId: backendIds.workflowJobRunBackendId,
-	      name,
-	      size: '0' // TODO - Add size
+	    return __awaiter(this, undefined, undefined, function* () {
+	        (0, path_and_artifact_name_validation_1.validateArtifactName)(name);
+	        (0, upload_zip_specification_1.validateRootDirectory)(rootDirectory);
+	        const zipSpecification = (0, upload_zip_specification_1.getUploadZipSpecification)(files, rootDirectory);
+	        if (zipSpecification.length === 0) {
+	            core.warning(`No files were found to upload`);
+	            return {
+	                success: false
+	            };
+	        }
+	        // get the IDs needed for the artifact creation
+	        const backendIds = (0, util_1.getBackendIdsFromToken)();
+	        if (!backendIds.workflowRunBackendId || !backendIds.workflowJobRunBackendId) {
+	            core.warning(`Failed to get backend ids`);
+	            return {
+	                success: false
+	            };
+	        }
+	        core.debug(`Workflow Run Backend ID: ${backendIds.workflowRunBackendId}`);
+	        core.debug(`Workflow Job Run Backend ID: ${backendIds.workflowJobRunBackendId}`);
+	        // create the artifact client
+	        const artifactClient = (0, artifact_twirp_client_1.createArtifactTwirpClient)('upload');
+	        // create the artifact
+	        const createArtifactReq = {
+	            workflowRunBackendId: backendIds.workflowRunBackendId,
+	            workflowJobRunBackendId: backendIds.workflowJobRunBackendId,
+	            name,
+	            version: 4
+	        };
+	        // if there is a retention period, add it to the request
+	        const expiresAt = (0, retention_1.getExpiration)(options === null || options === undefined ? undefined : options.retentionDays);
+	        if (expiresAt) {
+	            createArtifactReq.expiresAt = expiresAt;
+	        }
+	        const createArtifactResp = yield artifactClient.CreateArtifact(createArtifactReq);
+	        if (!createArtifactResp.ok) {
+	            core.warning(`Failed to create artifact`);
+	            return {
+	                success: false
+	            };
+	        }
+	        // TODO - Implement upload functionality
+	        // finalize the artifact
+	        const finalizeArtifactResp = yield artifactClient.FinalizeArtifact({
+	            workflowRunBackendId: backendIds.workflowRunBackendId,
+	            workflowJobRunBackendId: backendIds.workflowJobRunBackendId,
+	            name,
+	            size: '0' // TODO - Add size
+	        });
+	        if (!finalizeArtifactResp.ok) {
+	            core.warning(`Failed to finalize artifact`);
+	            return {
+	                success: false
+	            };
+	        }
+	        const uploadResponse = {
+	            success: true,
+	            size: 0,
+	            id: parseInt(finalizeArtifactResp.artifactId) // TODO - will this be a problem due to the id being a bigint?
+	        };
+	        return uploadResponse;
 	    });
-	    if (!finalizeArtifactResp.ok) {
-	      core.warning(`Failed to finalize artifact`);
-	      return {
-	        success: false
-	      }
-	    }
-	    const uploadResponse = {
-	      success: true,
-	      size: 0,
-	      id: parseInt(finalizeArtifactResp.artifactId) // TODO - will this be a problem due to the id being a bigint?
-	    };
-	    return uploadResponse
-	  })
 	}
 	uploadArtifact.uploadArtifact = uploadArtifact$1;
 	
@@ -38652,83 +37972,53 @@ var hasRequiredClient;
 function requireClient () {
 	if (hasRequiredClient) return client;
 	hasRequiredClient = 1;
-	var __awaiter =
-	  (client.__awaiter) ||
-	  function (thisArg, _arguments, P, generator) {
-	    function adopt(value) {
-	      return value instanceof P
-	        ? value
-	        : new P(function (resolve) {
-	            resolve(value);
-	          })
-	    }
+	var __awaiter = (client.__awaiter) || function (thisArg, _arguments, P, generator) {
+	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
 	    return new (P || (P = Promise))(function (resolve, reject) {
-	      function fulfilled(value) {
-	        try {
-	          step(generator.next(value));
-	        } catch (e) {
-	          reject(e);
-	        }
-	      }
-	      function rejected(value) {
-	        try {
-	          step(generator['throw'](value));
-	        } catch (e) {
-	          reject(e);
-	        }
-	      }
-	      function step(result) {
-	        result.done
-	          ? resolve(result.value)
-	          : adopt(result.value).then(fulfilled, rejected);
-	      }
-	      step((generator = generator.apply(thisArg, _arguments || [])).next());
-	    })
-	  };
-	Object.defineProperty(client, '__esModule', { value: true });
+	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+	        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+	        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+	        step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    });
+	};
+	Object.defineProperty(client, "__esModule", { value: true });
 	client.Client = undefined;
 	const upload_artifact_1 = requireUploadArtifact();
 	const core_1 = requireCore();
 	const config_1 = requireConfig();
 	class Client {
-	  /**
-	   * Constructs a Client
-	   */
-	  static create() {
-	    return new Client()
-	  }
-	  /**
-	   * Uploads an artifact
-	   */
-	  uploadArtifact(name, files, rootDirectory, options) {
-	    return __awaiter(this, undefined, undefined, function* () {
-	      if ((0, config_1.isGhes)()) {
-(0, core_1.warning)(
-	          `@actions/artifact v2 and upload-artifact v4 are not currently supported on GHES.`
-	        );
-	        return {
-	          success: false
-	        }
-	      }
-	      try {
-	        return (0, upload_artifact_1.uploadArtifact)(
-	          name,
-	          files,
-	          rootDirectory,
-	          options
-	        )
-	      } catch (error) {
-(0, core_1.warning)(`Artifact upload failed with error: ${error}.
+	    /**
+	     * Constructs a Client
+	     */
+	    static create() {
+	        return new Client();
+	    }
+	    /**
+	     * Uploads an artifact
+	     */
+	    uploadArtifact(name, files, rootDirectory, options) {
+	        return __awaiter(this, undefined, undefined, function* () {
+	            if ((0, config_1.isGhes)()) {
+	                (0, core_1.warning)(`@actions/artifact v2 and upload-artifact v4 are not currently supported on GHES.`);
+	                return {
+	                    success: false
+	                };
+	            }
+	            try {
+	                return (0, upload_artifact_1.uploadArtifact)(name, files, rootDirectory, options);
+	            }
+	            catch (error) {
+	                (0, core_1.warning)(`Artifact upload failed with error: ${error}.
 
 Errors can be temporary, so please try again and optionally run the action with debug enabled for more information.
 
 If the error persists, please check whether Actions is running normally at [https://githubstatus.com](https://www.githubstatus.com).`);
-	        return {
-	          success: false
-	        }
-	      }
-	    })
-	  }
+	                return {
+	                    success: false
+	                };
+	            }
+	        });
+	    }
 	}
 	client.Client = Client;
 	
@@ -38740,11 +38030,11 @@ var hasRequiredArtifact;
 function requireArtifact () {
 	if (hasRequiredArtifact) return artifact$1;
 	hasRequiredArtifact = 1;
-	Object.defineProperty(artifact$1, '__esModule', { value: true });
+	Object.defineProperty(artifact$1, "__esModule", { value: true });
 	artifact$1.create = undefined;
 	const client_1 = requireClient();
 	function create() {
-	  return client_1.Client.create()
+	    return client_1.Client.create();
 	}
 	artifact$1.create = create;
 	
