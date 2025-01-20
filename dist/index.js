@@ -1,51 +1,75 @@
-import require$$0 from 'os';
-import require$$0$1 from 'crypto';
-import require$$1 from 'fs';
-import require$$1$5 from 'path';
-import require$$2 from 'http';
-import require$$3 from 'https';
-import require$$0$5 from 'net';
-import require$$1$1 from 'tls';
+import require$$0$1 from 'os';
+import require$$0$2 from 'crypto';
+import require$$1$2 from 'fs';
+import require$$1$8 from 'path';
+import require$$2$1 from 'http';
+import require$$1$4 from 'https';
+import require$$0$6 from 'net';
+import require$$1$3 from 'tls';
 import require$$4 from 'events';
-import require$$0$3 from 'assert';
-import require$$0$2 from 'util';
-import require$$0$4 from 'stream';
+import require$$0$4 from 'assert';
+import require$$0$3 from 'util';
+import require$$0$5 from 'stream';
 import require$$7 from 'buffer';
 import require$$8 from 'querystring';
 import require$$13 from 'stream/web';
-import require$$0$7 from 'node:stream';
-import require$$1$2 from 'node:util';
-import require$$0$6 from 'node:events';
-import require$$0$8 from 'worker_threads';
-import require$$2$1 from 'perf_hooks';
+import require$$0$8 from 'node:stream';
+import require$$1$5 from 'node:util';
+import require$$0$7 from 'node:events';
+import require$$0$9 from 'worker_threads';
+import require$$2$2 from 'perf_hooks';
 import require$$5 from 'util/types';
 import require$$4$1 from 'async_hooks';
-import require$$1$3 from 'console';
-import require$$1$4 from 'url';
-import require$$3$1 from 'zlib';
+import require$$1$6 from 'console';
+import require$$1$7 from 'url';
+import require$$3 from 'zlib';
 import require$$6 from 'string_decoder';
-import require$$0$9 from 'diagnostics_channel';
-import require$$2$2 from 'child_process';
+import require$$0$a from 'diagnostics_channel';
+import require$$2$3 from 'child_process';
 import require$$6$1 from 'timers';
-import { create } from '@actions/artifact';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
-var core = {};
+function getAugmentedNamespace(n) {
+  if (n.__esModule) return n;
+  var f = n.default;
+	if (typeof f == "function") {
+		var a = function a () {
+			if (this instanceof a) {
+        return Reflect.construct(f, arguments, this.constructor);
+			}
+			return f.apply(this, arguments);
+		};
+		a.prototype = f.prototype;
+  } else a = {};
+  Object.defineProperty(a, '__esModule', {value: true});
+	Object.keys(n).forEach(function (k) {
+		var d = Object.getOwnPropertyDescriptor(n, k);
+		Object.defineProperty(a, k, d.get ? d : {
+			enumerable: true,
+			get: function () {
+				return n[k];
+			}
+		});
+	});
+	return a;
+}
 
-var command = {};
+var core$1 = {};
 
-var utils$1 = {};
+var command$1 = {};
 
-var hasRequiredUtils$1;
+var utils$2 = {};
 
-function requireUtils$1 () {
-	if (hasRequiredUtils$1) return utils$1;
-	hasRequiredUtils$1 = 1;
+var hasRequiredUtils$2;
+
+function requireUtils$2 () {
+	if (hasRequiredUtils$2) return utils$2;
+	hasRequiredUtils$2 = 1;
 	// We use any as a valid input type
 	/* eslint-disable @typescript-eslint/no-explicit-any */
-	Object.defineProperty(utils$1, "__esModule", { value: true });
-	utils$1.toCommandProperties = utils$1.toCommandValue = undefined;
+	Object.defineProperty(utils$2, "__esModule", { value: true });
+	utils$2.toCommandProperties = utils$2.toCommandValue = undefined;
 	/**
 	 * Sanitizes an input into a string so it can be passed into issueCommand safely
 	 * @param input input to sanitize into a string
@@ -59,7 +83,7 @@ function requireUtils$1 () {
 	    }
 	    return JSON.stringify(input);
 	}
-	utils$1.toCommandValue = toCommandValue;
+	utils$2.toCommandValue = toCommandValue;
 	/**
 	 *
 	 * @param annotationProperties
@@ -79,17 +103,17 @@ function requireUtils$1 () {
 	        endColumn: annotationProperties.endColumn
 	    };
 	}
-	utils$1.toCommandProperties = toCommandProperties;
+	utils$2.toCommandProperties = toCommandProperties;
 	
-	return utils$1;
+	return utils$2;
 }
 
-var hasRequiredCommand;
+var hasRequiredCommand$1;
 
-function requireCommand () {
-	if (hasRequiredCommand) return command;
-	hasRequiredCommand = 1;
-	var __createBinding = (command.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+function requireCommand$1 () {
+	if (hasRequiredCommand$1) return command$1;
+	hasRequiredCommand$1 = 1;
+	var __createBinding = (command$1.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 	    if (k2 === undefined) k2 = k;
 	    var desc = Object.getOwnPropertyDescriptor(m, k);
 	    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
@@ -100,22 +124,22 @@ function requireCommand () {
 	    if (k2 === undefined) k2 = k;
 	    o[k2] = m[k];
 	}));
-	var __setModuleDefault = (command.__setModuleDefault) || (Object.create ? (function(o, v) {
+	var __setModuleDefault = (command$1.__setModuleDefault) || (Object.create ? (function(o, v) {
 	    Object.defineProperty(o, "default", { enumerable: true, value: v });
 	}) : function(o, v) {
 	    o["default"] = v;
 	});
-	var __importStar = (command.__importStar) || function (mod) {
+	var __importStar = (command$1.__importStar) || function (mod) {
 	    if (mod && mod.__esModule) return mod;
 	    var result = {};
 	    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
 	    __setModuleDefault(result, mod);
 	    return result;
 	};
-	Object.defineProperty(command, "__esModule", { value: true });
-	command.issue = command.issueCommand = undefined;
-	const os = __importStar(require$$0);
-	const utils_1 = requireUtils$1();
+	Object.defineProperty(command$1, "__esModule", { value: true });
+	command$1.issue = command$1.issueCommand = undefined;
+	const os = __importStar(require$$0$1);
+	const utils_1 = requireUtils$2();
 	/**
 	 * Commands
 	 *
@@ -130,11 +154,11 @@ function requireCommand () {
 	    const cmd = new Command(command, properties, message);
 	    process.stdout.write(cmd.toString() + os.EOL);
 	}
-	command.issueCommand = issueCommand;
+	command$1.issueCommand = issueCommand;
 	function issue(name, message = '') {
 	    issueCommand(name, {}, message);
 	}
-	command.issue = issue;
+	command$1.issue = issue;
 	const CMD_STRING = '::';
 	class Command {
 	    constructor(command, properties, message) {
@@ -184,18 +208,18 @@ function requireCommand () {
 	        .replace(/,/g, '%2C');
 	}
 	
-	return command;
+	return command$1;
 }
 
-var fileCommand = {};
+var fileCommand$1 = {};
 
-var hasRequiredFileCommand;
+var hasRequiredFileCommand$1;
 
-function requireFileCommand () {
-	if (hasRequiredFileCommand) return fileCommand;
-	hasRequiredFileCommand = 1;
+function requireFileCommand$1 () {
+	if (hasRequiredFileCommand$1) return fileCommand$1;
+	hasRequiredFileCommand$1 = 1;
 	// For internal use, subject to change.
-	var __createBinding = (fileCommand.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	var __createBinding = (fileCommand$1.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 	    if (k2 === undefined) k2 = k;
 	    var desc = Object.getOwnPropertyDescriptor(m, k);
 	    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
@@ -206,26 +230,26 @@ function requireFileCommand () {
 	    if (k2 === undefined) k2 = k;
 	    o[k2] = m[k];
 	}));
-	var __setModuleDefault = (fileCommand.__setModuleDefault) || (Object.create ? (function(o, v) {
+	var __setModuleDefault = (fileCommand$1.__setModuleDefault) || (Object.create ? (function(o, v) {
 	    Object.defineProperty(o, "default", { enumerable: true, value: v });
 	}) : function(o, v) {
 	    o["default"] = v;
 	});
-	var __importStar = (fileCommand.__importStar) || function (mod) {
+	var __importStar = (fileCommand$1.__importStar) || function (mod) {
 	    if (mod && mod.__esModule) return mod;
 	    var result = {};
 	    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
 	    __setModuleDefault(result, mod);
 	    return result;
 	};
-	Object.defineProperty(fileCommand, "__esModule", { value: true });
-	fileCommand.prepareKeyValueMessage = fileCommand.issueFileCommand = undefined;
+	Object.defineProperty(fileCommand$1, "__esModule", { value: true });
+	fileCommand$1.prepareKeyValueMessage = fileCommand$1.issueFileCommand = undefined;
 	// We use any as a valid input type
 	/* eslint-disable @typescript-eslint/no-explicit-any */
-	const crypto = __importStar(require$$0$1);
-	const fs = __importStar(require$$1);
-	const os = __importStar(require$$0);
-	const utils_1 = requireUtils$1();
+	const crypto = __importStar(require$$0$2);
+	const fs = __importStar(require$$1$2);
+	const os = __importStar(require$$0$1);
+	const utils_1 = requireUtils$2();
 	function issueFileCommand(command, message) {
 	    const filePath = process.env[`GITHUB_${command}`];
 	    if (!filePath) {
@@ -238,7 +262,7 @@ function requireFileCommand () {
 	        encoding: 'utf8'
 	    });
 	}
-	fileCommand.issueFileCommand = issueFileCommand;
+	fileCommand$1.issueFileCommand = issueFileCommand;
 	function prepareKeyValueMessage(key, value) {
 	    const delimiter = `ghadelimiter_${crypto.randomUUID()}`;
 	    const convertedValue = (0, utils_1.toCommandValue)(value);
@@ -253,24 +277,24 @@ function requireFileCommand () {
 	    }
 	    return `${key}<<${delimiter}${os.EOL}${convertedValue}${os.EOL}${delimiter}`;
 	}
-	fileCommand.prepareKeyValueMessage = prepareKeyValueMessage;
+	fileCommand$1.prepareKeyValueMessage = prepareKeyValueMessage;
 	
-	return fileCommand;
+	return fileCommand$1;
 }
 
-var oidcUtils = {};
+var oidcUtils$1 = {};
 
-var lib = {};
+var lib$1 = {};
 
-var proxy = {};
+var proxy$1 = {};
 
-var hasRequiredProxy;
+var hasRequiredProxy$1;
 
-function requireProxy () {
-	if (hasRequiredProxy) return proxy;
-	hasRequiredProxy = 1;
-	Object.defineProperty(proxy, "__esModule", { value: true });
-	proxy.checkBypass = proxy.getProxyUrl = undefined;
+function requireProxy$1 () {
+	if (hasRequiredProxy$1) return proxy$1;
+	hasRequiredProxy$1 = 1;
+	Object.defineProperty(proxy$1, "__esModule", { value: true });
+	proxy$1.checkBypass = proxy$1.getProxyUrl = undefined;
 	function getProxyUrl(reqUrl) {
 	    const usingSsl = reqUrl.protocol === 'https:';
 	    if (checkBypass(reqUrl)) {
@@ -297,7 +321,7 @@ function requireProxy () {
 	        return undefined;
 	    }
 	}
-	proxy.getProxyUrl = getProxyUrl;
+	proxy$1.getProxyUrl = getProxyUrl;
 	function checkBypass(reqUrl) {
 	    if (!reqUrl.hostname) {
 	        return false;
@@ -341,7 +365,7 @@ function requireProxy () {
 	    }
 	    return false;
 	}
-	proxy.checkBypass = checkBypass;
+	proxy$1.checkBypass = checkBypass;
 	function isLoopbackAddress(host) {
 	    const hostLower = host.toLowerCase();
 	    return (hostLower === 'localhost' ||
@@ -363,27 +387,27 @@ function requireProxy () {
 	    }
 	}
 	
-	return proxy;
+	return proxy$1;
 }
 
-var tunnel$1 = {};
+var tunnel$3 = {};
 
-var hasRequiredTunnel$1;
+var hasRequiredTunnel$3;
 
-function requireTunnel$1 () {
-	if (hasRequiredTunnel$1) return tunnel$1;
-	hasRequiredTunnel$1 = 1;
-	var tls = require$$1$1;
-	var http = require$$2;
-	var https = require$$3;
+function requireTunnel$3 () {
+	if (hasRequiredTunnel$3) return tunnel$3;
+	hasRequiredTunnel$3 = 1;
+	var tls = require$$1$3;
+	var http = require$$2$1;
+	var https = require$$1$4;
 	var events = require$$4;
-	var util = require$$0$2;
+	var util = require$$0$3;
 
 
-	tunnel$1.httpOverHttp = httpOverHttp;
-	tunnel$1.httpsOverHttp = httpsOverHttp;
-	tunnel$1.httpOverHttps = httpOverHttps;
-	tunnel$1.httpsOverHttps = httpsOverHttps;
+	tunnel$3.httpOverHttp = httpOverHttp;
+	tunnel$3.httpsOverHttp = httpsOverHttp;
+	tunnel$3.httpOverHttps = httpOverHttps;
+	tunnel$3.httpsOverHttps = httpsOverHttps;
 
 
 	function httpOverHttp(options) {
@@ -632,18 +656,18 @@ function requireTunnel$1 () {
 	} else {
 	  debug = function() {};
 	}
-	tunnel$1.debug = debug; // for test
-	return tunnel$1;
+	tunnel$3.debug = debug; // for test
+	return tunnel$3;
 }
 
-var tunnel;
-var hasRequiredTunnel;
+var tunnel$2;
+var hasRequiredTunnel$2;
 
-function requireTunnel () {
-	if (hasRequiredTunnel) return tunnel;
-	hasRequiredTunnel = 1;
-	tunnel = requireTunnel$1();
-	return tunnel;
+function requireTunnel$2 () {
+	if (hasRequiredTunnel$2) return tunnel$2;
+	hasRequiredTunnel$2 = 1;
+	tunnel$2 = requireTunnel$3();
+	return tunnel$2;
 }
 
 var undici = {};
@@ -720,12 +744,12 @@ function requireSymbols$4 () {
 	return symbols$4;
 }
 
-var errors;
-var hasRequiredErrors;
+var errors$1;
+var hasRequiredErrors$1;
 
-function requireErrors () {
-	if (hasRequiredErrors) return errors;
-	hasRequiredErrors = 1;
+function requireErrors$1 () {
+	if (hasRequiredErrors$1) return errors$1;
+	hasRequiredErrors$1 = 1;
 
 	class UndiciError extends Error {
 	  constructor (message) {
@@ -933,7 +957,7 @@ function requireErrors () {
 	  }
 	}
 
-	errors = {
+	errors$1 = {
 	  HTTPParserError,
 	  UndiciError,
 	  HeadersTimeoutError,
@@ -955,7 +979,7 @@ function requireErrors () {
 	  ResponseExceededMaxSizeError,
 	  RequestRetryError
 	};
-	return errors;
+	return errors$1;
 }
 
 var constants$4;
@@ -1084,21 +1108,21 @@ function requireConstants$4 () {
 	return constants$4;
 }
 
-var util$6;
-var hasRequiredUtil$6;
+var util$7;
+var hasRequiredUtil$7;
 
-function requireUtil$6 () {
-	if (hasRequiredUtil$6) return util$6;
-	hasRequiredUtil$6 = 1;
+function requireUtil$7 () {
+	if (hasRequiredUtil$7) return util$7;
+	hasRequiredUtil$7 = 1;
 
-	const assert = require$$0$3;
+	const assert = require$$0$4;
 	const { kDestroyed, kBodyUsed } = requireSymbols$4();
-	const { IncomingMessage } = require$$2;
-	const stream = require$$0$4;
-	const net = require$$0$5;
-	const { InvalidArgumentError } = requireErrors();
+	const { IncomingMessage } = require$$2$1;
+	const stream = require$$0$5;
+	const net = require$$0$6;
+	const { InvalidArgumentError } = requireErrors$1();
 	const { Blob } = require$$7;
-	const nodeUtil = require$$0$2;
+	const nodeUtil = require$$0$3;
 	const { stringify } = require$$8;
 	const { headerNameLowerCasedRecord } = requireConstants$4();
 
@@ -1574,7 +1598,7 @@ function requireUtil$6 () {
 	const kEnumerableProperty = Object.create(null);
 	kEnumerableProperty.enumerable = true;
 
-	util$6 = {
+	util$7 = {
 	  kEnumerableProperty,
 	  nop,
 	  isDisturbed,
@@ -1611,7 +1635,7 @@ function requireUtil$6 () {
 	  nodeHasAutoSelectFamily: nodeMajor > 18 || (nodeMajor === 18 && nodeMinor >= 13),
 	  safeHTTPMethods: ['GET', 'HEAD', 'OPTIONS', 'TRACE']
 	};
-	return util$6;
+	return util$7;
 }
 
 var timers;
@@ -1754,8 +1778,8 @@ function requireSbmh () {
 	 * Based heavily on the Streaming Boyer-Moore-Horspool C++ implementation
 	 * by Hongli Lai at: https://github.com/FooBarWidget/boyer-moore-horspool
 	 */
-	const EventEmitter = require$$0$6.EventEmitter;
-	const inherits = require$$1$2.inherits;
+	const EventEmitter = require$$0$7.EventEmitter;
+	const inherits = require$$1$5.inherits;
 
 	function SBMH (needle) {
 	  if (typeof needle === 'string') {
@@ -1964,8 +1988,8 @@ function requirePartStream () {
 	if (hasRequiredPartStream) return PartStream_1;
 	hasRequiredPartStream = 1;
 
-	const inherits = require$$1$2.inherits;
-	const ReadableStream = require$$0$7.Readable;
+	const inherits = require$$1$5.inherits;
+	const ReadableStream = require$$0$8.Readable;
 
 	function PartStream (opts) {
 	  ReadableStream.call(this, opts);
@@ -2009,8 +2033,8 @@ function requireHeaderParser () {
 	if (hasRequiredHeaderParser) return HeaderParser_1;
 	hasRequiredHeaderParser = 1;
 
-	const EventEmitter = require$$0$6.EventEmitter;
-	const inherits = require$$1$2.inherits;
+	const EventEmitter = require$$0$7.EventEmitter;
+	const inherits = require$$1$5.inherits;
 	const getLimit = requireGetLimit();
 
 	const StreamSearch = requireSbmh();
@@ -2117,8 +2141,8 @@ function requireDicer () {
 	if (hasRequiredDicer) return Dicer_1;
 	hasRequiredDicer = 1;
 
-	const WritableStream = require$$0$7.Writable;
-	const inherits = require$$1$2.inherits;
+	const WritableStream = require$$0$8.Writable;
+	const inherits = require$$1$5.inherits;
 
 	const StreamSearch = requireSbmh();
 
@@ -2694,8 +2718,8 @@ function requireMultipart () {
 	//  * support limits.fieldNameSize
 	//     -- this will require modifications to utils.parseParams
 
-	const { Readable } = require$$0$7;
-	const { inherits } = require$$1$2;
+	const { Readable } = require$$0$8;
+	const { inherits } = require$$1$5;
 
 	const Dicer = requireDicer();
 
@@ -3260,8 +3284,8 @@ function requireMain () {
 	if (hasRequiredMain) return main.exports;
 	hasRequiredMain = 1;
 
-	const WritableStream = require$$0$7.Writable;
-	const { inherits } = require$$1$2;
+	const WritableStream = require$$0$8.Writable;
+	const { inherits } = require$$1$5;
 	const Dicer = requireDicer();
 
 	const MultipartParser = requireMultipart();
@@ -3353,7 +3377,7 @@ function requireConstants$3 () {
 	if (hasRequiredConstants$3) return constants$3;
 	hasRequiredConstants$3 = 1;
 
-	const { MessageChannel, receiveMessageOnPort } = require$$0$8;
+	const { MessageChannel, receiveMessageOnPort } = require$$0$9;
 
 	const corsSafeListedMethods = ['GET', 'HEAD', 'POST'];
 	const corsSafeListedMethodsSet = new Set(corsSafeListedMethods);
@@ -3553,18 +3577,18 @@ function requireGlobal$1 () {
 	return global$2;
 }
 
-var util$5;
-var hasRequiredUtil$5;
+var util$6;
+var hasRequiredUtil$6;
 
-function requireUtil$5 () {
-	if (hasRequiredUtil$5) return util$5;
-	hasRequiredUtil$5 = 1;
+function requireUtil$6 () {
+	if (hasRequiredUtil$6) return util$6;
+	hasRequiredUtil$6 = 1;
 
 	const { redirectStatusSet, referrerPolicySet: referrerPolicyTokens, badPortsSet } = requireConstants$3();
 	const { getGlobalOrigin } = requireGlobal$1();
-	const { performance } = require$$2$1;
-	const { isBlobLike, toUSVString, ReadableStreamFrom } = requireUtil$6();
-	const assert = require$$0$3;
+	const { performance } = require$$2$2;
+	const { isBlobLike, toUSVString, ReadableStreamFrom } = requireUtil$7();
+	const assert = require$$0$4;
 	const { isUint8Array } = require$$5;
 
 	let supportedHashes = [];
@@ -4654,7 +4678,7 @@ function requireUtil$5 () {
 	 */
 	const hasOwn = Object.hasOwn || ((dict, key) => Object.prototype.hasOwnProperty.call(dict, key));
 
-	util$5 = {
+	util$6 = {
 	  isAborted,
 	  isCancelled,
 	  createDeferredPromise,
@@ -4701,7 +4725,7 @@ function requireUtil$5 () {
 	  normalizeMethodRecord,
 	  parseMetadata
 	};
-	return util$5;
+	return util$6;
 }
 
 var symbols$3;
@@ -4729,8 +4753,8 @@ function requireWebidl () {
 	if (hasRequiredWebidl) return webidl_1;
 	hasRequiredWebidl = 1;
 
-	const { types } = require$$0$2;
-	const { hasOwn, toUSVString } = requireUtil$5();
+	const { types } = require$$0$3;
+	const { hasOwn, toUSVString } = requireUtil$6();
 
 	/** @type {import('../../types/webidl').Webidl} */
 	const webidl = {};
@@ -5382,9 +5406,9 @@ var hasRequiredDataURL;
 function requireDataURL () {
 	if (hasRequiredDataURL) return dataURL;
 	hasRequiredDataURL = 1;
-	const assert = require$$0$3;
+	const assert = require$$0$4;
 	const { atob } = require$$7;
-	const { isomorphicDecode } = requireUtil$5();
+	const { isomorphicDecode } = requireUtil$6();
 
 	const encoder = new TextEncoder();
 
@@ -6020,12 +6044,12 @@ function requireFile () {
 	hasRequiredFile = 1;
 
 	const { Blob, File: NativeFile } = require$$7;
-	const { types } = require$$0$2;
+	const { types } = require$$0$3;
 	const { kState } = requireSymbols$3();
-	const { isBlobLike } = requireUtil$5();
+	const { isBlobLike } = requireUtil$6();
 	const { webidl } = requireWebidl();
 	const { parseMIMEType, serializeAMimeType } = requireDataURL();
-	const { kEnumerableProperty } = requireUtil$6();
+	const { kEnumerableProperty } = requireUtil$7();
 	const encoder = new TextEncoder();
 
 	class File extends Blob {
@@ -6371,7 +6395,7 @@ function requireFormdata () {
 	if (hasRequiredFormdata) return formdata;
 	hasRequiredFormdata = 1;
 
-	const { isBlobLike, toUSVString, makeIterator } = requireUtil$5();
+	const { isBlobLike, toUSVString, makeIterator } = requireUtil$6();
 	const { kState } = requireSymbols$3();
 	const { File: UndiciFile, FileLike, isFileLike } = requireFile();
 	const { webidl } = requireWebidl();
@@ -6645,7 +6669,7 @@ function requireBody () {
 	hasRequiredBody = 1;
 
 	const Busboy = requireMain();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const {
 	  ReadableStreamFrom,
 	  isBlobLike,
@@ -6653,15 +6677,15 @@ function requireBody () {
 	  readableStreamClose,
 	  createDeferredPromise,
 	  fullyReadBody
-	} = requireUtil$5();
+	} = requireUtil$6();
 	const { FormData } = requireFormdata();
 	const { kState } = requireSymbols$3();
 	const { webidl } = requireWebidl();
 	const { DOMException, structuredClone } = requireConstants$3();
 	const { Blob, File: NativeFile } = require$$7;
 	const { kBodyUsed } = requireSymbols$4();
-	const assert = require$$0$3;
-	const { isErrored } = requireUtil$6();
+	const assert = require$$0$4;
+	const { isErrored } = requireUtil$7();
 	const { isUint8Array, isArrayBuffer } = require$$5;
 	const { File: UndiciFile } = requireFile();
 	const { parseMIMEType, serializeAMimeType } = requireDataURL();
@@ -7250,20 +7274,20 @@ function requireBody () {
 	return body;
 }
 
-var request$1;
-var hasRequiredRequest$1;
+var request$2;
+var hasRequiredRequest$2;
 
-function requireRequest$1 () {
-	if (hasRequiredRequest$1) return request$1;
-	hasRequiredRequest$1 = 1;
+function requireRequest$2 () {
+	if (hasRequiredRequest$2) return request$2;
+	hasRequiredRequest$2 = 1;
 
 	const {
 	  InvalidArgumentError,
 	  NotSupportedError
-	} = requireErrors();
-	const assert = require$$0$3;
+	} = requireErrors$1();
+	const assert = require$$0$4;
 	const { kHTTP2BuildRequest, kHTTP2CopyHeaders, kHTTP1BuildRequest } = requireSymbols$4();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 
 	// tokenRegExp and headerCharRegex have been lifted from
 	// https://github.com/nodejs/node/blob/main/lib/_http_common.js
@@ -7753,8 +7777,8 @@ function requireRequest$1 () {
 	  }
 	}
 
-	request$1 = Request;
-	return request$1;
+	request$2 = Request;
+	return request$2;
 }
 
 var dispatcher;
@@ -7796,7 +7820,7 @@ function requireDispatcherBase () {
 	  ClientDestroyedError,
 	  ClientClosedError,
 	  InvalidArgumentError
-	} = requireErrors();
+	} = requireErrors$1();
 	const { kDestroy, kClose, kDispatch, kInterceptors } = requireSymbols$4();
 
 	const kDestroyed = Symbol('destroyed');
@@ -7991,10 +8015,10 @@ function requireConnect () {
 	if (hasRequiredConnect) return connect;
 	hasRequiredConnect = 1;
 
-	const net = require$$0$5;
-	const assert = require$$0$3;
-	const util = requireUtil$6();
-	const { InvalidArgumentError, ConnectTimeoutError } = requireErrors();
+	const net = require$$0$6;
+	const assert = require$$0$4;
+	const util = requireUtil$7();
+	const { InvalidArgumentError, ConnectTimeoutError } = requireErrors$1();
 
 	let tls; // include tls conditionally since it is not always available
 
@@ -8077,7 +8101,7 @@ function requireConnect () {
 	    let socket;
 	    if (protocol === 'https:') {
 	      if (!tls) {
-	        tls = require$$1$1;
+	        tls = require$$1$3;
 	      }
 	      servername = servername || options.servername || util.getServerName(host) || null;
 
@@ -8183,15 +8207,15 @@ function requireConnect () {
 
 var constants$2 = {};
 
-var utils = {};
+var utils$1 = {};
 
-var hasRequiredUtils;
+var hasRequiredUtils$1;
 
-function requireUtils () {
-	if (hasRequiredUtils) return utils;
-	hasRequiredUtils = 1;
-	Object.defineProperty(utils, "__esModule", { value: true });
-	utils.enumToMap = undefined;
+function requireUtils$1 () {
+	if (hasRequiredUtils$1) return utils$1;
+	hasRequiredUtils$1 = 1;
+	Object.defineProperty(utils$1, "__esModule", { value: true });
+	utils$1.enumToMap = undefined;
 	function enumToMap(obj) {
 	    const res = {};
 	    Object.keys(obj).forEach((key) => {
@@ -8202,9 +8226,9 @@ function requireUtils () {
 	    });
 	    return res;
 	}
-	utils.enumToMap = enumToMap;
+	utils$1.enumToMap = enumToMap;
 	
-	return utils;
+	return utils$1;
 }
 
 var hasRequiredConstants$2;
@@ -8215,7 +8239,7 @@ function requireConstants$2 () {
 	(function (exports) {
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.SPECIAL_HEADERS = exports.HEADER_STATE = exports.MINOR = exports.MAJOR = exports.CONNECTION_TOKEN_CHARS = exports.HEADER_CHARS = exports.TOKEN = exports.STRICT_TOKEN = exports.HEX = exports.URL_CHAR = exports.STRICT_URL_CHAR = exports.USERINFO_CHARS = exports.MARK = exports.ALPHANUM = exports.NUM = exports.HEX_MAP = exports.NUM_MAP = exports.ALPHA = exports.FINISH = exports.H_METHOD_MAP = exports.METHOD_MAP = exports.METHODS_RTSP = exports.METHODS_ICE = exports.METHODS_HTTP = exports.METHODS = exports.LENIENT_FLAGS = exports.FLAGS = exports.TYPE = exports.ERROR = undefined;
-		const utils_1 = requireUtils();
+		const utils_1 = requireUtils$1();
 		(function (ERROR) {
 		    ERROR[ERROR["OK"] = 0] = "OK";
 		    ERROR[ERROR["INTERNAL"] = 1] = "INTERNAL";
@@ -8495,10 +8519,10 @@ function requireRedirectHandler () {
 	if (hasRequiredRedirectHandler) return RedirectHandler_1;
 	hasRequiredRedirectHandler = 1;
 
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const { kBodyUsed } = requireSymbols$4();
-	const assert = require$$0$3;
-	const { InvalidArgumentError } = requireErrors();
+	const assert = require$$0$4;
+	const { InvalidArgumentError } = requireErrors$1();
 	const EE = require$$4;
 
 	const redirectableStatusCodes = [300, 301, 302, 303, 307, 308];
@@ -8748,22 +8772,22 @@ function requireLlhttp_simdWasm () {
 	return llhttp_simdWasm;
 }
 
-var client;
-var hasRequiredClient;
+var client$1;
+var hasRequiredClient$1;
 
-function requireClient () {
-	if (hasRequiredClient) return client;
-	hasRequiredClient = 1;
+function requireClient$1 () {
+	if (hasRequiredClient$1) return client$1;
+	hasRequiredClient$1 = 1;
 
 	/* global WebAssembly */
 
-	const assert = require$$0$3;
-	const net = require$$0$5;
-	const http = require$$2;
-	const { pipeline } = require$$0$4;
-	const util = requireUtil$6();
+	const assert = require$$0$4;
+	const net = require$$0$6;
+	const http = require$$2$1;
+	const { pipeline } = require$$0$5;
+	const util = requireUtil$7();
 	const timers = requireTimers();
-	const Request = requireRequest$1();
+	const Request = requireRequest$2();
 	const DispatcherBase = requireDispatcherBase();
 	const {
 	  RequestContentLengthMismatchError,
@@ -8778,7 +8802,7 @@ function requireClient () {
 	  HTTPParserError,
 	  ResponseExceededMaxSizeError,
 	  ClientDestroyedError
-	} = requireErrors();
+	} = requireErrors$1();
 	const buildConnector = requireConnect();
 	const {
 	  kUrl,
@@ -11031,8 +11055,8 @@ function requireClient () {
 	  }
 	}
 
-	client = Client;
-	return client;
+	client$1 = Client;
+	return client$1;
 }
 
 /* eslint-disable */
@@ -11419,11 +11443,11 @@ function requirePool () {
 	  kAddClient,
 	  kGetDispatcher
 	} = requirePoolBase();
-	const Client = requireClient();
+	const Client = requireClient$1();
 	const {
 	  InvalidArgumentError
-	} = requireErrors();
-	const util = requireUtil$6();
+	} = requireErrors$1();
+	const util = requireUtil$7();
 	const { kUrl, kInterceptors } = requireSymbols$4();
 	const buildConnector = requireConnect();
 
@@ -11517,7 +11541,7 @@ function requireBalancedPool () {
 	const {
 	  BalancedPoolMissingUpstreamError,
 	  InvalidArgumentError
-	} = requireErrors();
+	} = requireErrors$1();
 	const {
 	  PoolBase,
 	  kClients,
@@ -11528,7 +11552,7 @@ function requireBalancedPool () {
 	} = requirePoolBase();
 	const Pool = requirePool();
 	const { kUrl, kInterceptors } = requireSymbols$4();
-	const { parseOrigin } = requireUtil$6();
+	const { parseOrigin } = requireUtil$7();
 	const kFactory = Symbol('factory');
 
 	const kOptions = Symbol('options');
@@ -11768,12 +11792,12 @@ function requireAgent () {
 	if (hasRequiredAgent) return agent;
 	hasRequiredAgent = 1;
 
-	const { InvalidArgumentError } = requireErrors();
+	const { InvalidArgumentError } = requireErrors$1();
 	const { kClients, kRunning, kClose, kDestroy, kDispatch, kInterceptors } = requireSymbols$4();
 	const DispatcherBase = requireDispatcherBase();
 	const Pool = requirePool();
-	const Client = requireClient();
-	const util = requireUtil$6();
+	const Client = requireClient$1();
+	const util = requireUtil$7();
 	const createRedirectInterceptor = requireRedirectInterceptor();
 	const { WeakRef, FinalizationRegistry } = requireDispatcherWeakref()();
 
@@ -11928,11 +11952,11 @@ function requireReadable () {
 	if (hasRequiredReadable) return readable;
 	hasRequiredReadable = 1;
 
-	const assert = require$$0$3;
-	const { Readable } = require$$0$4;
-	const { RequestAbortedError, NotSupportedError, InvalidArgumentError } = requireErrors();
-	const util = requireUtil$6();
-	const { ReadableStreamFrom, toUSVString } = requireUtil$6();
+	const assert = require$$0$4;
+	const { Readable } = require$$0$5;
+	const { RequestAbortedError, NotSupportedError, InvalidArgumentError } = requireErrors$1();
+	const util = requireUtil$7();
+	const { ReadableStreamFrom, toUSVString } = requireUtil$7();
 
 	let Blob;
 
@@ -12249,17 +12273,17 @@ function requireReadable () {
 	return readable;
 }
 
-var util$4;
-var hasRequiredUtil$4;
+var util$5;
+var hasRequiredUtil$5;
 
-function requireUtil$4 () {
-	if (hasRequiredUtil$4) return util$4;
-	hasRequiredUtil$4 = 1;
-	const assert = require$$0$3;
+function requireUtil$5 () {
+	if (hasRequiredUtil$5) return util$5;
+	hasRequiredUtil$5 = 1;
+	const assert = require$$0$4;
 	const {
 	  ResponseStatusCodeError
-	} = requireErrors();
-	const { toUSVString } = requireUtil$6();
+	} = requireErrors$1();
+	const { toUSVString } = requireUtil$7();
 
 	async function getResolveErrorBodyCallback ({ callback, body, contentType, statusCode, statusMessage, headers }) {
 	  assert(body);
@@ -12300,8 +12324,8 @@ function requireUtil$4 () {
 	  process.nextTick(callback, new ResponseStatusCodeError(`Response status code ${statusCode}${statusMessage ? `: ${statusMessage}` : ''}`, statusCode, headers));
 	}
 
-	util$4 = { getResolveErrorBodyCallback };
-	return util$4;
+	util$5 = { getResolveErrorBodyCallback };
+	return util$5;
 }
 
 var abortSignal;
@@ -12310,8 +12334,8 @@ var hasRequiredAbortSignal;
 function requireAbortSignal () {
 	if (hasRequiredAbortSignal) return abortSignal;
 	hasRequiredAbortSignal = 1;
-	const { addAbortListener } = requireUtil$6();
-	const { RequestAbortedError } = requireErrors();
+	const { addAbortListener } = requireUtil$7();
+	const { RequestAbortedError } = requireErrors$1();
 
 	const kListener = Symbol('kListener');
 	const kSignal = Symbol('kSignal');
@@ -12377,9 +12401,9 @@ function requireApiRequest () {
 	const {
 	  InvalidArgumentError,
 	  RequestAbortedError
-	} = requireErrors();
-	const util = requireUtil$6();
-	const { getResolveErrorBodyCallback } = requireUtil$4();
+	} = requireErrors$1();
+	const util = requireUtil$7();
+	const { getResolveErrorBodyCallback } = requireUtil$5();
 	const { AsyncResource } = require$$4$1;
 	const { addSignal, removeSignal } = requireAbortSignal();
 
@@ -12561,14 +12585,14 @@ function requireApiStream () {
 	if (hasRequiredApiStream) return apiStream;
 	hasRequiredApiStream = 1;
 
-	const { finished, PassThrough } = require$$0$4;
+	const { finished, PassThrough } = require$$0$5;
 	const {
 	  InvalidArgumentError,
 	  InvalidReturnValueError,
 	  RequestAbortedError
-	} = requireErrors();
-	const util = requireUtil$6();
-	const { getResolveErrorBodyCallback } = requireUtil$4();
+	} = requireErrors$1();
+	const util = requireUtil$7();
+	const { getResolveErrorBodyCallback } = requireUtil$5();
 	const { AsyncResource } = require$$4$1;
 	const { addSignal, removeSignal } = requireAbortSignal();
 
@@ -12793,16 +12817,16 @@ function requireApiPipeline () {
 	  Readable,
 	  Duplex,
 	  PassThrough
-	} = require$$0$4;
+	} = require$$0$5;
 	const {
 	  InvalidArgumentError,
 	  InvalidReturnValueError,
 	  RequestAbortedError
-	} = requireErrors();
-	const util = requireUtil$6();
+	} = requireErrors$1();
+	const util = requireUtil$7();
 	const { AsyncResource } = require$$4$1;
 	const { addSignal, removeSignal } = requireAbortSignal();
-	const assert = require$$0$3;
+	const assert = require$$0$4;
 
 	const kResume = Symbol('resume');
 
@@ -13046,11 +13070,11 @@ function requireApiUpgrade () {
 	if (hasRequiredApiUpgrade) return apiUpgrade;
 	hasRequiredApiUpgrade = 1;
 
-	const { InvalidArgumentError, RequestAbortedError, SocketError } = requireErrors();
+	const { InvalidArgumentError, RequestAbortedError, SocketError } = requireErrors$1();
 	const { AsyncResource } = require$$4$1;
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const { addSignal, removeSignal } = requireAbortSignal();
-	const assert = require$$0$3;
+	const assert = require$$0$4;
 
 	class UpgradeHandler extends AsyncResource {
 	  constructor (opts, callback) {
@@ -13160,8 +13184,8 @@ function requireApiConnect () {
 	hasRequiredApiConnect = 1;
 
 	const { AsyncResource } = require$$4$1;
-	const { InvalidArgumentError, RequestAbortedError, SocketError } = requireErrors();
-	const util = requireUtil$6();
+	const { InvalidArgumentError, RequestAbortedError, SocketError } = requireErrors$1();
+	const util = requireUtil$7();
 	const { addSignal, removeSignal } = requireAbortSignal();
 
 	class ConnectHandler extends AsyncResource {
@@ -13285,7 +13309,7 @@ function requireMockErrors () {
 	if (hasRequiredMockErrors) return mockErrors;
 	hasRequiredMockErrors = 1;
 
-	const { UndiciError } = requireErrors();
+	const { UndiciError } = requireErrors$1();
 
 	class MockNotMatchedError extends UndiciError {
 	  constructor (message) {
@@ -13349,13 +13373,13 @@ function requireMockUtils () {
 	  kOrigin,
 	  kGetNetConnect
 	} = requireMockSymbols();
-	const { buildURL, nop } = requireUtil$6();
-	const { STATUS_CODES } = require$$2;
+	const { buildURL, nop } = requireUtil$7();
+	const { STATUS_CODES } = require$$2$1;
 	const {
 	  types: {
 	    isPromise
 	  }
-	} = require$$0$2;
+	} = require$$0$3;
 
 	function matchValue (match, value) {
 	  if (typeof match === 'string') {
@@ -13710,8 +13734,8 @@ function requireMockInterceptor () {
 	  kContentLength,
 	  kMockDispatch
 	} = requireMockSymbols();
-	const { InvalidArgumentError } = requireErrors();
-	const { buildURL } = requireUtil$6();
+	const { InvalidArgumentError } = requireErrors$1();
+	const { buildURL } = requireUtil$7();
 
 	/**
 	 * Defines the scope API for an interceptor reply
@@ -13915,8 +13939,8 @@ function requireMockClient () {
 	if (hasRequiredMockClient) return mockClient;
 	hasRequiredMockClient = 1;
 
-	const { promisify } = require$$0$2;
-	const Client = requireClient();
+	const { promisify } = require$$0$3;
+	const Client = requireClient$1();
 	const { buildMockDispatch } = requireMockUtils();
 	const {
 	  kDispatches,
@@ -13929,7 +13953,7 @@ function requireMockClient () {
 	} = requireMockSymbols();
 	const { MockInterceptor } = requireMockInterceptor();
 	const Symbols = requireSymbols$4();
-	const { InvalidArgumentError } = requireErrors();
+	const { InvalidArgumentError } = requireErrors$1();
 
 	/**
 	 * MockClient provides an API that extends the Client to influence the mockDispatches.
@@ -13982,7 +14006,7 @@ function requireMockPool () {
 	if (hasRequiredMockPool) return mockPool;
 	hasRequiredMockPool = 1;
 
-	const { promisify } = require$$0$2;
+	const { promisify } = require$$0$3;
 	const Pool = requirePool();
 	const { buildMockDispatch } = requireMockUtils();
 	const {
@@ -13996,7 +14020,7 @@ function requireMockPool () {
 	} = requireMockSymbols();
 	const { MockInterceptor } = requireMockInterceptor();
 	const Symbols = requireSymbols$4();
-	const { InvalidArgumentError } = requireErrors();
+	const { InvalidArgumentError } = requireErrors$1();
 
 	/**
 	 * MockPool provides an API that extends the Pool to influence the mockDispatches.
@@ -14086,8 +14110,8 @@ function requirePendingInterceptorsFormatter () {
 	if (hasRequiredPendingInterceptorsFormatter) return pendingInterceptorsFormatter;
 	hasRequiredPendingInterceptorsFormatter = 1;
 
-	const { Transform } = require$$0$4;
-	const { Console } = require$$1$3;
+	const { Transform } = require$$0$5;
+	const { Console } = require$$1$6;
 
 	/**
 	 * Gets the output of `console.table(…)` as a string.
@@ -14150,7 +14174,7 @@ function requireMockAgent () {
 	const MockClient = requireMockClient();
 	const MockPool = requireMockPool();
 	const { matchValue, buildMockOptions } = requireMockUtils();
-	const { InvalidArgumentError, UndiciError } = requireErrors();
+	const { InvalidArgumentError, UndiciError } = requireErrors$1();
 	const Dispatcher = requireDispatcher();
 	const Pluralizer = requirePluralizer();
 	const PendingInterceptorsFormatter = requirePendingInterceptorsFormatter();
@@ -14314,11 +14338,11 @@ function requireProxyAgent () {
 	hasRequiredProxyAgent = 1;
 
 	const { kProxy, kClose, kDestroy, kInterceptors } = requireSymbols$4();
-	const { URL } = require$$1$4;
+	const { URL } = require$$1$7;
 	const Agent = requireAgent();
 	const Pool = requirePool();
 	const DispatcherBase = requireDispatcherBase();
-	const { InvalidArgumentError, RequestAbortedError } = requireErrors();
+	const { InvalidArgumentError, RequestAbortedError } = requireErrors$1();
 	const buildConnector = requireConnect();
 
 	const kAgent = Symbol('proxy agent');
@@ -14509,11 +14533,11 @@ var hasRequiredRetryHandler;
 function requireRetryHandler () {
 	if (hasRequiredRetryHandler) return RetryHandler_1;
 	hasRequiredRetryHandler = 1;
-	const assert = require$$0$3;
+	const assert = require$$0$4;
 
 	const { kRetryHandlerDefaultRetry } = requireSymbols$4();
-	const { RequestRetryError } = requireErrors();
-	const { isDisturbed, parseHeaders, parseRangeHeader } = requireUtil$6();
+	const { RequestRetryError } = requireErrors$1();
+	const { isDisturbed, parseHeaders, parseRangeHeader } = requireUtil$7();
 
 	function calculateRetryAfterHeader (retryAfter) {
 	  const current = Date.now();
@@ -14858,7 +14882,7 @@ function requireGlobal () {
 	// We include a version number for the Dispatcher API. In case of breaking changes,
 	// this version number must be increased to avoid conflicts.
 	const globalDispatcher = Symbol.for('undici.globalDispatcher.1');
-	const { InvalidArgumentError } = requireErrors();
+	const { InvalidArgumentError } = requireErrors$1();
 	const Agent = requireAgent();
 
 	if (getGlobalDispatcher() === undefined) {
@@ -14940,14 +14964,14 @@ function requireHeaders () {
 
 	const { kHeadersList, kConstruct } = requireSymbols$4();
 	const { kGuard } = requireSymbols$3();
-	const { kEnumerableProperty } = requireUtil$6();
+	const { kEnumerableProperty } = requireUtil$7();
 	const {
 	  makeIterator,
 	  isValidHeaderName,
 	  isValidHeaderValue
-	} = requireUtil$5();
+	} = requireUtil$6();
 	const { webidl } = requireWebidl();
-	const assert = require$$0$3;
+	const assert = require$$0$4;
 
 	const kHeadersMap = Symbol('headers map');
 	const kHeadersSortedMap = Symbol('headers map sorted');
@@ -15528,7 +15552,7 @@ function requireResponse () {
 
 	const { Headers, HeadersList, fill } = requireHeaders();
 	const { extractBody, cloneBody, mixinBody } = requireBody();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const { kEnumerableProperty } = util;
 	const {
 	  isValidReasonPhrase,
@@ -15538,7 +15562,7 @@ function requireResponse () {
 	  serializeJavascriptValueToJSONString,
 	  isErrorLike,
 	  isomorphicEncode
-	} = requireUtil$5();
+	} = requireUtil$6();
 	const {
 	  redirectStatusSet,
 	  nullBodyStatus,
@@ -15550,8 +15574,8 @@ function requireResponse () {
 	const { getGlobalOrigin } = requireGlobal$1();
 	const { URLSerializer } = requireDataURL();
 	const { kHeadersList, kConstruct } = requireSymbols$4();
-	const assert = require$$0$3;
-	const { types } = require$$0$2;
+	const assert = require$$0$4;
+	const { types } = require$$0$3;
 
 	const ReadableStream = globalThis.ReadableStream || require$$13.ReadableStream;
 	const textEncoder = new TextEncoder('utf-8');
@@ -16100,24 +16124,24 @@ function requireResponse () {
 
 /* globals AbortController */
 
-var request;
-var hasRequiredRequest;
+var request$1;
+var hasRequiredRequest$1;
 
-function requireRequest () {
-	if (hasRequiredRequest) return request;
-	hasRequiredRequest = 1;
+function requireRequest$1 () {
+	if (hasRequiredRequest$1) return request$1;
+	hasRequiredRequest$1 = 1;
 
 	const { extractBody, mixinBody, cloneBody } = requireBody();
 	const { Headers, fill: fillHeaders, HeadersList } = requireHeaders();
 	const { FinalizationRegistry } = requireDispatcherWeakref()();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const {
 	  isValidHTTPToken,
 	  sameOrigin,
 	  normalizeMethod,
 	  makePolicyContainer,
 	  normalizeMethodRecord
-	} = requireUtil$5();
+	} = requireUtil$6();
 	const {
 	  forbiddenMethodsSet,
 	  corsSafeListedMethodsSet,
@@ -16134,7 +16158,7 @@ function requireRequest () {
 	const { getGlobalOrigin } = requireGlobal$1();
 	const { URLSerializer } = requireDataURL();
 	const { kHeadersList, kConstruct } = requireSymbols$4();
-	const assert = require$$0$3;
+	const assert = require$$0$4;
 	const { getMaxListeners, setMaxListeners, getEventListeners, defaultMaxListeners } = require$$4;
 
 	let TransformStream = globalThis.TransformStream;
@@ -17048,8 +17072,8 @@ function requireRequest () {
 	  }
 	]);
 
-	request = { Request, makeRequest };
-	return request;
+	request$1 = { Request, makeRequest };
+	return request$1;
 }
 
 var fetch_1;
@@ -17067,8 +17091,8 @@ function requireFetch () {
 	  makeResponse
 	} = requireResponse();
 	const { Headers } = requireHeaders();
-	const { Request, makeRequest } = requireRequest();
-	const zlib = require$$3$1;
+	const { Request, makeRequest } = requireRequest$1();
+	const zlib = require$$3;
 	const {
 	  bytesMatch,
 	  makePolicyContainer,
@@ -17098,9 +17122,9 @@ function requireFetch () {
 	  urlIsLocal,
 	  urlIsHttpHttpsScheme,
 	  urlHasHttpsScheme
-	} = requireUtil$5();
+	} = requireUtil$6();
 	const { kState, kHeaders, kGuard, kRealm } = requireSymbols$3();
-	const assert = require$$0$3;
+	const assert = require$$0$4;
 	const { safelyExtractBody } = requireBody();
 	const {
 	  redirectStatusSet,
@@ -17112,13 +17136,13 @@ function requireFetch () {
 	} = requireConstants$3();
 	const { kHeadersList } = requireSymbols$4();
 	const EE = require$$4;
-	const { Readable, pipeline } = require$$0$4;
-	const { addAbortListener, isErrored, isReadable, nodeMajor, nodeMinor } = requireUtil$6();
+	const { Readable, pipeline } = require$$0$5;
+	const { addAbortListener, isErrored, isReadable, nodeMajor, nodeMinor } = requireUtil$7();
 	const { dataURLProcessor, serializeAMimeType } = requireDataURL();
 	const { TransformStream } = require$$13;
 	const { getGlobalDispatcher } = requireGlobal();
 	const { webidl } = requireWebidl();
-	const { STATUS_CODES } = require$$2;
+	const { STATUS_CODES } = require$$2$1;
 	const GET_OR_HEAD = ['GET', 'HEAD'];
 
 	/** @type {import('buffer').resolveObjectURL} */
@@ -19534,12 +19558,12 @@ function requireEncoding () {
 	return encoding;
 }
 
-var util$3;
-var hasRequiredUtil$3;
+var util$4;
+var hasRequiredUtil$4;
 
-function requireUtil$3 () {
-	if (hasRequiredUtil$3) return util$3;
-	hasRequiredUtil$3 = 1;
+function requireUtil$4 () {
+	if (hasRequiredUtil$4) return util$4;
+	hasRequiredUtil$4 = 1;
 
 	const {
 	  kState,
@@ -19552,7 +19576,7 @@ function requireUtil$3 () {
 	const { getEncoding } = requireEncoding();
 	const { DOMException } = requireConstants$3();
 	const { serializeAMimeType, parseMIMEType } = requireDataURL();
-	const { types } = require$$0$2;
+	const { types } = require$$0$3;
 	const { StringDecoder } = require$$6;
 	const { btoa } = require$$7;
 
@@ -19926,12 +19950,12 @@ function requireUtil$3 () {
 	  }, new Uint8Array(size))
 	}
 
-	util$3 = {
+	util$4 = {
 	  staticPropertyDescriptors,
 	  readOperation,
 	  fireAProgressEvent
 	};
-	return util$3;
+	return util$4;
 }
 
 var filereader;
@@ -19945,7 +19969,7 @@ function requireFilereader () {
 	  staticPropertyDescriptors,
 	  readOperation,
 	  fireAProgressEvent
-	} = requireUtil$3();
+	} = requireUtil$4();
 	const {
 	  kState,
 	  kError,
@@ -19954,7 +19978,7 @@ function requireFilereader () {
 	  kAborted
 	} = requireSymbols$2();
 	const { webidl } = requireWebidl();
-	const { kEnumerableProperty } = requireUtil$6();
+	const { kEnumerableProperty } = requireUtil$7();
 
 	class FileReader extends EventTarget {
 	  constructor () {
@@ -20299,16 +20323,16 @@ function requireSymbols$1 () {
 	return symbols$1;
 }
 
-var util$2;
-var hasRequiredUtil$2;
+var util$3;
+var hasRequiredUtil$3;
 
-function requireUtil$2 () {
-	if (hasRequiredUtil$2) return util$2;
-	hasRequiredUtil$2 = 1;
+function requireUtil$3 () {
+	if (hasRequiredUtil$3) return util$3;
+	hasRequiredUtil$3 = 1;
 
-	const assert = require$$0$3;
+	const assert = require$$0$4;
 	const { URLSerializer } = requireDataURL();
-	const { isValidHeaderName } = requireUtil$5();
+	const { isValidHeaderName } = requireUtil$6();
 
 	/**
 	 * @see https://url.spec.whatwg.org/#concept-url-equals
@@ -20349,11 +20373,11 @@ function requireUtil$2 () {
 	  return values
 	}
 
-	util$2 = {
+	util$3 = {
 	  urlEquals,
 	  fieldValues
 	};
-	return util$2;
+	return util$3;
 }
 
 var cache;
@@ -20364,16 +20388,16 @@ function requireCache () {
 	hasRequiredCache = 1;
 
 	const { kConstruct } = requireSymbols$1();
-	const { urlEquals, fieldValues: getFieldValues } = requireUtil$2();
-	const { kEnumerableProperty, isDisturbed } = requireUtil$6();
+	const { urlEquals, fieldValues: getFieldValues } = requireUtil$3();
+	const { kEnumerableProperty, isDisturbed } = requireUtil$7();
 	const { kHeadersList } = requireSymbols$4();
 	const { webidl } = requireWebidl();
 	const { Response, cloneResponse } = requireResponse();
-	const { Request } = requireRequest();
+	const { Request } = requireRequest$1();
 	const { kState, kHeaders, kGuard, kRealm } = requireSymbols$3();
 	const { fetching } = requireFetch();
-	const { urlIsHttpHttpsScheme, createDeferredPromise, readAllBytes } = requireUtil$5();
-	const assert = require$$0$3;
+	const { urlIsHttpHttpsScheme, createDeferredPromise, readAllBytes } = requireUtil$6();
+	const assert = require$$0$4;
 	const { getGlobalDispatcher } = requireGlobal();
 
 	/**
@@ -21212,7 +21236,7 @@ function requireCachestorage () {
 	const { kConstruct } = requireSymbols$1();
 	const { Cache } = requireCache();
 	const { webidl } = requireWebidl();
-	const { kEnumerableProperty } = requireUtil$6();
+	const { kEnumerableProperty } = requireUtil$7();
 
 	class CacheStorage {
 	  /**
@@ -21374,14 +21398,14 @@ function requireConstants$1 () {
 	return constants$1;
 }
 
-var util$1;
-var hasRequiredUtil$1;
+var util$2;
+var hasRequiredUtil$2;
 
-function requireUtil$1 () {
-	if (hasRequiredUtil$1) return util$1;
-	hasRequiredUtil$1 = 1;
+function requireUtil$2 () {
+	if (hasRequiredUtil$2) return util$2;
+	hasRequiredUtil$2 = 1;
 
-	const assert = require$$0$3;
+	const assert = require$$0$4;
 	const { kHeadersList } = requireSymbols$4();
 
 	function isCTLExcludingHtab (value) {
@@ -21665,25 +21689,25 @@ function requireUtil$1 () {
 	  return headersList
 	}
 
-	util$1 = {
+	util$2 = {
 	  isCTLExcludingHtab,
 	  stringify,
 	  getHeadersList
 	};
-	return util$1;
+	return util$2;
 }
 
-var parse;
+var parse$1;
 var hasRequiredParse;
 
 function requireParse () {
-	if (hasRequiredParse) return parse;
+	if (hasRequiredParse) return parse$1;
 	hasRequiredParse = 1;
 
 	const { maxNameValuePairSize, maxAttributeValueSize } = requireConstants$1();
-	const { isCTLExcludingHtab } = requireUtil$1();
+	const { isCTLExcludingHtab } = requireUtil$2();
 	const { collectASequenceOfCodePointsFast } = requireDataURL();
-	const assert = require$$0$3;
+	const assert = require$$0$4;
 
 	/**
 	 * @description Parses the field-value attributes of a set-cookie header string.
@@ -21991,11 +22015,11 @@ function requireParse () {
 	  return parseUnparsedAttributes(unparsedAttributes, cookieAttributeList)
 	}
 
-	parse = {
+	parse$1 = {
 	  parseSetCookie,
 	  parseUnparsedAttributes
 	};
-	return parse;
+	return parse$1;
 }
 
 var cookies;
@@ -22006,7 +22030,7 @@ function requireCookies () {
 	hasRequiredCookies = 1;
 
 	const { parseSetCookie } = requireParse();
-	const { stringify, getHeadersList } = requireUtil$1();
+	const { stringify, getHeadersList } = requireUtil$2();
 	const { webidl } = requireWebidl();
 	const { Headers } = requireHeaders();
 
@@ -22277,8 +22301,8 @@ function requireEvents () {
 	hasRequiredEvents = 1;
 
 	const { webidl } = requireWebidl();
-	const { kEnumerableProperty } = requireUtil$6();
-	const { MessagePort } = require$$0$8;
+	const { kEnumerableProperty } = requireUtil$7();
+	const { MessagePort } = require$$0$9;
 
 	/**
 	 * @see https://html.spec.whatwg.org/multipage/comms.html#messageevent
@@ -22580,12 +22604,12 @@ function requireEvents () {
 	return events;
 }
 
-var util;
-var hasRequiredUtil;
+var util$1;
+var hasRequiredUtil$1;
 
-function requireUtil () {
-	if (hasRequiredUtil) return util;
-	hasRequiredUtil = 1;
+function requireUtil$1 () {
+	if (hasRequiredUtil$1) return util$1;
+	hasRequiredUtil$1 = 1;
 
 	const { kReadyState, kController, kResponse, kBinaryType, kWebSocketURL } = requireSymbols();
 	const { states, opcodes } = requireConstants();
@@ -22775,7 +22799,7 @@ function requireUtil () {
 	  }
 	}
 
-	util = {
+	util$1 = {
 	  isEstablished,
 	  isClosing,
 	  isClosed,
@@ -22785,7 +22809,7 @@ function requireUtil () {
 	  failWebsocketConnection,
 	  websocketMessageReceived
 	};
-	return util;
+	return util$1;
 }
 
 var connection;
@@ -22795,7 +22819,7 @@ function requireConnection () {
 	if (hasRequiredConnection) return connection;
 	hasRequiredConnection = 1;
 
-	const diagnosticsChannel = require$$0$9;
+	const diagnosticsChannel = require$$0$a;
 	const { uid, states } = requireConstants();
 	const {
 	  kReadyState,
@@ -22803,9 +22827,9 @@ function requireConnection () {
 	  kByteParser,
 	  kReceivedClose
 	} = requireSymbols();
-	const { fireEvent, failWebsocketConnection } = requireUtil();
+	const { fireEvent, failWebsocketConnection } = requireUtil$1();
 	const { CloseEvent } = requireEvents();
-	const { makeRequest } = requireRequest();
+	const { makeRequest } = requireRequest$1();
 	const { fetching } = requireFetch();
 	const { Headers } = requireHeaders();
 	const { getGlobalDispatcher } = requireGlobal();
@@ -23175,11 +23199,11 @@ function requireReceiver () {
 	if (hasRequiredReceiver) return receiver;
 	hasRequiredReceiver = 1;
 
-	const { Writable } = require$$0$4;
-	const diagnosticsChannel = require$$0$9;
+	const { Writable } = require$$0$5;
+	const diagnosticsChannel = require$$0$a;
 	const { parserStates, opcodes, states, emptyBuffer } = requireConstants();
 	const { kReadyState, kSentClose, kResponse, kReceivedClose } = requireSymbols();
-	const { isValidStatusCode, failWebsocketConnection, websocketMessageReceived } = requireUtil();
+	const { isValidStatusCode, failWebsocketConnection, websocketMessageReceived } = requireUtil$1();
 	const { WebsocketFrameSend } = requireFrame();
 
 	// This code was influenced by ws released under the MIT license.
@@ -23541,13 +23565,13 @@ function requireWebsocket () {
 	  kSentClose,
 	  kByteParser
 	} = requireSymbols();
-	const { isEstablished, isClosing, isValidSubprotocol, failWebsocketConnection, fireEvent } = requireUtil();
+	const { isEstablished, isClosing, isValidSubprotocol, failWebsocketConnection, fireEvent } = requireUtil$1();
 	const { establishWebSocketConnection } = requireConnection();
 	const { WebsocketFrameSend } = requireFrame();
 	const { ByteParser } = requireReceiver();
-	const { kEnumerableProperty, isBlobLike } = requireUtil$6();
+	const { kEnumerableProperty, isBlobLike } = requireUtil$7();
 	const { getGlobalDispatcher } = requireGlobal();
-	const { types } = require$$0$2;
+	const { types } = require$$0$3;
 
 	let experimentalWarned = false;
 
@@ -24172,13 +24196,13 @@ function requireUndici () {
 	if (hasRequiredUndici) return undici;
 	hasRequiredUndici = 1;
 
-	const Client = requireClient();
+	const Client = requireClient$1();
 	const Dispatcher = requireDispatcher();
-	const errors = requireErrors();
+	const errors = requireErrors$1();
 	const Pool = requirePool();
 	const BalancedPool = requireBalancedPool();
 	const Agent = requireAgent();
-	const util = requireUtil$6();
+	const util = requireUtil$7();
 	const { InvalidArgumentError } = errors;
 	const api = requireApi();
 	const buildConnector = requireConnect();
@@ -24289,7 +24313,7 @@ function requireUndici () {
 	  };
 	  undici.Headers = requireHeaders().Headers;
 	  undici.Response = requireResponse().Response;
-	  undici.Request = requireRequest().Request;
+	  undici.Request = requireRequest$1().Request;
 	  undici.FormData = requireFormdata().FormData;
 	  undici.File = requireFile().File;
 	  undici.FileReader = requireFilereader().FileReader;
@@ -24340,13 +24364,13 @@ function requireUndici () {
 	return undici;
 }
 
-var hasRequiredLib;
+var hasRequiredLib$1;
 
-function requireLib () {
-	if (hasRequiredLib) return lib;
-	hasRequiredLib = 1;
+function requireLib$1 () {
+	if (hasRequiredLib$1) return lib$1;
+	hasRequiredLib$1 = 1;
 	/* eslint-disable @typescript-eslint/no-explicit-any */
-	var __createBinding = (lib.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	var __createBinding = (lib$1.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 	    if (k2 === undefined) k2 = k;
 	    var desc = Object.getOwnPropertyDescriptor(m, k);
 	    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
@@ -24357,19 +24381,19 @@ function requireLib () {
 	    if (k2 === undefined) k2 = k;
 	    o[k2] = m[k];
 	}));
-	var __setModuleDefault = (lib.__setModuleDefault) || (Object.create ? (function(o, v) {
+	var __setModuleDefault = (lib$1.__setModuleDefault) || (Object.create ? (function(o, v) {
 	    Object.defineProperty(o, "default", { enumerable: true, value: v });
 	}) : function(o, v) {
 	    o["default"] = v;
 	});
-	var __importStar = (lib.__importStar) || function (mod) {
+	var __importStar = (lib$1.__importStar) || function (mod) {
 	    if (mod && mod.__esModule) return mod;
 	    var result = {};
 	    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
 	    __setModuleDefault(result, mod);
 	    return result;
 	};
-	var __awaiter = (lib.__awaiter) || function (thisArg, _arguments, P, generator) {
+	var __awaiter = (lib$1.__awaiter) || function (thisArg, _arguments, P, generator) {
 	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
 	    return new (P || (P = Promise))(function (resolve, reject) {
 	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -24378,12 +24402,12 @@ function requireLib () {
 	        step((generator = generator.apply(thisArg, _arguments || [])).next());
 	    });
 	};
-	Object.defineProperty(lib, "__esModule", { value: true });
-	lib.HttpClient = lib.isHttps = lib.HttpClientResponse = lib.HttpClientError = lib.getProxyUrl = lib.MediaTypes = lib.Headers = lib.HttpCodes = undefined;
-	const http = __importStar(require$$2);
-	const https = __importStar(require$$3);
-	const pm = __importStar(requireProxy());
-	const tunnel = __importStar(requireTunnel());
+	Object.defineProperty(lib$1, "__esModule", { value: true });
+	lib$1.HttpClient = lib$1.isHttps = lib$1.HttpClientResponse = lib$1.HttpClientError = lib$1.getProxyUrl = lib$1.MediaTypes = lib$1.Headers = lib$1.HttpCodes = undefined;
+	const http = __importStar(require$$2$1);
+	const https = __importStar(require$$1$4);
+	const pm = __importStar(requireProxy$1());
+	const tunnel = __importStar(requireTunnel$2());
 	const undici_1 = requireUndici();
 	var HttpCodes;
 	(function (HttpCodes) {
@@ -24414,16 +24438,16 @@ function requireLib () {
 	    HttpCodes[HttpCodes["BadGateway"] = 502] = "BadGateway";
 	    HttpCodes[HttpCodes["ServiceUnavailable"] = 503] = "ServiceUnavailable";
 	    HttpCodes[HttpCodes["GatewayTimeout"] = 504] = "GatewayTimeout";
-	})(HttpCodes || (lib.HttpCodes = HttpCodes = {}));
+	})(HttpCodes || (lib$1.HttpCodes = HttpCodes = {}));
 	var Headers;
 	(function (Headers) {
 	    Headers["Accept"] = "accept";
 	    Headers["ContentType"] = "content-type";
-	})(Headers || (lib.Headers = Headers = {}));
+	})(Headers || (lib$1.Headers = Headers = {}));
 	var MediaTypes;
 	(function (MediaTypes) {
 	    MediaTypes["ApplicationJson"] = "application/json";
-	})(MediaTypes || (lib.MediaTypes = MediaTypes = {}));
+	})(MediaTypes || (lib$1.MediaTypes = MediaTypes = {}));
 	/**
 	 * Returns the proxy URL, depending upon the supplied url and proxy environment variables.
 	 * @param serverUrl  The server URL where the request will be sent. For example, https://api.github.com
@@ -24432,7 +24456,7 @@ function requireLib () {
 	    const proxyUrl = pm.getProxyUrl(new URL(serverUrl));
 	    return proxyUrl ? proxyUrl.href : '';
 	}
-	lib.getProxyUrl = getProxyUrl;
+	lib$1.getProxyUrl = getProxyUrl;
 	const HttpRedirectCodes = [
 	    HttpCodes.MovedPermanently,
 	    HttpCodes.ResourceMoved,
@@ -24456,7 +24480,7 @@ function requireLib () {
 	        Object.setPrototypeOf(this, HttpClientError.prototype);
 	    }
 	}
-	lib.HttpClientError = HttpClientError;
+	lib$1.HttpClientError = HttpClientError;
 	class HttpClientResponse {
 	    constructor(message) {
 	        this.message = message;
@@ -24488,12 +24512,12 @@ function requireLib () {
 	        });
 	    }
 	}
-	lib.HttpClientResponse = HttpClientResponse;
+	lib$1.HttpClientResponse = HttpClientResponse;
 	function isHttps(requestUrl) {
 	    const parsedUrl = new URL(requestUrl);
 	    return parsedUrl.protocol === 'https:';
 	}
-	lib.isHttps = isHttps;
+	lib$1.isHttps = isHttps;
 	class HttpClient {
 	    constructor(userAgent, handlers, requestOptions) {
 	        this._ignoreSslError = false;
@@ -24993,20 +25017,20 @@ function requireLib () {
 	        });
 	    }
 	}
-	lib.HttpClient = HttpClient;
+	lib$1.HttpClient = HttpClient;
 	const lowercaseKeys = (obj) => Object.keys(obj).reduce((c, k) => ((c[k.toLowerCase()] = obj[k]), c), {});
 	
-	return lib;
+	return lib$1;
 }
 
-var auth = {};
+var auth$1 = {};
 
-var hasRequiredAuth;
+var hasRequiredAuth$1;
 
-function requireAuth () {
-	if (hasRequiredAuth) return auth;
-	hasRequiredAuth = 1;
-	var __awaiter = (auth.__awaiter) || function (thisArg, _arguments, P, generator) {
+function requireAuth$1 () {
+	if (hasRequiredAuth$1) return auth$1;
+	hasRequiredAuth$1 = 1;
+	var __awaiter = (auth$1.__awaiter) || function (thisArg, _arguments, P, generator) {
 	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
 	    return new (P || (P = Promise))(function (resolve, reject) {
 	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -25015,8 +25039,8 @@ function requireAuth () {
 	        step((generator = generator.apply(thisArg, _arguments || [])).next());
 	    });
 	};
-	Object.defineProperty(auth, "__esModule", { value: true });
-	auth.PersonalAccessTokenCredentialHandler = auth.BearerCredentialHandler = auth.BasicCredentialHandler = undefined;
+	Object.defineProperty(auth$1, "__esModule", { value: true });
+	auth$1.PersonalAccessTokenCredentialHandler = auth$1.BearerCredentialHandler = auth$1.BasicCredentialHandler = undefined;
 	class BasicCredentialHandler {
 	    constructor(username, password) {
 	        this.username = username;
@@ -25038,7 +25062,7 @@ function requireAuth () {
 	        });
 	    }
 	}
-	auth.BasicCredentialHandler = BasicCredentialHandler;
+	auth$1.BasicCredentialHandler = BasicCredentialHandler;
 	class BearerCredentialHandler {
 	    constructor(token) {
 	        this.token = token;
@@ -25061,7 +25085,7 @@ function requireAuth () {
 	        });
 	    }
 	}
-	auth.BearerCredentialHandler = BearerCredentialHandler;
+	auth$1.BearerCredentialHandler = BearerCredentialHandler;
 	class PersonalAccessTokenCredentialHandler {
 	    constructor(token) {
 	        this.token = token;
@@ -25084,17 +25108,17 @@ function requireAuth () {
 	        });
 	    }
 	}
-	auth.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHandler;
+	auth$1.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHandler;
 	
-	return auth;
+	return auth$1;
 }
 
-var hasRequiredOidcUtils;
+var hasRequiredOidcUtils$1;
 
-function requireOidcUtils () {
-	if (hasRequiredOidcUtils) return oidcUtils;
-	hasRequiredOidcUtils = 1;
-	var __awaiter = (oidcUtils.__awaiter) || function (thisArg, _arguments, P, generator) {
+function requireOidcUtils$1 () {
+	if (hasRequiredOidcUtils$1) return oidcUtils$1;
+	hasRequiredOidcUtils$1 = 1;
+	var __awaiter = (oidcUtils$1.__awaiter) || function (thisArg, _arguments, P, generator) {
 	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
 	    return new (P || (P = Promise))(function (resolve, reject) {
 	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -25103,11 +25127,11 @@ function requireOidcUtils () {
 	        step((generator = generator.apply(thisArg, _arguments || [])).next());
 	    });
 	};
-	Object.defineProperty(oidcUtils, "__esModule", { value: true });
-	oidcUtils.OidcClient = undefined;
-	const http_client_1 = requireLib();
-	const auth_1 = requireAuth();
-	const core_1 = requireCore();
+	Object.defineProperty(oidcUtils$1, "__esModule", { value: true });
+	oidcUtils$1.OidcClient = undefined;
+	const http_client_1 = requireLib$1();
+	const auth_1 = requireAuth$1();
+	const core_1 = requireCore$1();
 	class OidcClient {
 	    static createHttpClient(allowRetry = true, maxRetry = 10) {
 	        const requestOptions = {
@@ -25168,20 +25192,20 @@ function requireOidcUtils () {
 	        });
 	    }
 	}
-	oidcUtils.OidcClient = OidcClient;
+	oidcUtils$1.OidcClient = OidcClient;
 	
-	return oidcUtils;
+	return oidcUtils$1;
 }
 
-var summary = {};
+var summary$1 = {};
 
-var hasRequiredSummary;
+var hasRequiredSummary$1;
 
-function requireSummary () {
-	if (hasRequiredSummary) return summary;
-	hasRequiredSummary = 1;
+function requireSummary$1 () {
+	if (hasRequiredSummary$1) return summary$1;
+	hasRequiredSummary$1 = 1;
 	(function (exports) {
-		var __awaiter = (summary.__awaiter) || function (thisArg, _arguments, P, generator) {
+		var __awaiter = (summary$1.__awaiter) || function (thisArg, _arguments, P, generator) {
 		    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
 		    return new (P || (P = Promise))(function (resolve, reject) {
 		        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -25192,8 +25216,8 @@ function requireSummary () {
 		};
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.summary = exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = undefined;
-		const os_1 = require$$0;
-		const fs_1 = require$$1;
+		const os_1 = require$$0$1;
+		const fs_1 = require$$1$2;
 		const { access, appendFile, writeFile } = fs_1.promises;
 		exports.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
 		exports.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary';
@@ -25463,18 +25487,18 @@ function requireSummary () {
 		exports.markdownSummary = _summary;
 		exports.summary = _summary;
 		
-	} (summary));
-	return summary;
+	} (summary$1));
+	return summary$1;
 }
 
-var pathUtils = {};
+var pathUtils$1 = {};
 
-var hasRequiredPathUtils;
+var hasRequiredPathUtils$1;
 
-function requirePathUtils () {
-	if (hasRequiredPathUtils) return pathUtils;
-	hasRequiredPathUtils = 1;
-	var __createBinding = (pathUtils.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+function requirePathUtils$1 () {
+	if (hasRequiredPathUtils$1) return pathUtils$1;
+	hasRequiredPathUtils$1 = 1;
+	var __createBinding = (pathUtils$1.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 	    if (k2 === undefined) k2 = k;
 	    var desc = Object.getOwnPropertyDescriptor(m, k);
 	    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
@@ -25485,21 +25509,21 @@ function requirePathUtils () {
 	    if (k2 === undefined) k2 = k;
 	    o[k2] = m[k];
 	}));
-	var __setModuleDefault = (pathUtils.__setModuleDefault) || (Object.create ? (function(o, v) {
+	var __setModuleDefault = (pathUtils$1.__setModuleDefault) || (Object.create ? (function(o, v) {
 	    Object.defineProperty(o, "default", { enumerable: true, value: v });
 	}) : function(o, v) {
 	    o["default"] = v;
 	});
-	var __importStar = (pathUtils.__importStar) || function (mod) {
+	var __importStar = (pathUtils$1.__importStar) || function (mod) {
 	    if (mod && mod.__esModule) return mod;
 	    var result = {};
 	    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
 	    __setModuleDefault(result, mod);
 	    return result;
 	};
-	Object.defineProperty(pathUtils, "__esModule", { value: true });
-	pathUtils.toPlatformPath = pathUtils.toWin32Path = pathUtils.toPosixPath = undefined;
-	const path = __importStar(require$$1$5);
+	Object.defineProperty(pathUtils$1, "__esModule", { value: true });
+	pathUtils$1.toPlatformPath = pathUtils$1.toWin32Path = pathUtils$1.toPosixPath = undefined;
+	const path = __importStar(require$$1$8);
 	/**
 	 * toPosixPath converts the given path to the posix form. On Windows, \\ will be
 	 * replaced with /.
@@ -25510,7 +25534,7 @@ function requirePathUtils () {
 	function toPosixPath(pth) {
 	    return pth.replace(/[\\]/g, '/');
 	}
-	pathUtils.toPosixPath = toPosixPath;
+	pathUtils$1.toPosixPath = toPosixPath;
 	/**
 	 * toWin32Path converts the given path to the win32 form. On Linux, / will be
 	 * replaced with \\.
@@ -25521,7 +25545,7 @@ function requirePathUtils () {
 	function toWin32Path(pth) {
 	    return pth.replace(/[/]/g, '\\');
 	}
-	pathUtils.toWin32Path = toWin32Path;
+	pathUtils$1.toWin32Path = toWin32Path;
 	/**
 	 * toPlatformPath converts the given path to a platform-specific path. It does
 	 * this by replacing instances of / and \ with the platform-specific path
@@ -25533,9 +25557,9 @@ function requirePathUtils () {
 	function toPlatformPath(pth) {
 	    return pth.replace(/[/\\]/g, path.sep);
 	}
-	pathUtils.toPlatformPath = toPlatformPath;
+	pathUtils$1.toPlatformPath = toPlatformPath;
 	
-	return pathUtils;
+	return pathUtils$1;
 }
 
 var platform = {};
@@ -25585,8 +25609,8 @@ function requireIoUtil () {
 		var _a;
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.getCmdPath = exports.tryGetExecutablePath = exports.isRooted = exports.isDirectory = exports.exists = exports.READONLY = exports.UV_FS_O_EXLOCK = exports.IS_WINDOWS = exports.unlink = exports.symlink = exports.stat = exports.rmdir = exports.rm = exports.rename = exports.readlink = exports.readdir = exports.open = exports.mkdir = exports.lstat = exports.copyFile = exports.chmod = undefined;
-		const fs = __importStar(require$$1);
-		const path = __importStar(require$$1$5);
+		const fs = __importStar(require$$1$2);
+		const path = __importStar(require$$1$8);
 		_a = fs.promises
 		// export const {open} = 'fs'
 		, exports.chmod = _a.chmod, exports.copyFile = _a.copyFile, exports.lstat = _a.lstat, exports.mkdir = _a.mkdir, exports.open = _a.open, exports.readdir = _a.readdir, exports.readlink = _a.readlink, exports.rename = _a.rename, exports.rm = _a.rm, exports.rmdir = _a.rmdir, exports.stat = _a.stat, exports.symlink = _a.symlink, exports.unlink = _a.unlink;
@@ -25775,8 +25799,8 @@ function requireIo () {
 	};
 	Object.defineProperty(io, "__esModule", { value: true });
 	io.findInPath = io.which = io.mkdirP = io.rmRF = io.mv = io.cp = undefined;
-	const assert_1 = require$$0$3;
-	const path = __importStar(require$$1$5);
+	const assert_1 = require$$0$4;
+	const path = __importStar(require$$1$8);
 	const ioUtil = __importStar(requireIoUtil());
 	/**
 	 * Copies a file or folder.
@@ -26081,10 +26105,10 @@ function requireToolrunner () {
 	};
 	Object.defineProperty(toolrunner, "__esModule", { value: true });
 	toolrunner.argStringToArray = toolrunner.ToolRunner = undefined;
-	const os = __importStar(require$$0);
+	const os = __importStar(require$$0$1);
 	const events = __importStar(require$$4);
-	const child = __importStar(require$$2$2);
-	const path = __importStar(require$$1$5);
+	const child = __importStar(require$$2$3);
+	const path = __importStar(require$$1$8);
 	const io = __importStar(requireIo());
 	const ioUtil = __importStar(requireIoUtil());
 	const timers_1 = require$$6$1;
@@ -26824,7 +26848,7 @@ function requirePlatform () {
 		};
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.getDetails = exports.isLinux = exports.isMacOS = exports.isWindows = exports.arch = exports.platform = undefined;
-		const os_1 = __importDefault(require$$0);
+		const os_1 = __importDefault(require$$0$1);
 		const exec = __importStar(requireExec());
 		const getWindowsInfo = () => __awaiter(undefined, undefined, undefined, function* () {
 		    const { stdout: version } = yield exec.getExecOutput('powershell -command "(Get-CimInstance -ClassName Win32_OperatingSystem).Version"', undefined, {
@@ -26884,13 +26908,13 @@ function requirePlatform () {
 	return platform;
 }
 
-var hasRequiredCore;
+var hasRequiredCore$1;
 
-function requireCore () {
-	if (hasRequiredCore) return core;
-	hasRequiredCore = 1;
+function requireCore$1 () {
+	if (hasRequiredCore$1) return core$1;
+	hasRequiredCore$1 = 1;
 	(function (exports) {
-		var __createBinding = (core.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+		var __createBinding = (core$1.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 		    if (k2 === undefined) k2 = k;
 		    var desc = Object.getOwnPropertyDescriptor(m, k);
 		    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
@@ -26901,19 +26925,19 @@ function requireCore () {
 		    if (k2 === undefined) k2 = k;
 		    o[k2] = m[k];
 		}));
-		var __setModuleDefault = (core.__setModuleDefault) || (Object.create ? (function(o, v) {
+		var __setModuleDefault = (core$1.__setModuleDefault) || (Object.create ? (function(o, v) {
 		    Object.defineProperty(o, "default", { enumerable: true, value: v });
 		}) : function(o, v) {
 		    o["default"] = v;
 		});
-		var __importStar = (core.__importStar) || function (mod) {
+		var __importStar = (core$1.__importStar) || function (mod) {
 		    if (mod && mod.__esModule) return mod;
 		    var result = {};
 		    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
 		    __setModuleDefault(result, mod);
 		    return result;
 		};
-		var __awaiter = (core.__awaiter) || function (thisArg, _arguments, P, generator) {
+		var __awaiter = (core$1.__awaiter) || function (thisArg, _arguments, P, generator) {
 		    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
 		    return new (P || (P = Promise))(function (resolve, reject) {
 		        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -26924,12 +26948,12 @@ function requireCore () {
 		};
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.platform = exports.toPlatformPath = exports.toWin32Path = exports.toPosixPath = exports.markdownSummary = exports.summary = exports.getIDToken = exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = undefined;
-		const command_1 = requireCommand();
-		const file_command_1 = requireFileCommand();
-		const utils_1 = requireUtils$1();
-		const os = __importStar(require$$0);
-		const path = __importStar(require$$1$5);
-		const oidc_utils_1 = requireOidcUtils();
+		const command_1 = requireCommand$1();
+		const file_command_1 = requireFileCommand$1();
+		const utils_1 = requireUtils$2();
+		const os = __importStar(require$$0$1);
+		const path = __importStar(require$$1$8);
+		const oidc_utils_1 = requireOidcUtils$1();
 		/**
 		 * The code to exit an action
 		 */
@@ -27214,6 +27238,2698 @@ function requireCore () {
 		/**
 		 * Summary exports
 		 */
+		var summary_1 = requireSummary$1();
+		Object.defineProperty(exports, "summary", { enumerable: true, get: function () { return summary_1.summary; } });
+		/**
+		 * @deprecated use core.summary
+		 */
+		var summary_2 = requireSummary$1();
+		Object.defineProperty(exports, "markdownSummary", { enumerable: true, get: function () { return summary_2.markdownSummary; } });
+		/**
+		 * Path exports
+		 */
+		var path_utils_1 = requirePathUtils$1();
+		Object.defineProperty(exports, "toPosixPath", { enumerable: true, get: function () { return path_utils_1.toPosixPath; } });
+		Object.defineProperty(exports, "toWin32Path", { enumerable: true, get: function () { return path_utils_1.toWin32Path; } });
+		Object.defineProperty(exports, "toPlatformPath", { enumerable: true, get: function () { return path_utils_1.toPlatformPath; } });
+		/**
+		 * Platform utilities exports
+		 */
+		exports.platform = __importStar(requirePlatform());
+		
+	} (core$1));
+	return core$1;
+}
+
+var coreExports = requireCore$1();
+
+var artifact$1 = {};
+
+var client = {};
+
+var uploadArtifact = {};
+
+var core = {};
+
+var command = {};
+
+var utils = {};
+
+var hasRequiredUtils;
+
+function requireUtils () {
+	if (hasRequiredUtils) return utils;
+	hasRequiredUtils = 1;
+	// We use any as a valid input type
+	/* eslint-disable @typescript-eslint/no-explicit-any */
+	Object.defineProperty(utils, "__esModule", { value: true });
+	utils.toCommandProperties = utils.toCommandValue = undefined;
+	/**
+	 * Sanitizes an input into a string so it can be passed into issueCommand safely
+	 * @param input input to sanitize into a string
+	 */
+	function toCommandValue(input) {
+	    if (input === null || input === undefined) {
+	        return '';
+	    }
+	    else if (typeof input === 'string' || input instanceof String) {
+	        return input;
+	    }
+	    return JSON.stringify(input);
+	}
+	utils.toCommandValue = toCommandValue;
+	/**
+	 *
+	 * @param annotationProperties
+	 * @returns The command properties to send with the actual annotation command
+	 * See IssueCommandProperties: https://github.com/actions/runner/blob/main/src/Runner.Worker/ActionCommandManager.cs#L646
+	 */
+	function toCommandProperties(annotationProperties) {
+	    if (!Object.keys(annotationProperties).length) {
+	        return {};
+	    }
+	    return {
+	        title: annotationProperties.title,
+	        file: annotationProperties.file,
+	        line: annotationProperties.startLine,
+	        endLine: annotationProperties.endLine,
+	        col: annotationProperties.startColumn,
+	        endColumn: annotationProperties.endColumn
+	    };
+	}
+	utils.toCommandProperties = toCommandProperties;
+	
+	return utils;
+}
+
+var hasRequiredCommand;
+
+function requireCommand () {
+	if (hasRequiredCommand) return command;
+	hasRequiredCommand = 1;
+	var __createBinding = (command.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+	}) : (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    o[k2] = m[k];
+	}));
+	var __setModuleDefault = (command.__setModuleDefault) || (Object.create ? (function(o, v) {
+	    Object.defineProperty(o, "default", { enumerable: true, value: v });
+	}) : function(o, v) {
+	    o["default"] = v;
+	});
+	var __importStar = (command.__importStar) || function (mod) {
+	    if (mod && mod.__esModule) return mod;
+	    var result = {};
+	    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+	    __setModuleDefault(result, mod);
+	    return result;
+	};
+	Object.defineProperty(command, "__esModule", { value: true });
+	command.issue = command.issueCommand = undefined;
+	const os = __importStar(require$$0$1);
+	const utils_1 = requireUtils();
+	/**
+	 * Commands
+	 *
+	 * Command Format:
+	 *   ::name key=value,key=value::message
+	 *
+	 * Examples:
+	 *   ::warning::This is the message
+	 *   ::set-env name=MY_VAR::some value
+	 */
+	function issueCommand(command, properties, message) {
+	    const cmd = new Command(command, properties, message);
+	    process.stdout.write(cmd.toString() + os.EOL);
+	}
+	command.issueCommand = issueCommand;
+	function issue(name, message = '') {
+	    issueCommand(name, {}, message);
+	}
+	command.issue = issue;
+	const CMD_STRING = '::';
+	class Command {
+	    constructor(command, properties, message) {
+	        if (!command) {
+	            command = 'missing.command';
+	        }
+	        this.command = command;
+	        this.properties = properties;
+	        this.message = message;
+	    }
+	    toString() {
+	        let cmdStr = CMD_STRING + this.command;
+	        if (this.properties && Object.keys(this.properties).length > 0) {
+	            cmdStr += ' ';
+	            let first = true;
+	            for (const key in this.properties) {
+	                if (this.properties.hasOwnProperty(key)) {
+	                    const val = this.properties[key];
+	                    if (val) {
+	                        if (first) {
+	                            first = false;
+	                        }
+	                        else {
+	                            cmdStr += ',';
+	                        }
+	                        cmdStr += `${key}=${escapeProperty(val)}`;
+	                    }
+	                }
+	            }
+	        }
+	        cmdStr += `${CMD_STRING}${escapeData(this.message)}`;
+	        return cmdStr;
+	    }
+	}
+	function escapeData(s) {
+	    return utils_1.toCommandValue(s)
+	        .replace(/%/g, '%25')
+	        .replace(/\r/g, '%0D')
+	        .replace(/\n/g, '%0A');
+	}
+	function escapeProperty(s) {
+	    return utils_1.toCommandValue(s)
+	        .replace(/%/g, '%25')
+	        .replace(/\r/g, '%0D')
+	        .replace(/\n/g, '%0A')
+	        .replace(/:/g, '%3A')
+	        .replace(/,/g, '%2C');
+	}
+	
+	return command;
+}
+
+var fileCommand = {};
+
+// Unique ID creation requires a high quality random # generator. In the browser we therefore
+// require the crypto API and do not support built-in fallback to lower quality random number
+// generators (like Math.random()).
+var getRandomValues;
+var rnds8 = new Uint8Array(16);
+function rng() {
+  // lazy load so that environments that need to polyfill have a chance to do so
+  if (!getRandomValues) {
+    // getRandomValues needs to be invoked in a context where "this" is a Crypto implementation. Also,
+    // find the complete implementation of crypto (msCrypto) on IE11.
+    getRandomValues = typeof crypto !== 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto !== 'undefined' && typeof msCrypto.getRandomValues === 'function' && msCrypto.getRandomValues.bind(msCrypto);
+
+    if (!getRandomValues) {
+      throw new Error('crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported');
+    }
+  }
+
+  return getRandomValues(rnds8);
+}
+
+var REGEX = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
+
+function validate(uuid) {
+  return typeof uuid === 'string' && REGEX.test(uuid);
+}
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+
+var byteToHex = [];
+
+for (var i = 0; i < 256; ++i) {
+  byteToHex.push((i + 0x100).toString(16).substr(1));
+}
+
+function stringify(arr) {
+  var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  // Note: Be careful editing this code!  It's been tuned for performance
+  // and works in ways you may not expect. See https://github.com/uuidjs/uuid/pull/434
+  var uuid = (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + '-' + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + '-' + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + '-' + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + '-' + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase(); // Consistency check for valid UUID.  If this throws, it's likely due to one
+  // of the following:
+  // - One or more input array values don't map to a hex octet (leading to
+  // "undefined" in the uuid)
+  // - Invalid input values for the RFC `version` or `variant` fields
+
+  if (!validate(uuid)) {
+    throw TypeError('Stringified UUID is invalid');
+  }
+
+  return uuid;
+}
+
+//
+// Inspired by https://github.com/LiosK/UUID.js
+// and http://docs.python.org/library/uuid.html
+
+var _nodeId;
+
+var _clockseq; // Previous uuid creation time
+
+
+var _lastMSecs = 0;
+var _lastNSecs = 0; // See https://github.com/uuidjs/uuid for API details
+
+function v1(options, buf, offset) {
+  var i = buf && offset || 0;
+  var b = buf || new Array(16);
+  options = options || {};
+  var node = options.node || _nodeId;
+  var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq; // node and clockseq need to be initialized to random values if they're not
+  // specified.  We do this lazily to minimize issues related to insufficient
+  // system entropy.  See #189
+
+  if (node == null || clockseq == null) {
+    var seedBytes = options.random || (options.rng || rng)();
+
+    if (node == null) {
+      // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
+      node = _nodeId = [seedBytes[0] | 0x01, seedBytes[1], seedBytes[2], seedBytes[3], seedBytes[4], seedBytes[5]];
+    }
+
+    if (clockseq == null) {
+      // Per 4.2.2, randomize (14 bit) clockseq
+      clockseq = _clockseq = (seedBytes[6] << 8 | seedBytes[7]) & 0x3fff;
+    }
+  } // UUID timestamps are 100 nano-second units since the Gregorian epoch,
+  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
+  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
+
+
+  var msecs = options.msecs !== undefined ? options.msecs : Date.now(); // Per 4.2.1.2, use count of uuid's generated during the current clock
+  // cycle to simulate higher resolution clock
+
+  var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1; // Time since last uuid creation (in msecs)
+
+  var dt = msecs - _lastMSecs + (nsecs - _lastNSecs) / 10000; // Per 4.2.1.2, Bump clockseq on clock regression
+
+  if (dt < 0 && options.clockseq === undefined) {
+    clockseq = clockseq + 1 & 0x3fff;
+  } // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+  // time interval
+
+
+  if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
+    nsecs = 0;
+  } // Per 4.2.1.2 Throw error if too many uuids are requested
+
+
+  if (nsecs >= 10000) {
+    throw new Error("uuid.v1(): Can't create more than 10M uuids/sec");
+  }
+
+  _lastMSecs = msecs;
+  _lastNSecs = nsecs;
+  _clockseq = clockseq; // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
+
+  msecs += 12219292800000; // `time_low`
+
+  var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+  b[i++] = tl >>> 24 & 0xff;
+  b[i++] = tl >>> 16 & 0xff;
+  b[i++] = tl >>> 8 & 0xff;
+  b[i++] = tl & 0xff; // `time_mid`
+
+  var tmh = msecs / 0x100000000 * 10000 & 0xfffffff;
+  b[i++] = tmh >>> 8 & 0xff;
+  b[i++] = tmh & 0xff; // `time_high_and_version`
+
+  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
+
+  b[i++] = tmh >>> 16 & 0xff; // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
+
+  b[i++] = clockseq >>> 8 | 0x80; // `clock_seq_low`
+
+  b[i++] = clockseq & 0xff; // `node`
+
+  for (var n = 0; n < 6; ++n) {
+    b[i + n] = node[n];
+  }
+
+  return buf || stringify(b);
+}
+
+function parse(uuid) {
+  if (!validate(uuid)) {
+    throw TypeError('Invalid UUID');
+  }
+
+  var v;
+  var arr = new Uint8Array(16); // Parse ########-....-....-....-............
+
+  arr[0] = (v = parseInt(uuid.slice(0, 8), 16)) >>> 24;
+  arr[1] = v >>> 16 & 0xff;
+  arr[2] = v >>> 8 & 0xff;
+  arr[3] = v & 0xff; // Parse ........-####-....-....-............
+
+  arr[4] = (v = parseInt(uuid.slice(9, 13), 16)) >>> 8;
+  arr[5] = v & 0xff; // Parse ........-....-####-....-............
+
+  arr[6] = (v = parseInt(uuid.slice(14, 18), 16)) >>> 8;
+  arr[7] = v & 0xff; // Parse ........-....-....-####-............
+
+  arr[8] = (v = parseInt(uuid.slice(19, 23), 16)) >>> 8;
+  arr[9] = v & 0xff; // Parse ........-....-....-....-############
+  // (Use "/" to avoid 32-bit truncation when bit-shifting high-order bytes)
+
+  arr[10] = (v = parseInt(uuid.slice(24, 36), 16)) / 0x10000000000 & 0xff;
+  arr[11] = v / 0x100000000 & 0xff;
+  arr[12] = v >>> 24 & 0xff;
+  arr[13] = v >>> 16 & 0xff;
+  arr[14] = v >>> 8 & 0xff;
+  arr[15] = v & 0xff;
+  return arr;
+}
+
+function stringToBytes(str) {
+  str = unescape(encodeURIComponent(str)); // UTF8 escape
+
+  var bytes = [];
+
+  for (var i = 0; i < str.length; ++i) {
+    bytes.push(str.charCodeAt(i));
+  }
+
+  return bytes;
+}
+
+var DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+var URL$1 = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
+function v35 (name, version, hashfunc) {
+  function generateUUID(value, namespace, buf, offset) {
+    if (typeof value === 'string') {
+      value = stringToBytes(value);
+    }
+
+    if (typeof namespace === 'string') {
+      namespace = parse(namespace);
+    }
+
+    if (namespace.length !== 16) {
+      throw TypeError('Namespace must be array-like (16 iterable integer values, 0-255)');
+    } // Compute hash of namespace and value, Per 4.3
+    // Future: Use spread syntax when supported on all platforms, e.g. `bytes =
+    // hashfunc([...namespace, ... value])`
+
+
+    var bytes = new Uint8Array(16 + value.length);
+    bytes.set(namespace);
+    bytes.set(value, namespace.length);
+    bytes = hashfunc(bytes);
+    bytes[6] = bytes[6] & 0x0f | version;
+    bytes[8] = bytes[8] & 0x3f | 0x80;
+
+    if (buf) {
+      offset = offset || 0;
+
+      for (var i = 0; i < 16; ++i) {
+        buf[offset + i] = bytes[i];
+      }
+
+      return buf;
+    }
+
+    return stringify(bytes);
+  } // Function#name is not settable on some platforms (#270)
+
+
+  try {
+    generateUUID.name = name; // eslint-disable-next-line no-empty
+  } catch (err) {} // For CommonJS default export support
+
+
+  generateUUID.DNS = DNS;
+  generateUUID.URL = URL$1;
+  return generateUUID;
+}
+
+/*
+ * Browser-compatible JavaScript MD5
+ *
+ * Modification of JavaScript MD5
+ * https://github.com/blueimp/JavaScript-MD5
+ *
+ * Copyright 2011, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * https://opensource.org/licenses/MIT
+ *
+ * Based on
+ * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
+ * Digest Algorithm, as defined in RFC 1321.
+ * Version 2.2 Copyright (C) Paul Johnston 1999 - 2009
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ * Distributed under the BSD License
+ * See http://pajhome.org.uk/crypt/md5 for more info.
+ */
+function md5(bytes) {
+  if (typeof bytes === 'string') {
+    var msg = unescape(encodeURIComponent(bytes)); // UTF8 escape
+
+    bytes = new Uint8Array(msg.length);
+
+    for (var i = 0; i < msg.length; ++i) {
+      bytes[i] = msg.charCodeAt(i);
+    }
+  }
+
+  return md5ToHexEncodedArray(wordsToMd5(bytesToWords(bytes), bytes.length * 8));
+}
+/*
+ * Convert an array of little-endian words to an array of bytes
+ */
+
+
+function md5ToHexEncodedArray(input) {
+  var output = [];
+  var length32 = input.length * 32;
+  var hexTab = '0123456789abcdef';
+
+  for (var i = 0; i < length32; i += 8) {
+    var x = input[i >> 5] >>> i % 32 & 0xff;
+    var hex = parseInt(hexTab.charAt(x >>> 4 & 0x0f) + hexTab.charAt(x & 0x0f), 16);
+    output.push(hex);
+  }
+
+  return output;
+}
+/**
+ * Calculate output length with padding and bit length
+ */
+
+
+function getOutputLength(inputLength8) {
+  return (inputLength8 + 64 >>> 9 << 4) + 14 + 1;
+}
+/*
+ * Calculate the MD5 of an array of little-endian words, and a bit length.
+ */
+
+
+function wordsToMd5(x, len) {
+  /* append padding */
+  x[len >> 5] |= 0x80 << len % 32;
+  x[getOutputLength(len) - 1] = len;
+  var a = 1732584193;
+  var b = -271733879;
+  var c = -1732584194;
+  var d = 271733878;
+
+  for (var i = 0; i < x.length; i += 16) {
+    var olda = a;
+    var oldb = b;
+    var oldc = c;
+    var oldd = d;
+    a = md5ff(a, b, c, d, x[i], 7, -680876936);
+    d = md5ff(d, a, b, c, x[i + 1], 12, -389564586);
+    c = md5ff(c, d, a, b, x[i + 2], 17, 606105819);
+    b = md5ff(b, c, d, a, x[i + 3], 22, -1044525330);
+    a = md5ff(a, b, c, d, x[i + 4], 7, -176418897);
+    d = md5ff(d, a, b, c, x[i + 5], 12, 1200080426);
+    c = md5ff(c, d, a, b, x[i + 6], 17, -1473231341);
+    b = md5ff(b, c, d, a, x[i + 7], 22, -45705983);
+    a = md5ff(a, b, c, d, x[i + 8], 7, 1770035416);
+    d = md5ff(d, a, b, c, x[i + 9], 12, -1958414417);
+    c = md5ff(c, d, a, b, x[i + 10], 17, -42063);
+    b = md5ff(b, c, d, a, x[i + 11], 22, -1990404162);
+    a = md5ff(a, b, c, d, x[i + 12], 7, 1804603682);
+    d = md5ff(d, a, b, c, x[i + 13], 12, -40341101);
+    c = md5ff(c, d, a, b, x[i + 14], 17, -1502002290);
+    b = md5ff(b, c, d, a, x[i + 15], 22, 1236535329);
+    a = md5gg(a, b, c, d, x[i + 1], 5, -165796510);
+    d = md5gg(d, a, b, c, x[i + 6], 9, -1069501632);
+    c = md5gg(c, d, a, b, x[i + 11], 14, 643717713);
+    b = md5gg(b, c, d, a, x[i], 20, -373897302);
+    a = md5gg(a, b, c, d, x[i + 5], 5, -701558691);
+    d = md5gg(d, a, b, c, x[i + 10], 9, 38016083);
+    c = md5gg(c, d, a, b, x[i + 15], 14, -660478335);
+    b = md5gg(b, c, d, a, x[i + 4], 20, -405537848);
+    a = md5gg(a, b, c, d, x[i + 9], 5, 568446438);
+    d = md5gg(d, a, b, c, x[i + 14], 9, -1019803690);
+    c = md5gg(c, d, a, b, x[i + 3], 14, -187363961);
+    b = md5gg(b, c, d, a, x[i + 8], 20, 1163531501);
+    a = md5gg(a, b, c, d, x[i + 13], 5, -1444681467);
+    d = md5gg(d, a, b, c, x[i + 2], 9, -51403784);
+    c = md5gg(c, d, a, b, x[i + 7], 14, 1735328473);
+    b = md5gg(b, c, d, a, x[i + 12], 20, -1926607734);
+    a = md5hh(a, b, c, d, x[i + 5], 4, -378558);
+    d = md5hh(d, a, b, c, x[i + 8], 11, -2022574463);
+    c = md5hh(c, d, a, b, x[i + 11], 16, 1839030562);
+    b = md5hh(b, c, d, a, x[i + 14], 23, -35309556);
+    a = md5hh(a, b, c, d, x[i + 1], 4, -1530992060);
+    d = md5hh(d, a, b, c, x[i + 4], 11, 1272893353);
+    c = md5hh(c, d, a, b, x[i + 7], 16, -155497632);
+    b = md5hh(b, c, d, a, x[i + 10], 23, -1094730640);
+    a = md5hh(a, b, c, d, x[i + 13], 4, 681279174);
+    d = md5hh(d, a, b, c, x[i], 11, -358537222);
+    c = md5hh(c, d, a, b, x[i + 3], 16, -722521979);
+    b = md5hh(b, c, d, a, x[i + 6], 23, 76029189);
+    a = md5hh(a, b, c, d, x[i + 9], 4, -640364487);
+    d = md5hh(d, a, b, c, x[i + 12], 11, -421815835);
+    c = md5hh(c, d, a, b, x[i + 15], 16, 530742520);
+    b = md5hh(b, c, d, a, x[i + 2], 23, -995338651);
+    a = md5ii(a, b, c, d, x[i], 6, -198630844);
+    d = md5ii(d, a, b, c, x[i + 7], 10, 1126891415);
+    c = md5ii(c, d, a, b, x[i + 14], 15, -1416354905);
+    b = md5ii(b, c, d, a, x[i + 5], 21, -57434055);
+    a = md5ii(a, b, c, d, x[i + 12], 6, 1700485571);
+    d = md5ii(d, a, b, c, x[i + 3], 10, -1894986606);
+    c = md5ii(c, d, a, b, x[i + 10], 15, -1051523);
+    b = md5ii(b, c, d, a, x[i + 1], 21, -2054922799);
+    a = md5ii(a, b, c, d, x[i + 8], 6, 1873313359);
+    d = md5ii(d, a, b, c, x[i + 15], 10, -30611744);
+    c = md5ii(c, d, a, b, x[i + 6], 15, -1560198380);
+    b = md5ii(b, c, d, a, x[i + 13], 21, 1309151649);
+    a = md5ii(a, b, c, d, x[i + 4], 6, -145523070);
+    d = md5ii(d, a, b, c, x[i + 11], 10, -1120210379);
+    c = md5ii(c, d, a, b, x[i + 2], 15, 718787259);
+    b = md5ii(b, c, d, a, x[i + 9], 21, -343485551);
+    a = safeAdd(a, olda);
+    b = safeAdd(b, oldb);
+    c = safeAdd(c, oldc);
+    d = safeAdd(d, oldd);
+  }
+
+  return [a, b, c, d];
+}
+/*
+ * Convert an array bytes to an array of little-endian words
+ * Characters >255 have their high-byte silently ignored.
+ */
+
+
+function bytesToWords(input) {
+  if (input.length === 0) {
+    return [];
+  }
+
+  var length8 = input.length * 8;
+  var output = new Uint32Array(getOutputLength(length8));
+
+  for (var i = 0; i < length8; i += 8) {
+    output[i >> 5] |= (input[i / 8] & 0xff) << i % 32;
+  }
+
+  return output;
+}
+/*
+ * Add integers, wrapping at 2^32. This uses 16-bit operations internally
+ * to work around bugs in some JS interpreters.
+ */
+
+
+function safeAdd(x, y) {
+  var lsw = (x & 0xffff) + (y & 0xffff);
+  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+  return msw << 16 | lsw & 0xffff;
+}
+/*
+ * Bitwise rotate a 32-bit number to the left.
+ */
+
+
+function bitRotateLeft(num, cnt) {
+  return num << cnt | num >>> 32 - cnt;
+}
+/*
+ * These functions implement the four basic operations the algorithm uses.
+ */
+
+
+function md5cmn(q, a, b, x, s, t) {
+  return safeAdd(bitRotateLeft(safeAdd(safeAdd(a, q), safeAdd(x, t)), s), b);
+}
+
+function md5ff(a, b, c, d, x, s, t) {
+  return md5cmn(b & c | ~b & d, a, b, x, s, t);
+}
+
+function md5gg(a, b, c, d, x, s, t) {
+  return md5cmn(b & d | c & ~d, a, b, x, s, t);
+}
+
+function md5hh(a, b, c, d, x, s, t) {
+  return md5cmn(b ^ c ^ d, a, b, x, s, t);
+}
+
+function md5ii(a, b, c, d, x, s, t) {
+  return md5cmn(c ^ (b | ~d), a, b, x, s, t);
+}
+
+var v3 = v35('v3', 0x30, md5);
+
+function v4(options, buf, offset) {
+  options = options || {};
+  var rnds = options.random || (options.rng || rng)(); // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+
+  rnds[6] = rnds[6] & 0x0f | 0x40;
+  rnds[8] = rnds[8] & 0x3f | 0x80; // Copy bytes to buffer, if provided
+
+  if (buf) {
+    offset = offset || 0;
+
+    for (var i = 0; i < 16; ++i) {
+      buf[offset + i] = rnds[i];
+    }
+
+    return buf;
+  }
+
+  return stringify(rnds);
+}
+
+// Adapted from Chris Veness' SHA1 code at
+// http://www.movable-type.co.uk/scripts/sha1.html
+function f(s, x, y, z) {
+  switch (s) {
+    case 0:
+      return x & y ^ ~x & z;
+
+    case 1:
+      return x ^ y ^ z;
+
+    case 2:
+      return x & y ^ x & z ^ y & z;
+
+    case 3:
+      return x ^ y ^ z;
+  }
+}
+
+function ROTL(x, n) {
+  return x << n | x >>> 32 - n;
+}
+
+function sha1(bytes) {
+  var K = [0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xca62c1d6];
+  var H = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0];
+
+  if (typeof bytes === 'string') {
+    var msg = unescape(encodeURIComponent(bytes)); // UTF8 escape
+
+    bytes = [];
+
+    for (var i = 0; i < msg.length; ++i) {
+      bytes.push(msg.charCodeAt(i));
+    }
+  } else if (!Array.isArray(bytes)) {
+    // Convert Array-like to Array
+    bytes = Array.prototype.slice.call(bytes);
+  }
+
+  bytes.push(0x80);
+  var l = bytes.length / 4 + 2;
+  var N = Math.ceil(l / 16);
+  var M = new Array(N);
+
+  for (var _i = 0; _i < N; ++_i) {
+    var arr = new Uint32Array(16);
+
+    for (var j = 0; j < 16; ++j) {
+      arr[j] = bytes[_i * 64 + j * 4] << 24 | bytes[_i * 64 + j * 4 + 1] << 16 | bytes[_i * 64 + j * 4 + 2] << 8 | bytes[_i * 64 + j * 4 + 3];
+    }
+
+    M[_i] = arr;
+  }
+
+  M[N - 1][14] = (bytes.length - 1) * 8 / Math.pow(2, 32);
+  M[N - 1][14] = Math.floor(M[N - 1][14]);
+  M[N - 1][15] = (bytes.length - 1) * 8 & 0xffffffff;
+
+  for (var _i2 = 0; _i2 < N; ++_i2) {
+    var W = new Uint32Array(80);
+
+    for (var t = 0; t < 16; ++t) {
+      W[t] = M[_i2][t];
+    }
+
+    for (var _t = 16; _t < 80; ++_t) {
+      W[_t] = ROTL(W[_t - 3] ^ W[_t - 8] ^ W[_t - 14] ^ W[_t - 16], 1);
+    }
+
+    var a = H[0];
+    var b = H[1];
+    var c = H[2];
+    var d = H[3];
+    var e = H[4];
+
+    for (var _t2 = 0; _t2 < 80; ++_t2) {
+      var s = Math.floor(_t2 / 20);
+      var T = ROTL(a, 5) + f(s, b, c, d) + e + K[s] + W[_t2] >>> 0;
+      e = d;
+      d = c;
+      c = ROTL(b, 30) >>> 0;
+      b = a;
+      a = T;
+    }
+
+    H[0] = H[0] + a >>> 0;
+    H[1] = H[1] + b >>> 0;
+    H[2] = H[2] + c >>> 0;
+    H[3] = H[3] + d >>> 0;
+    H[4] = H[4] + e >>> 0;
+  }
+
+  return [H[0] >> 24 & 0xff, H[0] >> 16 & 0xff, H[0] >> 8 & 0xff, H[0] & 0xff, H[1] >> 24 & 0xff, H[1] >> 16 & 0xff, H[1] >> 8 & 0xff, H[1] & 0xff, H[2] >> 24 & 0xff, H[2] >> 16 & 0xff, H[2] >> 8 & 0xff, H[2] & 0xff, H[3] >> 24 & 0xff, H[3] >> 16 & 0xff, H[3] >> 8 & 0xff, H[3] & 0xff, H[4] >> 24 & 0xff, H[4] >> 16 & 0xff, H[4] >> 8 & 0xff, H[4] & 0xff];
+}
+
+var v5 = v35('v5', 0x50, sha1);
+
+var nil = '00000000-0000-0000-0000-000000000000';
+
+function version(uuid) {
+  if (!validate(uuid)) {
+    throw TypeError('Invalid UUID');
+  }
+
+  return parseInt(uuid.substr(14, 1), 16);
+}
+
+var esmBrowser = /*#__PURE__*/Object.freeze({
+	__proto__: null,
+	NIL: nil,
+	parse: parse,
+	stringify: stringify,
+	v1: v1,
+	v3: v3,
+	v4: v4,
+	v5: v5,
+	validate: validate,
+	version: version
+});
+
+var require$$2 = /*@__PURE__*/getAugmentedNamespace(esmBrowser);
+
+var hasRequiredFileCommand;
+
+function requireFileCommand () {
+	if (hasRequiredFileCommand) return fileCommand;
+	hasRequiredFileCommand = 1;
+	// For internal use, subject to change.
+	var __createBinding = (fileCommand.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+	}) : (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    o[k2] = m[k];
+	}));
+	var __setModuleDefault = (fileCommand.__setModuleDefault) || (Object.create ? (function(o, v) {
+	    Object.defineProperty(o, "default", { enumerable: true, value: v });
+	}) : function(o, v) {
+	    o["default"] = v;
+	});
+	var __importStar = (fileCommand.__importStar) || function (mod) {
+	    if (mod && mod.__esModule) return mod;
+	    var result = {};
+	    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+	    __setModuleDefault(result, mod);
+	    return result;
+	};
+	Object.defineProperty(fileCommand, "__esModule", { value: true });
+	fileCommand.prepareKeyValueMessage = fileCommand.issueFileCommand = undefined;
+	// We use any as a valid input type
+	/* eslint-disable @typescript-eslint/no-explicit-any */
+	const fs = __importStar(require$$1$2);
+	const os = __importStar(require$$0$1);
+	const uuid_1 = require$$2;
+	const utils_1 = requireUtils();
+	function issueFileCommand(command, message) {
+	    const filePath = process.env[`GITHUB_${command}`];
+	    if (!filePath) {
+	        throw new Error(`Unable to find environment variable for file command ${command}`);
+	    }
+	    if (!fs.existsSync(filePath)) {
+	        throw new Error(`Missing file at path: ${filePath}`);
+	    }
+	    fs.appendFileSync(filePath, `${utils_1.toCommandValue(message)}${os.EOL}`, {
+	        encoding: 'utf8'
+	    });
+	}
+	fileCommand.issueFileCommand = issueFileCommand;
+	function prepareKeyValueMessage(key, value) {
+	    const delimiter = `ghadelimiter_${uuid_1.v4()}`;
+	    const convertedValue = utils_1.toCommandValue(value);
+	    // These should realistically never happen, but just in case someone finds a
+	    // way to exploit uuid generation let's not allow keys or values that contain
+	    // the delimiter.
+	    if (key.includes(delimiter)) {
+	        throw new Error(`Unexpected input: name should not contain the delimiter "${delimiter}"`);
+	    }
+	    if (convertedValue.includes(delimiter)) {
+	        throw new Error(`Unexpected input: value should not contain the delimiter "${delimiter}"`);
+	    }
+	    return `${key}<<${delimiter}${os.EOL}${convertedValue}${os.EOL}${delimiter}`;
+	}
+	fileCommand.prepareKeyValueMessage = prepareKeyValueMessage;
+	
+	return fileCommand;
+}
+
+var oidcUtils = {};
+
+var lib = {};
+
+var proxy = {};
+
+var hasRequiredProxy;
+
+function requireProxy () {
+	if (hasRequiredProxy) return proxy;
+	hasRequiredProxy = 1;
+	Object.defineProperty(proxy, "__esModule", { value: true });
+	proxy.checkBypass = proxy.getProxyUrl = undefined;
+	function getProxyUrl(reqUrl) {
+	    const usingSsl = reqUrl.protocol === 'https:';
+	    if (checkBypass(reqUrl)) {
+	        return undefined;
+	    }
+	    const proxyVar = (() => {
+	        if (usingSsl) {
+	            return process.env['https_proxy'] || process.env['HTTPS_PROXY'];
+	        }
+	        else {
+	            return process.env['http_proxy'] || process.env['HTTP_PROXY'];
+	        }
+	    })();
+	    if (proxyVar) {
+	        return new URL(proxyVar);
+	    }
+	    else {
+	        return undefined;
+	    }
+	}
+	proxy.getProxyUrl = getProxyUrl;
+	function checkBypass(reqUrl) {
+	    if (!reqUrl.hostname) {
+	        return false;
+	    }
+	    const reqHost = reqUrl.hostname;
+	    if (isLoopbackAddress(reqHost)) {
+	        return true;
+	    }
+	    const noProxy = process.env['no_proxy'] || process.env['NO_PROXY'] || '';
+	    if (!noProxy) {
+	        return false;
+	    }
+	    // Determine the request port
+	    let reqPort;
+	    if (reqUrl.port) {
+	        reqPort = Number(reqUrl.port);
+	    }
+	    else if (reqUrl.protocol === 'http:') {
+	        reqPort = 80;
+	    }
+	    else if (reqUrl.protocol === 'https:') {
+	        reqPort = 443;
+	    }
+	    // Format the request hostname and hostname with port
+	    const upperReqHosts = [reqUrl.hostname.toUpperCase()];
+	    if (typeof reqPort === 'number') {
+	        upperReqHosts.push(`${upperReqHosts[0]}:${reqPort}`);
+	    }
+	    // Compare request host against noproxy
+	    for (const upperNoProxyItem of noProxy
+	        .split(',')
+	        .map(x => x.trim().toUpperCase())
+	        .filter(x => x)) {
+	        if (upperNoProxyItem === '*' ||
+	            upperReqHosts.some(x => x === upperNoProxyItem ||
+	                x.endsWith(`.${upperNoProxyItem}`) ||
+	                (upperNoProxyItem.startsWith('.') &&
+	                    x.endsWith(`${upperNoProxyItem}`)))) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	proxy.checkBypass = checkBypass;
+	function isLoopbackAddress(host) {
+	    const hostLower = host.toLowerCase();
+	    return (hostLower === 'localhost' ||
+	        hostLower.startsWith('127.') ||
+	        hostLower.startsWith('[::1]') ||
+	        hostLower.startsWith('[0:0:0:0:0:0:0:1]'));
+	}
+	
+	return proxy;
+}
+
+var tunnel$1 = {};
+
+var hasRequiredTunnel$1;
+
+function requireTunnel$1 () {
+	if (hasRequiredTunnel$1) return tunnel$1;
+	hasRequiredTunnel$1 = 1;
+	var tls = require$$1$3;
+	var http = require$$2$1;
+	var https = require$$1$4;
+	var events = require$$4;
+	var util = require$$0$3;
+
+
+	tunnel$1.httpOverHttp = httpOverHttp;
+	tunnel$1.httpsOverHttp = httpsOverHttp;
+	tunnel$1.httpOverHttps = httpOverHttps;
+	tunnel$1.httpsOverHttps = httpsOverHttps;
+
+
+	function httpOverHttp(options) {
+	  var agent = new TunnelingAgent(options);
+	  agent.request = http.request;
+	  return agent;
+	}
+
+	function httpsOverHttp(options) {
+	  var agent = new TunnelingAgent(options);
+	  agent.request = http.request;
+	  agent.createSocket = createSecureSocket;
+	  agent.defaultPort = 443;
+	  return agent;
+	}
+
+	function httpOverHttps(options) {
+	  var agent = new TunnelingAgent(options);
+	  agent.request = https.request;
+	  return agent;
+	}
+
+	function httpsOverHttps(options) {
+	  var agent = new TunnelingAgent(options);
+	  agent.request = https.request;
+	  agent.createSocket = createSecureSocket;
+	  agent.defaultPort = 443;
+	  return agent;
+	}
+
+
+	function TunnelingAgent(options) {
+	  var self = this;
+	  self.options = options || {};
+	  self.proxyOptions = self.options.proxy || {};
+	  self.maxSockets = self.options.maxSockets || http.Agent.defaultMaxSockets;
+	  self.requests = [];
+	  self.sockets = [];
+
+	  self.on('free', function onFree(socket, host, port, localAddress) {
+	    var options = toOptions(host, port, localAddress);
+	    for (var i = 0, len = self.requests.length; i < len; ++i) {
+	      var pending = self.requests[i];
+	      if (pending.host === options.host && pending.port === options.port) {
+	        // Detect the request to connect same origin server,
+	        // reuse the connection.
+	        self.requests.splice(i, 1);
+	        pending.request.onSocket(socket);
+	        return;
+	      }
+	    }
+	    socket.destroy();
+	    self.removeSocket(socket);
+	  });
+	}
+	util.inherits(TunnelingAgent, events.EventEmitter);
+
+	TunnelingAgent.prototype.addRequest = function addRequest(req, host, port, localAddress) {
+	  var self = this;
+	  var options = mergeOptions({request: req}, self.options, toOptions(host, port, localAddress));
+
+	  if (self.sockets.length >= this.maxSockets) {
+	    // We are over limit so we'll add it to the queue.
+	    self.requests.push(options);
+	    return;
+	  }
+
+	  // If we are under maxSockets create a new one.
+	  self.createSocket(options, function(socket) {
+	    socket.on('free', onFree);
+	    socket.on('close', onCloseOrRemove);
+	    socket.on('agentRemove', onCloseOrRemove);
+	    req.onSocket(socket);
+
+	    function onFree() {
+	      self.emit('free', socket, options);
+	    }
+
+	    function onCloseOrRemove(err) {
+	      self.removeSocket(socket);
+	      socket.removeListener('free', onFree);
+	      socket.removeListener('close', onCloseOrRemove);
+	      socket.removeListener('agentRemove', onCloseOrRemove);
+	    }
+	  });
+	};
+
+	TunnelingAgent.prototype.createSocket = function createSocket(options, cb) {
+	  var self = this;
+	  var placeholder = {};
+	  self.sockets.push(placeholder);
+
+	  var connectOptions = mergeOptions({}, self.proxyOptions, {
+	    method: 'CONNECT',
+	    path: options.host + ':' + options.port,
+	    agent: false,
+	    headers: {
+	      host: options.host + ':' + options.port
+	    }
+	  });
+	  if (options.localAddress) {
+	    connectOptions.localAddress = options.localAddress;
+	  }
+	  if (connectOptions.proxyAuth) {
+	    connectOptions.headers = connectOptions.headers || {};
+	    connectOptions.headers['Proxy-Authorization'] = 'Basic ' +
+	        new Buffer(connectOptions.proxyAuth).toString('base64');
+	  }
+
+	  debug('making CONNECT request');
+	  var connectReq = self.request(connectOptions);
+	  connectReq.useChunkedEncodingByDefault = false; // for v0.6
+	  connectReq.once('response', onResponse); // for v0.6
+	  connectReq.once('upgrade', onUpgrade);   // for v0.6
+	  connectReq.once('connect', onConnect);   // for v0.7 or later
+	  connectReq.once('error', onError);
+	  connectReq.end();
+
+	  function onResponse(res) {
+	    // Very hacky. This is necessary to avoid http-parser leaks.
+	    res.upgrade = true;
+	  }
+
+	  function onUpgrade(res, socket, head) {
+	    // Hacky.
+	    process.nextTick(function() {
+	      onConnect(res, socket, head);
+	    });
+	  }
+
+	  function onConnect(res, socket, head) {
+	    connectReq.removeAllListeners();
+	    socket.removeAllListeners();
+
+	    if (res.statusCode !== 200) {
+	      debug('tunneling socket could not be established, statusCode=%d',
+	        res.statusCode);
+	      socket.destroy();
+	      var error = new Error('tunneling socket could not be established, ' +
+	        'statusCode=' + res.statusCode);
+	      error.code = 'ECONNRESET';
+	      options.request.emit('error', error);
+	      self.removeSocket(placeholder);
+	      return;
+	    }
+	    if (head.length > 0) {
+	      debug('got illegal response body from proxy');
+	      socket.destroy();
+	      var error = new Error('got illegal response body from proxy');
+	      error.code = 'ECONNRESET';
+	      options.request.emit('error', error);
+	      self.removeSocket(placeholder);
+	      return;
+	    }
+	    debug('tunneling connection has established');
+	    self.sockets[self.sockets.indexOf(placeholder)] = socket;
+	    return cb(socket);
+	  }
+
+	  function onError(cause) {
+	    connectReq.removeAllListeners();
+
+	    debug('tunneling socket could not be established, cause=%s\n',
+	          cause.message, cause.stack);
+	    var error = new Error('tunneling socket could not be established, ' +
+	                          'cause=' + cause.message);
+	    error.code = 'ECONNRESET';
+	    options.request.emit('error', error);
+	    self.removeSocket(placeholder);
+	  }
+	};
+
+	TunnelingAgent.prototype.removeSocket = function removeSocket(socket) {
+	  var pos = this.sockets.indexOf(socket);
+	  if (pos === -1) {
+	    return;
+	  }
+	  this.sockets.splice(pos, 1);
+
+	  var pending = this.requests.shift();
+	  if (pending) {
+	    // If we have pending requests and a socket gets closed a new one
+	    // needs to be created to take over in the pool for the one that closed.
+	    this.createSocket(pending, function(socket) {
+	      pending.request.onSocket(socket);
+	    });
+	  }
+	};
+
+	function createSecureSocket(options, cb) {
+	  var self = this;
+	  TunnelingAgent.prototype.createSocket.call(self, options, function(socket) {
+	    var hostHeader = options.request.getHeader('host');
+	    var tlsOptions = mergeOptions({}, self.options, {
+	      socket: socket,
+	      servername: hostHeader ? hostHeader.replace(/:.*$/, '') : options.host
+	    });
+
+	    // 0 is dummy port for v0.6
+	    var secureSocket = tls.connect(0, tlsOptions);
+	    self.sockets[self.sockets.indexOf(socket)] = secureSocket;
+	    cb(secureSocket);
+	  });
+	}
+
+
+	function toOptions(host, port, localAddress) {
+	  if (typeof host === 'string') { // since v0.10
+	    return {
+	      host: host,
+	      port: port,
+	      localAddress: localAddress
+	    };
+	  }
+	  return host; // for v0.11 or later
+	}
+
+	function mergeOptions(target) {
+	  for (var i = 1, len = arguments.length; i < len; ++i) {
+	    var overrides = arguments[i];
+	    if (typeof overrides === 'object') {
+	      var keys = Object.keys(overrides);
+	      for (var j = 0, keyLen = keys.length; j < keyLen; ++j) {
+	        var k = keys[j];
+	        if (overrides[k] !== undefined) {
+	          target[k] = overrides[k];
+	        }
+	      }
+	    }
+	  }
+	  return target;
+	}
+
+
+	var debug;
+	if (process.env.NODE_DEBUG && /\btunnel\b/.test(process.env.NODE_DEBUG)) {
+	  debug = function() {
+	    var args = Array.prototype.slice.call(arguments);
+	    if (typeof args[0] === 'string') {
+	      args[0] = 'TUNNEL: ' + args[0];
+	    } else {
+	      args.unshift('TUNNEL:');
+	    }
+	    console.error.apply(console, args);
+	  };
+	} else {
+	  debug = function() {};
+	}
+	tunnel$1.debug = debug; // for test
+	return tunnel$1;
+}
+
+var tunnel;
+var hasRequiredTunnel;
+
+function requireTunnel () {
+	if (hasRequiredTunnel) return tunnel;
+	hasRequiredTunnel = 1;
+	tunnel = requireTunnel$1();
+	return tunnel;
+}
+
+var hasRequiredLib;
+
+function requireLib () {
+	if (hasRequiredLib) return lib;
+	hasRequiredLib = 1;
+	(function (exports) {
+		/* eslint-disable @typescript-eslint/no-explicit-any */
+		var __createBinding = (lib.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+		    if (k2 === undefined) k2 = k;
+		    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+		}) : (function(o, m, k, k2) {
+		    if (k2 === undefined) k2 = k;
+		    o[k2] = m[k];
+		}));
+		var __setModuleDefault = (lib.__setModuleDefault) || (Object.create ? (function(o, v) {
+		    Object.defineProperty(o, "default", { enumerable: true, value: v });
+		}) : function(o, v) {
+		    o["default"] = v;
+		});
+		var __importStar = (lib.__importStar) || function (mod) {
+		    if (mod && mod.__esModule) return mod;
+		    var result = {};
+		    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+		    __setModuleDefault(result, mod);
+		    return result;
+		};
+		var __awaiter = (lib.__awaiter) || function (thisArg, _arguments, P, generator) {
+		    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+		    return new (P || (P = Promise))(function (resolve, reject) {
+		        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+		        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+		        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+		        step((generator = generator.apply(thisArg, _arguments || [])).next());
+		    });
+		};
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.HttpClient = exports.isHttps = exports.HttpClientResponse = exports.HttpClientError = exports.getProxyUrl = exports.MediaTypes = exports.Headers = exports.HttpCodes = undefined;
+		const http = __importStar(require$$2$1);
+		const https = __importStar(require$$1$4);
+		const pm = __importStar(requireProxy());
+		const tunnel = __importStar(requireTunnel());
+		var HttpCodes;
+		(function (HttpCodes) {
+		    HttpCodes[HttpCodes["OK"] = 200] = "OK";
+		    HttpCodes[HttpCodes["MultipleChoices"] = 300] = "MultipleChoices";
+		    HttpCodes[HttpCodes["MovedPermanently"] = 301] = "MovedPermanently";
+		    HttpCodes[HttpCodes["ResourceMoved"] = 302] = "ResourceMoved";
+		    HttpCodes[HttpCodes["SeeOther"] = 303] = "SeeOther";
+		    HttpCodes[HttpCodes["NotModified"] = 304] = "NotModified";
+		    HttpCodes[HttpCodes["UseProxy"] = 305] = "UseProxy";
+		    HttpCodes[HttpCodes["SwitchProxy"] = 306] = "SwitchProxy";
+		    HttpCodes[HttpCodes["TemporaryRedirect"] = 307] = "TemporaryRedirect";
+		    HttpCodes[HttpCodes["PermanentRedirect"] = 308] = "PermanentRedirect";
+		    HttpCodes[HttpCodes["BadRequest"] = 400] = "BadRequest";
+		    HttpCodes[HttpCodes["Unauthorized"] = 401] = "Unauthorized";
+		    HttpCodes[HttpCodes["PaymentRequired"] = 402] = "PaymentRequired";
+		    HttpCodes[HttpCodes["Forbidden"] = 403] = "Forbidden";
+		    HttpCodes[HttpCodes["NotFound"] = 404] = "NotFound";
+		    HttpCodes[HttpCodes["MethodNotAllowed"] = 405] = "MethodNotAllowed";
+		    HttpCodes[HttpCodes["NotAcceptable"] = 406] = "NotAcceptable";
+		    HttpCodes[HttpCodes["ProxyAuthenticationRequired"] = 407] = "ProxyAuthenticationRequired";
+		    HttpCodes[HttpCodes["RequestTimeout"] = 408] = "RequestTimeout";
+		    HttpCodes[HttpCodes["Conflict"] = 409] = "Conflict";
+		    HttpCodes[HttpCodes["Gone"] = 410] = "Gone";
+		    HttpCodes[HttpCodes["TooManyRequests"] = 429] = "TooManyRequests";
+		    HttpCodes[HttpCodes["InternalServerError"] = 500] = "InternalServerError";
+		    HttpCodes[HttpCodes["NotImplemented"] = 501] = "NotImplemented";
+		    HttpCodes[HttpCodes["BadGateway"] = 502] = "BadGateway";
+		    HttpCodes[HttpCodes["ServiceUnavailable"] = 503] = "ServiceUnavailable";
+		    HttpCodes[HttpCodes["GatewayTimeout"] = 504] = "GatewayTimeout";
+		})(HttpCodes = exports.HttpCodes || (exports.HttpCodes = {}));
+		var Headers;
+		(function (Headers) {
+		    Headers["Accept"] = "accept";
+		    Headers["ContentType"] = "content-type";
+		})(Headers = exports.Headers || (exports.Headers = {}));
+		var MediaTypes;
+		(function (MediaTypes) {
+		    MediaTypes["ApplicationJson"] = "application/json";
+		})(MediaTypes = exports.MediaTypes || (exports.MediaTypes = {}));
+		/**
+		 * Returns the proxy URL, depending upon the supplied url and proxy environment variables.
+		 * @param serverUrl  The server URL where the request will be sent. For example, https://api.github.com
+		 */
+		function getProxyUrl(serverUrl) {
+		    const proxyUrl = pm.getProxyUrl(new URL(serverUrl));
+		    return proxyUrl ? proxyUrl.href : '';
+		}
+		exports.getProxyUrl = getProxyUrl;
+		const HttpRedirectCodes = [
+		    HttpCodes.MovedPermanently,
+		    HttpCodes.ResourceMoved,
+		    HttpCodes.SeeOther,
+		    HttpCodes.TemporaryRedirect,
+		    HttpCodes.PermanentRedirect
+		];
+		const HttpResponseRetryCodes = [
+		    HttpCodes.BadGateway,
+		    HttpCodes.ServiceUnavailable,
+		    HttpCodes.GatewayTimeout
+		];
+		const RetryableHttpVerbs = ['OPTIONS', 'GET', 'DELETE', 'HEAD'];
+		const ExponentialBackoffCeiling = 10;
+		const ExponentialBackoffTimeSlice = 5;
+		class HttpClientError extends Error {
+		    constructor(message, statusCode) {
+		        super(message);
+		        this.name = 'HttpClientError';
+		        this.statusCode = statusCode;
+		        Object.setPrototypeOf(this, HttpClientError.prototype);
+		    }
+		}
+		exports.HttpClientError = HttpClientError;
+		class HttpClientResponse {
+		    constructor(message) {
+		        this.message = message;
+		    }
+		    readBody() {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            return new Promise((resolve) => __awaiter(this, undefined, undefined, function* () {
+		                let output = Buffer.alloc(0);
+		                this.message.on('data', (chunk) => {
+		                    output = Buffer.concat([output, chunk]);
+		                });
+		                this.message.on('end', () => {
+		                    resolve(output.toString());
+		                });
+		            }));
+		        });
+		    }
+		}
+		exports.HttpClientResponse = HttpClientResponse;
+		function isHttps(requestUrl) {
+		    const parsedUrl = new URL(requestUrl);
+		    return parsedUrl.protocol === 'https:';
+		}
+		exports.isHttps = isHttps;
+		class HttpClient {
+		    constructor(userAgent, handlers, requestOptions) {
+		        this._ignoreSslError = false;
+		        this._allowRedirects = true;
+		        this._allowRedirectDowngrade = false;
+		        this._maxRedirects = 50;
+		        this._allowRetries = false;
+		        this._maxRetries = 1;
+		        this._keepAlive = false;
+		        this._disposed = false;
+		        this.userAgent = userAgent;
+		        this.handlers = handlers || [];
+		        this.requestOptions = requestOptions;
+		        if (requestOptions) {
+		            if (requestOptions.ignoreSslError != null) {
+		                this._ignoreSslError = requestOptions.ignoreSslError;
+		            }
+		            this._socketTimeout = requestOptions.socketTimeout;
+		            if (requestOptions.allowRedirects != null) {
+		                this._allowRedirects = requestOptions.allowRedirects;
+		            }
+		            if (requestOptions.allowRedirectDowngrade != null) {
+		                this._allowRedirectDowngrade = requestOptions.allowRedirectDowngrade;
+		            }
+		            if (requestOptions.maxRedirects != null) {
+		                this._maxRedirects = Math.max(requestOptions.maxRedirects, 0);
+		            }
+		            if (requestOptions.keepAlive != null) {
+		                this._keepAlive = requestOptions.keepAlive;
+		            }
+		            if (requestOptions.allowRetries != null) {
+		                this._allowRetries = requestOptions.allowRetries;
+		            }
+		            if (requestOptions.maxRetries != null) {
+		                this._maxRetries = requestOptions.maxRetries;
+		            }
+		        }
+		    }
+		    options(requestUrl, additionalHeaders) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            return this.request('OPTIONS', requestUrl, null, additionalHeaders || {});
+		        });
+		    }
+		    get(requestUrl, additionalHeaders) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            return this.request('GET', requestUrl, null, additionalHeaders || {});
+		        });
+		    }
+		    del(requestUrl, additionalHeaders) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            return this.request('DELETE', requestUrl, null, additionalHeaders || {});
+		        });
+		    }
+		    post(requestUrl, data, additionalHeaders) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            return this.request('POST', requestUrl, data, additionalHeaders || {});
+		        });
+		    }
+		    patch(requestUrl, data, additionalHeaders) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            return this.request('PATCH', requestUrl, data, additionalHeaders || {});
+		        });
+		    }
+		    put(requestUrl, data, additionalHeaders) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            return this.request('PUT', requestUrl, data, additionalHeaders || {});
+		        });
+		    }
+		    head(requestUrl, additionalHeaders) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            return this.request('HEAD', requestUrl, null, additionalHeaders || {});
+		        });
+		    }
+		    sendStream(verb, requestUrl, stream, additionalHeaders) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            return this.request(verb, requestUrl, stream, additionalHeaders);
+		        });
+		    }
+		    /**
+		     * Gets a typed object from an endpoint
+		     * Be aware that not found returns a null.  Other errors (4xx, 5xx) reject the promise
+		     */
+		    getJson(requestUrl, additionalHeaders = {}) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+		            const res = yield this.get(requestUrl, additionalHeaders);
+		            return this._processResponse(res, this.requestOptions);
+		        });
+		    }
+		    postJson(requestUrl, obj, additionalHeaders = {}) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            const data = JSON.stringify(obj, null, 2);
+		            additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+		            additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
+		            const res = yield this.post(requestUrl, data, additionalHeaders);
+		            return this._processResponse(res, this.requestOptions);
+		        });
+		    }
+		    putJson(requestUrl, obj, additionalHeaders = {}) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            const data = JSON.stringify(obj, null, 2);
+		            additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+		            additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
+		            const res = yield this.put(requestUrl, data, additionalHeaders);
+		            return this._processResponse(res, this.requestOptions);
+		        });
+		    }
+		    patchJson(requestUrl, obj, additionalHeaders = {}) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            const data = JSON.stringify(obj, null, 2);
+		            additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+		            additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
+		            const res = yield this.patch(requestUrl, data, additionalHeaders);
+		            return this._processResponse(res, this.requestOptions);
+		        });
+		    }
+		    /**
+		     * Makes a raw http request.
+		     * All other methods such as get, post, patch, and request ultimately call this.
+		     * Prefer get, del, post and patch
+		     */
+		    request(verb, requestUrl, data, headers) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            if (this._disposed) {
+		                throw new Error('Client has already been disposed.');
+		            }
+		            const parsedUrl = new URL(requestUrl);
+		            let info = this._prepareRequest(verb, parsedUrl, headers);
+		            // Only perform retries on reads since writes may not be idempotent.
+		            const maxTries = this._allowRetries && RetryableHttpVerbs.includes(verb)
+		                ? this._maxRetries + 1
+		                : 1;
+		            let numTries = 0;
+		            let response;
+		            do {
+		                response = yield this.requestRaw(info, data);
+		                // Check if it's an authentication challenge
+		                if (response &&
+		                    response.message &&
+		                    response.message.statusCode === HttpCodes.Unauthorized) {
+		                    let authenticationHandler;
+		                    for (const handler of this.handlers) {
+		                        if (handler.canHandleAuthentication(response)) {
+		                            authenticationHandler = handler;
+		                            break;
+		                        }
+		                    }
+		                    if (authenticationHandler) {
+		                        return authenticationHandler.handleAuthentication(this, info, data);
+		                    }
+		                    else {
+		                        // We have received an unauthorized response but have no handlers to handle it.
+		                        // Let the response return to the caller.
+		                        return response;
+		                    }
+		                }
+		                let redirectsRemaining = this._maxRedirects;
+		                while (response.message.statusCode &&
+		                    HttpRedirectCodes.includes(response.message.statusCode) &&
+		                    this._allowRedirects &&
+		                    redirectsRemaining > 0) {
+		                    const redirectUrl = response.message.headers['location'];
+		                    if (!redirectUrl) {
+		                        // if there's no location to redirect to, we won't
+		                        break;
+		                    }
+		                    const parsedRedirectUrl = new URL(redirectUrl);
+		                    if (parsedUrl.protocol === 'https:' &&
+		                        parsedUrl.protocol !== parsedRedirectUrl.protocol &&
+		                        !this._allowRedirectDowngrade) {
+		                        throw new Error('Redirect from HTTPS to HTTP protocol. This downgrade is not allowed for security reasons. If you want to allow this behavior, set the allowRedirectDowngrade option to true.');
+		                    }
+		                    // we need to finish reading the response before reassigning response
+		                    // which will leak the open socket.
+		                    yield response.readBody();
+		                    // strip authorization header if redirected to a different hostname
+		                    if (parsedRedirectUrl.hostname !== parsedUrl.hostname) {
+		                        for (const header in headers) {
+		                            // header names are case insensitive
+		                            if (header.toLowerCase() === 'authorization') {
+		                                delete headers[header];
+		                            }
+		                        }
+		                    }
+		                    // let's make the request with the new redirectUrl
+		                    info = this._prepareRequest(verb, parsedRedirectUrl, headers);
+		                    response = yield this.requestRaw(info, data);
+		                    redirectsRemaining--;
+		                }
+		                if (!response.message.statusCode ||
+		                    !HttpResponseRetryCodes.includes(response.message.statusCode)) {
+		                    // If not a retry code, return immediately instead of retrying
+		                    return response;
+		                }
+		                numTries += 1;
+		                if (numTries < maxTries) {
+		                    yield response.readBody();
+		                    yield this._performExponentialBackoff(numTries);
+		                }
+		            } while (numTries < maxTries);
+		            return response;
+		        });
+		    }
+		    /**
+		     * Needs to be called if keepAlive is set to true in request options.
+		     */
+		    dispose() {
+		        if (this._agent) {
+		            this._agent.destroy();
+		        }
+		        this._disposed = true;
+		    }
+		    /**
+		     * Raw request.
+		     * @param info
+		     * @param data
+		     */
+		    requestRaw(info, data) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            return new Promise((resolve, reject) => {
+		                function callbackForResult(err, res) {
+		                    if (err) {
+		                        reject(err);
+		                    }
+		                    else if (!res) {
+		                        // If `err` is not passed, then `res` must be passed.
+		                        reject(new Error('Unknown error'));
+		                    }
+		                    else {
+		                        resolve(res);
+		                    }
+		                }
+		                this.requestRawWithCallback(info, data, callbackForResult);
+		            });
+		        });
+		    }
+		    /**
+		     * Raw request with callback.
+		     * @param info
+		     * @param data
+		     * @param onResult
+		     */
+		    requestRawWithCallback(info, data, onResult) {
+		        if (typeof data === 'string') {
+		            if (!info.options.headers) {
+		                info.options.headers = {};
+		            }
+		            info.options.headers['Content-Length'] = Buffer.byteLength(data, 'utf8');
+		        }
+		        let callbackCalled = false;
+		        function handleResult(err, res) {
+		            if (!callbackCalled) {
+		                callbackCalled = true;
+		                onResult(err, res);
+		            }
+		        }
+		        const req = info.httpModule.request(info.options, (msg) => {
+		            const res = new HttpClientResponse(msg);
+		            handleResult(undefined, res);
+		        });
+		        let socket;
+		        req.on('socket', sock => {
+		            socket = sock;
+		        });
+		        // If we ever get disconnected, we want the socket to timeout eventually
+		        req.setTimeout(this._socketTimeout || 3 * 60000, () => {
+		            if (socket) {
+		                socket.end();
+		            }
+		            handleResult(new Error(`Request timeout: ${info.options.path}`));
+		        });
+		        req.on('error', function (err) {
+		            // err has statusCode property
+		            // res should have headers
+		            handleResult(err);
+		        });
+		        if (data && typeof data === 'string') {
+		            req.write(data, 'utf8');
+		        }
+		        if (data && typeof data !== 'string') {
+		            data.on('close', function () {
+		                req.end();
+		            });
+		            data.pipe(req);
+		        }
+		        else {
+		            req.end();
+		        }
+		    }
+		    /**
+		     * Gets an http agent. This function is useful when you need an http agent that handles
+		     * routing through a proxy server - depending upon the url and proxy environment variables.
+		     * @param serverUrl  The server URL where the request will be sent. For example, https://api.github.com
+		     */
+		    getAgent(serverUrl) {
+		        const parsedUrl = new URL(serverUrl);
+		        return this._getAgent(parsedUrl);
+		    }
+		    _prepareRequest(method, requestUrl, headers) {
+		        const info = {};
+		        info.parsedUrl = requestUrl;
+		        const usingSsl = info.parsedUrl.protocol === 'https:';
+		        info.httpModule = usingSsl ? https : http;
+		        const defaultPort = usingSsl ? 443 : 80;
+		        info.options = {};
+		        info.options.host = info.parsedUrl.hostname;
+		        info.options.port = info.parsedUrl.port
+		            ? parseInt(info.parsedUrl.port)
+		            : defaultPort;
+		        info.options.path =
+		            (info.parsedUrl.pathname || '') + (info.parsedUrl.search || '');
+		        info.options.method = method;
+		        info.options.headers = this._mergeHeaders(headers);
+		        if (this.userAgent != null) {
+		            info.options.headers['user-agent'] = this.userAgent;
+		        }
+		        info.options.agent = this._getAgent(info.parsedUrl);
+		        // gives handlers an opportunity to participate
+		        if (this.handlers) {
+		            for (const handler of this.handlers) {
+		                handler.prepareRequest(info.options);
+		            }
+		        }
+		        return info;
+		    }
+		    _mergeHeaders(headers) {
+		        if (this.requestOptions && this.requestOptions.headers) {
+		            return Object.assign({}, lowercaseKeys(this.requestOptions.headers), lowercaseKeys(headers || {}));
+		        }
+		        return lowercaseKeys(headers || {});
+		    }
+		    _getExistingOrDefaultHeader(additionalHeaders, header, _default) {
+		        let clientHeader;
+		        if (this.requestOptions && this.requestOptions.headers) {
+		            clientHeader = lowercaseKeys(this.requestOptions.headers)[header];
+		        }
+		        return additionalHeaders[header] || clientHeader || _default;
+		    }
+		    _getAgent(parsedUrl) {
+		        let agent;
+		        const proxyUrl = pm.getProxyUrl(parsedUrl);
+		        const useProxy = proxyUrl && proxyUrl.hostname;
+		        if (this._keepAlive && useProxy) {
+		            agent = this._proxyAgent;
+		        }
+		        if (this._keepAlive && !useProxy) {
+		            agent = this._agent;
+		        }
+		        // if agent is already assigned use that agent.
+		        if (agent) {
+		            return agent;
+		        }
+		        const usingSsl = parsedUrl.protocol === 'https:';
+		        let maxSockets = 100;
+		        if (this.requestOptions) {
+		            maxSockets = this.requestOptions.maxSockets || http.globalAgent.maxSockets;
+		        }
+		        // This is `useProxy` again, but we need to check `proxyURl` directly for TypeScripts's flow analysis.
+		        if (proxyUrl && proxyUrl.hostname) {
+		            const agentOptions = {
+		                maxSockets,
+		                keepAlive: this._keepAlive,
+		                proxy: Object.assign(Object.assign({}, ((proxyUrl.username || proxyUrl.password) && {
+		                    proxyAuth: `${proxyUrl.username}:${proxyUrl.password}`
+		                })), { host: proxyUrl.hostname, port: proxyUrl.port })
+		            };
+		            let tunnelAgent;
+		            const overHttps = proxyUrl.protocol === 'https:';
+		            if (usingSsl) {
+		                tunnelAgent = overHttps ? tunnel.httpsOverHttps : tunnel.httpsOverHttp;
+		            }
+		            else {
+		                tunnelAgent = overHttps ? tunnel.httpOverHttps : tunnel.httpOverHttp;
+		            }
+		            agent = tunnelAgent(agentOptions);
+		            this._proxyAgent = agent;
+		        }
+		        // if reusing agent across request and tunneling agent isn't assigned create a new agent
+		        if (this._keepAlive && !agent) {
+		            const options = { keepAlive: this._keepAlive, maxSockets };
+		            agent = usingSsl ? new https.Agent(options) : new http.Agent(options);
+		            this._agent = agent;
+		        }
+		        // if not using private agent and tunnel agent isn't setup then use global agent
+		        if (!agent) {
+		            agent = usingSsl ? https.globalAgent : http.globalAgent;
+		        }
+		        if (usingSsl && this._ignoreSslError) {
+		            // we don't want to set NODE_TLS_REJECT_UNAUTHORIZED=0 since that will affect request for entire process
+		            // http.RequestOptions doesn't expose a way to modify RequestOptions.agent.options
+		            // we have to cast it to any and change it directly
+		            agent.options = Object.assign(agent.options || {}, {
+		                rejectUnauthorized: false
+		            });
+		        }
+		        return agent;
+		    }
+		    _performExponentialBackoff(retryNumber) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            retryNumber = Math.min(ExponentialBackoffCeiling, retryNumber);
+		            const ms = ExponentialBackoffTimeSlice * Math.pow(2, retryNumber);
+		            return new Promise(resolve => setTimeout(() => resolve(), ms));
+		        });
+		    }
+		    _processResponse(res, options) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            return new Promise((resolve, reject) => __awaiter(this, undefined, undefined, function* () {
+		                const statusCode = res.message.statusCode || 0;
+		                const response = {
+		                    statusCode,
+		                    result: null,
+		                    headers: {}
+		                };
+		                // not found leads to null obj returned
+		                if (statusCode === HttpCodes.NotFound) {
+		                    resolve(response);
+		                }
+		                // get the result from the body
+		                function dateTimeDeserializer(key, value) {
+		                    if (typeof value === 'string') {
+		                        const a = new Date(value);
+		                        if (!isNaN(a.valueOf())) {
+		                            return a;
+		                        }
+		                    }
+		                    return value;
+		                }
+		                let obj;
+		                let contents;
+		                try {
+		                    contents = yield res.readBody();
+		                    if (contents && contents.length > 0) {
+		                        if (options && options.deserializeDates) {
+		                            obj = JSON.parse(contents, dateTimeDeserializer);
+		                        }
+		                        else {
+		                            obj = JSON.parse(contents);
+		                        }
+		                        response.result = obj;
+		                    }
+		                    response.headers = res.message.headers;
+		                }
+		                catch (err) {
+		                    // Invalid resource (contents not json);  leaving result obj null
+		                }
+		                // note that 3xx redirects are handled by the http layer.
+		                if (statusCode > 299) {
+		                    let msg;
+		                    // if exception/error in body, attempt to get better error
+		                    if (obj && obj.message) {
+		                        msg = obj.message;
+		                    }
+		                    else if (contents && contents.length > 0) {
+		                        // it may be the case that the exception is in the body message as string
+		                        msg = contents;
+		                    }
+		                    else {
+		                        msg = `Failed request: (${statusCode})`;
+		                    }
+		                    const err = new HttpClientError(msg, statusCode);
+		                    err.result = response.result;
+		                    reject(err);
+		                }
+		                else {
+		                    resolve(response);
+		                }
+		            }));
+		        });
+		    }
+		}
+		exports.HttpClient = HttpClient;
+		const lowercaseKeys = (obj) => Object.keys(obj).reduce((c, k) => ((c[k.toLowerCase()] = obj[k]), c), {});
+		
+	} (lib));
+	return lib;
+}
+
+var auth = {};
+
+var hasRequiredAuth;
+
+function requireAuth () {
+	if (hasRequiredAuth) return auth;
+	hasRequiredAuth = 1;
+	var __awaiter = (auth.__awaiter) || function (thisArg, _arguments, P, generator) {
+	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+	    return new (P || (P = Promise))(function (resolve, reject) {
+	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+	        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+	        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+	        step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    });
+	};
+	Object.defineProperty(auth, "__esModule", { value: true });
+	auth.PersonalAccessTokenCredentialHandler = auth.BearerCredentialHandler = auth.BasicCredentialHandler = undefined;
+	class BasicCredentialHandler {
+	    constructor(username, password) {
+	        this.username = username;
+	        this.password = password;
+	    }
+	    prepareRequest(options) {
+	        if (!options.headers) {
+	            throw Error('The request has no headers');
+	        }
+	        options.headers['Authorization'] = `Basic ${Buffer.from(`${this.username}:${this.password}`).toString('base64')}`;
+	    }
+	    // This handler cannot handle 401
+	    canHandleAuthentication() {
+	        return false;
+	    }
+	    handleAuthentication() {
+	        return __awaiter(this, undefined, undefined, function* () {
+	            throw new Error('not implemented');
+	        });
+	    }
+	}
+	auth.BasicCredentialHandler = BasicCredentialHandler;
+	class BearerCredentialHandler {
+	    constructor(token) {
+	        this.token = token;
+	    }
+	    // currently implements pre-authorization
+	    // TODO: support preAuth = false where it hooks on 401
+	    prepareRequest(options) {
+	        if (!options.headers) {
+	            throw Error('The request has no headers');
+	        }
+	        options.headers['Authorization'] = `Bearer ${this.token}`;
+	    }
+	    // This handler cannot handle 401
+	    canHandleAuthentication() {
+	        return false;
+	    }
+	    handleAuthentication() {
+	        return __awaiter(this, undefined, undefined, function* () {
+	            throw new Error('not implemented');
+	        });
+	    }
+	}
+	auth.BearerCredentialHandler = BearerCredentialHandler;
+	class PersonalAccessTokenCredentialHandler {
+	    constructor(token) {
+	        this.token = token;
+	    }
+	    // currently implements pre-authorization
+	    // TODO: support preAuth = false where it hooks on 401
+	    prepareRequest(options) {
+	        if (!options.headers) {
+	            throw Error('The request has no headers');
+	        }
+	        options.headers['Authorization'] = `Basic ${Buffer.from(`PAT:${this.token}`).toString('base64')}`;
+	    }
+	    // This handler cannot handle 401
+	    canHandleAuthentication() {
+	        return false;
+	    }
+	    handleAuthentication() {
+	        return __awaiter(this, undefined, undefined, function* () {
+	            throw new Error('not implemented');
+	        });
+	    }
+	}
+	auth.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHandler;
+	
+	return auth;
+}
+
+var hasRequiredOidcUtils;
+
+function requireOidcUtils () {
+	if (hasRequiredOidcUtils) return oidcUtils;
+	hasRequiredOidcUtils = 1;
+	var __awaiter = (oidcUtils.__awaiter) || function (thisArg, _arguments, P, generator) {
+	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+	    return new (P || (P = Promise))(function (resolve, reject) {
+	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+	        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+	        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+	        step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    });
+	};
+	Object.defineProperty(oidcUtils, "__esModule", { value: true });
+	oidcUtils.OidcClient = undefined;
+	const http_client_1 = requireLib();
+	const auth_1 = requireAuth();
+	const core_1 = requireCore();
+	class OidcClient {
+	    static createHttpClient(allowRetry = true, maxRetry = 10) {
+	        const requestOptions = {
+	            allowRetries: allowRetry,
+	            maxRetries: maxRetry
+	        };
+	        return new http_client_1.HttpClient('actions/oidc-client', [new auth_1.BearerCredentialHandler(OidcClient.getRequestToken())], requestOptions);
+	    }
+	    static getRequestToken() {
+	        const token = process.env['ACTIONS_ID_TOKEN_REQUEST_TOKEN'];
+	        if (!token) {
+	            throw new Error('Unable to get ACTIONS_ID_TOKEN_REQUEST_TOKEN env variable');
+	        }
+	        return token;
+	    }
+	    static getIDTokenUrl() {
+	        const runtimeUrl = process.env['ACTIONS_ID_TOKEN_REQUEST_URL'];
+	        if (!runtimeUrl) {
+	            throw new Error('Unable to get ACTIONS_ID_TOKEN_REQUEST_URL env variable');
+	        }
+	        return runtimeUrl;
+	    }
+	    static getCall(id_token_url) {
+	        var _a;
+	        return __awaiter(this, undefined, undefined, function* () {
+	            const httpclient = OidcClient.createHttpClient();
+	            const res = yield httpclient
+	                .getJson(id_token_url)
+	                .catch(error => {
+	                throw new Error(`Failed to get ID Token. \n 
+        Error Code : ${error.statusCode}\n 
+        Error Message: ${error.result.message}`);
+	            });
+	            const id_token = (_a = res.result) === null || _a === undefined ? undefined : _a.value;
+	            if (!id_token) {
+	                throw new Error('Response json body do not have ID Token field');
+	            }
+	            return id_token;
+	        });
+	    }
+	    static getIDToken(audience) {
+	        return __awaiter(this, undefined, undefined, function* () {
+	            try {
+	                // New ID Token is requested from action service
+	                let id_token_url = OidcClient.getIDTokenUrl();
+	                if (audience) {
+	                    const encodedAudience = encodeURIComponent(audience);
+	                    id_token_url = `${id_token_url}&audience=${encodedAudience}`;
+	                }
+	                core_1.debug(`ID token url is ${id_token_url}`);
+	                const id_token = yield OidcClient.getCall(id_token_url);
+	                core_1.setSecret(id_token);
+	                return id_token;
+	            }
+	            catch (error) {
+	                throw new Error(`Error message: ${error.message}`);
+	            }
+	        });
+	    }
+	}
+	oidcUtils.OidcClient = OidcClient;
+	
+	return oidcUtils;
+}
+
+var summary = {};
+
+var hasRequiredSummary;
+
+function requireSummary () {
+	if (hasRequiredSummary) return summary;
+	hasRequiredSummary = 1;
+	(function (exports) {
+		var __awaiter = (summary.__awaiter) || function (thisArg, _arguments, P, generator) {
+		    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+		    return new (P || (P = Promise))(function (resolve, reject) {
+		        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+		        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+		        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+		        step((generator = generator.apply(thisArg, _arguments || [])).next());
+		    });
+		};
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.summary = exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = undefined;
+		const os_1 = require$$0$1;
+		const fs_1 = require$$1$2;
+		const { access, appendFile, writeFile } = fs_1.promises;
+		exports.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
+		exports.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary';
+		class Summary {
+		    constructor() {
+		        this._buffer = '';
+		    }
+		    /**
+		     * Finds the summary file path from the environment, rejects if env var is not found or file does not exist
+		     * Also checks r/w permissions.
+		     *
+		     * @returns step summary file path
+		     */
+		    filePath() {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            if (this._filePath) {
+		                return this._filePath;
+		            }
+		            const pathFromEnv = process.env[exports.SUMMARY_ENV_VAR];
+		            if (!pathFromEnv) {
+		                throw new Error(`Unable to find environment variable for $${exports.SUMMARY_ENV_VAR}. Check if your runtime environment supports job summaries.`);
+		            }
+		            try {
+		                yield access(pathFromEnv, fs_1.constants.R_OK | fs_1.constants.W_OK);
+		            }
+		            catch (_a) {
+		                throw new Error(`Unable to access summary file: '${pathFromEnv}'. Check if the file has correct read/write permissions.`);
+		            }
+		            this._filePath = pathFromEnv;
+		            return this._filePath;
+		        });
+		    }
+		    /**
+		     * Wraps content in an HTML tag, adding any HTML attributes
+		     *
+		     * @param {string} tag HTML tag to wrap
+		     * @param {string | null} content content within the tag
+		     * @param {[attribute: string]: string} attrs key-value list of HTML attributes to add
+		     *
+		     * @returns {string} content wrapped in HTML element
+		     */
+		    wrap(tag, content, attrs = {}) {
+		        const htmlAttrs = Object.entries(attrs)
+		            .map(([key, value]) => ` ${key}="${value}"`)
+		            .join('');
+		        if (!content) {
+		            return `<${tag}${htmlAttrs}>`;
+		        }
+		        return `<${tag}${htmlAttrs}>${content}</${tag}>`;
+		    }
+		    /**
+		     * Writes text in the buffer to the summary buffer file and empties buffer. Will append by default.
+		     *
+		     * @param {SummaryWriteOptions} [options] (optional) options for write operation
+		     *
+		     * @returns {Promise<Summary>} summary instance
+		     */
+		    write(options) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            const overwrite = !!(options === null || options === undefined ? undefined : options.overwrite);
+		            const filePath = yield this.filePath();
+		            const writeFunc = overwrite ? writeFile : appendFile;
+		            yield writeFunc(filePath, this._buffer, { encoding: 'utf8' });
+		            return this.emptyBuffer();
+		        });
+		    }
+		    /**
+		     * Clears the summary buffer and wipes the summary file
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    clear() {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            return this.emptyBuffer().write({ overwrite: true });
+		        });
+		    }
+		    /**
+		     * Returns the current summary buffer as a string
+		     *
+		     * @returns {string} string of summary buffer
+		     */
+		    stringify() {
+		        return this._buffer;
+		    }
+		    /**
+		     * If the summary buffer is empty
+		     *
+		     * @returns {boolen} true if the buffer is empty
+		     */
+		    isEmptyBuffer() {
+		        return this._buffer.length === 0;
+		    }
+		    /**
+		     * Resets the summary buffer without writing to summary file
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    emptyBuffer() {
+		        this._buffer = '';
+		        return this;
+		    }
+		    /**
+		     * Adds raw text to the summary buffer
+		     *
+		     * @param {string} text content to add
+		     * @param {boolean} [addEOL=false] (optional) append an EOL to the raw text (default: false)
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    addRaw(text, addEOL = false) {
+		        this._buffer += text;
+		        return addEOL ? this.addEOL() : this;
+		    }
+		    /**
+		     * Adds the operating system-specific end-of-line marker to the buffer
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    addEOL() {
+		        return this.addRaw(os_1.EOL);
+		    }
+		    /**
+		     * Adds an HTML codeblock to the summary buffer
+		     *
+		     * @param {string} code content to render within fenced code block
+		     * @param {string} lang (optional) language to syntax highlight code
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    addCodeBlock(code, lang) {
+		        const attrs = Object.assign({}, (lang && { lang }));
+		        const element = this.wrap('pre', this.wrap('code', code), attrs);
+		        return this.addRaw(element).addEOL();
+		    }
+		    /**
+		     * Adds an HTML list to the summary buffer
+		     *
+		     * @param {string[]} items list of items to render
+		     * @param {boolean} [ordered=false] (optional) if the rendered list should be ordered or not (default: false)
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    addList(items, ordered = false) {
+		        const tag = ordered ? 'ol' : 'ul';
+		        const listItems = items.map(item => this.wrap('li', item)).join('');
+		        const element = this.wrap(tag, listItems);
+		        return this.addRaw(element).addEOL();
+		    }
+		    /**
+		     * Adds an HTML table to the summary buffer
+		     *
+		     * @param {SummaryTableCell[]} rows table rows
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    addTable(rows) {
+		        const tableBody = rows
+		            .map(row => {
+		            const cells = row
+		                .map(cell => {
+		                if (typeof cell === 'string') {
+		                    return this.wrap('td', cell);
+		                }
+		                const { header, data, colspan, rowspan } = cell;
+		                const tag = header ? 'th' : 'td';
+		                const attrs = Object.assign(Object.assign({}, (colspan && { colspan })), (rowspan && { rowspan }));
+		                return this.wrap(tag, data, attrs);
+		            })
+		                .join('');
+		            return this.wrap('tr', cells);
+		        })
+		            .join('');
+		        const element = this.wrap('table', tableBody);
+		        return this.addRaw(element).addEOL();
+		    }
+		    /**
+		     * Adds a collapsable HTML details element to the summary buffer
+		     *
+		     * @param {string} label text for the closed state
+		     * @param {string} content collapsable content
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    addDetails(label, content) {
+		        const element = this.wrap('details', this.wrap('summary', label) + content);
+		        return this.addRaw(element).addEOL();
+		    }
+		    /**
+		     * Adds an HTML image tag to the summary buffer
+		     *
+		     * @param {string} src path to the image you to embed
+		     * @param {string} alt text description of the image
+		     * @param {SummaryImageOptions} options (optional) addition image attributes
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    addImage(src, alt, options) {
+		        const { width, height } = options || {};
+		        const attrs = Object.assign(Object.assign({}, (width && { width })), (height && { height }));
+		        const element = this.wrap('img', null, Object.assign({ src, alt }, attrs));
+		        return this.addRaw(element).addEOL();
+		    }
+		    /**
+		     * Adds an HTML section heading element
+		     *
+		     * @param {string} text heading text
+		     * @param {number | string} [level=1] (optional) the heading level, default: 1
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    addHeading(text, level) {
+		        const tag = `h${level}`;
+		        const allowedTag = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(tag)
+		            ? tag
+		            : 'h1';
+		        const element = this.wrap(allowedTag, text);
+		        return this.addRaw(element).addEOL();
+		    }
+		    /**
+		     * Adds an HTML thematic break (<hr>) to the summary buffer
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    addSeparator() {
+		        const element = this.wrap('hr', null);
+		        return this.addRaw(element).addEOL();
+		    }
+		    /**
+		     * Adds an HTML line break (<br>) to the summary buffer
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    addBreak() {
+		        const element = this.wrap('br', null);
+		        return this.addRaw(element).addEOL();
+		    }
+		    /**
+		     * Adds an HTML blockquote to the summary buffer
+		     *
+		     * @param {string} text quote text
+		     * @param {string} cite (optional) citation url
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    addQuote(text, cite) {
+		        const attrs = Object.assign({}, (cite && { cite }));
+		        const element = this.wrap('blockquote', text, attrs);
+		        return this.addRaw(element).addEOL();
+		    }
+		    /**
+		     * Adds an HTML anchor tag to the summary buffer
+		     *
+		     * @param {string} text link text/content
+		     * @param {string} href hyperlink
+		     *
+		     * @returns {Summary} summary instance
+		     */
+		    addLink(text, href) {
+		        const element = this.wrap('a', text, { href });
+		        return this.addRaw(element).addEOL();
+		    }
+		}
+		const _summary = new Summary();
+		/**
+		 * @deprecated use `core.summary`
+		 */
+		exports.markdownSummary = _summary;
+		exports.summary = _summary;
+		
+	} (summary));
+	return summary;
+}
+
+var pathUtils = {};
+
+var hasRequiredPathUtils;
+
+function requirePathUtils () {
+	if (hasRequiredPathUtils) return pathUtils;
+	hasRequiredPathUtils = 1;
+	var __createBinding = (pathUtils.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+	}) : (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    o[k2] = m[k];
+	}));
+	var __setModuleDefault = (pathUtils.__setModuleDefault) || (Object.create ? (function(o, v) {
+	    Object.defineProperty(o, "default", { enumerable: true, value: v });
+	}) : function(o, v) {
+	    o["default"] = v;
+	});
+	var __importStar = (pathUtils.__importStar) || function (mod) {
+	    if (mod && mod.__esModule) return mod;
+	    var result = {};
+	    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+	    __setModuleDefault(result, mod);
+	    return result;
+	};
+	Object.defineProperty(pathUtils, "__esModule", { value: true });
+	pathUtils.toPlatformPath = pathUtils.toWin32Path = pathUtils.toPosixPath = undefined;
+	const path = __importStar(require$$1$8);
+	/**
+	 * toPosixPath converts the given path to the posix form. On Windows, \\ will be
+	 * replaced with /.
+	 *
+	 * @param pth. Path to transform.
+	 * @return string Posix path.
+	 */
+	function toPosixPath(pth) {
+	    return pth.replace(/[\\]/g, '/');
+	}
+	pathUtils.toPosixPath = toPosixPath;
+	/**
+	 * toWin32Path converts the given path to the win32 form. On Linux, / will be
+	 * replaced with \\.
+	 *
+	 * @param pth. Path to transform.
+	 * @return string Win32 path.
+	 */
+	function toWin32Path(pth) {
+	    return pth.replace(/[/]/g, '\\');
+	}
+	pathUtils.toWin32Path = toWin32Path;
+	/**
+	 * toPlatformPath converts the given path to a platform-specific path. It does
+	 * this by replacing instances of / and \ with the platform-specific path
+	 * separator.
+	 *
+	 * @param pth The path to platformize.
+	 * @return string The platform-specific path.
+	 */
+	function toPlatformPath(pth) {
+	    return pth.replace(/[/\\]/g, path.sep);
+	}
+	pathUtils.toPlatformPath = toPlatformPath;
+	
+	return pathUtils;
+}
+
+var hasRequiredCore;
+
+function requireCore () {
+	if (hasRequiredCore) return core;
+	hasRequiredCore = 1;
+	(function (exports) {
+		var __createBinding = (core.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+		    if (k2 === undefined) k2 = k;
+		    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+		}) : (function(o, m, k, k2) {
+		    if (k2 === undefined) k2 = k;
+		    o[k2] = m[k];
+		}));
+		var __setModuleDefault = (core.__setModuleDefault) || (Object.create ? (function(o, v) {
+		    Object.defineProperty(o, "default", { enumerable: true, value: v });
+		}) : function(o, v) {
+		    o["default"] = v;
+		});
+		var __importStar = (core.__importStar) || function (mod) {
+		    if (mod && mod.__esModule) return mod;
+		    var result = {};
+		    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+		    __setModuleDefault(result, mod);
+		    return result;
+		};
+		var __awaiter = (core.__awaiter) || function (thisArg, _arguments, P, generator) {
+		    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+		    return new (P || (P = Promise))(function (resolve, reject) {
+		        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+		        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+		        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+		        step((generator = generator.apply(thisArg, _arguments || [])).next());
+		    });
+		};
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.getIDToken = exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = undefined;
+		const command_1 = requireCommand();
+		const file_command_1 = requireFileCommand();
+		const utils_1 = requireUtils();
+		const os = __importStar(require$$0$1);
+		const path = __importStar(require$$1$8);
+		const oidc_utils_1 = requireOidcUtils();
+		/**
+		 * The code to exit an action
+		 */
+		var ExitCode;
+		(function (ExitCode) {
+		    /**
+		     * A code indicating that the action was successful
+		     */
+		    ExitCode[ExitCode["Success"] = 0] = "Success";
+		    /**
+		     * A code indicating that the action was a failure
+		     */
+		    ExitCode[ExitCode["Failure"] = 1] = "Failure";
+		})(ExitCode = exports.ExitCode || (exports.ExitCode = {}));
+		//-----------------------------------------------------------------------
+		// Variables
+		//-----------------------------------------------------------------------
+		/**
+		 * Sets env variable for this action and future actions in the job
+		 * @param name the name of the variable to set
+		 * @param val the value of the variable. Non-string values will be converted to a string via JSON.stringify
+		 */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		function exportVariable(name, val) {
+		    const convertedVal = utils_1.toCommandValue(val);
+		    process.env[name] = convertedVal;
+		    const filePath = process.env['GITHUB_ENV'] || '';
+		    if (filePath) {
+		        return file_command_1.issueFileCommand('ENV', file_command_1.prepareKeyValueMessage(name, val));
+		    }
+		    command_1.issueCommand('set-env', { name }, convertedVal);
+		}
+		exports.exportVariable = exportVariable;
+		/**
+		 * Registers a secret which will get masked from logs
+		 * @param secret value of the secret
+		 */
+		function setSecret(secret) {
+		    command_1.issueCommand('add-mask', {}, secret);
+		}
+		exports.setSecret = setSecret;
+		/**
+		 * Prepends inputPath to the PATH (for this action and future actions)
+		 * @param inputPath
+		 */
+		function addPath(inputPath) {
+		    const filePath = process.env['GITHUB_PATH'] || '';
+		    if (filePath) {
+		        file_command_1.issueFileCommand('PATH', inputPath);
+		    }
+		    else {
+		        command_1.issueCommand('add-path', {}, inputPath);
+		    }
+		    process.env['PATH'] = `${inputPath}${path.delimiter}${process.env['PATH']}`;
+		}
+		exports.addPath = addPath;
+		/**
+		 * Gets the value of an input.
+		 * Unless trimWhitespace is set to false in InputOptions, the value is also trimmed.
+		 * Returns an empty string if the value is not defined.
+		 *
+		 * @param     name     name of the input to get
+		 * @param     options  optional. See InputOptions.
+		 * @returns   string
+		 */
+		function getInput(name, options) {
+		    const val = process.env[`INPUT_${name.replace(/ /g, '_').toUpperCase()}`] || '';
+		    if (options && options.required && !val) {
+		        throw new Error(`Input required and not supplied: ${name}`);
+		    }
+		    if (options && options.trimWhitespace === false) {
+		        return val;
+		    }
+		    return val.trim();
+		}
+		exports.getInput = getInput;
+		/**
+		 * Gets the values of an multiline input.  Each value is also trimmed.
+		 *
+		 * @param     name     name of the input to get
+		 * @param     options  optional. See InputOptions.
+		 * @returns   string[]
+		 *
+		 */
+		function getMultilineInput(name, options) {
+		    const inputs = getInput(name, options)
+		        .split('\n')
+		        .filter(x => x !== '');
+		    if (options && options.trimWhitespace === false) {
+		        return inputs;
+		    }
+		    return inputs.map(input => input.trim());
+		}
+		exports.getMultilineInput = getMultilineInput;
+		/**
+		 * Gets the input value of the boolean type in the YAML 1.2 "core schema" specification.
+		 * Support boolean input list: `true | True | TRUE | false | False | FALSE` .
+		 * The return value is also in boolean type.
+		 * ref: https://yaml.org/spec/1.2/spec.html#id2804923
+		 *
+		 * @param     name     name of the input to get
+		 * @param     options  optional. See InputOptions.
+		 * @returns   boolean
+		 */
+		function getBooleanInput(name, options) {
+		    const trueValue = ['true', 'True', 'TRUE'];
+		    const falseValue = ['false', 'False', 'FALSE'];
+		    const val = getInput(name, options);
+		    if (trueValue.includes(val))
+		        return true;
+		    if (falseValue.includes(val))
+		        return false;
+		    throw new TypeError(`Input does not meet YAML 1.2 "Core Schema" specification: ${name}\n` +
+		        `Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
+		}
+		exports.getBooleanInput = getBooleanInput;
+		/**
+		 * Sets the value of an output.
+		 *
+		 * @param     name     name of the output to set
+		 * @param     value    value to store. Non-string values will be converted to a string via JSON.stringify
+		 */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		function setOutput(name, value) {
+		    const filePath = process.env['GITHUB_OUTPUT'] || '';
+		    if (filePath) {
+		        return file_command_1.issueFileCommand('OUTPUT', file_command_1.prepareKeyValueMessage(name, value));
+		    }
+		    process.stdout.write(os.EOL);
+		    command_1.issueCommand('set-output', { name }, utils_1.toCommandValue(value));
+		}
+		exports.setOutput = setOutput;
+		/**
+		 * Enables or disables the echoing of commands into stdout for the rest of the step.
+		 * Echoing is disabled by default if ACTIONS_STEP_DEBUG is not set.
+		 *
+		 */
+		function setCommandEcho(enabled) {
+		    command_1.issue('echo', enabled ? 'on' : 'off');
+		}
+		exports.setCommandEcho = setCommandEcho;
+		//-----------------------------------------------------------------------
+		// Results
+		//-----------------------------------------------------------------------
+		/**
+		 * Sets the action status to failed.
+		 * When the action exits it will be with an exit code of 1
+		 * @param message add error issue message
+		 */
+		function setFailed(message) {
+		    process.exitCode = ExitCode.Failure;
+		    error(message);
+		}
+		exports.setFailed = setFailed;
+		//-----------------------------------------------------------------------
+		// Logging Commands
+		//-----------------------------------------------------------------------
+		/**
+		 * Gets whether Actions Step Debug is on or not
+		 */
+		function isDebug() {
+		    return process.env['RUNNER_DEBUG'] === '1';
+		}
+		exports.isDebug = isDebug;
+		/**
+		 * Writes debug message to user log
+		 * @param message debug message
+		 */
+		function debug(message) {
+		    command_1.issueCommand('debug', {}, message);
+		}
+		exports.debug = debug;
+		/**
+		 * Adds an error issue
+		 * @param message error issue message. Errors will be converted to string via toString()
+		 * @param properties optional properties to add to the annotation.
+		 */
+		function error(message, properties = {}) {
+		    command_1.issueCommand('error', utils_1.toCommandProperties(properties), message instanceof Error ? message.toString() : message);
+		}
+		exports.error = error;
+		/**
+		 * Adds a warning issue
+		 * @param message warning issue message. Errors will be converted to string via toString()
+		 * @param properties optional properties to add to the annotation.
+		 */
+		function warning(message, properties = {}) {
+		    command_1.issueCommand('warning', utils_1.toCommandProperties(properties), message instanceof Error ? message.toString() : message);
+		}
+		exports.warning = warning;
+		/**
+		 * Adds a notice issue
+		 * @param message notice issue message. Errors will be converted to string via toString()
+		 * @param properties optional properties to add to the annotation.
+		 */
+		function notice(message, properties = {}) {
+		    command_1.issueCommand('notice', utils_1.toCommandProperties(properties), message instanceof Error ? message.toString() : message);
+		}
+		exports.notice = notice;
+		/**
+		 * Writes info to log with console.log.
+		 * @param message info message
+		 */
+		function info(message) {
+		    process.stdout.write(message + os.EOL);
+		}
+		exports.info = info;
+		/**
+		 * Begin an output group.
+		 *
+		 * Output until the next `groupEnd` will be foldable in this group
+		 *
+		 * @param name The name of the output group
+		 */
+		function startGroup(name) {
+		    command_1.issue('group', name);
+		}
+		exports.startGroup = startGroup;
+		/**
+		 * End an output group.
+		 */
+		function endGroup() {
+		    command_1.issue('endgroup');
+		}
+		exports.endGroup = endGroup;
+		/**
+		 * Wrap an asynchronous function call in a group.
+		 *
+		 * Returns the same type as the function itself.
+		 *
+		 * @param name The name of the group
+		 * @param fn The function to wrap in the group
+		 */
+		function group(name, fn) {
+		    return __awaiter(this, undefined, undefined, function* () {
+		        startGroup(name);
+		        let result;
+		        try {
+		            result = yield fn();
+		        }
+		        finally {
+		            endGroup();
+		        }
+		        return result;
+		    });
+		}
+		exports.group = group;
+		//-----------------------------------------------------------------------
+		// Wrapper action state
+		//-----------------------------------------------------------------------
+		/**
+		 * Saves state for current action, the state can only be retrieved by this action's post job execution.
+		 *
+		 * @param     name     name of the state to store
+		 * @param     value    value to store. Non-string values will be converted to a string via JSON.stringify
+		 */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		function saveState(name, value) {
+		    const filePath = process.env['GITHUB_STATE'] || '';
+		    if (filePath) {
+		        return file_command_1.issueFileCommand('STATE', file_command_1.prepareKeyValueMessage(name, value));
+		    }
+		    command_1.issueCommand('save-state', { name }, utils_1.toCommandValue(value));
+		}
+		exports.saveState = saveState;
+		/**
+		 * Gets the value of an state set by this action's main execution.
+		 *
+		 * @param     name     name of the state to get
+		 * @returns   string
+		 */
+		function getState(name) {
+		    return process.env[`STATE_${name}`] || '';
+		}
+		exports.getState = getState;
+		function getIDToken(aud) {
+		    return __awaiter(this, undefined, undefined, function* () {
+		        return yield oidc_utils_1.OidcClient.getIDToken(aud);
+		    });
+		}
+		exports.getIDToken = getIDToken;
+		/**
+		 * Summary exports
+		 */
 		var summary_1 = requireSummary();
 		Object.defineProperty(exports, "summary", { enumerable: true, get: function () { return summary_1.summary; } });
 		/**
@@ -27228,16 +29944,8814 @@ function requireCore () {
 		Object.defineProperty(exports, "toPosixPath", { enumerable: true, get: function () { return path_utils_1.toPosixPath; } });
 		Object.defineProperty(exports, "toWin32Path", { enumerable: true, get: function () { return path_utils_1.toWin32Path; } });
 		Object.defineProperty(exports, "toPlatformPath", { enumerable: true, get: function () { return path_utils_1.toPlatformPath; } });
-		/**
-		 * Platform utilities exports
-		 */
-		exports.platform = __importStar(requirePlatform());
 		
 	} (core));
 	return core;
 }
 
-var coreExports = requireCore();
+var retention = {};
+
+var generated = {};
+
+var timestamp = {};
+
+/**
+ * Get the type of a JSON value.
+ * Distinguishes between array, null and object.
+ */
+function typeofJsonValue(value) {
+    let t = typeof value;
+    if (t == "object") {
+        if (Array.isArray(value))
+            return "array";
+        if (value === null)
+            return "null";
+    }
+    return t;
+}
+/**
+ * Is this a JSON object (instead of an array or null)?
+ */
+function isJsonObject(value) {
+    return value !== null && typeof value == "object" && !Array.isArray(value);
+}
+
+// lookup table from base64 character to byte
+let encTable = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'.split('');
+// lookup table from base64 character *code* to byte because lookup by number is fast
+let decTable = [];
+for (let i = 0; i < encTable.length; i++)
+    decTable[encTable[i].charCodeAt(0)] = i;
+// support base64url variants
+decTable["-".charCodeAt(0)] = encTable.indexOf("+");
+decTable["_".charCodeAt(0)] = encTable.indexOf("/");
+/**
+ * Decodes a base64 string to a byte array.
+ *
+ * - ignores white-space, including line breaks and tabs
+ * - allows inner padding (can decode concatenated base64 strings)
+ * - does not require padding
+ * - understands base64url encoding:
+ *   "-" instead of "+",
+ *   "_" instead of "/",
+ *   no padding
+ */
+function base64decode(base64Str) {
+    // estimate byte size, not accounting for inner padding and whitespace
+    let es = base64Str.length * 3 / 4;
+    // if (es % 3 !== 0)
+    // throw new Error('invalid base64 string');
+    if (base64Str[base64Str.length - 2] == '=')
+        es -= 2;
+    else if (base64Str[base64Str.length - 1] == '=')
+        es -= 1;
+    let bytes = new Uint8Array(es), bytePos = 0, // position in byte array
+    groupPos = 0, // position in base64 group
+    b, // current byte
+    p = 0 // previous byte
+    ;
+    for (let i = 0; i < base64Str.length; i++) {
+        b = decTable[base64Str.charCodeAt(i)];
+        if (b === undefined) {
+            // noinspection FallThroughInSwitchStatementJS
+            switch (base64Str[i]) {
+                case '=':
+                    groupPos = 0; // reset state when padding found
+                case '\n':
+                case '\r':
+                case '\t':
+                case ' ':
+                    continue; // skip white-space, and padding
+                default:
+                    throw Error(`invalid base64 string.`);
+            }
+        }
+        switch (groupPos) {
+            case 0:
+                p = b;
+                groupPos = 1;
+                break;
+            case 1:
+                bytes[bytePos++] = p << 2 | (b & 48) >> 4;
+                p = b;
+                groupPos = 2;
+                break;
+            case 2:
+                bytes[bytePos++] = (p & 15) << 4 | (b & 60) >> 2;
+                p = b;
+                groupPos = 3;
+                break;
+            case 3:
+                bytes[bytePos++] = (p & 3) << 6 | b;
+                groupPos = 0;
+                break;
+        }
+    }
+    if (groupPos == 1)
+        throw Error(`invalid base64 string.`);
+    return bytes.subarray(0, bytePos);
+}
+/**
+ * Encodes a byte array to a base64 string.
+ * Adds padding at the end.
+ * Does not insert newlines.
+ */
+function base64encode(bytes) {
+    let base64 = '', groupPos = 0, // position in base64 group
+    b, // current byte
+    p = 0; // carry over from previous byte
+    for (let i = 0; i < bytes.length; i++) {
+        b = bytes[i];
+        switch (groupPos) {
+            case 0:
+                base64 += encTable[b >> 2];
+                p = (b & 3) << 4;
+                groupPos = 1;
+                break;
+            case 1:
+                base64 += encTable[p | b >> 4];
+                p = (b & 15) << 2;
+                groupPos = 2;
+                break;
+            case 2:
+                base64 += encTable[p | b >> 6];
+                base64 += encTable[b & 63];
+                groupPos = 0;
+                break;
+        }
+    }
+    // padding required?
+    if (groupPos) {
+        base64 += encTable[p];
+        base64 += '=';
+        if (groupPos == 1)
+            base64 += '=';
+    }
+    return base64;
+}
+
+// Copyright (c) 2016, Daniel Wirtz  All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+// * Redistributions of source code must retain the above copyright
+//   notice, this list of conditions and the following disclaimer.
+// * Redistributions in binary form must reproduce the above copyright
+//   notice, this list of conditions and the following disclaimer in the
+//   documentation and/or other materials provided with the distribution.
+// * Neither the name of its author, nor the names of its contributors
+//   may be used to endorse or promote products derived from this software
+//   without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+const fromCharCodes = (chunk) => String.fromCharCode.apply(String, chunk);
+/**
+ * @deprecated This function will no longer be exported with the next major
+ * release, since protobuf-ts has switch to TextDecoder API. If you need this
+ * function, please migrate to @protobufjs/utf8. For context, see
+ * https://github.com/timostamm/protobuf-ts/issues/184
+ *
+ * Reads UTF8 bytes as a string.
+ *
+ * See [protobufjs / utf8](https://github.com/protobufjs/protobuf.js/blob/9893e35b854621cce64af4bf6be2cff4fb892796/lib/utf8/index.js#L40)
+ *
+ * Copyright (c) 2016, Daniel Wirtz
+ */
+function utf8read(bytes) {
+    if (bytes.length < 1)
+        return "";
+    let pos = 0, // position in bytes
+    parts = [], chunk = [], i = 0, // char offset
+    t; // temporary
+    let len = bytes.length;
+    while (pos < len) {
+        t = bytes[pos++];
+        if (t < 128)
+            chunk[i++] = t;
+        else if (t > 191 && t < 224)
+            chunk[i++] = (t & 31) << 6 | bytes[pos++] & 63;
+        else if (t > 239 && t < 365) {
+            t = ((t & 7) << 18 | (bytes[pos++] & 63) << 12 | (bytes[pos++] & 63) << 6 | bytes[pos++] & 63) - 0x10000;
+            chunk[i++] = 0xD800 + (t >> 10);
+            chunk[i++] = 0xDC00 + (t & 1023);
+        }
+        else
+            chunk[i++] = (t & 15) << 12 | (bytes[pos++] & 63) << 6 | bytes[pos++] & 63;
+        if (i > 8191) {
+            parts.push(fromCharCodes(chunk));
+            i = 0;
+        }
+    }
+    if (parts.length) {
+        if (i)
+            parts.push(fromCharCodes(chunk.slice(0, i)));
+        return parts.join("");
+    }
+    return fromCharCodes(chunk.slice(0, i));
+}
+
+/**
+ * This handler implements the default behaviour for unknown fields.
+ * When reading data, unknown fields are stored on the message, in a
+ * symbol property.
+ * When writing data, the symbol property is queried and unknown fields
+ * are serialized into the output again.
+ */
+var UnknownFieldHandler;
+(function (UnknownFieldHandler) {
+    /**
+     * The symbol used to store unknown fields for a message.
+     * The property must conform to `UnknownFieldContainer`.
+     */
+    UnknownFieldHandler.symbol = Symbol.for("protobuf-ts/unknown");
+    /**
+     * Store an unknown field during binary read directly on the message.
+     * This method is compatible with `BinaryReadOptions.readUnknownField`.
+     */
+    UnknownFieldHandler.onRead = (typeName, message, fieldNo, wireType, data) => {
+        let container = is(message) ? message[UnknownFieldHandler.symbol] : message[UnknownFieldHandler.symbol] = [];
+        container.push({ no: fieldNo, wireType, data });
+    };
+    /**
+     * Write unknown fields stored for the message to the writer.
+     * This method is compatible with `BinaryWriteOptions.writeUnknownFields`.
+     */
+    UnknownFieldHandler.onWrite = (typeName, message, writer) => {
+        for (let { no, wireType, data } of UnknownFieldHandler.list(message))
+            writer.tag(no, wireType).raw(data);
+    };
+    /**
+     * List unknown fields stored for the message.
+     * Note that there may be multiples fields with the same number.
+     */
+    UnknownFieldHandler.list = (message, fieldNo) => {
+        if (is(message)) {
+            let all = message[UnknownFieldHandler.symbol];
+            return fieldNo ? all.filter(uf => uf.no == fieldNo) : all;
+        }
+        return [];
+    };
+    /**
+     * Returns the last unknown field by field number.
+     */
+    UnknownFieldHandler.last = (message, fieldNo) => UnknownFieldHandler.list(message, fieldNo).slice(-1)[0];
+    const is = (message) => message && Array.isArray(message[UnknownFieldHandler.symbol]);
+})(UnknownFieldHandler || (UnknownFieldHandler = {}));
+/**
+ * Merges binary write or read options. Later values override earlier values.
+ */
+function mergeBinaryOptions(a, b) {
+    return Object.assign(Object.assign({}, a), b);
+}
+/**
+ * Protobuf binary format wire types.
+ *
+ * A wire type provides just enough information to find the length of the
+ * following value.
+ *
+ * See https://developers.google.com/protocol-buffers/docs/encoding#structure
+ */
+var WireType;
+(function (WireType) {
+    /**
+     * Used for int32, int64, uint32, uint64, sint32, sint64, bool, enum
+     */
+    WireType[WireType["Varint"] = 0] = "Varint";
+    /**
+     * Used for fixed64, sfixed64, double.
+     * Always 8 bytes with little-endian byte order.
+     */
+    WireType[WireType["Bit64"] = 1] = "Bit64";
+    /**
+     * Used for string, bytes, embedded messages, packed repeated fields
+     *
+     * Only repeated numeric types (types which use the varint, 32-bit,
+     * or 64-bit wire types) can be packed. In proto3, such fields are
+     * packed by default.
+     */
+    WireType[WireType["LengthDelimited"] = 2] = "LengthDelimited";
+    /**
+     * Used for groups
+     * @deprecated
+     */
+    WireType[WireType["StartGroup"] = 3] = "StartGroup";
+    /**
+     * Used for groups
+     * @deprecated
+     */
+    WireType[WireType["EndGroup"] = 4] = "EndGroup";
+    /**
+     * Used for fixed32, sfixed32, float.
+     * Always 4 bytes with little-endian byte order.
+     */
+    WireType[WireType["Bit32"] = 5] = "Bit32";
+})(WireType || (WireType = {}));
+
+// Copyright 2008 Google Inc.  All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+// * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+// * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+// * Neither the name of Google Inc. nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+// Code generated by the Protocol Buffer compiler is owned by the owner
+// of the input file used when generating it.  This code is not
+// standalone and requires a support library to be linked with it.  This
+// support library is itself covered by the above license.
+/**
+ * Read a 64 bit varint as two JS numbers.
+ *
+ * Returns tuple:
+ * [0]: low bits
+ * [0]: high bits
+ *
+ * Copyright 2008 Google Inc.  All rights reserved.
+ *
+ * See https://github.com/protocolbuffers/protobuf/blob/8a71927d74a4ce34efe2d8769fda198f52d20d12/js/experimental/runtime/kernel/buffer_decoder.js#L175
+ */
+function varint64read() {
+    let lowBits = 0;
+    let highBits = 0;
+    for (let shift = 0; shift < 28; shift += 7) {
+        let b = this.buf[this.pos++];
+        lowBits |= (b & 0x7F) << shift;
+        if ((b & 0x80) == 0) {
+            this.assertBounds();
+            return [lowBits, highBits];
+        }
+    }
+    let middleByte = this.buf[this.pos++];
+    // last four bits of the first 32 bit number
+    lowBits |= (middleByte & 0x0F) << 28;
+    // 3 upper bits are part of the next 32 bit number
+    highBits = (middleByte & 0x70) >> 4;
+    if ((middleByte & 0x80) == 0) {
+        this.assertBounds();
+        return [lowBits, highBits];
+    }
+    for (let shift = 3; shift <= 31; shift += 7) {
+        let b = this.buf[this.pos++];
+        highBits |= (b & 0x7F) << shift;
+        if ((b & 0x80) == 0) {
+            this.assertBounds();
+            return [lowBits, highBits];
+        }
+    }
+    throw new Error('invalid varint');
+}
+/**
+ * Write a 64 bit varint, given as two JS numbers, to the given bytes array.
+ *
+ * Copyright 2008 Google Inc.  All rights reserved.
+ *
+ * See https://github.com/protocolbuffers/protobuf/blob/8a71927d74a4ce34efe2d8769fda198f52d20d12/js/experimental/runtime/kernel/writer.js#L344
+ */
+function varint64write(lo, hi, bytes) {
+    for (let i = 0; i < 28; i = i + 7) {
+        const shift = lo >>> i;
+        const hasNext = !((shift >>> 7) == 0 && hi == 0);
+        const byte = (hasNext ? shift | 0x80 : shift) & 0xFF;
+        bytes.push(byte);
+        if (!hasNext) {
+            return;
+        }
+    }
+    const splitBits = ((lo >>> 28) & 0x0F) | ((hi & 0x07) << 4);
+    const hasMoreBits = !((hi >> 3) == 0);
+    bytes.push((hasMoreBits ? splitBits | 0x80 : splitBits) & 0xFF);
+    if (!hasMoreBits) {
+        return;
+    }
+    for (let i = 3; i < 31; i = i + 7) {
+        const shift = hi >>> i;
+        const hasNext = !((shift >>> 7) == 0);
+        const byte = (hasNext ? shift | 0x80 : shift) & 0xFF;
+        bytes.push(byte);
+        if (!hasNext) {
+            return;
+        }
+    }
+    bytes.push((hi >>> 31) & 0x01);
+}
+// constants for binary math
+const TWO_PWR_32_DBL$1 = (1 << 16) * (1 << 16);
+/**
+ * Parse decimal string of 64 bit integer value as two JS numbers.
+ *
+ * Returns tuple:
+ * [0]: minus sign?
+ * [1]: low bits
+ * [2]: high bits
+ *
+ * Copyright 2008 Google Inc.
+ */
+function int64fromString(dec) {
+    // Check for minus sign.
+    let minus = dec[0] == '-';
+    if (minus)
+        dec = dec.slice(1);
+    // Work 6 decimal digits at a time, acting like we're converting base 1e6
+    // digits to binary. This is safe to do with floating point math because
+    // Number.isSafeInteger(ALL_32_BITS * 1e6) == true.
+    const base = 1e6;
+    let lowBits = 0;
+    let highBits = 0;
+    function add1e6digit(begin, end) {
+        // Note: Number('') is 0.
+        const digit1e6 = Number(dec.slice(begin, end));
+        highBits *= base;
+        lowBits = lowBits * base + digit1e6;
+        // Carry bits from lowBits to highBits
+        if (lowBits >= TWO_PWR_32_DBL$1) {
+            highBits = highBits + ((lowBits / TWO_PWR_32_DBL$1) | 0);
+            lowBits = lowBits % TWO_PWR_32_DBL$1;
+        }
+    }
+    add1e6digit(-24, -18);
+    add1e6digit(-18, -12);
+    add1e6digit(-12, -6);
+    add1e6digit(-6);
+    return [minus, lowBits, highBits];
+}
+/**
+ * Format 64 bit integer value (as two JS numbers) to decimal string.
+ *
+ * Copyright 2008 Google Inc.
+ */
+function int64toString(bitsLow, bitsHigh) {
+    // Skip the expensive conversion if the number is small enough to use the
+    // built-in conversions.
+    if ((bitsHigh >>> 0) <= 0x1FFFFF) {
+        return '' + (TWO_PWR_32_DBL$1 * bitsHigh + (bitsLow >>> 0));
+    }
+    // What this code is doing is essentially converting the input number from
+    // base-2 to base-1e7, which allows us to represent the 64-bit range with
+    // only 3 (very large) digits. Those digits are then trivial to convert to
+    // a base-10 string.
+    // The magic numbers used here are -
+    // 2^24 = 16777216 = (1,6777216) in base-1e7.
+    // 2^48 = 281474976710656 = (2,8147497,6710656) in base-1e7.
+    // Split 32:32 representation into 16:24:24 representation so our
+    // intermediate digits don't overflow.
+    let low = bitsLow & 0xFFFFFF;
+    let mid = (((bitsLow >>> 24) | (bitsHigh << 8)) >>> 0) & 0xFFFFFF;
+    let high = (bitsHigh >> 16) & 0xFFFF;
+    // Assemble our three base-1e7 digits, ignoring carries. The maximum
+    // value in a digit at this step is representable as a 48-bit integer, which
+    // can be stored in a 64-bit floating point number.
+    let digitA = low + (mid * 6777216) + (high * 6710656);
+    let digitB = mid + (high * 8147497);
+    let digitC = (high * 2);
+    // Apply carries from A to B and from B to C.
+    let base = 10000000;
+    if (digitA >= base) {
+        digitB += Math.floor(digitA / base);
+        digitA %= base;
+    }
+    if (digitB >= base) {
+        digitC += Math.floor(digitB / base);
+        digitB %= base;
+    }
+    // Convert base-1e7 digits to base-10, with optional leading zeroes.
+    function decimalFrom1e7(digit1e7, needLeadingZeros) {
+        let partial = digit1e7 ? String(digit1e7) : '';
+        if (needLeadingZeros) {
+            return '0000000'.slice(partial.length) + partial;
+        }
+        return partial;
+    }
+    return decimalFrom1e7(digitC, /*needLeadingZeros=*/ 0) +
+        decimalFrom1e7(digitB, /*needLeadingZeros=*/ digitC) +
+        // If the final 1e7 digit didn't need leading zeros, we would have
+        // returned via the trivial code path at the top.
+        decimalFrom1e7(digitA, /*needLeadingZeros=*/ 1);
+}
+/**
+ * Write a 32 bit varint, signed or unsigned. Same as `varint64write(0, value, bytes)`
+ *
+ * Copyright 2008 Google Inc.  All rights reserved.
+ *
+ * See https://github.com/protocolbuffers/protobuf/blob/1b18833f4f2a2f681f4e4a25cdf3b0a43115ec26/js/binary/encoder.js#L144
+ */
+function varint32write(value, bytes) {
+    if (value >= 0) {
+        // write value as varint 32
+        while (value > 0x7f) {
+            bytes.push((value & 0x7f) | 0x80);
+            value = value >>> 7;
+        }
+        bytes.push(value);
+    }
+    else {
+        for (let i = 0; i < 9; i++) {
+            bytes.push(value & 127 | 128);
+            value = value >> 7;
+        }
+        bytes.push(1);
+    }
+}
+/**
+ * Read an unsigned 32 bit varint.
+ *
+ * See https://github.com/protocolbuffers/protobuf/blob/8a71927d74a4ce34efe2d8769fda198f52d20d12/js/experimental/runtime/kernel/buffer_decoder.js#L220
+ */
+function varint32read() {
+    let b = this.buf[this.pos++];
+    let result = b & 0x7F;
+    if ((b & 0x80) == 0) {
+        this.assertBounds();
+        return result;
+    }
+    b = this.buf[this.pos++];
+    result |= (b & 0x7F) << 7;
+    if ((b & 0x80) == 0) {
+        this.assertBounds();
+        return result;
+    }
+    b = this.buf[this.pos++];
+    result |= (b & 0x7F) << 14;
+    if ((b & 0x80) == 0) {
+        this.assertBounds();
+        return result;
+    }
+    b = this.buf[this.pos++];
+    result |= (b & 0x7F) << 21;
+    if ((b & 0x80) == 0) {
+        this.assertBounds();
+        return result;
+    }
+    // Extract only last 4 bits
+    b = this.buf[this.pos++];
+    result |= (b & 0x0F) << 28;
+    for (let readBytes = 5; ((b & 0x80) !== 0) && readBytes < 10; readBytes++)
+        b = this.buf[this.pos++];
+    if ((b & 0x80) != 0)
+        throw new Error('invalid varint');
+    this.assertBounds();
+    // Result can have 32 bits, convert it to unsigned
+    return result >>> 0;
+}
+
+let BI;
+function detectBi() {
+    const dv = new DataView(new ArrayBuffer(8));
+    const ok = globalThis.BigInt !== undefined
+        && typeof dv.getBigInt64 === "function"
+        && typeof dv.getBigUint64 === "function"
+        && typeof dv.setBigInt64 === "function"
+        && typeof dv.setBigUint64 === "function";
+    BI = ok ? {
+        MIN: BigInt("-9223372036854775808"),
+        MAX: BigInt("9223372036854775807"),
+        UMIN: BigInt("0"),
+        UMAX: BigInt("18446744073709551615"),
+        C: BigInt,
+        V: dv,
+    } : undefined;
+}
+detectBi();
+function assertBi(bi) {
+    if (!bi)
+        throw new Error("BigInt unavailable, see https://github.com/timostamm/protobuf-ts/blob/v1.0.8/MANUAL.md#bigint-support");
+}
+// used to validate from(string) input (when bigint is unavailable)
+const RE_DECIMAL_STR = /^-?[0-9]+$/;
+// constants for binary math
+const TWO_PWR_32_DBL = 0x100000000;
+const HALF_2_PWR_32 = 0x080000000;
+// base class for PbLong and PbULong provides shared code
+class SharedPbLong {
+    /**
+     * Create a new instance with the given bits.
+     */
+    constructor(lo, hi) {
+        this.lo = lo | 0;
+        this.hi = hi | 0;
+    }
+    /**
+     * Is this instance equal to 0?
+     */
+    isZero() {
+        return this.lo == 0 && this.hi == 0;
+    }
+    /**
+     * Convert to a native number.
+     */
+    toNumber() {
+        let result = this.hi * TWO_PWR_32_DBL + (this.lo >>> 0);
+        if (!Number.isSafeInteger(result))
+            throw new Error("cannot convert to safe number");
+        return result;
+    }
+}
+/**
+ * 64-bit unsigned integer as two 32-bit values.
+ * Converts between `string`, `number` and `bigint` representations.
+ */
+class PbULong extends SharedPbLong {
+    /**
+     * Create instance from a `string`, `number` or `bigint`.
+     */
+    static from(value) {
+        if (BI)
+            // noinspection FallThroughInSwitchStatementJS
+            switch (typeof value) {
+                case "string":
+                    if (value == "0")
+                        return this.ZERO;
+                    if (value == "")
+                        throw new Error('string is no integer');
+                    value = BI.C(value);
+                case "number":
+                    if (value === 0)
+                        return this.ZERO;
+                    value = BI.C(value);
+                case "bigint":
+                    if (!value)
+                        return this.ZERO;
+                    if (value < BI.UMIN)
+                        throw new Error('signed value for ulong');
+                    if (value > BI.UMAX)
+                        throw new Error('ulong too large');
+                    BI.V.setBigUint64(0, value, true);
+                    return new PbULong(BI.V.getInt32(0, true), BI.V.getInt32(4, true));
+            }
+        else
+            switch (typeof value) {
+                case "string":
+                    if (value == "0")
+                        return this.ZERO;
+                    value = value.trim();
+                    if (!RE_DECIMAL_STR.test(value))
+                        throw new Error('string is no integer');
+                    let [minus, lo, hi] = int64fromString(value);
+                    if (minus)
+                        throw new Error('signed value for ulong');
+                    return new PbULong(lo, hi);
+                case "number":
+                    if (value == 0)
+                        return this.ZERO;
+                    if (!Number.isSafeInteger(value))
+                        throw new Error('number is no integer');
+                    if (value < 0)
+                        throw new Error('signed value for ulong');
+                    return new PbULong(value, value / TWO_PWR_32_DBL);
+            }
+        throw new Error('unknown value ' + typeof value);
+    }
+    /**
+     * Convert to decimal string.
+     */
+    toString() {
+        return BI ? this.toBigInt().toString() : int64toString(this.lo, this.hi);
+    }
+    /**
+     * Convert to native bigint.
+     */
+    toBigInt() {
+        assertBi(BI);
+        BI.V.setInt32(0, this.lo, true);
+        BI.V.setInt32(4, this.hi, true);
+        return BI.V.getBigUint64(0, true);
+    }
+}
+/**
+ * ulong 0 singleton.
+ */
+PbULong.ZERO = new PbULong(0, 0);
+/**
+ * 64-bit signed integer as two 32-bit values.
+ * Converts between `string`, `number` and `bigint` representations.
+ */
+class PbLong extends SharedPbLong {
+    /**
+     * Create instance from a `string`, `number` or `bigint`.
+     */
+    static from(value) {
+        if (BI)
+            // noinspection FallThroughInSwitchStatementJS
+            switch (typeof value) {
+                case "string":
+                    if (value == "0")
+                        return this.ZERO;
+                    if (value == "")
+                        throw new Error('string is no integer');
+                    value = BI.C(value);
+                case "number":
+                    if (value === 0)
+                        return this.ZERO;
+                    value = BI.C(value);
+                case "bigint":
+                    if (!value)
+                        return this.ZERO;
+                    if (value < BI.MIN)
+                        throw new Error('signed long too small');
+                    if (value > BI.MAX)
+                        throw new Error('signed long too large');
+                    BI.V.setBigInt64(0, value, true);
+                    return new PbLong(BI.V.getInt32(0, true), BI.V.getInt32(4, true));
+            }
+        else
+            switch (typeof value) {
+                case "string":
+                    if (value == "0")
+                        return this.ZERO;
+                    value = value.trim();
+                    if (!RE_DECIMAL_STR.test(value))
+                        throw new Error('string is no integer');
+                    let [minus, lo, hi] = int64fromString(value);
+                    if (minus) {
+                        if (hi > HALF_2_PWR_32 || (hi == HALF_2_PWR_32 && lo != 0))
+                            throw new Error('signed long too small');
+                    }
+                    else if (hi >= HALF_2_PWR_32)
+                        throw new Error('signed long too large');
+                    let pbl = new PbLong(lo, hi);
+                    return minus ? pbl.negate() : pbl;
+                case "number":
+                    if (value == 0)
+                        return this.ZERO;
+                    if (!Number.isSafeInteger(value))
+                        throw new Error('number is no integer');
+                    return value > 0
+                        ? new PbLong(value, value / TWO_PWR_32_DBL)
+                        : new PbLong(-value, -value / TWO_PWR_32_DBL).negate();
+            }
+        throw new Error('unknown value ' + typeof value);
+    }
+    /**
+     * Do we have a minus sign?
+     */
+    isNegative() {
+        return (this.hi & HALF_2_PWR_32) !== 0;
+    }
+    /**
+     * Negate two's complement.
+     * Invert all the bits and add one to the result.
+     */
+    negate() {
+        let hi = ~this.hi, lo = this.lo;
+        if (lo)
+            lo = ~lo + 1;
+        else
+            hi += 1;
+        return new PbLong(lo, hi);
+    }
+    /**
+     * Convert to decimal string.
+     */
+    toString() {
+        if (BI)
+            return this.toBigInt().toString();
+        if (this.isNegative()) {
+            let n = this.negate();
+            return '-' + int64toString(n.lo, n.hi);
+        }
+        return int64toString(this.lo, this.hi);
+    }
+    /**
+     * Convert to native bigint.
+     */
+    toBigInt() {
+        assertBi(BI);
+        BI.V.setInt32(0, this.lo, true);
+        BI.V.setInt32(4, this.hi, true);
+        return BI.V.getBigInt64(0, true);
+    }
+}
+/**
+ * long 0 singleton.
+ */
+PbLong.ZERO = new PbLong(0, 0);
+
+const defaultsRead$1 = {
+    readUnknownField: true,
+    readerFactory: bytes => new BinaryReader(bytes),
+};
+/**
+ * Make options for reading binary data form partial options.
+ */
+function binaryReadOptions(options) {
+    return options ? Object.assign(Object.assign({}, defaultsRead$1), options) : defaultsRead$1;
+}
+class BinaryReader {
+    constructor(buf, textDecoder) {
+        this.varint64 = varint64read; // dirty cast for `this`
+        /**
+         * Read a `uint32` field, an unsigned 32 bit varint.
+         */
+        this.uint32 = varint32read; // dirty cast for `this` and access to protected `buf`
+        this.buf = buf;
+        this.len = buf.length;
+        this.pos = 0;
+        this.view = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
+        this.textDecoder = textDecoder !== null && textDecoder !== undefined ? textDecoder : new TextDecoder("utf-8", {
+            fatal: true,
+            ignoreBOM: true,
+        });
+    }
+    /**
+     * Reads a tag - field number and wire type.
+     */
+    tag() {
+        let tag = this.uint32(), fieldNo = tag >>> 3, wireType = tag & 7;
+        if (fieldNo <= 0 || wireType < 0 || wireType > 5)
+            throw new Error("illegal tag: field no " + fieldNo + " wire type " + wireType);
+        return [fieldNo, wireType];
+    }
+    /**
+     * Skip one element on the wire and return the skipped data.
+     * Supports WireType.StartGroup since v2.0.0-alpha.23.
+     */
+    skip(wireType) {
+        let start = this.pos;
+        // noinspection FallThroughInSwitchStatementJS
+        switch (wireType) {
+            case WireType.Varint:
+                while (this.buf[this.pos++] & 0x80) {
+                    // ignore
+                }
+                break;
+            case WireType.Bit64:
+                this.pos += 4;
+            case WireType.Bit32:
+                this.pos += 4;
+                break;
+            case WireType.LengthDelimited:
+                let len = this.uint32();
+                this.pos += len;
+                break;
+            case WireType.StartGroup:
+                // From descriptor.proto: Group type is deprecated, not supported in proto3.
+                // But we must still be able to parse and treat as unknown.
+                let t;
+                while ((t = this.tag()[1]) !== WireType.EndGroup) {
+                    this.skip(t);
+                }
+                break;
+            default:
+                throw new Error("cant skip wire type " + wireType);
+        }
+        this.assertBounds();
+        return this.buf.subarray(start, this.pos);
+    }
+    /**
+     * Throws error if position in byte array is out of range.
+     */
+    assertBounds() {
+        if (this.pos > this.len)
+            throw new RangeError("premature EOF");
+    }
+    /**
+     * Read a `int32` field, a signed 32 bit varint.
+     */
+    int32() {
+        return this.uint32() | 0;
+    }
+    /**
+     * Read a `sint32` field, a signed, zigzag-encoded 32-bit varint.
+     */
+    sint32() {
+        let zze = this.uint32();
+        // decode zigzag
+        return (zze >>> 1) ^ -(zze & 1);
+    }
+    /**
+     * Read a `int64` field, a signed 64-bit varint.
+     */
+    int64() {
+        return new PbLong(...this.varint64());
+    }
+    /**
+     * Read a `uint64` field, an unsigned 64-bit varint.
+     */
+    uint64() {
+        return new PbULong(...this.varint64());
+    }
+    /**
+     * Read a `sint64` field, a signed, zig-zag-encoded 64-bit varint.
+     */
+    sint64() {
+        let [lo, hi] = this.varint64();
+        // decode zig zag
+        let s = -(lo & 1);
+        lo = ((lo >>> 1 | (hi & 1) << 31) ^ s);
+        hi = (hi >>> 1 ^ s);
+        return new PbLong(lo, hi);
+    }
+    /**
+     * Read a `bool` field, a variant.
+     */
+    bool() {
+        let [lo, hi] = this.varint64();
+        return lo !== 0 || hi !== 0;
+    }
+    /**
+     * Read a `fixed32` field, an unsigned, fixed-length 32-bit integer.
+     */
+    fixed32() {
+        return this.view.getUint32((this.pos += 4) - 4, true);
+    }
+    /**
+     * Read a `sfixed32` field, a signed, fixed-length 32-bit integer.
+     */
+    sfixed32() {
+        return this.view.getInt32((this.pos += 4) - 4, true);
+    }
+    /**
+     * Read a `fixed64` field, an unsigned, fixed-length 64 bit integer.
+     */
+    fixed64() {
+        return new PbULong(this.sfixed32(), this.sfixed32());
+    }
+    /**
+     * Read a `fixed64` field, a signed, fixed-length 64-bit integer.
+     */
+    sfixed64() {
+        return new PbLong(this.sfixed32(), this.sfixed32());
+    }
+    /**
+     * Read a `float` field, 32-bit floating point number.
+     */
+    float() {
+        return this.view.getFloat32((this.pos += 4) - 4, true);
+    }
+    /**
+     * Read a `double` field, a 64-bit floating point number.
+     */
+    double() {
+        return this.view.getFloat64((this.pos += 8) - 8, true);
+    }
+    /**
+     * Read a `bytes` field, length-delimited arbitrary data.
+     */
+    bytes() {
+        let len = this.uint32();
+        let start = this.pos;
+        this.pos += len;
+        this.assertBounds();
+        return this.buf.subarray(start, start + len);
+    }
+    /**
+     * Read a `string` field, length-delimited data converted to UTF-8 text.
+     */
+    string() {
+        return this.textDecoder.decode(this.bytes());
+    }
+}
+
+/**
+ * assert that condition is true or throw error (with message)
+ */
+function assert(condition, msg) {
+    if (!condition) {
+        throw new Error(msg);
+    }
+}
+/**
+ * assert that value cannot exist = type `never`. throw runtime error if it does.
+ */
+function assertNever(value, msg) {
+    throw new Error(msg !== null && msg !== undefined ? msg : 'Unexpected object: ' + value);
+}
+const FLOAT32_MAX = 3.4028234663852886e+38, FLOAT32_MIN = -34028234663852886e22, UINT32_MAX = 0xFFFFFFFF, INT32_MAX = 0X7FFFFFFF, INT32_MIN = -2147483648;
+function assertInt32(arg) {
+    if (typeof arg !== "number")
+        throw new Error('invalid int 32: ' + typeof arg);
+    if (!Number.isInteger(arg) || arg > INT32_MAX || arg < INT32_MIN)
+        throw new Error('invalid int 32: ' + arg);
+}
+function assertUInt32(arg) {
+    if (typeof arg !== "number")
+        throw new Error('invalid uint 32: ' + typeof arg);
+    if (!Number.isInteger(arg) || arg > UINT32_MAX || arg < 0)
+        throw new Error('invalid uint 32: ' + arg);
+}
+function assertFloat32(arg) {
+    if (typeof arg !== "number")
+        throw new Error('invalid float 32: ' + typeof arg);
+    if (!Number.isFinite(arg))
+        return;
+    if (arg > FLOAT32_MAX || arg < FLOAT32_MIN)
+        throw new Error('invalid float 32: ' + arg);
+}
+
+const defaultsWrite$1 = {
+    writeUnknownFields: true,
+    writerFactory: () => new BinaryWriter(),
+};
+/**
+ * Make options for writing binary data form partial options.
+ */
+function binaryWriteOptions(options) {
+    return options ? Object.assign(Object.assign({}, defaultsWrite$1), options) : defaultsWrite$1;
+}
+class BinaryWriter {
+    constructor(textEncoder) {
+        /**
+         * Previous fork states.
+         */
+        this.stack = [];
+        this.textEncoder = textEncoder !== null && textEncoder !== undefined ? textEncoder : new TextEncoder();
+        this.chunks = [];
+        this.buf = [];
+    }
+    /**
+     * Return all bytes written and reset this writer.
+     */
+    finish() {
+        this.chunks.push(new Uint8Array(this.buf)); // flush the buffer
+        let len = 0;
+        for (let i = 0; i < this.chunks.length; i++)
+            len += this.chunks[i].length;
+        let bytes = new Uint8Array(len);
+        let offset = 0;
+        for (let i = 0; i < this.chunks.length; i++) {
+            bytes.set(this.chunks[i], offset);
+            offset += this.chunks[i].length;
+        }
+        this.chunks = [];
+        return bytes;
+    }
+    /**
+     * Start a new fork for length-delimited data like a message
+     * or a packed repeated field.
+     *
+     * Must be joined later with `join()`.
+     */
+    fork() {
+        this.stack.push({ chunks: this.chunks, buf: this.buf });
+        this.chunks = [];
+        this.buf = [];
+        return this;
+    }
+    /**
+     * Join the last fork. Write its length and bytes, then
+     * return to the previous state.
+     */
+    join() {
+        // get chunk of fork
+        let chunk = this.finish();
+        // restore previous state
+        let prev = this.stack.pop();
+        if (!prev)
+            throw new Error('invalid state, fork stack empty');
+        this.chunks = prev.chunks;
+        this.buf = prev.buf;
+        // write length of chunk as varint
+        this.uint32(chunk.byteLength);
+        return this.raw(chunk);
+    }
+    /**
+     * Writes a tag (field number and wire type).
+     *
+     * Equivalent to `uint32( (fieldNo << 3 | type) >>> 0 )`.
+     *
+     * Generated code should compute the tag ahead of time and call `uint32()`.
+     */
+    tag(fieldNo, type) {
+        return this.uint32((fieldNo << 3 | type) >>> 0);
+    }
+    /**
+     * Write a chunk of raw bytes.
+     */
+    raw(chunk) {
+        if (this.buf.length) {
+            this.chunks.push(new Uint8Array(this.buf));
+            this.buf = [];
+        }
+        this.chunks.push(chunk);
+        return this;
+    }
+    /**
+     * Write a `uint32` value, an unsigned 32 bit varint.
+     */
+    uint32(value) {
+        assertUInt32(value);
+        // write value as varint 32, inlined for speed
+        while (value > 0x7f) {
+            this.buf.push((value & 0x7f) | 0x80);
+            value = value >>> 7;
+        }
+        this.buf.push(value);
+        return this;
+    }
+    /**
+     * Write a `int32` value, a signed 32 bit varint.
+     */
+    int32(value) {
+        assertInt32(value);
+        varint32write(value, this.buf);
+        return this;
+    }
+    /**
+     * Write a `bool` value, a variant.
+     */
+    bool(value) {
+        this.buf.push(value ? 1 : 0);
+        return this;
+    }
+    /**
+     * Write a `bytes` value, length-delimited arbitrary data.
+     */
+    bytes(value) {
+        this.uint32(value.byteLength); // write length of chunk as varint
+        return this.raw(value);
+    }
+    /**
+     * Write a `string` value, length-delimited data converted to UTF-8 text.
+     */
+    string(value) {
+        let chunk = this.textEncoder.encode(value);
+        this.uint32(chunk.byteLength); // write length of chunk as varint
+        return this.raw(chunk);
+    }
+    /**
+     * Write a `float` value, 32-bit floating point number.
+     */
+    float(value) {
+        assertFloat32(value);
+        let chunk = new Uint8Array(4);
+        new DataView(chunk.buffer).setFloat32(0, value, true);
+        return this.raw(chunk);
+    }
+    /**
+     * Write a `double` value, a 64-bit floating point number.
+     */
+    double(value) {
+        let chunk = new Uint8Array(8);
+        new DataView(chunk.buffer).setFloat64(0, value, true);
+        return this.raw(chunk);
+    }
+    /**
+     * Write a `fixed32` value, an unsigned, fixed-length 32-bit integer.
+     */
+    fixed32(value) {
+        assertUInt32(value);
+        let chunk = new Uint8Array(4);
+        new DataView(chunk.buffer).setUint32(0, value, true);
+        return this.raw(chunk);
+    }
+    /**
+     * Write a `sfixed32` value, a signed, fixed-length 32-bit integer.
+     */
+    sfixed32(value) {
+        assertInt32(value);
+        let chunk = new Uint8Array(4);
+        new DataView(chunk.buffer).setInt32(0, value, true);
+        return this.raw(chunk);
+    }
+    /**
+     * Write a `sint32` value, a signed, zigzag-encoded 32-bit varint.
+     */
+    sint32(value) {
+        assertInt32(value);
+        // zigzag encode
+        value = ((value << 1) ^ (value >> 31)) >>> 0;
+        varint32write(value, this.buf);
+        return this;
+    }
+    /**
+     * Write a `fixed64` value, a signed, fixed-length 64-bit integer.
+     */
+    sfixed64(value) {
+        let chunk = new Uint8Array(8);
+        let view = new DataView(chunk.buffer);
+        let long = PbLong.from(value);
+        view.setInt32(0, long.lo, true);
+        view.setInt32(4, long.hi, true);
+        return this.raw(chunk);
+    }
+    /**
+     * Write a `fixed64` value, an unsigned, fixed-length 64 bit integer.
+     */
+    fixed64(value) {
+        let chunk = new Uint8Array(8);
+        let view = new DataView(chunk.buffer);
+        let long = PbULong.from(value);
+        view.setInt32(0, long.lo, true);
+        view.setInt32(4, long.hi, true);
+        return this.raw(chunk);
+    }
+    /**
+     * Write a `int64` value, a signed 64-bit varint.
+     */
+    int64(value) {
+        let long = PbLong.from(value);
+        varint64write(long.lo, long.hi, this.buf);
+        return this;
+    }
+    /**
+     * Write a `sint64` value, a signed, zig-zag-encoded 64-bit varint.
+     */
+    sint64(value) {
+        let long = PbLong.from(value), 
+        // zigzag encode
+        sign = long.hi >> 31, lo = (long.lo << 1) ^ sign, hi = ((long.hi << 1) | (long.lo >>> 31)) ^ sign;
+        varint64write(lo, hi, this.buf);
+        return this;
+    }
+    /**
+     * Write a `uint64` value, an unsigned 64-bit varint.
+     */
+    uint64(value) {
+        let long = PbULong.from(value);
+        varint64write(long.lo, long.hi, this.buf);
+        return this;
+    }
+}
+
+const defaultsWrite = {
+    emitDefaultValues: false,
+    enumAsInteger: false,
+    useProtoFieldName: false,
+    prettySpaces: 0,
+}, defaultsRead = {
+    ignoreUnknownFields: false,
+};
+/**
+ * Make options for reading JSON data from partial options.
+ */
+function jsonReadOptions(options) {
+    return options ? Object.assign(Object.assign({}, defaultsRead), options) : defaultsRead;
+}
+/**
+ * Make options for writing JSON data from partial options.
+ */
+function jsonWriteOptions(options) {
+    return options ? Object.assign(Object.assign({}, defaultsWrite), options) : defaultsWrite;
+}
+/**
+ * Merges JSON write or read options. Later values override earlier values. Type registries are merged.
+ */
+function mergeJsonOptions(a, b) {
+    var _a, _b;
+    let c = Object.assign(Object.assign({}, a), b);
+    c.typeRegistry = [...((_a = a === null || a === undefined ? undefined : a.typeRegistry) !== null && _a !== undefined ? _a : []), ...((_b = b === null || b === undefined ? undefined : b.typeRegistry) !== null && _b !== undefined ? _b : [])];
+    return c;
+}
+
+/**
+ * The symbol used as a key on message objects to store the message type.
+ *
+ * Note that this is an experimental feature - it is here to stay, but
+ * implementation details may change without notice.
+ */
+const MESSAGE_TYPE = Symbol.for("protobuf-ts/message-type");
+
+/**
+ * Converts snake_case to lowerCamelCase.
+ *
+ * Should behave like protoc:
+ * https://github.com/protocolbuffers/protobuf/blob/e8ae137c96444ea313485ed1118c5e43b2099cf1/src/google/protobuf/compiler/java/java_helpers.cc#L118
+ */
+function lowerCamelCase(snakeCase) {
+    let capNext = false;
+    const sb = [];
+    for (let i = 0; i < snakeCase.length; i++) {
+        let next = snakeCase.charAt(i);
+        if (next == '_') {
+            capNext = true;
+        }
+        else if (/\d/.test(next)) {
+            sb.push(next);
+            capNext = true;
+        }
+        else if (capNext) {
+            sb.push(next.toUpperCase());
+            capNext = false;
+        }
+        else if (i == 0) {
+            sb.push(next.toLowerCase());
+        }
+        else {
+            sb.push(next);
+        }
+    }
+    return sb.join('');
+}
+
+/**
+ * Scalar value types. This is a subset of field types declared by protobuf
+ * enum google.protobuf.FieldDescriptorProto.Type The types GROUP and MESSAGE
+ * are omitted, but the numerical values are identical.
+ */
+var ScalarType;
+(function (ScalarType) {
+    // 0 is reserved for errors.
+    // Order is weird for historical reasons.
+    ScalarType[ScalarType["DOUBLE"] = 1] = "DOUBLE";
+    ScalarType[ScalarType["FLOAT"] = 2] = "FLOAT";
+    // Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT64 if
+    // negative values are likely.
+    ScalarType[ScalarType["INT64"] = 3] = "INT64";
+    ScalarType[ScalarType["UINT64"] = 4] = "UINT64";
+    // Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT32 if
+    // negative values are likely.
+    ScalarType[ScalarType["INT32"] = 5] = "INT32";
+    ScalarType[ScalarType["FIXED64"] = 6] = "FIXED64";
+    ScalarType[ScalarType["FIXED32"] = 7] = "FIXED32";
+    ScalarType[ScalarType["BOOL"] = 8] = "BOOL";
+    ScalarType[ScalarType["STRING"] = 9] = "STRING";
+    // Tag-delimited aggregate.
+    // Group type is deprecated and not supported in proto3. However, Proto3
+    // implementations should still be able to parse the group wire format and
+    // treat group fields as unknown fields.
+    // TYPE_GROUP = 10,
+    // TYPE_MESSAGE = 11,  // Length-delimited aggregate.
+    // New in version 2.
+    ScalarType[ScalarType["BYTES"] = 12] = "BYTES";
+    ScalarType[ScalarType["UINT32"] = 13] = "UINT32";
+    // TYPE_ENUM = 14,
+    ScalarType[ScalarType["SFIXED32"] = 15] = "SFIXED32";
+    ScalarType[ScalarType["SFIXED64"] = 16] = "SFIXED64";
+    ScalarType[ScalarType["SINT32"] = 17] = "SINT32";
+    ScalarType[ScalarType["SINT64"] = 18] = "SINT64";
+})(ScalarType || (ScalarType = {}));
+/**
+ * JavaScript representation of 64 bit integral types. Equivalent to the
+ * field option "jstype".
+ *
+ * By default, protobuf-ts represents 64 bit types as `bigint`.
+ *
+ * You can change the default behaviour by enabling the plugin parameter
+ * `long_type_string`, which will represent 64 bit types as `string`.
+ *
+ * Alternatively, you can change the behaviour for individual fields
+ * with the field option "jstype":
+ *
+ * ```protobuf
+ * uint64 my_field = 1 [jstype = JS_STRING];
+ * uint64 other_field = 2 [jstype = JS_NUMBER];
+ * ```
+ */
+var LongType;
+(function (LongType) {
+    /**
+     * Use JavaScript `bigint`.
+     *
+     * Field option `[jstype = JS_NORMAL]`.
+     */
+    LongType[LongType["BIGINT"] = 0] = "BIGINT";
+    /**
+     * Use JavaScript `string`.
+     *
+     * Field option `[jstype = JS_STRING]`.
+     */
+    LongType[LongType["STRING"] = 1] = "STRING";
+    /**
+     * Use JavaScript `number`.
+     *
+     * Large values will loose precision.
+     *
+     * Field option `[jstype = JS_NUMBER]`.
+     */
+    LongType[LongType["NUMBER"] = 2] = "NUMBER";
+})(LongType || (LongType = {}));
+/**
+ * Protobuf 2.1.0 introduced packed repeated fields.
+ * Setting the field option `[packed = true]` enables packing.
+ *
+ * In proto3, all repeated fields are packed by default.
+ * Setting the field option `[packed = false]` disables packing.
+ *
+ * Packed repeated fields are encoded with a single tag,
+ * then a length-delimiter, then the element values.
+ *
+ * Unpacked repeated fields are encoded with a tag and
+ * value for each element.
+ *
+ * `bytes` and `string` cannot be packed.
+ */
+var RepeatType;
+(function (RepeatType) {
+    /**
+     * The field is not repeated.
+     */
+    RepeatType[RepeatType["NO"] = 0] = "NO";
+    /**
+     * The field is repeated and should be packed.
+     * Invalid for `bytes` and `string`, they cannot be packed.
+     */
+    RepeatType[RepeatType["PACKED"] = 1] = "PACKED";
+    /**
+     * The field is repeated but should not be packed.
+     * The only valid repeat type for repeated `bytes` and `string`.
+     */
+    RepeatType[RepeatType["UNPACKED"] = 2] = "UNPACKED";
+})(RepeatType || (RepeatType = {}));
+/**
+ * Turns PartialFieldInfo into FieldInfo.
+ */
+function normalizeFieldInfo(field) {
+    var _a, _b, _c, _d;
+    field.localName = (_a = field.localName) !== null && _a !== undefined ? _a : lowerCamelCase(field.name);
+    field.jsonName = (_b = field.jsonName) !== null && _b !== undefined ? _b : lowerCamelCase(field.name);
+    field.repeat = (_c = field.repeat) !== null && _c !== undefined ? _c : RepeatType.NO;
+    field.opt = (_d = field.opt) !== null && _d !== undefined ? _d : (field.repeat ? false : field.oneof ? false : field.kind == "message");
+    return field;
+}
+/**
+ * Read custom field options from a generated message type.
+ *
+ * @deprecated use readFieldOption()
+ */
+function readFieldOptions(messageType, fieldName, extensionName, extensionType) {
+    var _a;
+    const options = (_a = messageType.fields.find((m, i) => m.localName == fieldName || i == fieldName)) === null || _a === undefined ? undefined : _a.options;
+    return options && options[extensionName] ? extensionType.fromJson(options[extensionName]) : undefined;
+}
+function readFieldOption(messageType, fieldName, extensionName, extensionType) {
+    var _a;
+    const options = (_a = messageType.fields.find((m, i) => m.localName == fieldName || i == fieldName)) === null || _a === undefined ? undefined : _a.options;
+    if (!options) {
+        return undefined;
+    }
+    const optionVal = options[extensionName];
+    if (optionVal === undefined) {
+        return optionVal;
+    }
+    return extensionType ? extensionType.fromJson(optionVal) : optionVal;
+}
+function readMessageOption(messageType, extensionName, extensionType) {
+    const options = messageType.options;
+    const optionVal = options[extensionName];
+    if (optionVal === undefined) {
+        return optionVal;
+    }
+    return extensionType ? extensionType.fromJson(optionVal) : optionVal;
+}
+
+/**
+ * Is the given value a valid oneof group?
+ *
+ * We represent protobuf `oneof` as algebraic data types (ADT) in generated
+ * code. But when working with messages of unknown type, the ADT does not
+ * help us.
+ *
+ * This type guard checks if the given object adheres to the ADT rules, which
+ * are as follows:
+ *
+ * 1) Must be an object.
+ *
+ * 2) Must have a "oneofKind" discriminator property.
+ *
+ * 3) If "oneofKind" is `undefined`, no member field is selected. The object
+ * must not have any other properties.
+ *
+ * 4) If "oneofKind" is a `string`, the member field with this name is
+ * selected.
+ *
+ * 5) If a member field is selected, the object must have a second property
+ * with this name. The property must not be `undefined`.
+ *
+ * 6) No extra properties are allowed. The object has either one property
+ * (no selection) or two properties (selection).
+ *
+ */
+function isOneofGroup(any) {
+    if (typeof any != 'object' || any === null || !any.hasOwnProperty('oneofKind')) {
+        return false;
+    }
+    switch (typeof any.oneofKind) {
+        case "string":
+            if (any[any.oneofKind] === undefined)
+                return false;
+            return Object.keys(any).length == 2;
+        case "undefined":
+            return Object.keys(any).length == 1;
+        default:
+            return false;
+    }
+}
+/**
+ * Returns the value of the given field in a oneof group.
+ */
+function getOneofValue(oneof, kind) {
+    return oneof[kind];
+}
+function setOneofValue(oneof, kind, value) {
+    if (oneof.oneofKind !== undefined) {
+        delete oneof[oneof.oneofKind];
+    }
+    oneof.oneofKind = kind;
+    if (value !== undefined) {
+        oneof[kind] = value;
+    }
+}
+/**
+ * Removes the selected field in a oneof group.
+ *
+ * Note that the recommended way to modify a oneof group is to set
+ * a new object:
+ *
+ * ```ts
+ * message.result = { oneofKind: undefined };
+ * ```
+ */
+function clearOneofValue(oneof) {
+    if (oneof.oneofKind !== undefined) {
+        delete oneof[oneof.oneofKind];
+    }
+    oneof.oneofKind = undefined;
+}
+/**
+ * Returns the selected value of the given oneof group.
+ *
+ * Not that the recommended way to access a oneof group is to check
+ * the "oneofKind" property and let TypeScript narrow down the union
+ * type for you:
+ *
+ * ```ts
+ * if (message.result.oneofKind === "error") {
+ *   message.result.error; // string
+ * }
+ * ```
+ *
+ * In the rare case you just need the value, and do not care about
+ * which protobuf field is selected, you can use this function
+ * for convenience.
+ */
+function getSelectedOneofValue(oneof) {
+    if (oneof.oneofKind === undefined) {
+        return undefined;
+    }
+    return oneof[oneof.oneofKind];
+}
+
+// noinspection JSMethodCanBeStatic
+class ReflectionTypeCheck {
+    constructor(info) {
+        var _a;
+        this.fields = (_a = info.fields) !== null && _a !== undefined ? _a : [];
+    }
+    prepare() {
+        if (this.data)
+            return;
+        const req = [], known = [], oneofs = [];
+        for (let field of this.fields) {
+            if (field.oneof) {
+                if (!oneofs.includes(field.oneof)) {
+                    oneofs.push(field.oneof);
+                    req.push(field.oneof);
+                    known.push(field.oneof);
+                }
+            }
+            else {
+                known.push(field.localName);
+                switch (field.kind) {
+                    case "scalar":
+                    case "enum":
+                        if (!field.opt || field.repeat)
+                            req.push(field.localName);
+                        break;
+                    case "message":
+                        if (field.repeat)
+                            req.push(field.localName);
+                        break;
+                    case "map":
+                        req.push(field.localName);
+                        break;
+                }
+            }
+        }
+        this.data = { req, known, oneofs: Object.values(oneofs) };
+    }
+    /**
+     * Is the argument a valid message as specified by the
+     * reflection information?
+     *
+     * Checks all field types recursively. The `depth`
+     * specifies how deep into the structure the check will be.
+     *
+     * With a depth of 0, only the presence of fields
+     * is checked.
+     *
+     * With a depth of 1 or more, the field types are checked.
+     *
+     * With a depth of 2 or more, the members of map, repeated
+     * and message fields are checked.
+     *
+     * Message fields will be checked recursively with depth - 1.
+     *
+     * The number of map entries / repeated values being checked
+     * is < depth.
+     */
+    is(message, depth, allowExcessProperties = false) {
+        if (depth < 0)
+            return true;
+        if (message === null || message === undefined || typeof message != 'object')
+            return false;
+        this.prepare();
+        let keys = Object.keys(message), data = this.data;
+        // if a required field is missing in arg, this cannot be a T
+        if (keys.length < data.req.length || data.req.some(n => !keys.includes(n)))
+            return false;
+        if (!allowExcessProperties) {
+            // if the arg contains a key we dont know, this is not a literal T
+            if (keys.some(k => !data.known.includes(k)))
+                return false;
+        }
+        // "With a depth of 0, only the presence and absence of fields is checked."
+        // "With a depth of 1 or more, the field types are checked."
+        if (depth < 1) {
+            return true;
+        }
+        // check oneof group
+        for (const name of data.oneofs) {
+            const group = message[name];
+            if (!isOneofGroup(group))
+                return false;
+            if (group.oneofKind === undefined)
+                continue;
+            const field = this.fields.find(f => f.localName === group.oneofKind);
+            if (!field)
+                return false; // we found no field, but have a kind, something is wrong
+            if (!this.field(group[group.oneofKind], field, allowExcessProperties, depth))
+                return false;
+        }
+        // check types
+        for (const field of this.fields) {
+            if (field.oneof !== undefined)
+                continue;
+            if (!this.field(message[field.localName], field, allowExcessProperties, depth))
+                return false;
+        }
+        return true;
+    }
+    field(arg, field, allowExcessProperties, depth) {
+        let repeated = field.repeat;
+        switch (field.kind) {
+            case "scalar":
+                if (arg === undefined)
+                    return field.opt;
+                if (repeated)
+                    return this.scalars(arg, field.T, depth, field.L);
+                return this.scalar(arg, field.T, field.L);
+            case "enum":
+                if (arg === undefined)
+                    return field.opt;
+                if (repeated)
+                    return this.scalars(arg, ScalarType.INT32, depth);
+                return this.scalar(arg, ScalarType.INT32);
+            case "message":
+                if (arg === undefined)
+                    return true;
+                if (repeated)
+                    return this.messages(arg, field.T(), allowExcessProperties, depth);
+                return this.message(arg, field.T(), allowExcessProperties, depth);
+            case "map":
+                if (typeof arg != 'object' || arg === null)
+                    return false;
+                if (depth < 2)
+                    return true;
+                if (!this.mapKeys(arg, field.K, depth))
+                    return false;
+                switch (field.V.kind) {
+                    case "scalar":
+                        return this.scalars(Object.values(arg), field.V.T, depth, field.V.L);
+                    case "enum":
+                        return this.scalars(Object.values(arg), ScalarType.INT32, depth);
+                    case "message":
+                        return this.messages(Object.values(arg), field.V.T(), allowExcessProperties, depth);
+                }
+                break;
+        }
+        return true;
+    }
+    message(arg, type, allowExcessProperties, depth) {
+        if (allowExcessProperties) {
+            return type.isAssignable(arg, depth);
+        }
+        return type.is(arg, depth);
+    }
+    messages(arg, type, allowExcessProperties, depth) {
+        if (!Array.isArray(arg))
+            return false;
+        if (depth < 2)
+            return true;
+        if (allowExcessProperties) {
+            for (let i = 0; i < arg.length && i < depth; i++)
+                if (!type.isAssignable(arg[i], depth - 1))
+                    return false;
+        }
+        else {
+            for (let i = 0; i < arg.length && i < depth; i++)
+                if (!type.is(arg[i], depth - 1))
+                    return false;
+        }
+        return true;
+    }
+    scalar(arg, type, longType) {
+        let argType = typeof arg;
+        switch (type) {
+            case ScalarType.UINT64:
+            case ScalarType.FIXED64:
+            case ScalarType.INT64:
+            case ScalarType.SFIXED64:
+            case ScalarType.SINT64:
+                switch (longType) {
+                    case LongType.BIGINT:
+                        return argType == "bigint";
+                    case LongType.NUMBER:
+                        return argType == "number" && !isNaN(arg);
+                    default:
+                        return argType == "string";
+                }
+            case ScalarType.BOOL:
+                return argType == 'boolean';
+            case ScalarType.STRING:
+                return argType == 'string';
+            case ScalarType.BYTES:
+                return arg instanceof Uint8Array;
+            case ScalarType.DOUBLE:
+            case ScalarType.FLOAT:
+                return argType == 'number' && !isNaN(arg);
+            default:
+                // case ScalarType.UINT32:
+                // case ScalarType.FIXED32:
+                // case ScalarType.INT32:
+                // case ScalarType.SINT32:
+                // case ScalarType.SFIXED32:
+                return argType == 'number' && Number.isInteger(arg);
+        }
+    }
+    scalars(arg, type, depth, longType) {
+        if (!Array.isArray(arg))
+            return false;
+        if (depth < 2)
+            return true;
+        if (Array.isArray(arg))
+            for (let i = 0; i < arg.length && i < depth; i++)
+                if (!this.scalar(arg[i], type, longType))
+                    return false;
+        return true;
+    }
+    mapKeys(map, type, depth) {
+        let keys = Object.keys(map);
+        switch (type) {
+            case ScalarType.INT32:
+            case ScalarType.FIXED32:
+            case ScalarType.SFIXED32:
+            case ScalarType.SINT32:
+            case ScalarType.UINT32:
+                return this.scalars(keys.slice(0, depth).map(k => parseInt(k)), type, depth);
+            case ScalarType.BOOL:
+                return this.scalars(keys.slice(0, depth).map(k => k == 'true' ? true : k == 'false' ? false : k), type, depth);
+            default:
+                return this.scalars(keys, type, depth, LongType.STRING);
+        }
+    }
+}
+
+/**
+ * Utility method to convert a PbLong or PbUlong to a JavaScript
+ * representation during runtime.
+ *
+ * Works with generated field information, `undefined` is equivalent
+ * to `STRING`.
+ */
+function reflectionLongConvert(long, type) {
+    switch (type) {
+        case LongType.BIGINT:
+            return long.toBigInt();
+        case LongType.NUMBER:
+            return long.toNumber();
+        default:
+            // case undefined:
+            // case LongType.STRING:
+            return long.toString();
+    }
+}
+
+/**
+ * Reads proto3 messages in canonical JSON format using reflection information.
+ *
+ * https://developers.google.com/protocol-buffers/docs/proto3#json
+ */
+class ReflectionJsonReader {
+    constructor(info) {
+        this.info = info;
+    }
+    prepare() {
+        var _a;
+        if (this.fMap === undefined) {
+            this.fMap = {};
+            const fieldsInput = (_a = this.info.fields) !== null && _a !== undefined ? _a : [];
+            for (const field of fieldsInput) {
+                this.fMap[field.name] = field;
+                this.fMap[field.jsonName] = field;
+                this.fMap[field.localName] = field;
+            }
+        }
+    }
+    // Cannot parse JSON <type of jsonValue> for <type name>#<fieldName>.
+    assert(condition, fieldName, jsonValue) {
+        if (!condition) {
+            let what = typeofJsonValue(jsonValue);
+            if (what == "number" || what == "boolean")
+                what = jsonValue.toString();
+            throw new Error(`Cannot parse JSON ${what} for ${this.info.typeName}#${fieldName}`);
+        }
+    }
+    /**
+     * Reads a message from canonical JSON format into the target message.
+     *
+     * Repeated fields are appended. Map entries are added, overwriting
+     * existing keys.
+     *
+     * If a message field is already present, it will be merged with the
+     * new data.
+     */
+    read(input, message, options) {
+        this.prepare();
+        const oneofsHandled = [];
+        for (const [jsonKey, jsonValue] of Object.entries(input)) {
+            const field = this.fMap[jsonKey];
+            if (!field) {
+                if (!options.ignoreUnknownFields)
+                    throw new Error(`Found unknown field while reading ${this.info.typeName} from JSON format. JSON key: ${jsonKey}`);
+                continue;
+            }
+            const localName = field.localName;
+            // handle oneof ADT
+            let target; // this will be the target for the field value, whether it is member of a oneof or not
+            if (field.oneof) {
+                if (jsonValue === null && (field.kind !== 'enum' || field.T()[0] !== 'google.protobuf.NullValue')) {
+                    continue;
+                }
+                // since json objects are unordered by specification, it is not possible to take the last of multiple oneofs
+                if (oneofsHandled.includes(field.oneof))
+                    throw new Error(`Multiple members of the oneof group "${field.oneof}" of ${this.info.typeName} are present in JSON.`);
+                oneofsHandled.push(field.oneof);
+                target = message[field.oneof] = {
+                    oneofKind: localName
+                };
+            }
+            else {
+                target = message;
+            }
+            // we have handled oneof above. we just have read the value into `target`.
+            if (field.kind == 'map') {
+                if (jsonValue === null) {
+                    continue;
+                }
+                // check input
+                this.assert(isJsonObject(jsonValue), field.name, jsonValue);
+                // our target to put map entries into
+                const fieldObj = target[localName];
+                // read entries
+                for (const [jsonObjKey, jsonObjValue] of Object.entries(jsonValue)) {
+                    this.assert(jsonObjValue !== null, field.name + " map value", null);
+                    // read value
+                    let val;
+                    switch (field.V.kind) {
+                        case "message":
+                            val = field.V.T().internalJsonRead(jsonObjValue, options);
+                            break;
+                        case "enum":
+                            val = this.enum(field.V.T(), jsonObjValue, field.name, options.ignoreUnknownFields);
+                            if (val === false)
+                                continue;
+                            break;
+                        case "scalar":
+                            val = this.scalar(jsonObjValue, field.V.T, field.V.L, field.name);
+                            break;
+                    }
+                    this.assert(val !== undefined, field.name + " map value", jsonObjValue);
+                    // read key
+                    let key = jsonObjKey;
+                    if (field.K == ScalarType.BOOL)
+                        key = key == "true" ? true : key == "false" ? false : key;
+                    key = this.scalar(key, field.K, LongType.STRING, field.name).toString();
+                    fieldObj[key] = val;
+                }
+            }
+            else if (field.repeat) {
+                if (jsonValue === null)
+                    continue;
+                // check input
+                this.assert(Array.isArray(jsonValue), field.name, jsonValue);
+                // our target to put array entries into
+                const fieldArr = target[localName];
+                // read array entries
+                for (const jsonItem of jsonValue) {
+                    this.assert(jsonItem !== null, field.name, null);
+                    let val;
+                    switch (field.kind) {
+                        case "message":
+                            val = field.T().internalJsonRead(jsonItem, options);
+                            break;
+                        case "enum":
+                            val = this.enum(field.T(), jsonItem, field.name, options.ignoreUnknownFields);
+                            if (val === false)
+                                continue;
+                            break;
+                        case "scalar":
+                            val = this.scalar(jsonItem, field.T, field.L, field.name);
+                            break;
+                    }
+                    this.assert(val !== undefined, field.name, jsonValue);
+                    fieldArr.push(val);
+                }
+            }
+            else {
+                switch (field.kind) {
+                    case "message":
+                        if (jsonValue === null && field.T().typeName != 'google.protobuf.Value') {
+                            this.assert(field.oneof === undefined, field.name + " (oneof member)", null);
+                            continue;
+                        }
+                        target[localName] = field.T().internalJsonRead(jsonValue, options, target[localName]);
+                        break;
+                    case "enum":
+                        let val = this.enum(field.T(), jsonValue, field.name, options.ignoreUnknownFields);
+                        if (val === false)
+                            continue;
+                        target[localName] = val;
+                        break;
+                    case "scalar":
+                        target[localName] = this.scalar(jsonValue, field.T, field.L, field.name);
+                        break;
+                }
+            }
+        }
+    }
+    /**
+     * Returns `false` for unrecognized string representations.
+     *
+     * google.protobuf.NullValue accepts only JSON `null` (or the old `"NULL_VALUE"`).
+     */
+    enum(type, json, fieldName, ignoreUnknownFields) {
+        if (type[0] == 'google.protobuf.NullValue')
+            assert(json === null || json === "NULL_VALUE", `Unable to parse field ${this.info.typeName}#${fieldName}, enum ${type[0]} only accepts null.`);
+        if (json === null)
+            // we require 0 to be default value for all enums
+            return 0;
+        switch (typeof json) {
+            case "number":
+                assert(Number.isInteger(json), `Unable to parse field ${this.info.typeName}#${fieldName}, enum can only be integral number, got ${json}.`);
+                return json;
+            case "string":
+                let localEnumName = json;
+                if (type[2] && json.substring(0, type[2].length) === type[2])
+                    // lookup without the shared prefix
+                    localEnumName = json.substring(type[2].length);
+                let enumNumber = type[1][localEnumName];
+                if (typeof enumNumber === 'undefined' && ignoreUnknownFields) {
+                    return false;
+                }
+                assert(typeof enumNumber == "number", `Unable to parse field ${this.info.typeName}#${fieldName}, enum ${type[0]} has no value for "${json}".`);
+                return enumNumber;
+        }
+        assert(false, `Unable to parse field ${this.info.typeName}#${fieldName}, cannot parse enum value from ${typeof json}".`);
+    }
+    scalar(json, type, longType, fieldName) {
+        let e;
+        try {
+            switch (type) {
+                // float, double: JSON value will be a number or one of the special string values "NaN", "Infinity", and "-Infinity".
+                // Either numbers or strings are accepted. Exponent notation is also accepted.
+                case ScalarType.DOUBLE:
+                case ScalarType.FLOAT:
+                    if (json === null)
+                        return .0;
+                    if (json === "NaN")
+                        return Number.NaN;
+                    if (json === "Infinity")
+                        return Number.POSITIVE_INFINITY;
+                    if (json === "-Infinity")
+                        return Number.NEGATIVE_INFINITY;
+                    if (json === "") {
+                        e = "empty string";
+                        break;
+                    }
+                    if (typeof json == "string" && json.trim().length !== json.length) {
+                        e = "extra whitespace";
+                        break;
+                    }
+                    if (typeof json != "string" && typeof json != "number") {
+                        break;
+                    }
+                    let float = Number(json);
+                    if (Number.isNaN(float)) {
+                        e = "not a number";
+                        break;
+                    }
+                    if (!Number.isFinite(float)) {
+                        // infinity and -infinity are handled by string representation above, so this is an error
+                        e = "too large or small";
+                        break;
+                    }
+                    if (type == ScalarType.FLOAT)
+                        assertFloat32(float);
+                    return float;
+                // int32, fixed32, uint32: JSON value will be a decimal number. Either numbers or strings are accepted.
+                case ScalarType.INT32:
+                case ScalarType.FIXED32:
+                case ScalarType.SFIXED32:
+                case ScalarType.SINT32:
+                case ScalarType.UINT32:
+                    if (json === null)
+                        return 0;
+                    let int32;
+                    if (typeof json == "number")
+                        int32 = json;
+                    else if (json === "")
+                        e = "empty string";
+                    else if (typeof json == "string") {
+                        if (json.trim().length !== json.length)
+                            e = "extra whitespace";
+                        else
+                            int32 = Number(json);
+                    }
+                    if (int32 === undefined)
+                        break;
+                    if (type == ScalarType.UINT32)
+                        assertUInt32(int32);
+                    else
+                        assertInt32(int32);
+                    return int32;
+                // int64, fixed64, uint64: JSON value will be a decimal string. Either numbers or strings are accepted.
+                case ScalarType.INT64:
+                case ScalarType.SFIXED64:
+                case ScalarType.SINT64:
+                    if (json === null)
+                        return reflectionLongConvert(PbLong.ZERO, longType);
+                    if (typeof json != "number" && typeof json != "string")
+                        break;
+                    return reflectionLongConvert(PbLong.from(json), longType);
+                case ScalarType.FIXED64:
+                case ScalarType.UINT64:
+                    if (json === null)
+                        return reflectionLongConvert(PbULong.ZERO, longType);
+                    if (typeof json != "number" && typeof json != "string")
+                        break;
+                    return reflectionLongConvert(PbULong.from(json), longType);
+                // bool:
+                case ScalarType.BOOL:
+                    if (json === null)
+                        return false;
+                    if (typeof json !== "boolean")
+                        break;
+                    return json;
+                // string:
+                case ScalarType.STRING:
+                    if (json === null)
+                        return "";
+                    if (typeof json !== "string") {
+                        e = "extra whitespace";
+                        break;
+                    }
+                    try {
+                        encodeURIComponent(json);
+                    }
+                    catch (e) {
+                        e = "invalid UTF8";
+                        break;
+                    }
+                    return json;
+                // bytes: JSON value will be the data encoded as a string using standard base64 encoding with paddings.
+                // Either standard or URL-safe base64 encoding with/without paddings are accepted.
+                case ScalarType.BYTES:
+                    if (json === null || json === "")
+                        return new Uint8Array(0);
+                    if (typeof json !== 'string')
+                        break;
+                    return base64decode(json);
+            }
+        }
+        catch (error) {
+            e = error.message;
+        }
+        this.assert(false, fieldName + (e ? " - " + e : ""), json);
+    }
+}
+
+/**
+ * Writes proto3 messages in canonical JSON format using reflection
+ * information.
+ *
+ * https://developers.google.com/protocol-buffers/docs/proto3#json
+ */
+class ReflectionJsonWriter {
+    constructor(info) {
+        var _a;
+        this.fields = (_a = info.fields) !== null && _a !== undefined ? _a : [];
+    }
+    /**
+     * Converts the message to a JSON object, based on the field descriptors.
+     */
+    write(message, options) {
+        const json = {}, source = message;
+        for (const field of this.fields) {
+            // field is not part of a oneof, simply write as is
+            if (!field.oneof) {
+                let jsonValue = this.field(field, source[field.localName], options);
+                if (jsonValue !== undefined)
+                    json[options.useProtoFieldName ? field.name : field.jsonName] = jsonValue;
+                continue;
+            }
+            // field is part of a oneof
+            const group = source[field.oneof];
+            if (group.oneofKind !== field.localName)
+                continue; // not selected, skip
+            const opt = field.kind == 'scalar' || field.kind == 'enum'
+                ? Object.assign(Object.assign({}, options), { emitDefaultValues: true }) : options;
+            let jsonValue = this.field(field, group[field.localName], opt);
+            assert(jsonValue !== undefined);
+            json[options.useProtoFieldName ? field.name : field.jsonName] = jsonValue;
+        }
+        return json;
+    }
+    field(field, value, options) {
+        let jsonValue = undefined;
+        if (field.kind == 'map') {
+            assert(typeof value == "object" && value !== null);
+            const jsonObj = {};
+            switch (field.V.kind) {
+                case "scalar":
+                    for (const [entryKey, entryValue] of Object.entries(value)) {
+                        const val = this.scalar(field.V.T, entryValue, field.name, false, true);
+                        assert(val !== undefined);
+                        jsonObj[entryKey.toString()] = val; // JSON standard allows only (double quoted) string as property key
+                    }
+                    break;
+                case "message":
+                    const messageType = field.V.T();
+                    for (const [entryKey, entryValue] of Object.entries(value)) {
+                        const val = this.message(messageType, entryValue, field.name, options);
+                        assert(val !== undefined);
+                        jsonObj[entryKey.toString()] = val; // JSON standard allows only (double quoted) string as property key
+                    }
+                    break;
+                case "enum":
+                    const enumInfo = field.V.T();
+                    for (const [entryKey, entryValue] of Object.entries(value)) {
+                        assert(entryValue === undefined || typeof entryValue == 'number');
+                        const val = this.enum(enumInfo, entryValue, field.name, false, true, options.enumAsInteger);
+                        assert(val !== undefined);
+                        jsonObj[entryKey.toString()] = val; // JSON standard allows only (double quoted) string as property key
+                    }
+                    break;
+            }
+            if (options.emitDefaultValues || Object.keys(jsonObj).length > 0)
+                jsonValue = jsonObj;
+        }
+        else if (field.repeat) {
+            assert(Array.isArray(value));
+            const jsonArr = [];
+            switch (field.kind) {
+                case "scalar":
+                    for (let i = 0; i < value.length; i++) {
+                        const val = this.scalar(field.T, value[i], field.name, field.opt, true);
+                        assert(val !== undefined);
+                        jsonArr.push(val);
+                    }
+                    break;
+                case "enum":
+                    const enumInfo = field.T();
+                    for (let i = 0; i < value.length; i++) {
+                        assert(value[i] === undefined || typeof value[i] == 'number');
+                        const val = this.enum(enumInfo, value[i], field.name, field.opt, true, options.enumAsInteger);
+                        assert(val !== undefined);
+                        jsonArr.push(val);
+                    }
+                    break;
+                case "message":
+                    const messageType = field.T();
+                    for (let i = 0; i < value.length; i++) {
+                        const val = this.message(messageType, value[i], field.name, options);
+                        assert(val !== undefined);
+                        jsonArr.push(val);
+                    }
+                    break;
+            }
+            // add converted array to json output
+            if (options.emitDefaultValues || jsonArr.length > 0 || options.emitDefaultValues)
+                jsonValue = jsonArr;
+        }
+        else {
+            switch (field.kind) {
+                case "scalar":
+                    jsonValue = this.scalar(field.T, value, field.name, field.opt, options.emitDefaultValues);
+                    break;
+                case "enum":
+                    jsonValue = this.enum(field.T(), value, field.name, field.opt, options.emitDefaultValues, options.enumAsInteger);
+                    break;
+                case "message":
+                    jsonValue = this.message(field.T(), value, field.name, options);
+                    break;
+            }
+        }
+        return jsonValue;
+    }
+    /**
+     * Returns `null` as the default for google.protobuf.NullValue.
+     */
+    enum(type, value, fieldName, optional, emitDefaultValues, enumAsInteger) {
+        if (type[0] == 'google.protobuf.NullValue')
+            return !emitDefaultValues && !optional ? undefined : null;
+        if (value === undefined) {
+            assert(optional);
+            return undefined;
+        }
+        if (value === 0 && !emitDefaultValues && !optional)
+            // we require 0 to be default value for all enums
+            return undefined;
+        assert(typeof value == 'number');
+        assert(Number.isInteger(value));
+        if (enumAsInteger || !type[1].hasOwnProperty(value))
+            // if we don't now the enum value, just return the number
+            return value;
+        if (type[2])
+            // restore the dropped prefix
+            return type[2] + type[1][value];
+        return type[1][value];
+    }
+    message(type, value, fieldName, options) {
+        if (value === undefined)
+            return options.emitDefaultValues ? null : undefined;
+        return type.internalJsonWrite(value, options);
+    }
+    scalar(type, value, fieldName, optional, emitDefaultValues) {
+        if (value === undefined) {
+            assert(optional);
+            return undefined;
+        }
+        const ed = emitDefaultValues || optional;
+        // noinspection FallThroughInSwitchStatementJS
+        switch (type) {
+            // int32, fixed32, uint32: JSON value will be a decimal number. Either numbers or strings are accepted.
+            case ScalarType.INT32:
+            case ScalarType.SFIXED32:
+            case ScalarType.SINT32:
+                if (value === 0)
+                    return ed ? 0 : undefined;
+                assertInt32(value);
+                return value;
+            case ScalarType.FIXED32:
+            case ScalarType.UINT32:
+                if (value === 0)
+                    return ed ? 0 : undefined;
+                assertUInt32(value);
+                return value;
+            // float, double: JSON value will be a number or one of the special string values "NaN", "Infinity", and "-Infinity".
+            // Either numbers or strings are accepted. Exponent notation is also accepted.
+            case ScalarType.FLOAT:
+                assertFloat32(value);
+            case ScalarType.DOUBLE:
+                if (value === 0)
+                    return ed ? 0 : undefined;
+                assert(typeof value == 'number');
+                if (Number.isNaN(value))
+                    return 'NaN';
+                if (value === Number.POSITIVE_INFINITY)
+                    return 'Infinity';
+                if (value === Number.NEGATIVE_INFINITY)
+                    return '-Infinity';
+                return value;
+            // string:
+            case ScalarType.STRING:
+                if (value === "")
+                    return ed ? '' : undefined;
+                assert(typeof value == 'string');
+                return value;
+            // bool:
+            case ScalarType.BOOL:
+                if (value === false)
+                    return ed ? false : undefined;
+                assert(typeof value == 'boolean');
+                return value;
+            // JSON value will be a decimal string. Either numbers or strings are accepted.
+            case ScalarType.UINT64:
+            case ScalarType.FIXED64:
+                assert(typeof value == 'number' || typeof value == 'string' || typeof value == 'bigint');
+                let ulong = PbULong.from(value);
+                if (ulong.isZero() && !ed)
+                    return undefined;
+                return ulong.toString();
+            // JSON value will be a decimal string. Either numbers or strings are accepted.
+            case ScalarType.INT64:
+            case ScalarType.SFIXED64:
+            case ScalarType.SINT64:
+                assert(typeof value == 'number' || typeof value == 'string' || typeof value == 'bigint');
+                let long = PbLong.from(value);
+                if (long.isZero() && !ed)
+                    return undefined;
+                return long.toString();
+            // bytes: JSON value will be the data encoded as a string using standard base64 encoding with paddings.
+            // Either standard or URL-safe base64 encoding with/without paddings are accepted.
+            case ScalarType.BYTES:
+                assert(value instanceof Uint8Array);
+                if (!value.byteLength)
+                    return ed ? "" : undefined;
+                return base64encode(value);
+        }
+    }
+}
+
+/**
+ * Creates the default value for a scalar type.
+ */
+function reflectionScalarDefault(type, longType = LongType.STRING) {
+    switch (type) {
+        case ScalarType.BOOL:
+            return false;
+        case ScalarType.UINT64:
+        case ScalarType.FIXED64:
+            return reflectionLongConvert(PbULong.ZERO, longType);
+        case ScalarType.INT64:
+        case ScalarType.SFIXED64:
+        case ScalarType.SINT64:
+            return reflectionLongConvert(PbLong.ZERO, longType);
+        case ScalarType.DOUBLE:
+        case ScalarType.FLOAT:
+            return 0.0;
+        case ScalarType.BYTES:
+            return new Uint8Array(0);
+        case ScalarType.STRING:
+            return "";
+        default:
+            // case ScalarType.INT32:
+            // case ScalarType.UINT32:
+            // case ScalarType.SINT32:
+            // case ScalarType.FIXED32:
+            // case ScalarType.SFIXED32:
+            return 0;
+    }
+}
+
+/**
+ * Reads proto3 messages in binary format using reflection information.
+ *
+ * https://developers.google.com/protocol-buffers/docs/encoding
+ */
+class ReflectionBinaryReader {
+    constructor(info) {
+        this.info = info;
+    }
+    prepare() {
+        var _a;
+        if (!this.fieldNoToField) {
+            const fieldsInput = (_a = this.info.fields) !== null && _a !== undefined ? _a : [];
+            this.fieldNoToField = new Map(fieldsInput.map(field => [field.no, field]));
+        }
+    }
+    /**
+     * Reads a message from binary format into the target message.
+     *
+     * Repeated fields are appended. Map entries are added, overwriting
+     * existing keys.
+     *
+     * If a message field is already present, it will be merged with the
+     * new data.
+     */
+    read(reader, message, options, length) {
+        this.prepare();
+        const end = length === undefined ? reader.len : reader.pos + length;
+        while (reader.pos < end) {
+            // read the tag and find the field
+            const [fieldNo, wireType] = reader.tag(), field = this.fieldNoToField.get(fieldNo);
+            if (!field) {
+                let u = options.readUnknownField;
+                if (u == "throw")
+                    throw new Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.info.typeName}`);
+                let d = reader.skip(wireType);
+                if (u !== false)
+                    (u === true ? UnknownFieldHandler.onRead : u)(this.info.typeName, message, fieldNo, wireType, d);
+                continue;
+            }
+            // target object for the field we are reading
+            let target = message, repeated = field.repeat, localName = field.localName;
+            // if field is member of oneof ADT, use ADT as target
+            if (field.oneof) {
+                target = target[field.oneof];
+                // if other oneof member selected, set new ADT
+                if (target.oneofKind !== localName)
+                    target = message[field.oneof] = {
+                        oneofKind: localName
+                    };
+            }
+            // we have handled oneof above, we just have read the value into `target[localName]`
+            switch (field.kind) {
+                case "scalar":
+                case "enum":
+                    let T = field.kind == "enum" ? ScalarType.INT32 : field.T;
+                    let L = field.kind == "scalar" ? field.L : undefined;
+                    if (repeated) {
+                        let arr = target[localName]; // safe to assume presence of array, oneof cannot contain repeated values
+                        if (wireType == WireType.LengthDelimited && T != ScalarType.STRING && T != ScalarType.BYTES) {
+                            let e = reader.uint32() + reader.pos;
+                            while (reader.pos < e)
+                                arr.push(this.scalar(reader, T, L));
+                        }
+                        else
+                            arr.push(this.scalar(reader, T, L));
+                    }
+                    else
+                        target[localName] = this.scalar(reader, T, L);
+                    break;
+                case "message":
+                    if (repeated) {
+                        let arr = target[localName]; // safe to assume presence of array, oneof cannot contain repeated values
+                        let msg = field.T().internalBinaryRead(reader, reader.uint32(), options);
+                        arr.push(msg);
+                    }
+                    else
+                        target[localName] = field.T().internalBinaryRead(reader, reader.uint32(), options, target[localName]);
+                    break;
+                case "map":
+                    let [mapKey, mapVal] = this.mapEntry(field, reader, options);
+                    // safe to assume presence of map object, oneof cannot contain repeated values
+                    target[localName][mapKey] = mapVal;
+                    break;
+            }
+        }
+    }
+    /**
+     * Read a map field, expecting key field = 1, value field = 2
+     */
+    mapEntry(field, reader, options) {
+        let length = reader.uint32();
+        let end = reader.pos + length;
+        let key = undefined; // javascript only allows number or string for object properties
+        let val = undefined;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case 1:
+                    if (field.K == ScalarType.BOOL)
+                        key = reader.bool().toString();
+                    else
+                        // long types are read as string, number types are okay as number
+                        key = this.scalar(reader, field.K, LongType.STRING);
+                    break;
+                case 2:
+                    switch (field.V.kind) {
+                        case "scalar":
+                            val = this.scalar(reader, field.V.T, field.V.L);
+                            break;
+                        case "enum":
+                            val = reader.int32();
+                            break;
+                        case "message":
+                            val = field.V.T().internalBinaryRead(reader, reader.uint32(), options);
+                            break;
+                    }
+                    break;
+                default:
+                    throw new Error(`Unknown field ${fieldNo} (wire type ${wireType}) in map entry for ${this.info.typeName}#${field.name}`);
+            }
+        }
+        if (key === undefined) {
+            let keyRaw = reflectionScalarDefault(field.K);
+            key = field.K == ScalarType.BOOL ? keyRaw.toString() : keyRaw;
+        }
+        if (val === undefined)
+            switch (field.V.kind) {
+                case "scalar":
+                    val = reflectionScalarDefault(field.V.T, field.V.L);
+                    break;
+                case "enum":
+                    val = 0;
+                    break;
+                case "message":
+                    val = field.V.T().create();
+                    break;
+            }
+        return [key, val];
+    }
+    scalar(reader, type, longType) {
+        switch (type) {
+            case ScalarType.INT32:
+                return reader.int32();
+            case ScalarType.STRING:
+                return reader.string();
+            case ScalarType.BOOL:
+                return reader.bool();
+            case ScalarType.DOUBLE:
+                return reader.double();
+            case ScalarType.FLOAT:
+                return reader.float();
+            case ScalarType.INT64:
+                return reflectionLongConvert(reader.int64(), longType);
+            case ScalarType.UINT64:
+                return reflectionLongConvert(reader.uint64(), longType);
+            case ScalarType.FIXED64:
+                return reflectionLongConvert(reader.fixed64(), longType);
+            case ScalarType.FIXED32:
+                return reader.fixed32();
+            case ScalarType.BYTES:
+                return reader.bytes();
+            case ScalarType.UINT32:
+                return reader.uint32();
+            case ScalarType.SFIXED32:
+                return reader.sfixed32();
+            case ScalarType.SFIXED64:
+                return reflectionLongConvert(reader.sfixed64(), longType);
+            case ScalarType.SINT32:
+                return reader.sint32();
+            case ScalarType.SINT64:
+                return reflectionLongConvert(reader.sint64(), longType);
+        }
+    }
+}
+
+/**
+ * Writes proto3 messages in binary format using reflection information.
+ *
+ * https://developers.google.com/protocol-buffers/docs/encoding
+ */
+class ReflectionBinaryWriter {
+    constructor(info) {
+        this.info = info;
+    }
+    prepare() {
+        if (!this.fields) {
+            const fieldsInput = this.info.fields ? this.info.fields.concat() : [];
+            this.fields = fieldsInput.sort((a, b) => a.no - b.no);
+        }
+    }
+    /**
+     * Writes the message to binary format.
+     */
+    write(message, writer, options) {
+        this.prepare();
+        for (const field of this.fields) {
+            let value, // this will be our field value, whether it is member of a oneof or not
+            emitDefault, // whether we emit the default value (only true for oneof members)
+            repeated = field.repeat, localName = field.localName;
+            // handle oneof ADT
+            if (field.oneof) {
+                const group = message[field.oneof];
+                if (group.oneofKind !== localName)
+                    continue; // if field is not selected, skip
+                value = group[localName];
+                emitDefault = true;
+            }
+            else {
+                value = message[localName];
+                emitDefault = false;
+            }
+            // we have handled oneof above. we just have to honor `emitDefault`.
+            switch (field.kind) {
+                case "scalar":
+                case "enum":
+                    let T = field.kind == "enum" ? ScalarType.INT32 : field.T;
+                    if (repeated) {
+                        assert(Array.isArray(value));
+                        if (repeated == RepeatType.PACKED)
+                            this.packed(writer, T, field.no, value);
+                        else
+                            for (const item of value)
+                                this.scalar(writer, T, field.no, item, true);
+                    }
+                    else if (value === undefined)
+                        assert(field.opt);
+                    else
+                        this.scalar(writer, T, field.no, value, emitDefault || field.opt);
+                    break;
+                case "message":
+                    if (repeated) {
+                        assert(Array.isArray(value));
+                        for (const item of value)
+                            this.message(writer, options, field.T(), field.no, item);
+                    }
+                    else {
+                        this.message(writer, options, field.T(), field.no, value);
+                    }
+                    break;
+                case "map":
+                    assert(typeof value == 'object' && value !== null);
+                    for (const [key, val] of Object.entries(value))
+                        this.mapEntry(writer, options, field, key, val);
+                    break;
+            }
+        }
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u === true ? UnknownFieldHandler.onWrite : u)(this.info.typeName, message, writer);
+    }
+    mapEntry(writer, options, field, key, value) {
+        writer.tag(field.no, WireType.LengthDelimited);
+        writer.fork();
+        // javascript only allows number or string for object properties
+        // we convert from our representation to the protobuf type
+        let keyValue = key;
+        switch (field.K) {
+            case ScalarType.INT32:
+            case ScalarType.FIXED32:
+            case ScalarType.UINT32:
+            case ScalarType.SFIXED32:
+            case ScalarType.SINT32:
+                keyValue = Number.parseInt(key);
+                break;
+            case ScalarType.BOOL:
+                assert(key == 'true' || key == 'false');
+                keyValue = key == 'true';
+                break;
+        }
+        // write key, expecting key field number = 1
+        this.scalar(writer, field.K, 1, keyValue, true);
+        // write value, expecting value field number = 2
+        switch (field.V.kind) {
+            case 'scalar':
+                this.scalar(writer, field.V.T, 2, value, true);
+                break;
+            case 'enum':
+                this.scalar(writer, ScalarType.INT32, 2, value, true);
+                break;
+            case 'message':
+                this.message(writer, options, field.V.T(), 2, value);
+                break;
+        }
+        writer.join();
+    }
+    message(writer, options, handler, fieldNo, value) {
+        if (value === undefined)
+            return;
+        handler.internalBinaryWrite(value, writer.tag(fieldNo, WireType.LengthDelimited).fork(), options);
+        writer.join();
+    }
+    /**
+     * Write a single scalar value.
+     */
+    scalar(writer, type, fieldNo, value, emitDefault) {
+        let [wireType, method, isDefault] = this.scalarInfo(type, value);
+        if (!isDefault || emitDefault) {
+            writer.tag(fieldNo, wireType);
+            writer[method](value);
+        }
+    }
+    /**
+     * Write an array of scalar values in packed format.
+     */
+    packed(writer, type, fieldNo, value) {
+        if (!value.length)
+            return;
+        assert(type !== ScalarType.BYTES && type !== ScalarType.STRING);
+        // write tag
+        writer.tag(fieldNo, WireType.LengthDelimited);
+        // begin length-delimited
+        writer.fork();
+        // write values without tags
+        let [, method,] = this.scalarInfo(type);
+        for (let i = 0; i < value.length; i++)
+            writer[method](value[i]);
+        // end length delimited
+        writer.join();
+    }
+    /**
+     * Get information for writing a scalar value.
+     *
+     * Returns tuple:
+     * [0]: appropriate WireType
+     * [1]: name of the appropriate method of IBinaryWriter
+     * [2]: whether the given value is a default value
+     *
+     * If argument `value` is omitted, [2] is always false.
+     */
+    scalarInfo(type, value) {
+        let t = WireType.Varint;
+        let m;
+        let i = value === undefined;
+        let d = value === 0;
+        switch (type) {
+            case ScalarType.INT32:
+                m = "int32";
+                break;
+            case ScalarType.STRING:
+                d = i || !value.length;
+                t = WireType.LengthDelimited;
+                m = "string";
+                break;
+            case ScalarType.BOOL:
+                d = value === false;
+                m = "bool";
+                break;
+            case ScalarType.UINT32:
+                m = "uint32";
+                break;
+            case ScalarType.DOUBLE:
+                t = WireType.Bit64;
+                m = "double";
+                break;
+            case ScalarType.FLOAT:
+                t = WireType.Bit32;
+                m = "float";
+                break;
+            case ScalarType.INT64:
+                d = i || PbLong.from(value).isZero();
+                m = "int64";
+                break;
+            case ScalarType.UINT64:
+                d = i || PbULong.from(value).isZero();
+                m = "uint64";
+                break;
+            case ScalarType.FIXED64:
+                d = i || PbULong.from(value).isZero();
+                t = WireType.Bit64;
+                m = "fixed64";
+                break;
+            case ScalarType.BYTES:
+                d = i || !value.byteLength;
+                t = WireType.LengthDelimited;
+                m = "bytes";
+                break;
+            case ScalarType.FIXED32:
+                t = WireType.Bit32;
+                m = "fixed32";
+                break;
+            case ScalarType.SFIXED32:
+                t = WireType.Bit32;
+                m = "sfixed32";
+                break;
+            case ScalarType.SFIXED64:
+                d = i || PbLong.from(value).isZero();
+                t = WireType.Bit64;
+                m = "sfixed64";
+                break;
+            case ScalarType.SINT32:
+                m = "sint32";
+                break;
+            case ScalarType.SINT64:
+                d = i || PbLong.from(value).isZero();
+                m = "sint64";
+                break;
+        }
+        return [t, m, i || d];
+    }
+}
+
+/**
+ * Creates an instance of the generic message, using the field
+ * information.
+ */
+function reflectionCreate(type) {
+    const msg = {};
+    Object.defineProperty(msg, MESSAGE_TYPE, { enumerable: false, value: type });
+    for (let field of type.fields) {
+        let name = field.localName;
+        if (field.opt)
+            continue;
+        if (field.oneof)
+            msg[field.oneof] = { oneofKind: undefined };
+        else if (field.repeat)
+            msg[name] = [];
+        else
+            switch (field.kind) {
+                case "scalar":
+                    msg[name] = reflectionScalarDefault(field.T, field.L);
+                    break;
+                case "enum":
+                    // we require 0 to be default value for all enums
+                    msg[name] = 0;
+                    break;
+                case "map":
+                    msg[name] = {};
+                    break;
+            }
+    }
+    return msg;
+}
+
+/**
+ * Copy partial data into the target message.
+ *
+ * If a singular scalar or enum field is present in the source, it
+ * replaces the field in the target.
+ *
+ * If a singular message field is present in the source, it is merged
+ * with the target field by calling mergePartial() of the responsible
+ * message type.
+ *
+ * If a repeated field is present in the source, its values replace
+ * all values in the target array, removing extraneous values.
+ * Repeated message fields are copied, not merged.
+ *
+ * If a map field is present in the source, entries are added to the
+ * target map, replacing entries with the same key. Entries that only
+ * exist in the target remain. Entries with message values are copied,
+ * not merged.
+ *
+ * Note that this function differs from protobuf merge semantics,
+ * which appends repeated fields.
+ */
+function reflectionMergePartial(info, target, source) {
+    let fieldValue, // the field value we are working with
+    input = source, output; // where we want our field value to go
+    for (let field of info.fields) {
+        let name = field.localName;
+        if (field.oneof) {
+            const group = input[field.oneof]; // this is the oneof`s group in the source
+            if ((group === null || group === undefined ? undefined : group.oneofKind) == undefined) { // the user is free to omit
+                continue; // we skip this field, and all other members too
+            }
+            fieldValue = group[name]; // our value comes from the the oneof group of the source
+            output = target[field.oneof]; // and our output is the oneof group of the target
+            output.oneofKind = group.oneofKind; // always update discriminator
+            if (fieldValue == undefined) {
+                delete output[name]; // remove any existing value
+                continue; // skip further work on field
+            }
+        }
+        else {
+            fieldValue = input[name]; // we are using the source directly
+            output = target; // we want our field value to go directly into the target
+            if (fieldValue == undefined) {
+                continue; // skip further work on field, existing value is used as is
+            }
+        }
+        if (field.repeat)
+            output[name].length = fieldValue.length; // resize target array to match source array
+        // now we just work with `fieldValue` and `output` to merge the value
+        switch (field.kind) {
+            case "scalar":
+            case "enum":
+                if (field.repeat)
+                    for (let i = 0; i < fieldValue.length; i++)
+                        output[name][i] = fieldValue[i]; // not a reference type
+                else
+                    output[name] = fieldValue; // not a reference type
+                break;
+            case "message":
+                let T = field.T();
+                if (field.repeat)
+                    for (let i = 0; i < fieldValue.length; i++)
+                        output[name][i] = T.create(fieldValue[i]);
+                else if (output[name] === undefined)
+                    output[name] = T.create(fieldValue); // nothing to merge with
+                else
+                    T.mergePartial(output[name], fieldValue);
+                break;
+            case "map":
+                // Map and repeated fields are simply overwritten, not appended or merged
+                switch (field.V.kind) {
+                    case "scalar":
+                    case "enum":
+                        Object.assign(output[name], fieldValue); // elements are not reference types
+                        break;
+                    case "message":
+                        let T = field.V.T();
+                        for (let k of Object.keys(fieldValue))
+                            output[name][k] = T.create(fieldValue[k]);
+                        break;
+                }
+                break;
+        }
+    }
+}
+
+/**
+ * Determines whether two message of the same type have the same field values.
+ * Checks for deep equality, traversing repeated fields, oneof groups, maps
+ * and messages recursively.
+ * Will also return true if both messages are `undefined`.
+ */
+function reflectionEquals(info, a, b) {
+    if (a === b)
+        return true;
+    if (!a || !b)
+        return false;
+    for (let field of info.fields) {
+        let localName = field.localName;
+        let val_a = field.oneof ? a[field.oneof][localName] : a[localName];
+        let val_b = field.oneof ? b[field.oneof][localName] : b[localName];
+        switch (field.kind) {
+            case "enum":
+            case "scalar":
+                let t = field.kind == "enum" ? ScalarType.INT32 : field.T;
+                if (!(field.repeat
+                    ? repeatedPrimitiveEq(t, val_a, val_b)
+                    : primitiveEq(t, val_a, val_b)))
+                    return false;
+                break;
+            case "map":
+                if (!(field.V.kind == "message"
+                    ? repeatedMsgEq(field.V.T(), objectValues(val_a), objectValues(val_b))
+                    : repeatedPrimitiveEq(field.V.kind == "enum" ? ScalarType.INT32 : field.V.T, objectValues(val_a), objectValues(val_b))))
+                    return false;
+                break;
+            case "message":
+                let T = field.T();
+                if (!(field.repeat
+                    ? repeatedMsgEq(T, val_a, val_b)
+                    : T.equals(val_a, val_b)))
+                    return false;
+                break;
+        }
+    }
+    return true;
+}
+const objectValues = Object.values;
+function primitiveEq(type, a, b) {
+    if (a === b)
+        return true;
+    if (type !== ScalarType.BYTES)
+        return false;
+    let ba = a;
+    let bb = b;
+    if (ba.length !== bb.length)
+        return false;
+    for (let i = 0; i < ba.length; i++)
+        if (ba[i] != bb[i])
+            return false;
+    return true;
+}
+function repeatedPrimitiveEq(type, a, b) {
+    if (a.length !== b.length)
+        return false;
+    for (let i = 0; i < a.length; i++)
+        if (!primitiveEq(type, a[i], b[i]))
+            return false;
+    return true;
+}
+function repeatedMsgEq(type, a, b) {
+    if (a.length !== b.length)
+        return false;
+    for (let i = 0; i < a.length; i++)
+        if (!type.equals(a[i], b[i]))
+            return false;
+    return true;
+}
+
+/**
+ * This standard message type provides reflection-based
+ * operations to work with a message.
+ */
+class MessageType {
+    constructor(name, fields, options) {
+        this.defaultCheckDepth = 16;
+        this.typeName = name;
+        this.fields = fields.map(normalizeFieldInfo);
+        this.options = options !== null && options !== undefined ? options : {};
+        this.refTypeCheck = new ReflectionTypeCheck(this);
+        this.refJsonReader = new ReflectionJsonReader(this);
+        this.refJsonWriter = new ReflectionJsonWriter(this);
+        this.refBinReader = new ReflectionBinaryReader(this);
+        this.refBinWriter = new ReflectionBinaryWriter(this);
+    }
+    create(value) {
+        let message = reflectionCreate(this);
+        if (value !== undefined) {
+            reflectionMergePartial(this, message, value);
+        }
+        return message;
+    }
+    /**
+     * Clone the message.
+     *
+     * Unknown fields are discarded.
+     */
+    clone(message) {
+        let copy = this.create();
+        reflectionMergePartial(this, copy, message);
+        return copy;
+    }
+    /**
+     * Determines whether two message of the same type have the same field values.
+     * Checks for deep equality, traversing repeated fields, oneof groups, maps
+     * and messages recursively.
+     * Will also return true if both messages are `undefined`.
+     */
+    equals(a, b) {
+        return reflectionEquals(this, a, b);
+    }
+    /**
+     * Is the given value assignable to our message type
+     * and contains no [excess properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#excess-property-checks)?
+     */
+    is(arg, depth = this.defaultCheckDepth) {
+        return this.refTypeCheck.is(arg, depth, false);
+    }
+    /**
+     * Is the given value assignable to our message type,
+     * regardless of [excess properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#excess-property-checks)?
+     */
+    isAssignable(arg, depth = this.defaultCheckDepth) {
+        return this.refTypeCheck.is(arg, depth, true);
+    }
+    /**
+     * Copy partial data into the target message.
+     */
+    mergePartial(target, source) {
+        reflectionMergePartial(this, target, source);
+    }
+    /**
+     * Create a new message from binary format.
+     */
+    fromBinary(data, options) {
+        let opt = binaryReadOptions(options);
+        return this.internalBinaryRead(opt.readerFactory(data), data.byteLength, opt);
+    }
+    /**
+     * Read a new message from a JSON value.
+     */
+    fromJson(json, options) {
+        return this.internalJsonRead(json, jsonReadOptions(options));
+    }
+    /**
+     * Read a new message from a JSON string.
+     * This is equivalent to `T.fromJson(JSON.parse(json))`.
+     */
+    fromJsonString(json, options) {
+        let value = JSON.parse(json);
+        return this.fromJson(value, options);
+    }
+    /**
+     * Write the message to canonical JSON value.
+     */
+    toJson(message, options) {
+        return this.internalJsonWrite(message, jsonWriteOptions(options));
+    }
+    /**
+     * Convert the message to canonical JSON string.
+     * This is equivalent to `JSON.stringify(T.toJson(t))`
+     */
+    toJsonString(message, options) {
+        var _a;
+        let value = this.toJson(message, options);
+        return JSON.stringify(value, null, (_a = options === null || options === undefined ? undefined : options.prettySpaces) !== null && _a !== undefined ? _a : 0);
+    }
+    /**
+     * Write the message to binary format.
+     */
+    toBinary(message, options) {
+        let opt = binaryWriteOptions(options);
+        return this.internalBinaryWrite(message, opt.writerFactory(), opt).finish();
+    }
+    /**
+     * This is an internal method. If you just want to read a message from
+     * JSON, use `fromJson()` or `fromJsonString()`.
+     *
+     * Reads JSON value and merges the fields into the target
+     * according to protobuf rules. If the target is omitted,
+     * a new instance is created first.
+     */
+    internalJsonRead(json, options, target) {
+        if (json !== null && typeof json == "object" && !Array.isArray(json)) {
+            let message = target !== null && target !== undefined ? target : this.create();
+            this.refJsonReader.read(json, message, options);
+            return message;
+        }
+        throw new Error(`Unable to parse message ${this.typeName} from JSON ${typeofJsonValue(json)}.`);
+    }
+    /**
+     * This is an internal method. If you just want to write a message
+     * to JSON, use `toJson()` or `toJsonString().
+     *
+     * Writes JSON value and returns it.
+     */
+    internalJsonWrite(message, options) {
+        return this.refJsonWriter.write(message, options);
+    }
+    /**
+     * This is an internal method. If you just want to write a message
+     * in binary format, use `toBinary()`.
+     *
+     * Serializes the message in binary format and appends it to the given
+     * writer. Returns passed writer.
+     */
+    internalBinaryWrite(message, writer, options) {
+        this.refBinWriter.write(message, writer, options);
+        return writer;
+    }
+    /**
+     * This is an internal method. If you just want to read a message from
+     * binary data, use `fromBinary()`.
+     *
+     * Reads data from binary format and merges the fields into
+     * the target according to protobuf rules. If the target is
+     * omitted, a new instance is created first.
+     */
+    internalBinaryRead(reader, length, options, target) {
+        let message = target !== null && target !== undefined ? target : this.create();
+        this.refBinReader.read(reader, message, options, length);
+        return message;
+    }
+}
+
+/**
+ * Check if the provided object is a proto message.
+ *
+ * Note that this is an experimental feature - it is here to stay, but
+ * implementation details may change without notice.
+ */
+function containsMessageType(msg) {
+    return msg[MESSAGE_TYPE] != null;
+}
+
+/**
+ * Is this a lookup object generated by Typescript, for a Typescript enum
+ * generated by protobuf-ts?
+ *
+ * - No `const enum` (enum must not be inlined, we need reverse mapping).
+ * - No string enum (we need int32 for protobuf).
+ * - Must have a value for 0 (otherwise, we would need to support custom default values).
+ */
+function isEnumObject(arg) {
+    if (typeof arg != 'object' || arg === null) {
+        return false;
+    }
+    if (!arg.hasOwnProperty(0)) {
+        return false;
+    }
+    for (let k of Object.keys(arg)) {
+        let num = parseInt(k);
+        if (!Number.isNaN(num)) {
+            // is there a name for the number?
+            let nam = arg[num];
+            if (nam === undefined)
+                return false;
+            // does the name resolve back to the number?
+            if (arg[nam] !== num)
+                return false;
+        }
+        else {
+            // is there a number for the name?
+            let num = arg[k];
+            if (num === undefined)
+                return false;
+            // is it a string enum?
+            if (typeof num !== 'number')
+                return false;
+            // do we know the number?
+            if (arg[num] === undefined)
+                return false;
+        }
+    }
+    return true;
+}
+/**
+ * Lists all values of a Typescript enum, as an array of objects with a "name"
+ * property and a "number" property.
+ *
+ * Note that it is possible that a number appears more than once, because it is
+ * possible to have aliases in an enum.
+ *
+ * Throws if the enum does not adhere to the rules of enums generated by
+ * protobuf-ts. See `isEnumObject()`.
+ */
+function listEnumValues(enumObject) {
+    if (!isEnumObject(enumObject))
+        throw new Error("not a typescript enum object");
+    let values = [];
+    for (let [name, number] of Object.entries(enumObject))
+        if (typeof number == "number")
+            values.push({ name, number });
+    return values;
+}
+/**
+ * Lists the names of a Typescript enum.
+ *
+ * Throws if the enum does not adhere to the rules of enums generated by
+ * protobuf-ts. See `isEnumObject()`.
+ */
+function listEnumNames(enumObject) {
+    return listEnumValues(enumObject).map(val => val.name);
+}
+/**
+ * Lists the numbers of a Typescript enum.
+ *
+ * Throws if the enum does not adhere to the rules of enums generated by
+ * protobuf-ts. See `isEnumObject()`.
+ */
+function listEnumNumbers(enumObject) {
+    return listEnumValues(enumObject)
+        .map(val => val.number)
+        .filter((num, index, arr) => arr.indexOf(num) == index);
+}
+
+// Public API of the protobuf-ts runtime.
+// Note: we do not use `export * from ...` to help tree shakers,
+// webpack verbose output hints that this should be useful
+// Convenience JSON typings and corresponding type guards
+
+var es2015$1 = /*#__PURE__*/Object.freeze({
+	__proto__: null,
+	BinaryReader: BinaryReader,
+	BinaryWriter: BinaryWriter,
+	get LongType () { return LongType; },
+	MESSAGE_TYPE: MESSAGE_TYPE,
+	MessageType: MessageType,
+	PbLong: PbLong,
+	PbULong: PbULong,
+	ReflectionBinaryReader: ReflectionBinaryReader,
+	ReflectionBinaryWriter: ReflectionBinaryWriter,
+	ReflectionJsonReader: ReflectionJsonReader,
+	ReflectionJsonWriter: ReflectionJsonWriter,
+	ReflectionTypeCheck: ReflectionTypeCheck,
+	get RepeatType () { return RepeatType; },
+	get ScalarType () { return ScalarType; },
+	get UnknownFieldHandler () { return UnknownFieldHandler; },
+	get WireType () { return WireType; },
+	assert: assert,
+	assertFloat32: assertFloat32,
+	assertInt32: assertInt32,
+	assertNever: assertNever,
+	assertUInt32: assertUInt32,
+	base64decode: base64decode,
+	base64encode: base64encode,
+	binaryReadOptions: binaryReadOptions,
+	binaryWriteOptions: binaryWriteOptions,
+	clearOneofValue: clearOneofValue,
+	containsMessageType: containsMessageType,
+	getOneofValue: getOneofValue,
+	getSelectedOneofValue: getSelectedOneofValue,
+	isEnumObject: isEnumObject,
+	isJsonObject: isJsonObject,
+	isOneofGroup: isOneofGroup,
+	jsonReadOptions: jsonReadOptions,
+	jsonWriteOptions: jsonWriteOptions,
+	listEnumNames: listEnumNames,
+	listEnumNumbers: listEnumNumbers,
+	listEnumValues: listEnumValues,
+	lowerCamelCase: lowerCamelCase,
+	mergeBinaryOptions: mergeBinaryOptions,
+	mergeJsonOptions: mergeJsonOptions,
+	normalizeFieldInfo: normalizeFieldInfo,
+	readFieldOption: readFieldOption,
+	readFieldOptions: readFieldOptions,
+	readMessageOption: readMessageOption,
+	reflectionCreate: reflectionCreate,
+	reflectionEquals: reflectionEquals,
+	reflectionMergePartial: reflectionMergePartial,
+	reflectionScalarDefault: reflectionScalarDefault,
+	setOneofValue: setOneofValue,
+	typeofJsonValue: typeofJsonValue,
+	utf8read: utf8read
+});
+
+var require$$1$1 = /*@__PURE__*/getAugmentedNamespace(es2015$1);
+
+var hasRequiredTimestamp;
+
+function requireTimestamp () {
+	if (hasRequiredTimestamp) return timestamp;
+	hasRequiredTimestamp = 1;
+	Object.defineProperty(timestamp, '__esModule', { value: true });
+	timestamp.Timestamp = undefined;
+	const runtime_1 = require$$1$1;
+	const runtime_2 = require$$1$1;
+	const runtime_3 = require$$1$1;
+	const runtime_4 = require$$1$1;
+	const runtime_5 = require$$1$1;
+	const runtime_6 = require$$1$1;
+	const runtime_7 = require$$1$1;
+	// @generated message type with reflection information, may provide speed optimized methods
+	class Timestamp$Type extends runtime_7.MessageType {
+	  constructor() {
+	    super('google.protobuf.Timestamp', [
+	      { no: 1, name: 'seconds', kind: 'scalar', T: 3 /*ScalarType.INT64*/ },
+	      { no: 2, name: 'nanos', kind: 'scalar', T: 5 /*ScalarType.INT32*/ }
+	    ]);
+	  }
+	  /**
+	   * Creates a new `Timestamp` for the current time.
+	   */
+	  now() {
+	    const msg = this.create();
+	    const ms = Date.now();
+	    msg.seconds = runtime_6.PbLong.from(Math.floor(ms / 1000)).toString();
+	    msg.nanos = (ms % 1000) * 1000000;
+	    return msg
+	  }
+	  /**
+	   * Converts a `Timestamp` to a JavaScript Date.
+	   */
+	  toDate(message) {
+	    return new Date(
+	      runtime_6.PbLong.from(message.seconds).toNumber() * 1000 +
+	        Math.ceil(message.nanos / 1000000)
+	    )
+	  }
+	  /**
+	   * Converts a JavaScript Date to a `Timestamp`.
+	   */
+	  fromDate(date) {
+	    const msg = this.create();
+	    const ms = date.getTime();
+	    msg.seconds = runtime_6.PbLong.from(Math.floor(ms / 1000)).toString();
+	    msg.nanos = (ms % 1000) * 1000000;
+	    return msg
+	  }
+	  /**
+	   * In JSON format, the `Timestamp` type is encoded as a string
+	   * in the RFC 3339 format.
+	   */
+	  internalJsonWrite(message, options) {
+	    let ms = runtime_6.PbLong.from(message.seconds).toNumber() * 1000;
+	    if (
+	      ms < Date.parse('0001-01-01T00:00:00Z') ||
+	      ms > Date.parse('9999-12-31T23:59:59Z')
+	    )
+	      throw new Error(
+	        'Unable to encode Timestamp to JSON. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.'
+	      )
+	    if (message.nanos < 0)
+	      throw new Error(
+	        'Unable to encode invalid Timestamp to JSON. Nanos must not be negative.'
+	      )
+	    let z = 'Z';
+	    if (message.nanos > 0) {
+	      let nanosStr = (message.nanos + 1000000000).toString().substring(1);
+	      if (nanosStr.substring(3) === '000000')
+	        z = '.' + nanosStr.substring(0, 3) + 'Z';
+	      else if (nanosStr.substring(6) === '000')
+	        z = '.' + nanosStr.substring(0, 6) + 'Z';
+	      else z = '.' + nanosStr + 'Z';
+	    }
+	    return new Date(ms).toISOString().replace('.000Z', z)
+	  }
+	  /**
+	   * In JSON format, the `Timestamp` type is encoded as a string
+	   * in the RFC 3339 format.
+	   */
+	  internalJsonRead(json, options, target) {
+	    if (typeof json !== 'string')
+	      throw new Error(
+	        'Unable to parse Timestamp from JSON ' +
+	          (0, runtime_5.typeofJsonValue)(json) +
+	          '.'
+	      )
+	    let matches = json.match(
+	      /^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(?:Z|\.([0-9]{3,9})Z|([+-][0-9][0-9]:[0-9][0-9]))$/
+	    );
+	    if (!matches)
+	      throw new Error('Unable to parse Timestamp from JSON. Invalid format.')
+	    let ms = Date.parse(
+	      matches[1] +
+	        '-' +
+	        matches[2] +
+	        '-' +
+	        matches[3] +
+	        'T' +
+	        matches[4] +
+	        ':' +
+	        matches[5] +
+	        ':' +
+	        matches[6] +
+	        (matches[8] ? matches[8] : 'Z')
+	    );
+	    if (Number.isNaN(ms))
+	      throw new Error('Unable to parse Timestamp from JSON. Invalid value.')
+	    if (
+	      ms < Date.parse('0001-01-01T00:00:00Z') ||
+	      ms > Date.parse('9999-12-31T23:59:59Z')
+	    )
+	      throw new globalThis.Error(
+	        'Unable to parse Timestamp from JSON. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.'
+	      )
+	    if (!target) target = this.create();
+	    target.seconds = runtime_6.PbLong.from(ms / 1000).toString();
+	    target.nanos = 0;
+	    if (matches[7])
+	      target.nanos =
+	        parseInt('1' + matches[7] + '0'.repeat(9 - matches[7].length)) -
+	        1000000000;
+	    return target
+	  }
+	  create(value) {
+	    const message = { seconds: '0', nanos: 0 };
+	    globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, {
+	      enumerable: false,
+	      value: this
+	    });
+	    if (value !== undefined)
+	      (0, runtime_3.reflectionMergePartial)(this, message, value);
+	    return message
+	  }
+	  internalBinaryRead(reader, length, options, target) {
+	    let message = target !== null && target !== undefined ? target : this.create(),
+	      end = reader.pos + length;
+	    while (reader.pos < end) {
+	      let [fieldNo, wireType] = reader.tag();
+	      switch (fieldNo) {
+	        case /* int64 seconds */ 1:
+	          message.seconds = reader.int64().toString();
+	          break
+	        case /* int32 nanos */ 2:
+	          message.nanos = reader.int32();
+	          break
+	        default:
+	          let u = options.readUnknownField;
+	          if (u === 'throw')
+	            throw new globalThis.Error(
+	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+	            )
+	          let d = reader.skip(wireType);
+	          if (u !== false)
+	            (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(
+	              this.typeName,
+	              message,
+	              fieldNo,
+	              wireType,
+	              d
+	            );
+	      }
+	    }
+	    return message
+	  }
+	  internalBinaryWrite(message, writer, options) {
+	    /* int64 seconds = 1; */
+	    if (message.seconds !== '0')
+	      writer.tag(1, runtime_1.WireType.Varint).int64(message.seconds);
+	    /* int32 nanos = 2; */
+	    if (message.nanos !== 0)
+	      writer.tag(2, runtime_1.WireType.Varint).int32(message.nanos);
+	    let u = options.writeUnknownFields;
+	    if (u !== false)
+	      (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(
+	        this.typeName,
+	        message,
+	        writer
+	      );
+	    return writer
+	  }
+	}
+	/**
+	 * @generated MessageType for protobuf message google.protobuf.Timestamp
+	 */
+	timestamp.Timestamp = new Timestamp$Type();
+	
+	return timestamp;
+}
+
+var wrappers = {};
+
+var hasRequiredWrappers;
+
+function requireWrappers () {
+	if (hasRequiredWrappers) return wrappers;
+	hasRequiredWrappers = 1;
+	Object.defineProperty(wrappers, '__esModule', { value: true });
+	wrappers.BytesValue =
+	  wrappers.StringValue =
+	  wrappers.BoolValue =
+	  wrappers.UInt32Value =
+	  wrappers.Int32Value =
+	  wrappers.UInt64Value =
+	  wrappers.Int64Value =
+	  wrappers.FloatValue =
+	  wrappers.DoubleValue =
+	    undefined;
+	// @generated by protobuf-ts 2.9.1 with parameter long_type_string,client_none,generate_dependencies
+	// @generated from protobuf file "google/protobuf/wrappers.proto" (package "google.protobuf", syntax proto3)
+	// tslint:disable
+	//
+	// Protocol Buffers - Google's data interchange format
+	// Copyright 2008 Google Inc.  All rights reserved.
+	// https://developers.google.com/protocol-buffers/
+	//
+	// Redistribution and use in source and binary forms, with or without
+	// modification, are permitted provided that the following conditions are
+	// met:
+	//
+	//     * Redistributions of source code must retain the above copyright
+	// notice, this list of conditions and the following disclaimer.
+	//     * Redistributions in binary form must reproduce the above
+	// copyright notice, this list of conditions and the following disclaimer
+	// in the documentation and/or other materials provided with the
+	// distribution.
+	//     * Neither the name of Google Inc. nor the names of its
+	// contributors may be used to endorse or promote products derived from
+	// this software without specific prior written permission.
+	//
+	// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+	// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+	// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+	// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+	// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+	// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+	// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+	// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+	// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+	// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+	//
+	//
+	// Wrappers for primitive (non-message) types. These types are useful
+	// for embedding primitives in the `google.protobuf.Any` type and for places
+	// where we need to distinguish between the absence of a primitive
+	// typed field and its default value.
+	//
+	const runtime_1 = require$$1$1;
+	const runtime_2 = require$$1$1;
+	const runtime_3 = require$$1$1;
+	const runtime_4 = require$$1$1;
+	const runtime_5 = require$$1$1;
+	const runtime_6 = require$$1$1;
+	const runtime_7 = require$$1$1;
+	// @generated message type with reflection information, may provide speed optimized methods
+	class DoubleValue$Type extends runtime_7.MessageType {
+	  constructor() {
+	    super('google.protobuf.DoubleValue', [
+	      { no: 1, name: 'value', kind: 'scalar', T: 1 /*ScalarType.DOUBLE*/ }
+	    ]);
+	  }
+	  /**
+	   * Encode `DoubleValue` to JSON number.
+	   */
+	  internalJsonWrite(message, options) {
+	    return this.refJsonWriter.scalar(2, message.value, 'value', false, true)
+	  }
+	  /**
+	   * Decode `DoubleValue` from JSON number.
+	   */
+	  internalJsonRead(json, options, target) {
+	    if (!target) target = this.create();
+	    target.value = this.refJsonReader.scalar(json, 1, undefined, 'value');
+	    return target
+	  }
+	  create(value) {
+	    const message = { value: 0 };
+	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
+	      enumerable: false,
+	      value: this
+	    });
+	    if (value !== undefined)
+	      (0, runtime_5.reflectionMergePartial)(this, message, value);
+	    return message
+	  }
+	  internalBinaryRead(reader, length, options, target) {
+	    let message = target !== null && target !== undefined ? target : this.create(),
+	      end = reader.pos + length;
+	    while (reader.pos < end) {
+	      let [fieldNo, wireType] = reader.tag();
+	      switch (fieldNo) {
+	        case /* double value */ 1:
+	          message.value = reader.double();
+	          break
+	        default:
+	          let u = options.readUnknownField;
+	          if (u === 'throw')
+	            throw new globalThis.Error(
+	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+	            )
+	          let d = reader.skip(wireType);
+	          if (u !== false)
+	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
+	              this.typeName,
+	              message,
+	              fieldNo,
+	              wireType,
+	              d
+	            );
+	      }
+	    }
+	    return message
+	  }
+	  internalBinaryWrite(message, writer, options) {
+	    /* double value = 1; */
+	    if (message.value !== 0)
+	      writer.tag(1, runtime_3.WireType.Bit64).double(message.value);
+	    let u = options.writeUnknownFields;
+	    if (u !== false)
+	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
+	        this.typeName,
+	        message,
+	        writer
+	      );
+	    return writer
+	  }
+	}
+	/**
+	 * @generated MessageType for protobuf message google.protobuf.DoubleValue
+	 */
+	wrappers.DoubleValue = new DoubleValue$Type();
+	// @generated message type with reflection information, may provide speed optimized methods
+	class FloatValue$Type extends runtime_7.MessageType {
+	  constructor() {
+	    super('google.protobuf.FloatValue', [
+	      { no: 1, name: 'value', kind: 'scalar', T: 2 /*ScalarType.FLOAT*/ }
+	    ]);
+	  }
+	  /**
+	   * Encode `FloatValue` to JSON number.
+	   */
+	  internalJsonWrite(message, options) {
+	    return this.refJsonWriter.scalar(1, message.value, 'value', false, true)
+	  }
+	  /**
+	   * Decode `FloatValue` from JSON number.
+	   */
+	  internalJsonRead(json, options, target) {
+	    if (!target) target = this.create();
+	    target.value = this.refJsonReader.scalar(json, 1, undefined, 'value');
+	    return target
+	  }
+	  create(value) {
+	    const message = { value: 0 };
+	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
+	      enumerable: false,
+	      value: this
+	    });
+	    if (value !== undefined)
+	      (0, runtime_5.reflectionMergePartial)(this, message, value);
+	    return message
+	  }
+	  internalBinaryRead(reader, length, options, target) {
+	    let message = target !== null && target !== undefined ? target : this.create(),
+	      end = reader.pos + length;
+	    while (reader.pos < end) {
+	      let [fieldNo, wireType] = reader.tag();
+	      switch (fieldNo) {
+	        case /* float value */ 1:
+	          message.value = reader.float();
+	          break
+	        default:
+	          let u = options.readUnknownField;
+	          if (u === 'throw')
+	            throw new globalThis.Error(
+	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+	            )
+	          let d = reader.skip(wireType);
+	          if (u !== false)
+	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
+	              this.typeName,
+	              message,
+	              fieldNo,
+	              wireType,
+	              d
+	            );
+	      }
+	    }
+	    return message
+	  }
+	  internalBinaryWrite(message, writer, options) {
+	    /* float value = 1; */
+	    if (message.value !== 0)
+	      writer.tag(1, runtime_3.WireType.Bit32).float(message.value);
+	    let u = options.writeUnknownFields;
+	    if (u !== false)
+	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
+	        this.typeName,
+	        message,
+	        writer
+	      );
+	    return writer
+	  }
+	}
+	/**
+	 * @generated MessageType for protobuf message google.protobuf.FloatValue
+	 */
+	wrappers.FloatValue = new FloatValue$Type();
+	// @generated message type with reflection information, may provide speed optimized methods
+	class Int64Value$Type extends runtime_7.MessageType {
+	  constructor() {
+	    super('google.protobuf.Int64Value', [
+	      { no: 1, name: 'value', kind: 'scalar', T: 3 /*ScalarType.INT64*/ }
+	    ]);
+	  }
+	  /**
+	   * Encode `Int64Value` to JSON string.
+	   */
+	  internalJsonWrite(message, options) {
+	    return this.refJsonWriter.scalar(
+	      runtime_1.ScalarType.INT64,
+	      message.value,
+	      'value',
+	      false,
+	      true
+	    )
+	  }
+	  /**
+	   * Decode `Int64Value` from JSON string.
+	   */
+	  internalJsonRead(json, options, target) {
+	    if (!target) target = this.create();
+	    target.value = this.refJsonReader.scalar(
+	      json,
+	      runtime_1.ScalarType.INT64,
+	      runtime_2.LongType.STRING,
+	      'value'
+	    );
+	    return target
+	  }
+	  create(value) {
+	    const message = { value: '0' };
+	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
+	      enumerable: false,
+	      value: this
+	    });
+	    if (value !== undefined)
+	      (0, runtime_5.reflectionMergePartial)(this, message, value);
+	    return message
+	  }
+	  internalBinaryRead(reader, length, options, target) {
+	    let message = target !== null && target !== undefined ? target : this.create(),
+	      end = reader.pos + length;
+	    while (reader.pos < end) {
+	      let [fieldNo, wireType] = reader.tag();
+	      switch (fieldNo) {
+	        case /* int64 value */ 1:
+	          message.value = reader.int64().toString();
+	          break
+	        default:
+	          let u = options.readUnknownField;
+	          if (u === 'throw')
+	            throw new globalThis.Error(
+	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+	            )
+	          let d = reader.skip(wireType);
+	          if (u !== false)
+	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
+	              this.typeName,
+	              message,
+	              fieldNo,
+	              wireType,
+	              d
+	            );
+	      }
+	    }
+	    return message
+	  }
+	  internalBinaryWrite(message, writer, options) {
+	    /* int64 value = 1; */
+	    if (message.value !== '0')
+	      writer.tag(1, runtime_3.WireType.Varint).int64(message.value);
+	    let u = options.writeUnknownFields;
+	    if (u !== false)
+	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
+	        this.typeName,
+	        message,
+	        writer
+	      );
+	    return writer
+	  }
+	}
+	/**
+	 * @generated MessageType for protobuf message google.protobuf.Int64Value
+	 */
+	wrappers.Int64Value = new Int64Value$Type();
+	// @generated message type with reflection information, may provide speed optimized methods
+	class UInt64Value$Type extends runtime_7.MessageType {
+	  constructor() {
+	    super('google.protobuf.UInt64Value', [
+	      { no: 1, name: 'value', kind: 'scalar', T: 4 /*ScalarType.UINT64*/ }
+	    ]);
+	  }
+	  /**
+	   * Encode `UInt64Value` to JSON string.
+	   */
+	  internalJsonWrite(message, options) {
+	    return this.refJsonWriter.scalar(
+	      runtime_1.ScalarType.UINT64,
+	      message.value,
+	      'value',
+	      false,
+	      true
+	    )
+	  }
+	  /**
+	   * Decode `UInt64Value` from JSON string.
+	   */
+	  internalJsonRead(json, options, target) {
+	    if (!target) target = this.create();
+	    target.value = this.refJsonReader.scalar(
+	      json,
+	      runtime_1.ScalarType.UINT64,
+	      runtime_2.LongType.STRING,
+	      'value'
+	    );
+	    return target
+	  }
+	  create(value) {
+	    const message = { value: '0' };
+	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
+	      enumerable: false,
+	      value: this
+	    });
+	    if (value !== undefined)
+	      (0, runtime_5.reflectionMergePartial)(this, message, value);
+	    return message
+	  }
+	  internalBinaryRead(reader, length, options, target) {
+	    let message = target !== null && target !== undefined ? target : this.create(),
+	      end = reader.pos + length;
+	    while (reader.pos < end) {
+	      let [fieldNo, wireType] = reader.tag();
+	      switch (fieldNo) {
+	        case /* uint64 value */ 1:
+	          message.value = reader.uint64().toString();
+	          break
+	        default:
+	          let u = options.readUnknownField;
+	          if (u === 'throw')
+	            throw new globalThis.Error(
+	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+	            )
+	          let d = reader.skip(wireType);
+	          if (u !== false)
+	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
+	              this.typeName,
+	              message,
+	              fieldNo,
+	              wireType,
+	              d
+	            );
+	      }
+	    }
+	    return message
+	  }
+	  internalBinaryWrite(message, writer, options) {
+	    /* uint64 value = 1; */
+	    if (message.value !== '0')
+	      writer.tag(1, runtime_3.WireType.Varint).uint64(message.value);
+	    let u = options.writeUnknownFields;
+	    if (u !== false)
+	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
+	        this.typeName,
+	        message,
+	        writer
+	      );
+	    return writer
+	  }
+	}
+	/**
+	 * @generated MessageType for protobuf message google.protobuf.UInt64Value
+	 */
+	wrappers.UInt64Value = new UInt64Value$Type();
+	// @generated message type with reflection information, may provide speed optimized methods
+	class Int32Value$Type extends runtime_7.MessageType {
+	  constructor() {
+	    super('google.protobuf.Int32Value', [
+	      { no: 1, name: 'value', kind: 'scalar', T: 5 /*ScalarType.INT32*/ }
+	    ]);
+	  }
+	  /**
+	   * Encode `Int32Value` to JSON string.
+	   */
+	  internalJsonWrite(message, options) {
+	    return this.refJsonWriter.scalar(5, message.value, 'value', false, true)
+	  }
+	  /**
+	   * Decode `Int32Value` from JSON string.
+	   */
+	  internalJsonRead(json, options, target) {
+	    if (!target) target = this.create();
+	    target.value = this.refJsonReader.scalar(json, 5, undefined, 'value');
+	    return target
+	  }
+	  create(value) {
+	    const message = { value: 0 };
+	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
+	      enumerable: false,
+	      value: this
+	    });
+	    if (value !== undefined)
+	      (0, runtime_5.reflectionMergePartial)(this, message, value);
+	    return message
+	  }
+	  internalBinaryRead(reader, length, options, target) {
+	    let message = target !== null && target !== undefined ? target : this.create(),
+	      end = reader.pos + length;
+	    while (reader.pos < end) {
+	      let [fieldNo, wireType] = reader.tag();
+	      switch (fieldNo) {
+	        case /* int32 value */ 1:
+	          message.value = reader.int32();
+	          break
+	        default:
+	          let u = options.readUnknownField;
+	          if (u === 'throw')
+	            throw new globalThis.Error(
+	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+	            )
+	          let d = reader.skip(wireType);
+	          if (u !== false)
+	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
+	              this.typeName,
+	              message,
+	              fieldNo,
+	              wireType,
+	              d
+	            );
+	      }
+	    }
+	    return message
+	  }
+	  internalBinaryWrite(message, writer, options) {
+	    /* int32 value = 1; */
+	    if (message.value !== 0)
+	      writer.tag(1, runtime_3.WireType.Varint).int32(message.value);
+	    let u = options.writeUnknownFields;
+	    if (u !== false)
+	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
+	        this.typeName,
+	        message,
+	        writer
+	      );
+	    return writer
+	  }
+	}
+	/**
+	 * @generated MessageType for protobuf message google.protobuf.Int32Value
+	 */
+	wrappers.Int32Value = new Int32Value$Type();
+	// @generated message type with reflection information, may provide speed optimized methods
+	class UInt32Value$Type extends runtime_7.MessageType {
+	  constructor() {
+	    super('google.protobuf.UInt32Value', [
+	      { no: 1, name: 'value', kind: 'scalar', T: 13 /*ScalarType.UINT32*/ }
+	    ]);
+	  }
+	  /**
+	   * Encode `UInt32Value` to JSON string.
+	   */
+	  internalJsonWrite(message, options) {
+	    return this.refJsonWriter.scalar(13, message.value, 'value', false, true)
+	  }
+	  /**
+	   * Decode `UInt32Value` from JSON string.
+	   */
+	  internalJsonRead(json, options, target) {
+	    if (!target) target = this.create();
+	    target.value = this.refJsonReader.scalar(json, 13, undefined, 'value');
+	    return target
+	  }
+	  create(value) {
+	    const message = { value: 0 };
+	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
+	      enumerable: false,
+	      value: this
+	    });
+	    if (value !== undefined)
+	      (0, runtime_5.reflectionMergePartial)(this, message, value);
+	    return message
+	  }
+	  internalBinaryRead(reader, length, options, target) {
+	    let message = target !== null && target !== undefined ? target : this.create(),
+	      end = reader.pos + length;
+	    while (reader.pos < end) {
+	      let [fieldNo, wireType] = reader.tag();
+	      switch (fieldNo) {
+	        case /* uint32 value */ 1:
+	          message.value = reader.uint32();
+	          break
+	        default:
+	          let u = options.readUnknownField;
+	          if (u === 'throw')
+	            throw new globalThis.Error(
+	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+	            )
+	          let d = reader.skip(wireType);
+	          if (u !== false)
+	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
+	              this.typeName,
+	              message,
+	              fieldNo,
+	              wireType,
+	              d
+	            );
+	      }
+	    }
+	    return message
+	  }
+	  internalBinaryWrite(message, writer, options) {
+	    /* uint32 value = 1; */
+	    if (message.value !== 0)
+	      writer.tag(1, runtime_3.WireType.Varint).uint32(message.value);
+	    let u = options.writeUnknownFields;
+	    if (u !== false)
+	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
+	        this.typeName,
+	        message,
+	        writer
+	      );
+	    return writer
+	  }
+	}
+	/**
+	 * @generated MessageType for protobuf message google.protobuf.UInt32Value
+	 */
+	wrappers.UInt32Value = new UInt32Value$Type();
+	// @generated message type with reflection information, may provide speed optimized methods
+	class BoolValue$Type extends runtime_7.MessageType {
+	  constructor() {
+	    super('google.protobuf.BoolValue', [
+	      { no: 1, name: 'value', kind: 'scalar', T: 8 /*ScalarType.BOOL*/ }
+	    ]);
+	  }
+	  /**
+	   * Encode `BoolValue` to JSON bool.
+	   */
+	  internalJsonWrite(message, options) {
+	    return message.value
+	  }
+	  /**
+	   * Decode `BoolValue` from JSON bool.
+	   */
+	  internalJsonRead(json, options, target) {
+	    if (!target) target = this.create();
+	    target.value = this.refJsonReader.scalar(json, 8, undefined, 'value');
+	    return target
+	  }
+	  create(value) {
+	    const message = { value: false };
+	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
+	      enumerable: false,
+	      value: this
+	    });
+	    if (value !== undefined)
+	      (0, runtime_5.reflectionMergePartial)(this, message, value);
+	    return message
+	  }
+	  internalBinaryRead(reader, length, options, target) {
+	    let message = target !== null && target !== undefined ? target : this.create(),
+	      end = reader.pos + length;
+	    while (reader.pos < end) {
+	      let [fieldNo, wireType] = reader.tag();
+	      switch (fieldNo) {
+	        case /* bool value */ 1:
+	          message.value = reader.bool();
+	          break
+	        default:
+	          let u = options.readUnknownField;
+	          if (u === 'throw')
+	            throw new globalThis.Error(
+	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+	            )
+	          let d = reader.skip(wireType);
+	          if (u !== false)
+	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
+	              this.typeName,
+	              message,
+	              fieldNo,
+	              wireType,
+	              d
+	            );
+	      }
+	    }
+	    return message
+	  }
+	  internalBinaryWrite(message, writer, options) {
+	    /* bool value = 1; */
+	    if (message.value !== false)
+	      writer.tag(1, runtime_3.WireType.Varint).bool(message.value);
+	    let u = options.writeUnknownFields;
+	    if (u !== false)
+	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
+	        this.typeName,
+	        message,
+	        writer
+	      );
+	    return writer
+	  }
+	}
+	/**
+	 * @generated MessageType for protobuf message google.protobuf.BoolValue
+	 */
+	wrappers.BoolValue = new BoolValue$Type();
+	// @generated message type with reflection information, may provide speed optimized methods
+	class StringValue$Type extends runtime_7.MessageType {
+	  constructor() {
+	    super('google.protobuf.StringValue', [
+	      { no: 1, name: 'value', kind: 'scalar', T: 9 /*ScalarType.STRING*/ }
+	    ]);
+	  }
+	  /**
+	   * Encode `StringValue` to JSON string.
+	   */
+	  internalJsonWrite(message, options) {
+	    return message.value
+	  }
+	  /**
+	   * Decode `StringValue` from JSON string.
+	   */
+	  internalJsonRead(json, options, target) {
+	    if (!target) target = this.create();
+	    target.value = this.refJsonReader.scalar(json, 9, undefined, 'value');
+	    return target
+	  }
+	  create(value) {
+	    const message = { value: '' };
+	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
+	      enumerable: false,
+	      value: this
+	    });
+	    if (value !== undefined)
+	      (0, runtime_5.reflectionMergePartial)(this, message, value);
+	    return message
+	  }
+	  internalBinaryRead(reader, length, options, target) {
+	    let message = target !== null && target !== undefined ? target : this.create(),
+	      end = reader.pos + length;
+	    while (reader.pos < end) {
+	      let [fieldNo, wireType] = reader.tag();
+	      switch (fieldNo) {
+	        case /* string value */ 1:
+	          message.value = reader.string();
+	          break
+	        default:
+	          let u = options.readUnknownField;
+	          if (u === 'throw')
+	            throw new globalThis.Error(
+	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+	            )
+	          let d = reader.skip(wireType);
+	          if (u !== false)
+	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
+	              this.typeName,
+	              message,
+	              fieldNo,
+	              wireType,
+	              d
+	            );
+	      }
+	    }
+	    return message
+	  }
+	  internalBinaryWrite(message, writer, options) {
+	    /* string value = 1; */
+	    if (message.value !== '')
+	      writer.tag(1, runtime_3.WireType.LengthDelimited).string(message.value);
+	    let u = options.writeUnknownFields;
+	    if (u !== false)
+	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
+	        this.typeName,
+	        message,
+	        writer
+	      );
+	    return writer
+	  }
+	}
+	/**
+	 * @generated MessageType for protobuf message google.protobuf.StringValue
+	 */
+	wrappers.StringValue = new StringValue$Type();
+	// @generated message type with reflection information, may provide speed optimized methods
+	class BytesValue$Type extends runtime_7.MessageType {
+	  constructor() {
+	    super('google.protobuf.BytesValue', [
+	      { no: 1, name: 'value', kind: 'scalar', T: 12 /*ScalarType.BYTES*/ }
+	    ]);
+	  }
+	  /**
+	   * Encode `BytesValue` to JSON string.
+	   */
+	  internalJsonWrite(message, options) {
+	    return this.refJsonWriter.scalar(12, message.value, 'value', false, true)
+	  }
+	  /**
+	   * Decode `BytesValue` from JSON string.
+	   */
+	  internalJsonRead(json, options, target) {
+	    if (!target) target = this.create();
+	    target.value = this.refJsonReader.scalar(json, 12, undefined, 'value');
+	    return target
+	  }
+	  create(value) {
+	    const message = { value: new Uint8Array(0) };
+	    globalThis.Object.defineProperty(message, runtime_6.MESSAGE_TYPE, {
+	      enumerable: false,
+	      value: this
+	    });
+	    if (value !== undefined)
+	      (0, runtime_5.reflectionMergePartial)(this, message, value);
+	    return message
+	  }
+	  internalBinaryRead(reader, length, options, target) {
+	    let message = target !== null && target !== undefined ? target : this.create(),
+	      end = reader.pos + length;
+	    while (reader.pos < end) {
+	      let [fieldNo, wireType] = reader.tag();
+	      switch (fieldNo) {
+	        case /* bytes value */ 1:
+	          message.value = reader.bytes();
+	          break
+	        default:
+	          let u = options.readUnknownField;
+	          if (u === 'throw')
+	            throw new globalThis.Error(
+	              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+	            )
+	          let d = reader.skip(wireType);
+	          if (u !== false)
+	            (u === true ? runtime_4.UnknownFieldHandler.onRead : u)(
+	              this.typeName,
+	              message,
+	              fieldNo,
+	              wireType,
+	              d
+	            );
+	      }
+	    }
+	    return message
+	  }
+	  internalBinaryWrite(message, writer, options) {
+	    /* bytes value = 1; */
+	    if (message.value.length)
+	      writer.tag(1, runtime_3.WireType.LengthDelimited).bytes(message.value);
+	    let u = options.writeUnknownFields;
+	    if (u !== false)
+	      (u == true ? runtime_4.UnknownFieldHandler.onWrite : u)(
+	        this.typeName,
+	        message,
+	        writer
+	      );
+	    return writer
+	  }
+	}
+	/**
+	 * @generated MessageType for protobuf message google.protobuf.BytesValue
+	 */
+	wrappers.BytesValue = new BytesValue$Type();
+	
+	return wrappers;
+}
+
+var artifact = {};
+
+/**
+ * Turns PartialMethodInfo into MethodInfo.
+ */
+function normalizeMethodInfo(method, service) {
+    var _a, _b, _c;
+    let m = method;
+    m.service = service;
+    m.localName = (_a = m.localName) !== null && _a !== undefined ? _a : lowerCamelCase(m.name);
+    // noinspection PointlessBooleanExpressionJS
+    m.serverStreaming = !!m.serverStreaming;
+    // noinspection PointlessBooleanExpressionJS
+    m.clientStreaming = !!m.clientStreaming;
+    m.options = (_b = m.options) !== null && _b !== undefined ? _b : {};
+    m.idempotency = (_c = m.idempotency) !== null && _c !== undefined ? _c : undefined;
+    return m;
+}
+/**
+ * Read custom method options from a generated service client.
+ *
+ * @deprecated use readMethodOption()
+ */
+function readMethodOptions(service, methodName, extensionName, extensionType) {
+    var _a;
+    const options = (_a = service.methods.find((m, i) => m.localName === methodName || i === methodName)) === null || _a === undefined ? undefined : _a.options;
+    return options && options[extensionName] ? extensionType.fromJson(options[extensionName]) : undefined;
+}
+function readMethodOption(service, methodName, extensionName, extensionType) {
+    var _a;
+    const options = (_a = service.methods.find((m, i) => m.localName === methodName || i === methodName)) === null || _a === undefined ? undefined : _a.options;
+    if (!options) {
+        return undefined;
+    }
+    const optionVal = options[extensionName];
+    if (optionVal === undefined) {
+        return optionVal;
+    }
+    return extensionType ? extensionType.fromJson(optionVal) : optionVal;
+}
+function readServiceOption(service, extensionName, extensionType) {
+    const options = service.options;
+    if (!options) {
+        return undefined;
+    }
+    const optionVal = options[extensionName];
+    if (optionVal === undefined) {
+        return optionVal;
+    }
+    return extensionType ? extensionType.fromJson(optionVal) : optionVal;
+}
+
+class ServiceType {
+    constructor(typeName, methods, options) {
+        this.typeName = typeName;
+        this.methods = methods.map(i => normalizeMethodInfo(i, this));
+        this.options = options !== null && options !== undefined ? options : {};
+    }
+}
+
+/**
+ * An error that occurred while calling a RPC method.
+ */
+class RpcError extends Error {
+    constructor(message, code = 'UNKNOWN', meta) {
+        super(message);
+        this.name = 'RpcError';
+        // see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-2.html#example
+        Object.setPrototypeOf(this, new.target.prototype);
+        this.code = code;
+        this.meta = meta !== null && meta !== undefined ? meta : {};
+    }
+    toString() {
+        const l = [this.name + ': ' + this.message];
+        if (this.code) {
+            l.push('');
+            l.push('Code: ' + this.code);
+        }
+        if (this.serviceName && this.methodName) {
+            l.push('Method: ' + this.serviceName + '/' + this.methodName);
+        }
+        let m = Object.entries(this.meta);
+        if (m.length) {
+            l.push('');
+            l.push('Meta:');
+            for (let [k, v] of m) {
+                l.push(`  ${k}: ${v}`);
+            }
+        }
+        return l.join('\n');
+    }
+}
+
+/**
+ * Merges custom RPC options with defaults. Returns a new instance and keeps
+ * the "defaults" and the "options" unmodified.
+ *
+ * Merges `RpcMetadata` "meta", overwriting values from "defaults" with
+ * values from "options". Does not append values to existing entries.
+ *
+ * Merges "jsonOptions", including "jsonOptions.typeRegistry", by creating
+ * a new array that contains types from "options.jsonOptions.typeRegistry"
+ * first, then types from "defaults.jsonOptions.typeRegistry".
+ *
+ * Merges "binaryOptions".
+ *
+ * Merges "interceptors" by creating a new array that contains interceptors
+ * from "defaults" first, then interceptors from "options".
+ *
+ * Works with objects that extend `RpcOptions`, but only if the added
+ * properties are of type Date, primitive like string, boolean, or Array
+ * of primitives. If you have other property types, you have to merge them
+ * yourself.
+ */
+function mergeRpcOptions(defaults, options) {
+    if (!options)
+        return defaults;
+    let o = {};
+    copy(defaults, o);
+    copy(options, o);
+    for (let key of Object.keys(options)) {
+        let val = options[key];
+        switch (key) {
+            case "jsonOptions":
+                o.jsonOptions = mergeJsonOptions(defaults.jsonOptions, o.jsonOptions);
+                break;
+            case "binaryOptions":
+                o.binaryOptions = mergeBinaryOptions(defaults.binaryOptions, o.binaryOptions);
+                break;
+            case "meta":
+                o.meta = {};
+                copy(defaults.meta, o.meta);
+                copy(options.meta, o.meta);
+                break;
+            case "interceptors":
+                o.interceptors = defaults.interceptors ? defaults.interceptors.concat(val) : val.concat();
+                break;
+        }
+    }
+    return o;
+}
+function copy(a, into) {
+    if (!a)
+        return;
+    let c = into;
+    for (let [k, v] of Object.entries(a)) {
+        if (v instanceof Date)
+            c[k] = new Date(v.getTime());
+        else if (Array.isArray(v))
+            c[k] = v.concat();
+        else
+            c[k] = v;
+    }
+}
+
+var DeferredState;
+(function (DeferredState) {
+    DeferredState[DeferredState["PENDING"] = 0] = "PENDING";
+    DeferredState[DeferredState["REJECTED"] = 1] = "REJECTED";
+    DeferredState[DeferredState["RESOLVED"] = 2] = "RESOLVED";
+})(DeferredState || (DeferredState = {}));
+/**
+ * A deferred promise. This is a "controller" for a promise, which lets you
+ * pass a promise around and reject or resolve it from the outside.
+ *
+ * Warning: This class is to be used with care. Using it can make code very
+ * difficult to read. It is intended for use in library code that exposes
+ * promises, not for regular business logic.
+ */
+class Deferred {
+    /**
+     * @param preventUnhandledRejectionWarning - prevents the warning
+     * "Unhandled Promise rejection" by adding a noop rejection handler.
+     * Working with calls returned from the runtime-rpc package in an
+     * async function usually means awaiting one call property after
+     * the other. This means that the "status" is not being awaited when
+     * an earlier await for the "headers" is rejected. This causes the
+     * "unhandled promise reject" warning. A more correct behaviour for
+     * calls might be to become aware whether at least one of the
+     * promises is handled and swallow the rejection warning for the
+     * others.
+     */
+    constructor(preventUnhandledRejectionWarning = true) {
+        this._state = DeferredState.PENDING;
+        this._promise = new Promise((resolve, reject) => {
+            this._resolve = resolve;
+            this._reject = reject;
+        });
+        if (preventUnhandledRejectionWarning) {
+            this._promise.catch(_ => { });
+        }
+    }
+    /**
+     * Get the current state of the promise.
+     */
+    get state() {
+        return this._state;
+    }
+    /**
+     * Get the deferred promise.
+     */
+    get promise() {
+        return this._promise;
+    }
+    /**
+     * Resolve the promise. Throws if the promise is already resolved or rejected.
+     */
+    resolve(value) {
+        if (this.state !== DeferredState.PENDING)
+            throw new Error(`cannot resolve ${DeferredState[this.state].toLowerCase()}`);
+        this._resolve(value);
+        this._state = DeferredState.RESOLVED;
+    }
+    /**
+     * Reject the promise. Throws if the promise is already resolved or rejected.
+     */
+    reject(reason) {
+        if (this.state !== DeferredState.PENDING)
+            throw new Error(`cannot reject ${DeferredState[this.state].toLowerCase()}`);
+        this._reject(reason);
+        this._state = DeferredState.REJECTED;
+    }
+    /**
+     * Resolve the promise. Ignore if not pending.
+     */
+    resolvePending(val) {
+        if (this._state === DeferredState.PENDING)
+            this.resolve(val);
+    }
+    /**
+     * Reject the promise. Ignore if not pending.
+     */
+    rejectPending(reason) {
+        if (this._state === DeferredState.PENDING)
+            this.reject(reason);
+    }
+}
+
+/**
+ * A `RpcOutputStream` that you control.
+ */
+class RpcOutputStreamController {
+    constructor() {
+        this._lis = {
+            nxt: [],
+            msg: [],
+            err: [],
+            cmp: [],
+        };
+        this._closed = false;
+    }
+    // --- RpcOutputStream callback API
+    onNext(callback) {
+        return this.addLis(callback, this._lis.nxt);
+    }
+    onMessage(callback) {
+        return this.addLis(callback, this._lis.msg);
+    }
+    onError(callback) {
+        return this.addLis(callback, this._lis.err);
+    }
+    onComplete(callback) {
+        return this.addLis(callback, this._lis.cmp);
+    }
+    addLis(callback, list) {
+        list.push(callback);
+        return () => {
+            let i = list.indexOf(callback);
+            if (i >= 0)
+                list.splice(i, 1);
+        };
+    }
+    // remove all listeners
+    clearLis() {
+        for (let l of Object.values(this._lis))
+            l.splice(0, l.length);
+    }
+    // --- Controller API
+    /**
+     * Is this stream already closed by a completion or error?
+     */
+    get closed() {
+        return this._closed !== false;
+    }
+    /**
+     * Emit message, close with error, or close successfully, but only one
+     * at a time.
+     * Can be used to wrap a stream by using the other stream's `onNext`.
+     */
+    notifyNext(message, error, complete) {
+        assert((message ? 1 : 0) + (error ? 1 : 0) + (complete ? 1 : 0) <= 1, 'only one emission at a time');
+        if (message)
+            this.notifyMessage(message);
+        if (error)
+            this.notifyError(error);
+        if (complete)
+            this.notifyComplete();
+    }
+    /**
+     * Emits a new message. Throws if stream is closed.
+     *
+     * Triggers onNext and onMessage callbacks.
+     */
+    notifyMessage(message) {
+        assert(!this.closed, 'stream is closed');
+        this.pushIt({ value: message, done: false });
+        this._lis.msg.forEach(l => l(message));
+        this._lis.nxt.forEach(l => l(message, undefined, false));
+    }
+    /**
+     * Closes the stream with an error. Throws if stream is closed.
+     *
+     * Triggers onNext and onError callbacks.
+     */
+    notifyError(error) {
+        assert(!this.closed, 'stream is closed');
+        this._closed = error;
+        this.pushIt(error);
+        this._lis.err.forEach(l => l(error));
+        this._lis.nxt.forEach(l => l(undefined, error, false));
+        this.clearLis();
+    }
+    /**
+     * Closes the stream successfully. Throws if stream is closed.
+     *
+     * Triggers onNext and onComplete callbacks.
+     */
+    notifyComplete() {
+        assert(!this.closed, 'stream is closed');
+        this._closed = true;
+        this.pushIt({ value: null, done: true });
+        this._lis.cmp.forEach(l => l());
+        this._lis.nxt.forEach(l => l(undefined, undefined, true));
+        this.clearLis();
+    }
+    /**
+     * Creates an async iterator (that can be used with `for await {...}`)
+     * to consume the stream.
+     *
+     * Some things to note:
+     * - If an error occurs, the `for await` will throw it.
+     * - If an error occurred before the `for await` was started, `for await`
+     *   will re-throw it.
+     * - If the stream is already complete, the `for await` will be empty.
+     * - If your `for await` consumes slower than the stream produces,
+     *   for example because you are relaying messages in a slow operation,
+     *   messages are queued.
+     */
+    [Symbol.asyncIterator]() {
+        // init the iterator state, enabling pushIt()
+        if (!this._itState) {
+            this._itState = { q: [] };
+        }
+        // if we are closed, we are definitely not receiving any more messages.
+        // but we can't let the iterator get stuck. we want to either:
+        // a) finish the new iterator immediately, because we are completed
+        // b) reject the new iterator, because we errored
+        if (this._closed === true)
+            this.pushIt({ value: null, done: true });
+        else if (this._closed !== false)
+            this.pushIt(this._closed);
+        // the async iterator
+        return {
+            next: () => {
+                let state = this._itState;
+                assert(state, "bad state"); // if we don't have a state here, code is broken
+                // there should be no pending result.
+                // did the consumer call next() before we resolved our previous result promise?
+                assert(!state.p, "iterator contract broken");
+                // did we produce faster than the iterator consumed?
+                // return the oldest result from the queue.
+                let first = state.q.shift();
+                if (first)
+                    return ("value" in first) ? Promise.resolve(first) : Promise.reject(first);
+                // we have no result ATM, but we promise one.
+                // as soon as we have a result, we must resolve promise.
+                state.p = new Deferred();
+                return state.p.promise;
+            },
+        };
+    }
+    // "push" a new iterator result.
+    // this either resolves a pending promise, or enqueues the result.
+    pushIt(result) {
+        let state = this._itState;
+        if (!state)
+            return;
+        // is the consumer waiting for us?
+        if (state.p) {
+            // yes, consumer is waiting for this promise.
+            const p = state.p;
+            assert(p.state == DeferredState.PENDING, "iterator contract broken");
+            // resolve the promise
+            ("value" in result) ? p.resolve(result) : p.reject(result);
+            // must cleanup, otherwise iterator.next() would pick it up again.
+            delete state.p;
+        }
+        else {
+            // we are producing faster than the iterator consumes.
+            // push result onto queue.
+            state.q.push(result);
+        }
+    }
+}
+
+var __awaiter$4 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+/**
+ * A unary RPC call. Unary means there is exactly one input message and
+ * exactly one output message unless an error occurred.
+ */
+class UnaryCall {
+    constructor(method, requestHeaders, request, headers, response, status, trailers) {
+        this.method = method;
+        this.requestHeaders = requestHeaders;
+        this.request = request;
+        this.headers = headers;
+        this.response = response;
+        this.status = status;
+        this.trailers = trailers;
+    }
+    /**
+     * If you are only interested in the final outcome of this call,
+     * you can await it to receive a `FinishedUnaryCall`.
+     */
+    then(onfulfilled, onrejected) {
+        return this.promiseFinished().then(value => onfulfilled ? Promise.resolve(onfulfilled(value)) : value, reason => onrejected ? Promise.resolve(onrejected(reason)) : Promise.reject(reason));
+    }
+    promiseFinished() {
+        return __awaiter$4(this, undefined, undefined, function* () {
+            let [headers, response, status, trailers] = yield Promise.all([this.headers, this.response, this.status, this.trailers]);
+            return {
+                method: this.method,
+                requestHeaders: this.requestHeaders,
+                request: this.request,
+                headers,
+                response,
+                status,
+                trailers
+            };
+        });
+    }
+}
+
+var __awaiter$3 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+/**
+ * A server streaming RPC call. The client provides exactly one input message
+ * but the server may respond with 0, 1, or more messages.
+ */
+class ServerStreamingCall {
+    constructor(method, requestHeaders, request, headers, response, status, trailers) {
+        this.method = method;
+        this.requestHeaders = requestHeaders;
+        this.request = request;
+        this.headers = headers;
+        this.responses = response;
+        this.status = status;
+        this.trailers = trailers;
+    }
+    /**
+     * Instead of awaiting the response status and trailers, you can
+     * just as well await this call itself to receive the server outcome.
+     * You should first setup some listeners to the `request` to
+     * see the actual messages the server replied with.
+     */
+    then(onfulfilled, onrejected) {
+        return this.promiseFinished().then(value => onfulfilled ? Promise.resolve(onfulfilled(value)) : value, reason => onrejected ? Promise.resolve(onrejected(reason)) : Promise.reject(reason));
+    }
+    promiseFinished() {
+        return __awaiter$3(this, undefined, undefined, function* () {
+            let [headers, status, trailers] = yield Promise.all([this.headers, this.status, this.trailers]);
+            return {
+                method: this.method,
+                requestHeaders: this.requestHeaders,
+                request: this.request,
+                headers,
+                status,
+                trailers,
+            };
+        });
+    }
+}
+
+var __awaiter$2 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+/**
+ * A client streaming RPC call. This means that the clients sends 0, 1, or
+ * more messages to the server, and the server replies with exactly one
+ * message.
+ */
+class ClientStreamingCall {
+    constructor(method, requestHeaders, request, headers, response, status, trailers) {
+        this.method = method;
+        this.requestHeaders = requestHeaders;
+        this.requests = request;
+        this.headers = headers;
+        this.response = response;
+        this.status = status;
+        this.trailers = trailers;
+    }
+    /**
+     * Instead of awaiting the response status and trailers, you can
+     * just as well await this call itself to receive the server outcome.
+     * Note that it may still be valid to send more request messages.
+     */
+    then(onfulfilled, onrejected) {
+        return this.promiseFinished().then(value => onfulfilled ? Promise.resolve(onfulfilled(value)) : value, reason => onrejected ? Promise.resolve(onrejected(reason)) : Promise.reject(reason));
+    }
+    promiseFinished() {
+        return __awaiter$2(this, undefined, undefined, function* () {
+            let [headers, response, status, trailers] = yield Promise.all([this.headers, this.response, this.status, this.trailers]);
+            return {
+                method: this.method,
+                requestHeaders: this.requestHeaders,
+                headers,
+                response,
+                status,
+                trailers
+            };
+        });
+    }
+}
+
+var __awaiter$1 = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+/**
+ * A duplex streaming RPC call. This means that the clients sends an
+ * arbitrary amount of messages to the server, while at the same time,
+ * the server sends an arbitrary amount of messages to the client.
+ */
+class DuplexStreamingCall {
+    constructor(method, requestHeaders, request, headers, response, status, trailers) {
+        this.method = method;
+        this.requestHeaders = requestHeaders;
+        this.requests = request;
+        this.headers = headers;
+        this.responses = response;
+        this.status = status;
+        this.trailers = trailers;
+    }
+    /**
+     * Instead of awaiting the response status and trailers, you can
+     * just as well await this call itself to receive the server outcome.
+     * Note that it may still be valid to send more request messages.
+     */
+    then(onfulfilled, onrejected) {
+        return this.promiseFinished().then(value => onfulfilled ? Promise.resolve(onfulfilled(value)) : value, reason => onrejected ? Promise.resolve(onrejected(reason)) : Promise.reject(reason));
+    }
+    promiseFinished() {
+        return __awaiter$1(this, undefined, undefined, function* () {
+            let [headers, status, trailers] = yield Promise.all([this.headers, this.status, this.trailers]);
+            return {
+                method: this.method,
+                requestHeaders: this.requestHeaders,
+                headers,
+                status,
+                trailers,
+            };
+        });
+    }
+}
+
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+/**
+ * Transport for testing.
+ */
+class TestTransport {
+    /**
+     * Initialize with mock data. Omitted fields have default value.
+     */
+    constructor(data) {
+        /**
+         * Suppress warning / error about uncaught rejections of
+         * "status" and "trailers".
+         */
+        this.suppressUncaughtRejections = true;
+        this.headerDelay = 10;
+        this.responseDelay = 50;
+        this.betweenResponseDelay = 10;
+        this.afterResponseDelay = 10;
+        this.data = data !== null && data !== undefined ? data : {};
+    }
+    /**
+     * Sent message(s) during the last operation.
+     */
+    get sentMessages() {
+        if (this.lastInput instanceof TestInputStream) {
+            return this.lastInput.sent;
+        }
+        else if (typeof this.lastInput == "object") {
+            return [this.lastInput.single];
+        }
+        return [];
+    }
+    /**
+     * Sending message(s) completed?
+     */
+    get sendComplete() {
+        if (this.lastInput instanceof TestInputStream) {
+            return this.lastInput.completed;
+        }
+        else if (typeof this.lastInput == "object") {
+            return true;
+        }
+        return false;
+    }
+    // Creates a promise for response headers from the mock data.
+    promiseHeaders() {
+        var _a;
+        const headers = (_a = this.data.headers) !== null && _a !== undefined ? _a : TestTransport.defaultHeaders;
+        return headers instanceof RpcError
+            ? Promise.reject(headers)
+            : Promise.resolve(headers);
+    }
+    // Creates a promise for a single, valid, message from the mock data.
+    promiseSingleResponse(method) {
+        if (this.data.response instanceof RpcError) {
+            return Promise.reject(this.data.response);
+        }
+        let r;
+        if (Array.isArray(this.data.response)) {
+            assert(this.data.response.length > 0);
+            r = this.data.response[0];
+        }
+        else if (this.data.response !== undefined) {
+            r = this.data.response;
+        }
+        else {
+            r = method.O.create();
+        }
+        assert(method.O.is(r));
+        return Promise.resolve(r);
+    }
+    /**
+     * Pushes response messages from the mock data to the output stream.
+     * If an error response, status or trailers are mocked, the stream is
+     * closed with the respective error.
+     * Otherwise, stream is completed successfully.
+     *
+     * The returned promise resolves when the stream is closed. It should
+     * not reject. If it does, code is broken.
+     */
+    streamResponses(method, stream, abort) {
+        return __awaiter(this, undefined, undefined, function* () {
+            // normalize "data.response" into an array of valid output messages
+            const messages = [];
+            if (this.data.response === undefined) {
+                messages.push(method.O.create());
+            }
+            else if (Array.isArray(this.data.response)) {
+                for (let msg of this.data.response) {
+                    assert(method.O.is(msg));
+                    messages.push(msg);
+                }
+            }
+            else if (!(this.data.response instanceof RpcError)) {
+                assert(method.O.is(this.data.response));
+                messages.push(this.data.response);
+            }
+            // start the stream with an initial delay.
+            // if the request is cancelled, notify() error and exit.
+            try {
+                yield delay(this.responseDelay, abort)(undefined);
+            }
+            catch (error) {
+                stream.notifyError(error);
+                return;
+            }
+            // if error response was mocked, notify() error (stream is now closed with error) and exit.
+            if (this.data.response instanceof RpcError) {
+                stream.notifyError(this.data.response);
+                return;
+            }
+            // regular response messages were mocked. notify() them.
+            for (let msg of messages) {
+                stream.notifyMessage(msg);
+                // add a short delay between responses
+                // if the request is cancelled, notify() error and exit.
+                try {
+                    yield delay(this.betweenResponseDelay, abort)(undefined);
+                }
+                catch (error) {
+                    stream.notifyError(error);
+                    return;
+                }
+            }
+            // error status was mocked, notify() error (stream is now closed with error) and exit.
+            if (this.data.status instanceof RpcError) {
+                stream.notifyError(this.data.status);
+                return;
+            }
+            // error trailers were mocked, notify() error (stream is now closed with error) and exit.
+            if (this.data.trailers instanceof RpcError) {
+                stream.notifyError(this.data.trailers);
+                return;
+            }
+            // stream completed successfully
+            stream.notifyComplete();
+        });
+    }
+    // Creates a promise for response status from the mock data.
+    promiseStatus() {
+        var _a;
+        const status = (_a = this.data.status) !== null && _a !== undefined ? _a : TestTransport.defaultStatus;
+        return status instanceof RpcError
+            ? Promise.reject(status)
+            : Promise.resolve(status);
+    }
+    // Creates a promise for response trailers from the mock data.
+    promiseTrailers() {
+        var _a;
+        const trailers = (_a = this.data.trailers) !== null && _a !== undefined ? _a : TestTransport.defaultTrailers;
+        return trailers instanceof RpcError
+            ? Promise.reject(trailers)
+            : Promise.resolve(trailers);
+    }
+    maybeSuppressUncaught(...promise) {
+        if (this.suppressUncaughtRejections) {
+            for (let p of promise) {
+                p.catch(() => {
+                });
+            }
+        }
+    }
+    mergeOptions(options) {
+        return mergeRpcOptions({}, options);
+    }
+    unary(method, input, options) {
+        var _a;
+        const requestHeaders = (_a = options.meta) !== null && _a !== undefined ? _a : {}, headersPromise = this.promiseHeaders()
+            .then(delay(this.headerDelay, options.abort)), responsePromise = headersPromise
+            .catch(_ => {
+        })
+            .then(delay(this.responseDelay, options.abort))
+            .then(_ => this.promiseSingleResponse(method)), statusPromise = responsePromise
+            .catch(_ => {
+        })
+            .then(delay(this.afterResponseDelay, options.abort))
+            .then(_ => this.promiseStatus()), trailersPromise = responsePromise
+            .catch(_ => {
+        })
+            .then(delay(this.afterResponseDelay, options.abort))
+            .then(_ => this.promiseTrailers());
+        this.maybeSuppressUncaught(statusPromise, trailersPromise);
+        this.lastInput = { single: input };
+        return new UnaryCall(method, requestHeaders, input, headersPromise, responsePromise, statusPromise, trailersPromise);
+    }
+    serverStreaming(method, input, options) {
+        var _a;
+        const requestHeaders = (_a = options.meta) !== null && _a !== undefined ? _a : {}, headersPromise = this.promiseHeaders()
+            .then(delay(this.headerDelay, options.abort)), outputStream = new RpcOutputStreamController(), responseStreamClosedPromise = headersPromise
+            .then(delay(this.responseDelay, options.abort))
+            .catch(() => {
+        })
+            .then(() => this.streamResponses(method, outputStream, options.abort))
+            .then(delay(this.afterResponseDelay, options.abort)), statusPromise = responseStreamClosedPromise
+            .then(() => this.promiseStatus()), trailersPromise = responseStreamClosedPromise
+            .then(() => this.promiseTrailers());
+        this.maybeSuppressUncaught(statusPromise, trailersPromise);
+        this.lastInput = { single: input };
+        return new ServerStreamingCall(method, requestHeaders, input, headersPromise, outputStream, statusPromise, trailersPromise);
+    }
+    clientStreaming(method, options) {
+        var _a;
+        const requestHeaders = (_a = options.meta) !== null && _a !== undefined ? _a : {}, headersPromise = this.promiseHeaders()
+            .then(delay(this.headerDelay, options.abort)), responsePromise = headersPromise
+            .catch(_ => {
+        })
+            .then(delay(this.responseDelay, options.abort))
+            .then(_ => this.promiseSingleResponse(method)), statusPromise = responsePromise
+            .catch(_ => {
+        })
+            .then(delay(this.afterResponseDelay, options.abort))
+            .then(_ => this.promiseStatus()), trailersPromise = responsePromise
+            .catch(_ => {
+        })
+            .then(delay(this.afterResponseDelay, options.abort))
+            .then(_ => this.promiseTrailers());
+        this.maybeSuppressUncaught(statusPromise, trailersPromise);
+        this.lastInput = new TestInputStream(this.data, options.abort);
+        return new ClientStreamingCall(method, requestHeaders, this.lastInput, headersPromise, responsePromise, statusPromise, trailersPromise);
+    }
+    duplex(method, options) {
+        var _a;
+        const requestHeaders = (_a = options.meta) !== null && _a !== undefined ? _a : {}, headersPromise = this.promiseHeaders()
+            .then(delay(this.headerDelay, options.abort)), outputStream = new RpcOutputStreamController(), responseStreamClosedPromise = headersPromise
+            .then(delay(this.responseDelay, options.abort))
+            .catch(() => {
+        })
+            .then(() => this.streamResponses(method, outputStream, options.abort))
+            .then(delay(this.afterResponseDelay, options.abort)), statusPromise = responseStreamClosedPromise
+            .then(() => this.promiseStatus()), trailersPromise = responseStreamClosedPromise
+            .then(() => this.promiseTrailers());
+        this.maybeSuppressUncaught(statusPromise, trailersPromise);
+        this.lastInput = new TestInputStream(this.data, options.abort);
+        return new DuplexStreamingCall(method, requestHeaders, this.lastInput, headersPromise, outputStream, statusPromise, trailersPromise);
+    }
+}
+TestTransport.defaultHeaders = {
+    responseHeader: "test"
+};
+TestTransport.defaultStatus = {
+    code: "OK", detail: "all good"
+};
+TestTransport.defaultTrailers = {
+    responseTrailer: "test"
+};
+function delay(ms, abort) {
+    return (v) => new Promise((resolve, reject) => {
+        if (abort === null || abort === undefined ? undefined : abort.aborted) {
+            reject(new RpcError("user cancel", "CANCELLED"));
+        }
+        else {
+            const id = setTimeout(() => resolve(v), ms);
+            if (abort) {
+                abort.addEventListener("abort", ev => {
+                    clearTimeout(id);
+                    reject(new RpcError("user cancel", "CANCELLED"));
+                });
+            }
+        }
+    });
+}
+class TestInputStream {
+    constructor(data, abort) {
+        this._completed = false;
+        this._sent = [];
+        this.data = data;
+        this.abort = abort;
+    }
+    get sent() {
+        return this._sent;
+    }
+    get completed() {
+        return this._completed;
+    }
+    send(message) {
+        if (this.data.inputMessage instanceof RpcError) {
+            return Promise.reject(this.data.inputMessage);
+        }
+        const delayMs = this.data.inputMessage === undefined
+            ? 10
+            : this.data.inputMessage;
+        return Promise.resolve(undefined)
+            .then(() => {
+            this._sent.push(message);
+        })
+            .then(delay(delayMs, this.abort));
+    }
+    complete() {
+        if (this.data.inputComplete instanceof RpcError) {
+            return Promise.reject(this.data.inputComplete);
+        }
+        const delayMs = this.data.inputComplete === undefined
+            ? 10
+            : this.data.inputComplete;
+        return Promise.resolve(undefined)
+            .then(() => {
+            this._completed = true;
+        })
+            .then(delay(delayMs, this.abort));
+    }
+}
+
+/**
+ * Creates a "stack" of of all interceptors specified in the given `RpcOptions`.
+ * Used by generated client implementations.
+ * @internal
+ */
+function stackIntercept(kind, transport, method, options, input) {
+    var _a, _b, _c, _d;
+    if (kind == "unary") {
+        let tail = (mtd, inp, opt) => transport.unary(mtd, inp, opt);
+        for (const curr of ((_a = options.interceptors) !== null && _a !== undefined ? _a : []).filter(i => i.interceptUnary).reverse()) {
+            const next = tail;
+            tail = (mtd, inp, opt) => curr.interceptUnary(next, mtd, inp, opt);
+        }
+        return tail(method, input, options);
+    }
+    if (kind == "serverStreaming") {
+        let tail = (mtd, inp, opt) => transport.serverStreaming(mtd, inp, opt);
+        for (const curr of ((_b = options.interceptors) !== null && _b !== undefined ? _b : []).filter(i => i.interceptServerStreaming).reverse()) {
+            const next = tail;
+            tail = (mtd, inp, opt) => curr.interceptServerStreaming(next, mtd, inp, opt);
+        }
+        return tail(method, input, options);
+    }
+    if (kind == "clientStreaming") {
+        let tail = (mtd, opt) => transport.clientStreaming(mtd, opt);
+        for (const curr of ((_c = options.interceptors) !== null && _c !== undefined ? _c : []).filter(i => i.interceptClientStreaming).reverse()) {
+            const next = tail;
+            tail = (mtd, opt) => curr.interceptClientStreaming(next, mtd, opt);
+        }
+        return tail(method, options);
+    }
+    if (kind == "duplex") {
+        let tail = (mtd, opt) => transport.duplex(mtd, opt);
+        for (const curr of ((_d = options.interceptors) !== null && _d !== undefined ? _d : []).filter(i => i.interceptDuplex).reverse()) {
+            const next = tail;
+            tail = (mtd, opt) => curr.interceptDuplex(next, mtd, opt);
+        }
+        return tail(method, options);
+    }
+    assertNever(kind);
+}
+/**
+ * @deprecated replaced by `stackIntercept()`, still here to support older generated code
+ */
+function stackUnaryInterceptors(transport, method, input, options) {
+    return stackIntercept("unary", transport, method, options, input);
+}
+/**
+ * @deprecated replaced by `stackIntercept()`, still here to support older generated code
+ */
+function stackServerStreamingInterceptors(transport, method, input, options) {
+    return stackIntercept("serverStreaming", transport, method, options, input);
+}
+/**
+ * @deprecated replaced by `stackIntercept()`, still here to support older generated code
+ */
+function stackClientStreamingInterceptors(transport, method, options) {
+    return stackIntercept("clientStreaming", transport, method, options);
+}
+/**
+ * @deprecated replaced by `stackIntercept()`, still here to support older generated code
+ */
+function stackDuplexStreamingInterceptors(transport, method, options) {
+    return stackIntercept("duplex", transport, method, options);
+}
+
+class ServerCallContextController {
+    constructor(method, headers, deadline, sendResponseHeadersFn, defaultStatus = { code: 'OK', detail: '' }) {
+        this._cancelled = false;
+        this._listeners = [];
+        this.method = method;
+        this.headers = headers;
+        this.deadline = deadline;
+        this.trailers = {};
+        this._sendRH = sendResponseHeadersFn;
+        this.status = defaultStatus;
+    }
+    /**
+     * Set the call cancelled.
+     *
+     * Invokes all callbacks registered with onCancel() and
+     * sets `cancelled = true`.
+     */
+    notifyCancelled() {
+        if (!this._cancelled) {
+            this._cancelled = true;
+            for (let l of this._listeners) {
+                l();
+            }
+        }
+    }
+    /**
+     * Send response headers.
+     */
+    sendResponseHeaders(data) {
+        this._sendRH(data);
+    }
+    /**
+     * Is the call cancelled?
+     *
+     * When the client closes the connection before the server
+     * is done, the call is cancelled.
+     *
+     * If you want to cancel a request on the server, throw a
+     * RpcError with the CANCELLED status code.
+     */
+    get cancelled() {
+        return this._cancelled;
+    }
+    /**
+     * Add a callback for cancellation.
+     */
+    onCancel(callback) {
+        const l = this._listeners;
+        l.push(callback);
+        return () => {
+            let i = l.indexOf(callback);
+            if (i >= 0)
+                l.splice(i, 1);
+        };
+    }
+}
+
+// Public API of the rpc runtime.
+// Note: we do not use `export * from ...` to help tree shakers,
+// webpack verbose output hints that this should be useful
+
+var es2015 = /*#__PURE__*/Object.freeze({
+	__proto__: null,
+	ClientStreamingCall: ClientStreamingCall,
+	Deferred: Deferred,
+	get DeferredState () { return DeferredState; },
+	DuplexStreamingCall: DuplexStreamingCall,
+	RpcError: RpcError,
+	RpcOutputStreamController: RpcOutputStreamController,
+	ServerCallContextController: ServerCallContextController,
+	ServerStreamingCall: ServerStreamingCall,
+	ServiceType: ServiceType,
+	TestTransport: TestTransport,
+	UnaryCall: UnaryCall,
+	mergeRpcOptions: mergeRpcOptions,
+	readMethodOption: readMethodOption,
+	readMethodOptions: readMethodOptions,
+	readServiceOption: readServiceOption,
+	stackClientStreamingInterceptors: stackClientStreamingInterceptors,
+	stackDuplexStreamingInterceptors: stackDuplexStreamingInterceptors,
+	stackIntercept: stackIntercept,
+	stackServerStreamingInterceptors: stackServerStreamingInterceptors,
+	stackUnaryInterceptors: stackUnaryInterceptors
+});
+
+var require$$0 = /*@__PURE__*/getAugmentedNamespace(es2015);
+
+var hasRequiredArtifact$1;
+
+function requireArtifact$1 () {
+	if (hasRequiredArtifact$1) return artifact;
+	hasRequiredArtifact$1 = 1;
+	(function (exports) {
+		Object.defineProperty(exports, '__esModule', { value: true });
+		exports.ArtifactService =
+		  exports.FinalizeArtifactResponse =
+		  exports.FinalizeArtifactRequest =
+		  exports.CreateArtifactResponse =
+		  exports.CreateArtifactRequest =
+		    undefined;
+		// @generated by protobuf-ts 2.9.1 with parameter long_type_string,client_none,generate_dependencies
+		// @generated from protobuf file "results/api/v1/artifact.proto" (package "github.actions.results.api.v1", syntax proto3)
+		// tslint:disable
+		const runtime_rpc_1 = require$$0;
+		const runtime_1 = require$$1$1;
+		const runtime_2 = require$$1$1;
+		const runtime_3 = require$$1$1;
+		const runtime_4 = require$$1$1;
+		const runtime_5 = require$$1$1;
+		const wrappers_1 = requireWrappers();
+		const timestamp_1 = requireTimestamp();
+		// @generated message type with reflection information, may provide speed optimized methods
+		class CreateArtifactRequest$Type extends runtime_5.MessageType {
+		  constructor() {
+		    super('github.actions.results.api.v1.CreateArtifactRequest', [
+		      {
+		        no: 1,
+		        name: 'workflow_run_backend_id',
+		        kind: 'scalar',
+		        T: 9 /*ScalarType.STRING*/
+		      },
+		      {
+		        no: 2,
+		        name: 'workflow_job_run_backend_id',
+		        kind: 'scalar',
+		        T: 9 /*ScalarType.STRING*/
+		      },
+		      { no: 3, name: 'name', kind: 'scalar', T: 9 /*ScalarType.STRING*/ },
+		      {
+		        no: 4,
+		        name: 'expires_at',
+		        kind: 'message',
+		        T: () => timestamp_1.Timestamp
+		      },
+		      { no: 5, name: 'version', kind: 'scalar', T: 5 /*ScalarType.INT32*/ }
+		    ]);
+		  }
+		  create(value) {
+		    const message = {
+		      workflowRunBackendId: '',
+		      workflowJobRunBackendId: '',
+		      name: '',
+		      version: 0
+		    };
+		    globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, {
+		      enumerable: false,
+		      value: this
+		    });
+		    if (value !== undefined)
+		      (0, runtime_3.reflectionMergePartial)(this, message, value);
+		    return message
+		  }
+		  internalBinaryRead(reader, length, options, target) {
+		    let message = target !== null && target !== undefined ? target : this.create(),
+		      end = reader.pos + length;
+		    while (reader.pos < end) {
+		      let [fieldNo, wireType] = reader.tag();
+		      switch (fieldNo) {
+		        case /* string workflow_run_backend_id */ 1:
+		          message.workflowRunBackendId = reader.string();
+		          break
+		        case /* string workflow_job_run_backend_id */ 2:
+		          message.workflowJobRunBackendId = reader.string();
+		          break
+		        case /* string name */ 3:
+		          message.name = reader.string();
+		          break
+		        case /* google.protobuf.Timestamp expires_at */ 4:
+		          message.expiresAt = timestamp_1.Timestamp.internalBinaryRead(
+		            reader,
+		            reader.uint32(),
+		            options,
+		            message.expiresAt
+		          );
+		          break
+		        case /* int32 version */ 5:
+		          message.version = reader.int32();
+		          break
+		        default:
+		          let u = options.readUnknownField;
+		          if (u === 'throw')
+		            throw new globalThis.Error(
+		              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+		            )
+		          let d = reader.skip(wireType);
+		          if (u !== false)
+		            (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(
+		              this.typeName,
+		              message,
+		              fieldNo,
+		              wireType,
+		              d
+		            );
+		      }
+		    }
+		    return message
+		  }
+		  internalBinaryWrite(message, writer, options) {
+		    /* string workflow_run_backend_id = 1; */
+		    if (message.workflowRunBackendId !== '')
+		      writer
+		        .tag(1, runtime_1.WireType.LengthDelimited)
+		        .string(message.workflowRunBackendId);
+		    /* string workflow_job_run_backend_id = 2; */
+		    if (message.workflowJobRunBackendId !== '')
+		      writer
+		        .tag(2, runtime_1.WireType.LengthDelimited)
+		        .string(message.workflowJobRunBackendId);
+		    /* string name = 3; */
+		    if (message.name !== '')
+		      writer.tag(3, runtime_1.WireType.LengthDelimited).string(message.name);
+		    /* google.protobuf.Timestamp expires_at = 4; */
+		    if (message.expiresAt)
+		      timestamp_1.Timestamp.internalBinaryWrite(
+		        message.expiresAt,
+		        writer.tag(4, runtime_1.WireType.LengthDelimited).fork(),
+		        options
+		      ).join();
+		    /* int32 version = 5; */
+		    if (message.version !== 0)
+		      writer.tag(5, runtime_1.WireType.Varint).int32(message.version);
+		    let u = options.writeUnknownFields;
+		    if (u !== false)
+		      (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(
+		        this.typeName,
+		        message,
+		        writer
+		      );
+		    return writer
+		  }
+		}
+		/**
+		 * @generated MessageType for protobuf message github.actions.results.api.v1.CreateArtifactRequest
+		 */
+		exports.CreateArtifactRequest = new CreateArtifactRequest$Type();
+		// @generated message type with reflection information, may provide speed optimized methods
+		class CreateArtifactResponse$Type extends runtime_5.MessageType {
+		  constructor() {
+		    super('github.actions.results.api.v1.CreateArtifactResponse', [
+		      { no: 1, name: 'ok', kind: 'scalar', T: 8 /*ScalarType.BOOL*/ },
+		      {
+		        no: 2,
+		        name: 'signed_upload_url',
+		        kind: 'scalar',
+		        T: 9 /*ScalarType.STRING*/
+		      }
+		    ]);
+		  }
+		  create(value) {
+		    const message = { ok: false, signedUploadUrl: '' };
+		    globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, {
+		      enumerable: false,
+		      value: this
+		    });
+		    if (value !== undefined)
+		      (0, runtime_3.reflectionMergePartial)(this, message, value);
+		    return message
+		  }
+		  internalBinaryRead(reader, length, options, target) {
+		    let message = target !== null && target !== undefined ? target : this.create(),
+		      end = reader.pos + length;
+		    while (reader.pos < end) {
+		      let [fieldNo, wireType] = reader.tag();
+		      switch (fieldNo) {
+		        case /* bool ok */ 1:
+		          message.ok = reader.bool();
+		          break
+		        case /* string signed_upload_url */ 2:
+		          message.signedUploadUrl = reader.string();
+		          break
+		        default:
+		          let u = options.readUnknownField;
+		          if (u === 'throw')
+		            throw new globalThis.Error(
+		              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+		            )
+		          let d = reader.skip(wireType);
+		          if (u !== false)
+		            (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(
+		              this.typeName,
+		              message,
+		              fieldNo,
+		              wireType,
+		              d
+		            );
+		      }
+		    }
+		    return message
+		  }
+		  internalBinaryWrite(message, writer, options) {
+		    /* bool ok = 1; */
+		    if (message.ok !== false)
+		      writer.tag(1, runtime_1.WireType.Varint).bool(message.ok);
+		    /* string signed_upload_url = 2; */
+		    if (message.signedUploadUrl !== '')
+		      writer
+		        .tag(2, runtime_1.WireType.LengthDelimited)
+		        .string(message.signedUploadUrl);
+		    let u = options.writeUnknownFields;
+		    if (u !== false)
+		      (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(
+		        this.typeName,
+		        message,
+		        writer
+		      );
+		    return writer
+		  }
+		}
+		/**
+		 * @generated MessageType for protobuf message github.actions.results.api.v1.CreateArtifactResponse
+		 */
+		exports.CreateArtifactResponse = new CreateArtifactResponse$Type();
+		// @generated message type with reflection information, may provide speed optimized methods
+		class FinalizeArtifactRequest$Type extends runtime_5.MessageType {
+		  constructor() {
+		    super('github.actions.results.api.v1.FinalizeArtifactRequest', [
+		      {
+		        no: 1,
+		        name: 'workflow_run_backend_id',
+		        kind: 'scalar',
+		        T: 9 /*ScalarType.STRING*/
+		      },
+		      {
+		        no: 2,
+		        name: 'workflow_job_run_backend_id',
+		        kind: 'scalar',
+		        T: 9 /*ScalarType.STRING*/
+		      },
+		      { no: 3, name: 'name', kind: 'scalar', T: 9 /*ScalarType.STRING*/ },
+		      { no: 4, name: 'size', kind: 'scalar', T: 3 /*ScalarType.INT64*/ },
+		      { no: 5, name: 'hash', kind: 'message', T: () => wrappers_1.StringValue }
+		    ]);
+		  }
+		  create(value) {
+		    const message = {
+		      workflowRunBackendId: '',
+		      workflowJobRunBackendId: '',
+		      name: '',
+		      size: '0'
+		    };
+		    globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, {
+		      enumerable: false,
+		      value: this
+		    });
+		    if (value !== undefined)
+		      (0, runtime_3.reflectionMergePartial)(this, message, value);
+		    return message
+		  }
+		  internalBinaryRead(reader, length, options, target) {
+		    let message = target !== null && target !== undefined ? target : this.create(),
+		      end = reader.pos + length;
+		    while (reader.pos < end) {
+		      let [fieldNo, wireType] = reader.tag();
+		      switch (fieldNo) {
+		        case /* string workflow_run_backend_id */ 1:
+		          message.workflowRunBackendId = reader.string();
+		          break
+		        case /* string workflow_job_run_backend_id */ 2:
+		          message.workflowJobRunBackendId = reader.string();
+		          break
+		        case /* string name */ 3:
+		          message.name = reader.string();
+		          break
+		        case /* int64 size */ 4:
+		          message.size = reader.int64().toString();
+		          break
+		        case /* google.protobuf.StringValue hash */ 5:
+		          message.hash = wrappers_1.StringValue.internalBinaryRead(
+		            reader,
+		            reader.uint32(),
+		            options,
+		            message.hash
+		          );
+		          break
+		        default:
+		          let u = options.readUnknownField;
+		          if (u === 'throw')
+		            throw new globalThis.Error(
+		              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+		            )
+		          let d = reader.skip(wireType);
+		          if (u !== false)
+		            (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(
+		              this.typeName,
+		              message,
+		              fieldNo,
+		              wireType,
+		              d
+		            );
+		      }
+		    }
+		    return message
+		  }
+		  internalBinaryWrite(message, writer, options) {
+		    /* string workflow_run_backend_id = 1; */
+		    if (message.workflowRunBackendId !== '')
+		      writer
+		        .tag(1, runtime_1.WireType.LengthDelimited)
+		        .string(message.workflowRunBackendId);
+		    /* string workflow_job_run_backend_id = 2; */
+		    if (message.workflowJobRunBackendId !== '')
+		      writer
+		        .tag(2, runtime_1.WireType.LengthDelimited)
+		        .string(message.workflowJobRunBackendId);
+		    /* string name = 3; */
+		    if (message.name !== '')
+		      writer.tag(3, runtime_1.WireType.LengthDelimited).string(message.name);
+		    /* int64 size = 4; */
+		    if (message.size !== '0')
+		      writer.tag(4, runtime_1.WireType.Varint).int64(message.size);
+		    /* google.protobuf.StringValue hash = 5; */
+		    if (message.hash)
+		      wrappers_1.StringValue.internalBinaryWrite(
+		        message.hash,
+		        writer.tag(5, runtime_1.WireType.LengthDelimited).fork(),
+		        options
+		      ).join();
+		    let u = options.writeUnknownFields;
+		    if (u !== false)
+		      (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(
+		        this.typeName,
+		        message,
+		        writer
+		      );
+		    return writer
+		  }
+		}
+		/**
+		 * @generated MessageType for protobuf message github.actions.results.api.v1.FinalizeArtifactRequest
+		 */
+		exports.FinalizeArtifactRequest = new FinalizeArtifactRequest$Type();
+		// @generated message type with reflection information, may provide speed optimized methods
+		class FinalizeArtifactResponse$Type extends runtime_5.MessageType {
+		  constructor() {
+		    super('github.actions.results.api.v1.FinalizeArtifactResponse', [
+		      { no: 1, name: 'ok', kind: 'scalar', T: 8 /*ScalarType.BOOL*/ },
+		      { no: 2, name: 'artifact_id', kind: 'scalar', T: 3 /*ScalarType.INT64*/ }
+		    ]);
+		  }
+		  create(value) {
+		    const message = { ok: false, artifactId: '0' };
+		    globalThis.Object.defineProperty(message, runtime_4.MESSAGE_TYPE, {
+		      enumerable: false,
+		      value: this
+		    });
+		    if (value !== undefined)
+		      (0, runtime_3.reflectionMergePartial)(this, message, value);
+		    return message
+		  }
+		  internalBinaryRead(reader, length, options, target) {
+		    let message = target !== null && target !== undefined ? target : this.create(),
+		      end = reader.pos + length;
+		    while (reader.pos < end) {
+		      let [fieldNo, wireType] = reader.tag();
+		      switch (fieldNo) {
+		        case /* bool ok */ 1:
+		          message.ok = reader.bool();
+		          break
+		        case /* int64 artifact_id */ 2:
+		          message.artifactId = reader.int64().toString();
+		          break
+		        default:
+		          let u = options.readUnknownField;
+		          if (u === 'throw')
+		            throw new globalThis.Error(
+		              `Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`
+		            )
+		          let d = reader.skip(wireType);
+		          if (u !== false)
+		            (u === true ? runtime_2.UnknownFieldHandler.onRead : u)(
+		              this.typeName,
+		              message,
+		              fieldNo,
+		              wireType,
+		              d
+		            );
+		      }
+		    }
+		    return message
+		  }
+		  internalBinaryWrite(message, writer, options) {
+		    /* bool ok = 1; */
+		    if (message.ok !== false)
+		      writer.tag(1, runtime_1.WireType.Varint).bool(message.ok);
+		    /* int64 artifact_id = 2; */
+		    if (message.artifactId !== '0')
+		      writer.tag(2, runtime_1.WireType.Varint).int64(message.artifactId);
+		    let u = options.writeUnknownFields;
+		    if (u !== false)
+		      (u == true ? runtime_2.UnknownFieldHandler.onWrite : u)(
+		        this.typeName,
+		        message,
+		        writer
+		      );
+		    return writer
+		  }
+		}
+		/**
+		 * @generated MessageType for protobuf message github.actions.results.api.v1.FinalizeArtifactResponse
+		 */
+		exports.FinalizeArtifactResponse = new FinalizeArtifactResponse$Type();
+		/**
+		 * @generated ServiceType for protobuf service github.actions.results.api.v1.ArtifactService
+		 */
+		exports.ArtifactService = new runtime_rpc_1.ServiceType(
+		  'github.actions.results.api.v1.ArtifactService',
+		  [
+		    {
+		      name: 'CreateArtifact',
+		      options: {},
+		      I: exports.CreateArtifactRequest,
+		      O: exports.CreateArtifactResponse
+		    },
+		    {
+		      name: 'FinalizeArtifact',
+		      options: {},
+		      I: exports.FinalizeArtifactRequest,
+		      O: exports.FinalizeArtifactResponse
+		    }
+		  ]
+		);
+		
+	} (artifact));
+	return artifact;
+}
+
+var artifact_twirp = {};
+
+var twirp = {};
+
+var context = {};
+
+var hasRequiredContext;
+
+function requireContext () {
+	if (hasRequiredContext) return context;
+	hasRequiredContext = 1;
+	Object.defineProperty(context, "__esModule", { value: true });
+	return context;
+}
+
+var server = {};
+
+var hooks = {};
+
+var hasRequiredHooks;
+
+function requireHooks () {
+	if (hasRequiredHooks) return hooks;
+	hasRequiredHooks = 1;
+	var __awaiter = (hooks.__awaiter) || function (thisArg, _arguments, P, generator) {
+	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+	    return new (P || (P = Promise))(function (resolve, reject) {
+	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+	        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+	        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+	        step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    });
+	};
+	Object.defineProperty(hooks, "__esModule", { value: true });
+	hooks.isHook = hooks.chainHooks = undefined;
+	// ChainHooks creates a new ServerHook which chains the callbacks in
+	// each of the constituent hooks passed in. Each hook function will be
+	// called in the order of the ServerHooks values passed in.
+	//
+	// For the erroring hooks, RequestReceived and RequestRouted, any returned
+	// errors prevent processing by later hooks.
+	function chainHooks(...hooks) {
+	    if (hooks.length === 0) {
+	        return null;
+	    }
+	    if (hooks.length === 1) {
+	        return hooks[0];
+	    }
+	    const serverHook = {
+	        requestReceived(ctx) {
+	            return __awaiter(this, undefined, undefined, function* () {
+	                for (const hook of hooks) {
+	                    if (!hook.requestReceived) {
+	                        continue;
+	                    }
+	                    yield hook.requestReceived(ctx);
+	                }
+	            });
+	        },
+	        requestPrepared(ctx) {
+	            return __awaiter(this, undefined, undefined, function* () {
+	                for (const hook of hooks) {
+	                    if (!hook.requestPrepared) {
+	                        continue;
+	                    }
+	                    console.warn("hook requestPrepared is deprecated and will be removed in the next release. " +
+	                        "Please use responsePrepared instead.");
+	                    yield hook.requestPrepared(ctx);
+	                }
+	            });
+	        },
+	        responsePrepared(ctx) {
+	            return __awaiter(this, undefined, undefined, function* () {
+	                for (const hook of hooks) {
+	                    if (!hook.responsePrepared) {
+	                        continue;
+	                    }
+	                    yield hook.responsePrepared(ctx);
+	                }
+	            });
+	        },
+	        requestSent(ctx) {
+	            return __awaiter(this, undefined, undefined, function* () {
+	                for (const hook of hooks) {
+	                    if (!hook.requestSent) {
+	                        continue;
+	                    }
+	                    console.warn("hook requestSent is deprecated and will be removed in the next release. " +
+	                        "Please use responseSent instead.");
+	                    yield hook.requestSent(ctx);
+	                }
+	            });
+	        },
+	        responseSent(ctx) {
+	            return __awaiter(this, undefined, undefined, function* () {
+	                for (const hook of hooks) {
+	                    if (!hook.responseSent) {
+	                        continue;
+	                    }
+	                    yield hook.responseSent(ctx);
+	                }
+	            });
+	        },
+	        requestRouted(ctx) {
+	            return __awaiter(this, undefined, undefined, function* () {
+	                for (const hook of hooks) {
+	                    if (!hook.requestRouted) {
+	                        continue;
+	                    }
+	                    yield hook.requestRouted(ctx);
+	                }
+	            });
+	        },
+	        error(ctx, err) {
+	            return __awaiter(this, undefined, undefined, function* () {
+	                for (const hook of hooks) {
+	                    if (!hook.error) {
+	                        continue;
+	                    }
+	                    yield hook.error(ctx, err);
+	                }
+	            });
+	        },
+	    };
+	    return serverHook;
+	}
+	hooks.chainHooks = chainHooks;
+	function isHook(object) {
+	    return ("requestReceived" in object ||
+	        "requestPrepared" in object ||
+	        "requestSent" in object ||
+	        "requestRouted" in object ||
+	        "responsePrepared" in object ||
+	        "responseSent" in object ||
+	        "error" in object);
+	}
+	hooks.isHook = isHook;
+	return hooks;
+}
+
+var request = {};
+
+var errors = {};
+
+var hasRequiredErrors;
+
+function requireErrors () {
+	if (hasRequiredErrors) return errors;
+	hasRequiredErrors = 1;
+	(function (exports) {
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.isValidErrorCode = exports.httpStatusFromErrorCode = exports.TwirpErrorCode = exports.BadRouteError = exports.InternalServerErrorWith = exports.InternalServerError = exports.RequiredArgumentError = exports.InvalidArgumentError = exports.NotFoundError = exports.TwirpError = undefined;
+		/**
+		 * Represents a twirp error
+		 */
+		class TwirpError extends Error {
+		    constructor(code, msg) {
+		        super(msg);
+		        this.code = TwirpErrorCode.Internal;
+		        this.meta = {};
+		        this.code = code;
+		        this.msg = msg;
+		        Object.setPrototypeOf(this, TwirpError.prototype);
+		    }
+		    /**
+		     * Adds a metadata kv to the error
+		     * @param key
+		     * @param value
+		     */
+		    withMeta(key, value) {
+		        this.meta[key] = value;
+		        return this;
+		    }
+		    /**
+		     * Returns a single metadata value
+		     * return "" if not found
+		     * @param key
+		     */
+		    getMeta(key) {
+		        return this.meta[key] || "";
+		    }
+		    /**
+		     * Add the original error cause
+		     * @param err
+		     * @param addMeta
+		     */
+		    withCause(err, addMeta = false) {
+		        this._originalCause = err;
+		        if (addMeta) {
+		            this.withMeta("cause", err.message);
+		        }
+		        return this;
+		    }
+		    cause() {
+		        return this._originalCause;
+		    }
+		    /**
+		     * Returns the error representation to JSON
+		     */
+		    toJSON() {
+		        try {
+		            return JSON.stringify({
+		                code: this.code,
+		                msg: this.msg,
+		                meta: this.meta,
+		            });
+		        }
+		        catch (e) {
+		            return `{"code": "internal", "msg": "There was an error but it could not be serialized into JSON"}`;
+		        }
+		    }
+		    /**
+		     * Create a twirp error from an object
+		     * @param obj
+		     */
+		    static fromObject(obj) {
+		        const code = obj["code"] || TwirpErrorCode.Unknown;
+		        const msg = obj["msg"] || "unknown";
+		        const error = new TwirpError(code, msg);
+		        if (obj["meta"]) {
+		            Object.keys(obj["meta"]).forEach((key) => {
+		                error.withMeta(key, obj["meta"][key]);
+		            });
+		        }
+		        return error;
+		    }
+		}
+		exports.TwirpError = TwirpError;
+		/**
+		 * NotFoundError constructor for the common NotFound error.
+		 */
+		class NotFoundError extends TwirpError {
+		    constructor(msg) {
+		        super(TwirpErrorCode.NotFound, msg);
+		    }
+		}
+		exports.NotFoundError = NotFoundError;
+		/**
+		 * InvalidArgumentError constructor for the common InvalidArgument error. Can be
+		 * used when an argument has invalid format, is a number out of range, is a bad
+		 * option, etc).
+		 */
+		class InvalidArgumentError extends TwirpError {
+		    constructor(argument, validationMsg) {
+		        super(TwirpErrorCode.InvalidArgument, argument + " " + validationMsg);
+		        this.withMeta("argument", argument);
+		    }
+		}
+		exports.InvalidArgumentError = InvalidArgumentError;
+		/**
+		 * RequiredArgumentError is a more specific constructor for InvalidArgument
+		 * error. Should be used when the argument is required (expected to have a
+		 * non-zero value).
+		 */
+		class RequiredArgumentError extends InvalidArgumentError {
+		    constructor(argument) {
+		        super(argument, "is required");
+		    }
+		}
+		exports.RequiredArgumentError = RequiredArgumentError;
+		/**
+		 * InternalError constructor for the common Internal error. Should be used to
+		 * specify that something bad or unexpected happened.
+		 */
+		class InternalServerError extends TwirpError {
+		    constructor(msg) {
+		        super(TwirpErrorCode.Internal, msg);
+		    }
+		}
+		exports.InternalServerError = InternalServerError;
+		/**
+		 * InternalErrorWith makes an internal error, wrapping the original error and using it
+		 * for the error message, and with metadata "cause" with the original error type.
+		 * This function is used by Twirp services to wrap non-Twirp errors as internal errors.
+		 * The wrapped error can be extracted later with err.cause()
+		 */
+		class InternalServerErrorWith extends InternalServerError {
+		    constructor(err) {
+		        super(err.message);
+		        this.withMeta("cause", err.name);
+		        this.withCause(err);
+		    }
+		}
+		exports.InternalServerErrorWith = InternalServerErrorWith;
+		/**
+		 * A standard BadRoute Error
+		 */
+		class BadRouteError extends TwirpError {
+		    constructor(msg, method, url) {
+		        super(TwirpErrorCode.BadRoute, msg);
+		        this.withMeta("twirp_invalid_route", method + " " + url);
+		    }
+		}
+		exports.BadRouteError = BadRouteError;
+		var TwirpErrorCode;
+		(function (TwirpErrorCode) {
+		    // Canceled indicates the operation was cancelled (typically by the caller).
+		    TwirpErrorCode["Canceled"] = "canceled";
+		    // Unknown error. For example when handling errors raised by APIs that do not
+		    // return enough error information.
+		    TwirpErrorCode["Unknown"] = "unknown";
+		    // InvalidArgument indicates client specified an invalid argument. It
+		    // indicates arguments that are problematic regardless of the state of the
+		    // system (i.e. a malformed file name, required argument, number out of range,
+		    // etc.).
+		    TwirpErrorCode["InvalidArgument"] = "invalid_argument";
+		    // Malformed indicates an error occurred while decoding the client's request.
+		    // This may mean that the message was encoded improperly, or that there is a
+		    // disagreement in message format between the client and server.
+		    TwirpErrorCode["Malformed"] = "malformed";
+		    // DeadlineExceeded means operation expired before completion. For operations
+		    // that change the state of the system, this error may be returned even if the
+		    // operation has completed successfully (timeout).
+		    TwirpErrorCode["DeadlineExceeded"] = "deadline_exceeded";
+		    // NotFound means some requested entity was not found.
+		    TwirpErrorCode["NotFound"] = "not_found";
+		    // BadRoute means that the requested URL path wasn't routable to a Twirp
+		    // service and method. This is returned by the generated server, and usually
+		    // shouldn't be returned by applications. Instead, applications should use
+		    // NotFound or Unimplemented.
+		    TwirpErrorCode["BadRoute"] = "bad_route";
+		    // AlreadyExists means an attempt to create an entity failed because one
+		    // already exists.
+		    TwirpErrorCode["AlreadyExists"] = "already_exists";
+		    // PermissionDenied indicates the caller does not have permission to execute
+		    // the specified operation. It must not be used if the caller cannot be
+		    // identified (Unauthenticated).
+		    TwirpErrorCode["PermissionDenied"] = "permission_denied";
+		    // Unauthenticated indicates the request does not have valid authentication
+		    // credentials for the operation.
+		    TwirpErrorCode["Unauthenticated"] = "unauthenticated";
+		    // ResourceExhausted indicates some resource has been exhausted, perhaps a
+		    // per-user quota, or perhaps the entire file system is out of space.
+		    TwirpErrorCode["ResourceExhausted"] = "resource_exhausted";
+		    // FailedPrecondition indicates operation was rejected because the system is
+		    // not in a state required for the operation's execution. For example, doing
+		    // an rmdir operation on a directory that is non-empty, or on a non-directory
+		    // object, or when having conflicting read-modify-write on the same resource.
+		    TwirpErrorCode["FailedPrecondition"] = "failed_precondition";
+		    // Aborted indicates the operation was aborted, typically due to a concurrency
+		    // issue like sequencer check failures, transaction aborts, etc.
+		    TwirpErrorCode["Aborted"] = "aborted";
+		    // OutOfRange means operation was attempted past the valid range. For example,
+		    // seeking or reading past end of a paginated collection.
+		    //
+		    // Unlike InvalidArgument, this error indicates a problem that may be fixed if
+		    // the system state changes (i.e. adding more items to the collection).
+		    //
+		    // There is a fair bit of overlap between FailedPrecondition and OutOfRange.
+		    // We recommend using OutOfRange (the more specific error) when it applies so
+		    // that callers who are iterating through a space can easily look for an
+		    // OutOfRange error to detect when they are done.
+		    TwirpErrorCode["OutOfRange"] = "out_of_range";
+		    // Unimplemented indicates operation is not implemented or not
+		    // supported/enabled in this service.
+		    TwirpErrorCode["Unimplemented"] = "unimplemented";
+		    // Internal errors. When some invariants expected by the underlying system
+		    // have been broken. In other words, something bad happened in the library or
+		    // backend service. Do not confuse with HTTP Internal Server Error; an
+		    // Internal error could also happen on the client code, i.e. when parsing a
+		    // server response.
+		    TwirpErrorCode["Internal"] = "internal";
+		    // Unavailable indicates the service is currently unavailable. This is a most
+		    // likely a transient condition and may be corrected by retrying with a
+		    // backoff.
+		    TwirpErrorCode["Unavailable"] = "unavailable";
+		    // DataLoss indicates unrecoverable data loss or corruption.
+		    TwirpErrorCode["DataLoss"] = "data_loss";
+		})(TwirpErrorCode = exports.TwirpErrorCode || (exports.TwirpErrorCode = {}));
+		// ServerHTTPStatusFromErrorCode maps a Twirp error type into a similar HTTP
+		// response status. It is used by the Twirp server handler to set the HTTP
+		// response status code. Returns 0 if the ErrorCode is invalid.
+		function httpStatusFromErrorCode(code) {
+		    switch (code) {
+		        case TwirpErrorCode.Canceled:
+		            return 408; // RequestTimeout
+		        case TwirpErrorCode.Unknown:
+		            return 500; // Internal Server Error
+		        case TwirpErrorCode.InvalidArgument:
+		            return 400; // BadRequest
+		        case TwirpErrorCode.Malformed:
+		            return 400; // BadRequest
+		        case TwirpErrorCode.DeadlineExceeded:
+		            return 408; // RequestTimeout
+		        case TwirpErrorCode.NotFound:
+		            return 404; // Not Found
+		        case TwirpErrorCode.BadRoute:
+		            return 404; // Not Found
+		        case TwirpErrorCode.AlreadyExists:
+		            return 409; // Conflict
+		        case TwirpErrorCode.PermissionDenied:
+		            return 403; // Forbidden
+		        case TwirpErrorCode.Unauthenticated:
+		            return 401; // Unauthorized
+		        case TwirpErrorCode.ResourceExhausted:
+		            return 429; // Too Many Requests
+		        case TwirpErrorCode.FailedPrecondition:
+		            return 412; // Precondition Failed
+		        case TwirpErrorCode.Aborted:
+		            return 409; // Conflict
+		        case TwirpErrorCode.OutOfRange:
+		            return 400; // Bad Request
+		        case TwirpErrorCode.Unimplemented:
+		            return 501; // Not Implemented
+		        case TwirpErrorCode.Internal:
+		            return 500; // Internal Server Error
+		        case TwirpErrorCode.Unavailable:
+		            return 503; // Service Unavailable
+		        case TwirpErrorCode.DataLoss:
+		            return 500; // Internal Server Error
+		        default:
+		            return 0; // Invalid!
+		    }
+		}
+		exports.httpStatusFromErrorCode = httpStatusFromErrorCode;
+		// IsValidErrorCode returns true if is one of the valid predefined constants.
+		function isValidErrorCode(code) {
+		    return httpStatusFromErrorCode(code) != 0;
+		}
+		exports.isValidErrorCode = isValidErrorCode; 
+	} (errors));
+	return errors;
+}
+
+var hasRequiredRequest;
+
+function requireRequest () {
+	if (hasRequiredRequest) return request;
+	hasRequiredRequest = 1;
+	(function (exports) {
+		var __awaiter = (request.__awaiter) || function (thisArg, _arguments, P, generator) {
+		    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+		    return new (P || (P = Promise))(function (resolve, reject) {
+		        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+		        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+		        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+		        step((generator = generator.apply(thisArg, _arguments || [])).next());
+		    });
+		};
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.parseTwirpPath = exports.getRequestData = exports.validateRequest = exports.getContentType = exports.TwirpContentType = undefined;
+		const errors_1 = requireErrors();
+		/**
+		 * Supported Twirp Content-Type
+		 */
+		var TwirpContentType;
+		(function (TwirpContentType) {
+		    TwirpContentType[TwirpContentType["Protobuf"] = 0] = "Protobuf";
+		    TwirpContentType[TwirpContentType["JSON"] = 1] = "JSON";
+		    TwirpContentType[TwirpContentType["Unknown"] = 2] = "Unknown";
+		})(TwirpContentType = exports.TwirpContentType || (exports.TwirpContentType = {}));
+		/**
+		 * Get supported content-type
+		 * @param mimeType
+		 */
+		function getContentType(mimeType) {
+		    switch (mimeType) {
+		        case "application/protobuf":
+		            return TwirpContentType.Protobuf;
+		        case "application/json":
+		            return TwirpContentType.JSON;
+		        default:
+		            return TwirpContentType.Unknown;
+		    }
+		}
+		exports.getContentType = getContentType;
+		/**
+		 * Validate a twirp request
+		 * @param ctx
+		 * @param request
+		 * @param pathPrefix
+		 */
+		function validateRequest(ctx, request, pathPrefix) {
+		    if (request.method !== "POST") {
+		        const msg = `unsupported method ${request.method} (only POST is allowed)`;
+		        throw new errors_1.BadRouteError(msg, request.method || "", request.url || "");
+		    }
+		    const path = parseTwirpPath(request.url || "");
+		    if (path.pkgService !==
+		        (ctx.packageName ? ctx.packageName + "." : "") + ctx.serviceName) {
+		        const msg = `no handler for path ${request.url}`;
+		        throw new errors_1.BadRouteError(msg, request.method || "", request.url || "");
+		    }
+		    if (path.prefix !== pathPrefix) {
+		        const msg = `invalid path prefix ${path.prefix}, expected ${pathPrefix}, on path ${request.url}`;
+		        throw new errors_1.BadRouteError(msg, request.method || "", request.url || "");
+		    }
+		    const mimeContentType = request.headers["content-type"] || "";
+		    if (ctx.contentType === TwirpContentType.Unknown) {
+		        const msg = `unexpected Content-Type: ${request.headers["content-type"]}`;
+		        throw new errors_1.BadRouteError(msg, request.method || "", request.url || "");
+		    }
+		    return Object.assign(Object.assign({}, path), { mimeContentType, contentType: ctx.contentType });
+		}
+		exports.validateRequest = validateRequest;
+		/**
+		 * Get request data from the body
+		 * @param req
+		 */
+		function getRequestData(req) {
+		    return new Promise((resolve, reject) => {
+		        const reqWithRawBody = req;
+		        if (reqWithRawBody.rawBody instanceof Buffer) {
+		            resolve(reqWithRawBody.rawBody);
+		            return;
+		        }
+		        const chunks = [];
+		        req.on("data", (chunk) => chunks.push(chunk));
+		        req.on("end", () => __awaiter(this, undefined, undefined, function* () {
+		            const data = Buffer.concat(chunks);
+		            resolve(data);
+		        }));
+		        req.on("error", (err) => {
+		            if (req.aborted) {
+		                reject(new errors_1.TwirpError(errors_1.TwirpErrorCode.DeadlineExceeded, "failed to read request: deadline exceeded"));
+		            }
+		            else {
+		                reject(new errors_1.TwirpError(errors_1.TwirpErrorCode.Malformed, err.message).withCause(err));
+		            }
+		        });
+		        req.on("close", () => {
+		            reject(new errors_1.TwirpError(errors_1.TwirpErrorCode.Canceled, "failed to read request: context canceled"));
+		        });
+		    });
+		}
+		exports.getRequestData = getRequestData;
+		/**
+		 * Parses twirp url path
+		 * @param path
+		 */
+		function parseTwirpPath(path) {
+		    const parts = path.split("/");
+		    if (parts.length < 2) {
+		        return {
+		            pkgService: "",
+		            method: "",
+		            prefix: "",
+		        };
+		    }
+		    return {
+		        method: parts[parts.length - 1],
+		        pkgService: parts[parts.length - 2],
+		        prefix: parts.slice(0, parts.length - 2).join("/"),
+		    };
+		}
+		exports.parseTwirpPath = parseTwirpPath; 
+	} (request));
+	return request;
+}
+
+var hasRequiredServer;
+
+function requireServer () {
+	if (hasRequiredServer) return server;
+	hasRequiredServer = 1;
+	var __awaiter = (server.__awaiter) || function (thisArg, _arguments, P, generator) {
+	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+	    return new (P || (P = Promise))(function (resolve, reject) {
+	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+	        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+	        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+	        step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    });
+	};
+	Object.defineProperty(server, "__esModule", { value: true });
+	server.writeError = server.TwirpServer = undefined;
+	const hooks_1 = requireHooks();
+	const request_1 = requireRequest();
+	const errors_1 = requireErrors();
+	/**
+	 * Runtime server implementation of a TwirpServer
+	 */
+	class TwirpServer {
+	    constructor(options) {
+	        this.pathPrefix = "/twirp";
+	        this.hooks = [];
+	        this.interceptors = [];
+	        this.packageName = options.packageName;
+	        this.serviceName = options.serviceName;
+	        this.methodList = options.methodList;
+	        this.matchRoute = options.matchRoute;
+	        this.service = options.service;
+	    }
+	    /**
+	     * Returns the prefix for this server
+	     */
+	    get prefix() {
+	        return this.pathPrefix;
+	    }
+	    /**
+	     * The http handler for twirp complaint endpoints
+	     * @param options
+	     */
+	    httpHandler(options) {
+	        return (req, resp) => {
+	            // setup prefix
+	            if ((options === null || options === undefined ? undefined : options.prefix) !== undefined) {
+	                this.withPrefix(options.prefix);
+	            }
+	            return this._httpHandler(req, resp);
+	        };
+	    }
+	    /**
+	     * Adds interceptors or hooks to the request stack
+	     * @param middlewares
+	     */
+	    use(...middlewares) {
+	        middlewares.forEach((middleware) => {
+	            if (hooks_1.isHook(middleware)) {
+	                this.hooks.push(middleware);
+	                return this;
+	            }
+	            this.interceptors.push(middleware);
+	        });
+	        return this;
+	    }
+	    /**
+	     * Adds a prefix to the service url path
+	     * @param prefix
+	     */
+	    withPrefix(prefix) {
+	        if (prefix === false) {
+	            this.pathPrefix = "";
+	        }
+	        else {
+	            this.pathPrefix = prefix;
+	        }
+	        return this;
+	    }
+	    /**
+	     * Returns the regex matching path for this twirp server
+	     */
+	    matchingPath() {
+	        const baseRegex = this.baseURI().replace(/\./g, "\\.");
+	        return new RegExp(`${baseRegex}\/(${this.methodList.join("|")})`);
+	    }
+	    /**
+	     * Returns the base URI for this twirp server
+	     */
+	    baseURI() {
+	        return `${this.pathPrefix}/${this.packageName ? this.packageName + "." : ""}${this.serviceName}`;
+	    }
+	    /**
+	     * Create a twirp context
+	     * @param req
+	     * @param res
+	     * @private
+	     */
+	    createContext(req, res) {
+	        return {
+	            packageName: this.packageName,
+	            serviceName: this.serviceName,
+	            methodName: "",
+	            contentType: request_1.getContentType(req.headers["content-type"]),
+	            req: req,
+	            res: res,
+	        };
+	    }
+	    /**
+	     * Twrip server http handler implementation
+	     * @param req
+	     * @param resp
+	     * @private
+	     */
+	    _httpHandler(req, resp) {
+	        return __awaiter(this, undefined, undefined, function* () {
+	            const ctx = this.createContext(req, resp);
+	            try {
+	                yield this.invokeHook("requestReceived", ctx);
+	                const { method, mimeContentType } = request_1.validateRequest(ctx, req, this.pathPrefix || "");
+	                const handler = this.matchRoute(method, {
+	                    onMatch: (ctx) => {
+	                        return this.invokeHook("requestRouted", ctx);
+	                    },
+	                    onNotFound: () => {
+	                        const msg = `no handler for path ${req.url}`;
+	                        throw new errors_1.BadRouteError(msg, req.method || "", req.url || "");
+	                    },
+	                });
+	                const body = yield request_1.getRequestData(req);
+	                const response = yield handler(ctx, this.service, body, this.interceptors);
+	                yield Promise.all([
+	                    this.invokeHook("responsePrepared", ctx),
+	                    // keep backwards compatibility till next release
+	                    this.invokeHook("requestPrepared", ctx),
+	                ]);
+	                resp.statusCode = 200;
+	                resp.setHeader("Content-Type", mimeContentType);
+	                resp.end(response);
+	            }
+	            catch (e) {
+	                yield this.invokeHook("error", ctx, mustBeTwirpError(e));
+	                if (!resp.headersSent) {
+	                    writeError(resp, e);
+	                }
+	            }
+	            finally {
+	                yield Promise.all([
+	                    this.invokeHook("responseSent", ctx),
+	                    // keep backwards compatibility till next release
+	                    this.invokeHook("requestSent", ctx),
+	                ]);
+	            }
+	        });
+	    }
+	    /**
+	     * Invoke a hook
+	     * @param hookName
+	     * @param ctx
+	     * @param err
+	     * @protected
+	     */
+	    invokeHook(hookName, ctx, err) {
+	        return __awaiter(this, undefined, undefined, function* () {
+	            if (this.hooks.length === 0) {
+	                return;
+	            }
+	            const chainedHooks = hooks_1.chainHooks(...this.hooks);
+	            const hook = chainedHooks === null || chainedHooks === undefined ? undefined : chainedHooks[hookName];
+	            if (hook) {
+	                yield hook(ctx, err || new errors_1.InternalServerError("internal server error"));
+	            }
+	        });
+	    }
+	}
+	server.TwirpServer = TwirpServer;
+	/**
+	 * Write http error response
+	 * @param res
+	 * @param error
+	 */
+	function writeError(res, error) {
+	    const twirpError = mustBeTwirpError(error);
+	    res.setHeader("Content-Type", "application/json");
+	    res.statusCode = errors_1.httpStatusFromErrorCode(twirpError.code);
+	    res.end(twirpError.toJSON());
+	}
+	server.writeError = writeError;
+	/**
+	 * Make sure that the error passed is a TwirpError
+	 * otherwise it will wrap it into an InternalError
+	 * @param err
+	 */
+	function mustBeTwirpError(err) {
+	    if (err instanceof errors_1.TwirpError) {
+	        return err;
+	    }
+	    return new errors_1.InternalServerErrorWith(err);
+	}
+	return server;
+}
+
+var interceptors = {};
+
+var hasRequiredInterceptors;
+
+function requireInterceptors () {
+	if (hasRequiredInterceptors) return interceptors;
+	hasRequiredInterceptors = 1;
+	var __awaiter = (interceptors.__awaiter) || function (thisArg, _arguments, P, generator) {
+	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+	    return new (P || (P = Promise))(function (resolve, reject) {
+	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+	        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+	        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+	        step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    });
+	};
+	Object.defineProperty(interceptors, "__esModule", { value: true });
+	interceptors.chainInterceptors = undefined;
+	// chains multiple Interceptors into a single Interceptor.
+	// The first interceptor wraps the second one, and so on.
+	// Returns null if interceptors is empty.
+	function chainInterceptors(...interceptors) {
+	    if (interceptors.length === 0) {
+	        return;
+	    }
+	    if (interceptors.length === 1) {
+	        return interceptors[0];
+	    }
+	    const first = interceptors[0];
+	    return (ctx, request, handler) => __awaiter(this, undefined, undefined, function* () {
+	        let next = handler;
+	        for (let i = interceptors.length - 1; i > 0; i--) {
+	            next = ((next) => (ctx, typedRequest) => {
+	                return interceptors[i](ctx, typedRequest, next);
+	            })(next);
+	        }
+	        return first(ctx, request, next);
+	    });
+	}
+	interceptors.chainInterceptors = chainInterceptors;
+	return interceptors;
+}
+
+var gateway = {};
+
+var dotObject;
+var hasRequiredDotObject;
+
+function requireDotObject () {
+	if (hasRequiredDotObject) return dotObject;
+	hasRequiredDotObject = 1;
+
+	function _process (v, mod) {
+	  var i;
+	  var r;
+
+	  if (typeof mod === 'function') {
+	    r = mod(v);
+	    if (r !== undefined) {
+	      v = r;
+	    }
+	  } else if (Array.isArray(mod)) {
+	    for (i = 0; i < mod.length; i++) {
+	      r = mod[i](v);
+	      if (r !== undefined) {
+	        v = r;
+	      }
+	    }
+	  }
+
+	  return v
+	}
+
+	function parseKey (key, val) {
+	  // detect negative index notation
+	  if (key[0] === '-' && Array.isArray(val) && /^-\d+$/.test(key)) {
+	    return val.length + parseInt(key, 10)
+	  }
+	  return key
+	}
+
+	function isIndex (k) {
+	  return /^\d+$/.test(k)
+	}
+
+	function isObject (val) {
+	  return Object.prototype.toString.call(val) === '[object Object]'
+	}
+
+	function isArrayOrObject (val) {
+	  return Object(val) === val
+	}
+
+	function isEmptyObject (val) {
+	  return Object.keys(val).length === 0
+	}
+
+	var blacklist = ['__proto__', 'prototype', 'constructor'];
+	var blacklistFilter = function (part) { return blacklist.indexOf(part) === -1 };
+
+	function parsePath (path, sep) {
+	  if (path.indexOf('[') >= 0) {
+	    path = path.replace(/\[/g, sep).replace(/]/g, '');
+	  }
+
+	  var parts = path.split(sep);
+
+	  var check = parts.filter(blacklistFilter);
+
+	  if (check.length !== parts.length) {
+	    throw Error('Refusing to update blacklisted property ' + path)
+	  }
+
+	  return parts
+	}
+
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+	function DotObject (separator, override, useArray, useBrackets) {
+	  if (!(this instanceof DotObject)) {
+	    return new DotObject(separator, override, useArray, useBrackets)
+	  }
+
+	  if (typeof override === 'undefined') override = false;
+	  if (typeof useArray === 'undefined') useArray = true;
+	  if (typeof useBrackets === 'undefined') useBrackets = true;
+	  this.separator = separator || '.';
+	  this.override = override;
+	  this.useArray = useArray;
+	  this.useBrackets = useBrackets;
+	  this.keepArray = false;
+
+	  // contains touched arrays
+	  this.cleanup = [];
+	}
+
+	var dotDefault = new DotObject('.', false, true, true);
+	function wrap (method) {
+	  return function () {
+	    return dotDefault[method].apply(dotDefault, arguments)
+	  }
+	}
+
+	DotObject.prototype._fill = function (a, obj, v, mod) {
+	  var k = a.shift();
+
+	  if (a.length > 0) {
+	    obj[k] = obj[k] || (this.useArray && isIndex(a[0]) ? [] : {});
+
+	    if (!isArrayOrObject(obj[k])) {
+	      if (this.override) {
+	        obj[k] = {};
+	      } else {
+	        if (!(isArrayOrObject(v) && isEmptyObject(v))) {
+	          throw new Error(
+	            'Trying to redefine `' + k + '` which is a ' + typeof obj[k]
+	          )
+	        }
+
+	        return
+	      }
+	    }
+
+	    this._fill(a, obj[k], v, mod);
+	  } else {
+	    if (!this.override && isArrayOrObject(obj[k]) && !isEmptyObject(obj[k])) {
+	      if (!(isArrayOrObject(v) && isEmptyObject(v))) {
+	        throw new Error("Trying to redefine non-empty obj['" + k + "']")
+	      }
+
+	      return
+	    }
+
+	    obj[k] = _process(v, mod);
+	  }
+	};
+
+	/**
+	 *
+	 * Converts an object with dotted-key/value pairs to it's expanded version
+	 *
+	 * Optionally transformed by a set of modifiers.
+	 *
+	 * Usage:
+	 *
+	 *   var row = {
+	 *     'nr': 200,
+	 *     'doc.name': '  My Document  '
+	 *   }
+	 *
+	 *   var mods = {
+	 *     'doc.name': [_s.trim, _s.underscored]
+	 *   }
+	 *
+	 *   dot.object(row, mods)
+	 *
+	 * @param {Object} obj
+	 * @param {Object} mods
+	 */
+	DotObject.prototype.object = function (obj, mods) {
+	  var self = this;
+
+	  Object.keys(obj).forEach(function (k) {
+	    var mod = mods === undefined ? null : mods[k];
+	    // normalize array notation.
+	    var ok = parsePath(k, self.separator).join(self.separator);
+
+	    if (ok.indexOf(self.separator) !== -1) {
+	      self._fill(ok.split(self.separator), obj, obj[k], mod);
+	      delete obj[k];
+	    } else {
+	      obj[k] = _process(obj[k], mod);
+	    }
+	  });
+
+	  return obj
+	};
+
+	/**
+	 * @param {String} path dotted path
+	 * @param {String} v value to be set
+	 * @param {Object} obj object to be modified
+	 * @param {Function|Array} mod optional modifier
+	 */
+	DotObject.prototype.str = function (path, v, obj, mod) {
+	  var ok = parsePath(path, this.separator).join(this.separator);
+
+	  if (path.indexOf(this.separator) !== -1) {
+	    this._fill(ok.split(this.separator), obj, v, mod);
+	  } else {
+	    obj[path] = _process(v, mod);
+	  }
+
+	  return obj
+	};
+
+	/**
+	 *
+	 * Pick a value from an object using dot notation.
+	 *
+	 * Optionally remove the value
+	 *
+	 * @param {String} path
+	 * @param {Object} obj
+	 * @param {Boolean} remove
+	 */
+	DotObject.prototype.pick = function (path, obj, remove, reindexArray) {
+	  var i;
+	  var keys;
+	  var val;
+	  var key;
+	  var cp;
+
+	  keys = parsePath(path, this.separator);
+	  for (i = 0; i < keys.length; i++) {
+	    key = parseKey(keys[i], obj);
+	    if (obj && typeof obj === 'object' && key in obj) {
+	      if (i === keys.length - 1) {
+	        if (remove) {
+	          val = obj[key];
+	          if (reindexArray && Array.isArray(obj)) {
+	            obj.splice(key, 1);
+	          } else {
+	            delete obj[key];
+	          }
+	          if (Array.isArray(obj)) {
+	            cp = keys.slice(0, -1).join('.');
+	            if (this.cleanup.indexOf(cp) === -1) {
+	              this.cleanup.push(cp);
+	            }
+	          }
+	          return val
+	        } else {
+	          return obj[key]
+	        }
+	      } else {
+	        obj = obj[key];
+	      }
+	    } else {
+	      return undefined
+	    }
+	  }
+	  if (remove && Array.isArray(obj)) {
+	    obj = obj.filter(function (n) {
+	      return n !== undefined
+	    });
+	  }
+	  return obj
+	};
+	/**
+	 *
+	 * Delete value from an object using dot notation.
+	 *
+	 * @param {String} path
+	 * @param {Object} obj
+	 * @return {any} The removed value
+	 */
+	DotObject.prototype.delete = function (path, obj) {
+	  return this.remove(path, obj, true)
+	};
+
+	/**
+	 *
+	 * Remove value from an object using dot notation.
+	 *
+	 * Will remove multiple items if path is an array.
+	 * In this case array indexes will be retained until all
+	 * removals have been processed.
+	 *
+	 * Use dot.delete() to automatically  re-index arrays.
+	 *
+	 * @param {String|Array<String>} path
+	 * @param {Object} obj
+	 * @param {Boolean} reindexArray
+	 * @return {any} The removed value
+	 */
+	DotObject.prototype.remove = function (path, obj, reindexArray) {
+	  var i;
+
+	  this.cleanup = [];
+	  if (Array.isArray(path)) {
+	    for (i = 0; i < path.length; i++) {
+	      this.pick(path[i], obj, true, reindexArray);
+	    }
+	    if (!reindexArray) {
+	      this._cleanup(obj);
+	    }
+	    return obj
+	  } else {
+	    return this.pick(path, obj, true, reindexArray)
+	  }
+	};
+
+	DotObject.prototype._cleanup = function (obj) {
+	  var ret;
+	  var i;
+	  var keys;
+	  var root;
+	  if (this.cleanup.length) {
+	    for (i = 0; i < this.cleanup.length; i++) {
+	      keys = this.cleanup[i].split('.');
+	      root = keys.splice(0, -1).join('.');
+	      ret = root ? this.pick(root, obj) : obj;
+	      ret = ret[keys[0]].filter(function (v) {
+	        return v !== undefined
+	      });
+	      this.set(this.cleanup[i], ret, obj);
+	    }
+	    this.cleanup = [];
+	  }
+	};
+
+	/**
+	 * Alias method  for `dot.remove`
+	 *
+	 * Note: this is not an alias for dot.delete()
+	 *
+	 * @param {String|Array<String>} path
+	 * @param {Object} obj
+	 * @param {Boolean} reindexArray
+	 * @return {any} The removed value
+	 */
+	DotObject.prototype.del = DotObject.prototype.remove;
+
+	/**
+	 *
+	 * Move a property from one place to the other.
+	 *
+	 * If the source path does not exist (undefined)
+	 * the target property will not be set.
+	 *
+	 * @param {String} source
+	 * @param {String} target
+	 * @param {Object} obj
+	 * @param {Function|Array} mods
+	 * @param {Boolean} merge
+	 */
+	DotObject.prototype.move = function (source, target, obj, mods, merge) {
+	  if (typeof mods === 'function' || Array.isArray(mods)) {
+	    this.set(target, _process(this.pick(source, obj, true), mods), obj, merge);
+	  } else {
+	    merge = mods;
+	    this.set(target, this.pick(source, obj, true), obj, merge);
+	  }
+
+	  return obj
+	};
+
+	/**
+	 *
+	 * Transfer a property from one object to another object.
+	 *
+	 * If the source path does not exist (undefined)
+	 * the property on the other object will not be set.
+	 *
+	 * @param {String} source
+	 * @param {String} target
+	 * @param {Object} obj1
+	 * @param {Object} obj2
+	 * @param {Function|Array} mods
+	 * @param {Boolean} merge
+	 */
+	DotObject.prototype.transfer = function (
+	  source,
+	  target,
+	  obj1,
+	  obj2,
+	  mods,
+	  merge
+	) {
+	  if (typeof mods === 'function' || Array.isArray(mods)) {
+	    this.set(
+	      target,
+	      _process(this.pick(source, obj1, true), mods),
+	      obj2,
+	      merge
+	    );
+	  } else {
+	    merge = mods;
+	    this.set(target, this.pick(source, obj1, true), obj2, merge);
+	  }
+
+	  return obj2
+	};
+
+	/**
+	 *
+	 * Copy a property from one object to another object.
+	 *
+	 * If the source path does not exist (undefined)
+	 * the property on the other object will not be set.
+	 *
+	 * @param {String} source
+	 * @param {String} target
+	 * @param {Object} obj1
+	 * @param {Object} obj2
+	 * @param {Function|Array} mods
+	 * @param {Boolean} merge
+	 */
+	DotObject.prototype.copy = function (source, target, obj1, obj2, mods, merge) {
+	  if (typeof mods === 'function' || Array.isArray(mods)) {
+	    this.set(
+	      target,
+	      _process(
+	        // clone what is picked
+	        JSON.parse(JSON.stringify(this.pick(source, obj1, false))),
+	        mods
+	      ),
+	      obj2,
+	      merge
+	    );
+	  } else {
+	    merge = mods;
+	    this.set(target, this.pick(source, obj1, false), obj2, merge);
+	  }
+
+	  return obj2
+	};
+
+	/**
+	 *
+	 * Set a property on an object using dot notation.
+	 *
+	 * @param {String} path
+	 * @param {any} val
+	 * @param {Object} obj
+	 * @param {Boolean} merge
+	 */
+	DotObject.prototype.set = function (path, val, obj, merge) {
+	  var i;
+	  var k;
+	  var keys;
+	  var key;
+
+	  // Do not operate if the value is undefined.
+	  if (typeof val === 'undefined') {
+	    return obj
+	  }
+	  keys = parsePath(path, this.separator);
+
+	  for (i = 0; i < keys.length; i++) {
+	    key = keys[i];
+	    if (i === keys.length - 1) {
+	      if (merge && isObject(val) && isObject(obj[key])) {
+	        for (k in val) {
+	          if (hasOwnProperty.call(val, k)) {
+	            obj[key][k] = val[k];
+	          }
+	        }
+	      } else if (merge && Array.isArray(obj[key]) && Array.isArray(val)) {
+	        for (var j = 0; j < val.length; j++) {
+	          obj[keys[i]].push(val[j]);
+	        }
+	      } else {
+	        obj[key] = val;
+	      }
+	    } else if (
+	      // force the value to be an object
+	      !hasOwnProperty.call(obj, key) ||
+	      (!isObject(obj[key]) && !Array.isArray(obj[key]))
+	    ) {
+	      // initialize as array if next key is numeric
+	      if (/^\d+$/.test(keys[i + 1])) {
+	        obj[key] = [];
+	      } else {
+	        obj[key] = {};
+	      }
+	    }
+	    obj = obj[key];
+	  }
+	  return obj
+	};
+
+	/**
+	 *
+	 * Transform an object
+	 *
+	 * Usage:
+	 *
+	 *   var obj = {
+	 *     "id": 1,
+	 *    "some": {
+	 *      "thing": "else"
+	 *    }
+	 *   }
+	 *
+	 *   var transform = {
+	 *     "id": "nr",
+	 *    "some.thing": "name"
+	 *   }
+	 *
+	 *   var tgt = dot.transform(transform, obj)
+	 *
+	 * @param {Object} recipe Transform recipe
+	 * @param {Object} obj Object to be transformed
+	 * @param {Array} mods modifiers for the target
+	 */
+	DotObject.prototype.transform = function (recipe, obj, tgt) {
+	  obj = obj || {};
+	  tgt = tgt || {};
+	  Object.keys(recipe).forEach(
+	    function (key) {
+	      this.set(recipe[key], this.pick(key, obj), tgt);
+	    }.bind(this)
+	  );
+	  return tgt
+	};
+
+	/**
+	 *
+	 * Convert object to dotted-key/value pair
+	 *
+	 * Usage:
+	 *
+	 *   var tgt = dot.dot(obj)
+	 *
+	 *   or
+	 *
+	 *   var tgt = {}
+	 *   dot.dot(obj, tgt)
+	 *
+	 * @param {Object} obj source object
+	 * @param {Object} tgt target object
+	 * @param {Array} path path array (internal)
+	 */
+	DotObject.prototype.dot = function (obj, tgt, path) {
+	  tgt = tgt || {};
+	  path = path || [];
+	  var isArray = Array.isArray(obj);
+
+	  Object.keys(obj).forEach(
+	    function (key) {
+	      var index = isArray && this.useBrackets ? '[' + key + ']' : key;
+	      if (
+	        isArrayOrObject(obj[key]) &&
+	        ((isObject(obj[key]) && !isEmptyObject(obj[key])) ||
+	          (Array.isArray(obj[key]) && !this.keepArray && obj[key].length !== 0))
+	      ) {
+	        if (isArray && this.useBrackets) {
+	          var previousKey = path[path.length - 1] || '';
+	          return this.dot(
+	            obj[key],
+	            tgt,
+	            path.slice(0, -1).concat(previousKey + index)
+	          )
+	        } else {
+	          return this.dot(obj[key], tgt, path.concat(index))
+	        }
+	      } else {
+	        if (isArray && this.useBrackets) {
+	          tgt[path.join(this.separator).concat('[' + key + ']')] = obj[key];
+	        } else {
+	          tgt[path.concat(index).join(this.separator)] = obj[key];
+	        }
+	      }
+	    }.bind(this)
+	  );
+	  return tgt
+	};
+
+	DotObject.pick = wrap('pick');
+	DotObject.move = wrap('move');
+	DotObject.transfer = wrap('transfer');
+	DotObject.transform = wrap('transform');
+	DotObject.copy = wrap('copy');
+	DotObject.object = wrap('object');
+	DotObject.str = wrap('str');
+	DotObject.set = wrap('set');
+	DotObject.delete = wrap('delete');
+	DotObject.del = DotObject.remove = wrap('remove');
+	DotObject.dot = wrap('dot');
+	['override', 'overwrite'].forEach(function (prop) {
+	  Object.defineProperty(DotObject, prop, {
+	    get: function () {
+	      return dotDefault.override
+	    },
+	    set: function (val) {
+	      dotDefault.override = !!val;
+	    }
+	  });
+	});
+	['useArray', 'keepArray', 'useBrackets'].forEach(function (prop) {
+	  Object.defineProperty(DotObject, prop, {
+	    get: function () {
+	      return dotDefault[prop]
+	    },
+	    set: function (val) {
+	      dotDefault[prop] = val;
+	    }
+	  });
+	});
+
+	DotObject._process = _process;
+
+	dotObject = DotObject;
+	return dotObject;
+}
+
+var http_client = {};
+
+var hasRequiredHttp_client;
+
+function requireHttp_client () {
+	if (hasRequiredHttp_client) return http_client;
+	hasRequiredHttp_client = 1;
+	var __createBinding = (http_client.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+	}) : (function(o, m, k, k2) {
+	    if (k2 === undefined) k2 = k;
+	    o[k2] = m[k];
+	}));
+	var __setModuleDefault = (http_client.__setModuleDefault) || (Object.create ? (function(o, v) {
+	    Object.defineProperty(o, "default", { enumerable: true, value: v });
+	}) : function(o, v) {
+	    o["default"] = v;
+	});
+	var __importStar = (http_client.__importStar) || function (mod) {
+	    if (mod && mod.__esModule) return mod;
+	    var result = {};
+	    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+	    __setModuleDefault(result, mod);
+	    return result;
+	};
+	var __awaiter = (http_client.__awaiter) || function (thisArg, _arguments, P, generator) {
+	    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+	    return new (P || (P = Promise))(function (resolve, reject) {
+	        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+	        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+	        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+	        step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    });
+	};
+	Object.defineProperty(http_client, "__esModule", { value: true });
+	http_client.FetchRPC = http_client.wrapErrorResponseToTwirpError = http_client.NodeHttpRPC = undefined;
+	const http = __importStar(require$$2$1);
+	const https = __importStar(require$$1$4);
+	const url_1 = require$$1$7;
+	const errors_1 = requireErrors();
+	/**
+	 * a node HTTP RPC implementation
+	 * @param options
+	 * @constructor
+	 */
+	const NodeHttpRPC = (options) => ({
+	    request(service, method, contentType, data) {
+	        let client;
+	        return new Promise((resolve, rejected) => {
+	            const responseChunks = [];
+	            const requestData = contentType === "application/protobuf"
+	                ? Buffer.from(data)
+	                : JSON.stringify(data);
+	            const url = new url_1.URL(options.baseUrl);
+	            const isHttps = url.protocol === "https:";
+	            if (isHttps) {
+	                client = https;
+	            }
+	            else {
+	                client = http;
+	            }
+	            const prefix = url.pathname !== "/" ? url.pathname : "";
+	            const req = client
+	                .request(Object.assign(Object.assign({}, (options ? options : {})), { method: "POST", protocol: url.protocol, host: url.hostname, port: url.port ? url.port : isHttps ? 443 : 80, path: `${prefix}/${service}/${method}`, headers: Object.assign(Object.assign({}, (options.headers ? options.headers : {})), { "Content-Type": contentType, "Content-Length": contentType === "application/protobuf"
+	                        ? Buffer.byteLength(requestData)
+	                        : Buffer.from(requestData).byteLength }) }), (res) => {
+	                res.on("data", (chunk) => responseChunks.push(chunk));
+	                res.on("end", () => {
+	                    const data = Buffer.concat(responseChunks);
+	                    if (res.statusCode != 200) {
+	                        rejected(wrapErrorResponseToTwirpError(data.toString()));
+	                    }
+	                    else {
+	                        if (contentType === "application/json") {
+	                            resolve(JSON.parse(data.toString()));
+	                        }
+	                        else {
+	                            resolve(data);
+	                        }
+	                    }
+	                });
+	                res.on("error", (err) => {
+	                    rejected(err);
+	                });
+	            })
+	                .on("error", (err) => {
+	                rejected(err);
+	            });
+	            req.end(requestData);
+	        });
+	    },
+	});
+	http_client.NodeHttpRPC = NodeHttpRPC;
+	function wrapErrorResponseToTwirpError(errorResponse) {
+	    return errors_1.TwirpError.fromObject(JSON.parse(errorResponse));
+	}
+	http_client.wrapErrorResponseToTwirpError = wrapErrorResponseToTwirpError;
+	/**
+	 * a browser fetch RPC implementation
+	 */
+	const FetchRPC = (options) => ({
+	    request(service, method, contentType, data) {
+	        return __awaiter(this, undefined, undefined, function* () {
+	            const headers = new Headers(options.headers);
+	            headers.set("content-type", contentType);
+	            const response = yield fetch(`${options.baseUrl}/${service}/${method}`, Object.assign(Object.assign({}, options), { method: "POST", headers, body: data instanceof Uint8Array ? data : JSON.stringify(data) }));
+	            if (response.status === 200) {
+	                if (contentType === "application/json") {
+	                    return yield response.json();
+	                }
+	                return new Uint8Array(yield response.arrayBuffer());
+	            }
+	            throw errors_1.TwirpError.fromObject(yield response.json());
+	        });
+	    },
+	});
+	http_client.FetchRPC = FetchRPC;
+	return http_client;
+}
+
+var hasRequiredGateway;
+
+function requireGateway () {
+	if (hasRequiredGateway) return gateway;
+	hasRequiredGateway = 1;
+	(function (exports) {
+		var __createBinding = (gateway.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+		    if (k2 === undefined) k2 = k;
+		    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+		}) : (function(o, m, k, k2) {
+		    if (k2 === undefined) k2 = k;
+		    o[k2] = m[k];
+		}));
+		var __setModuleDefault = (gateway.__setModuleDefault) || (Object.create ? (function(o, v) {
+		    Object.defineProperty(o, "default", { enumerable: true, value: v });
+		}) : function(o, v) {
+		    o["default"] = v;
+		});
+		var __importStar = (gateway.__importStar) || function (mod) {
+		    if (mod && mod.__esModule) return mod;
+		    var result = {};
+		    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+		    __setModuleDefault(result, mod);
+		    return result;
+		};
+		var __awaiter = (gateway.__awaiter) || function (thisArg, _arguments, P, generator) {
+		    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+		    return new (P || (P = Promise))(function (resolve, reject) {
+		        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+		        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+		        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+		        step((generator = generator.apply(thisArg, _arguments || [])).next());
+		    });
+		};
+		var __rest = (gateway.__rest) || function (s, e) {
+		    var t = {};
+		    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+		        t[p] = s[p];
+		    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+		        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+		            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+		                t[p[i]] = s[p[i]];
+		        }
+		    return t;
+		};
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.Gateway = exports.Pattern = undefined;
+		const querystring_1 = require$$8;
+		const dotObject = __importStar(requireDotObject());
+		const request_1 = requireRequest();
+		const errors_1 = requireErrors();
+		const http_client_1 = requireHttp_client();
+		const server_1 = requireServer();
+		(function (Pattern) {
+		    Pattern["POST"] = "post";
+		    Pattern["GET"] = "get";
+		    Pattern["PATCH"] = "patch";
+		    Pattern["PUT"] = "put";
+		    Pattern["DELETE"] = "delete";
+		})(exports.Pattern || (exports.Pattern = {}));
+		/**
+		 * The Gateway proxies http requests to Twirp Compliant
+		 * handlers
+		 */
+		class Gateway {
+		    constructor(routes) {
+		        this.routes = routes;
+		    }
+		    /**
+		     * Middleware that rewrite the current request
+		     * to a Twirp compliant request
+		     */
+		    twirpRewrite(prefix = "/twirp") {
+		        return (req, resp, next) => {
+		            this.rewrite(req, resp, prefix)
+		                .then(() => next())
+		                .catch((e) => {
+		                if (e instanceof errors_1.TwirpError) {
+		                    if (e.code !== errors_1.TwirpErrorCode.NotFound) {
+		                        server_1.writeError(resp, e);
+		                    }
+		                    else {
+		                        next();
+		                    }
+		                }
+		            });
+		        };
+		    }
+		    /**
+		     * Rewrite an incoming request to a Twirp compliant request
+		     * @param req
+		     * @param resp
+		     * @param prefix
+		     */
+		    rewrite(req, resp, prefix = "/twirp") {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            const [match, route] = this.matchRoute(req);
+		            const body = yield this.prepareTwirpBody(req, match, route);
+		            const twirpUrl = `${prefix}/${route.packageName}.${route.serviceName}/${route.methodName}`;
+		            req.url = twirpUrl;
+		            req.originalUrl = twirpUrl;
+		            req.method = "POST";
+		            req.headers["content-type"] = "application/json";
+		            req.rawBody = Buffer.from(JSON.stringify(body));
+		            if (route.responseBodyKey) {
+		                const endFn = resp.end.bind(resp);
+		                resp.end = function (chunk) {
+		                    if (resp.statusCode === 200) {
+		                        endFn(`{ "${route.responseBodyKey}": ${chunk} }`);
+		                    }
+		                    else {
+		                        endFn(chunk);
+		                    }
+		                };
+		            }
+		        });
+		    }
+		    /**
+		     * Create a reverse proxy handler to
+		     * proxy http requests to Twirp Compliant handlers
+		     * @param httpClientOption
+		     */
+		    reverseProxy(httpClientOption) {
+		        const client = http_client_1.NodeHttpRPC(httpClientOption);
+		        return (req, res) => __awaiter(this, undefined, undefined, function* () {
+		            try {
+		                const [match, route] = this.matchRoute(req);
+		                const body = yield this.prepareTwirpBody(req, match, route);
+		                const response = yield client.request(`${route.packageName}.${route.serviceName}`, route.methodName, "application/json", body);
+		                res.statusCode = 200;
+		                res.setHeader("content-type", "application/json");
+		                let jsonResponse;
+		                if (route.responseBodyKey) {
+		                    jsonResponse = JSON.stringify({ [route.responseBodyKey]: response });
+		                }
+		                else {
+		                    jsonResponse = JSON.stringify(response);
+		                }
+		                res.end(jsonResponse);
+		            }
+		            catch (e) {
+		                server_1.writeError(res, e);
+		            }
+		        });
+		    }
+		    /**
+		     * Prepares twirp body requests using http.google.annotions
+		     * compliant spec
+		     *
+		     * @param req
+		     * @param match
+		     * @param route
+		     * @protected
+		     */
+		    prepareTwirpBody(req, match, route) {
+		        return __awaiter(this, undefined, undefined, function* () {
+		            const _a = match.params, { query_string } = _a, params = __rest(_a, ["query_string"]);
+		            let requestBody = Object.assign({}, params);
+		            if (query_string && route.bodyKey !== "*") {
+		                const queryParams = this.parseQueryString(query_string);
+		                requestBody = Object.assign(Object.assign({}, queryParams), requestBody);
+		            }
+		            let body = {};
+		            if (route.bodyKey) {
+		                const data = yield request_1.getRequestData(req);
+		                try {
+		                    const jsonBody = JSON.parse(data.toString() || "{}");
+		                    if (route.bodyKey === "*") {
+		                        body = jsonBody;
+		                    }
+		                    else {
+		                        body[route.bodyKey] = jsonBody;
+		                    }
+		                }
+		                catch (e) {
+		                    const msg = "the json request could not be decoded";
+		                    throw new errors_1.TwirpError(errors_1.TwirpErrorCode.Malformed, msg).withCause(e, true);
+		                }
+		            }
+		            return Object.assign(Object.assign({}, body), requestBody);
+		        });
+		    }
+		    /**
+		     * Matches a route
+		     * @param req
+		     */
+		    matchRoute(req) {
+		        var _a;
+		        const httpMethod = (_a = req.method) === null || _a === undefined ? undefined : _a.toLowerCase();
+		        if (!httpMethod) {
+		            throw new errors_1.BadRouteError(`method not allowed`, req.method || "", req.url || "");
+		        }
+		        const routes = this.routes[httpMethod];
+		        for (const route of routes) {
+		            const match = route.matcher(req.url || "/");
+		            if (match) {
+		                return [match, route];
+		            }
+		        }
+		        throw new errors_1.NotFoundError(`url ${req.url} not found`);
+		    }
+		    /**
+		     * Parse query string
+		     * @param queryString
+		     */
+		    parseQueryString(queryString) {
+		        const queryParams = querystring_1.parse(queryString.replace("?", ""));
+		        return dotObject.object(queryParams);
+		    }
+		}
+		exports.Gateway = Gateway; 
+	} (gateway));
+	return gateway;
+}
+
+var hasRequiredTwirp;
+
+function requireTwirp () {
+	if (hasRequiredTwirp) return twirp;
+	hasRequiredTwirp = 1;
+	(function (exports) {
+		var __createBinding = (twirp.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+		    if (k2 === undefined) k2 = k;
+		    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+		}) : (function(o, m, k, k2) {
+		    if (k2 === undefined) k2 = k;
+		    o[k2] = m[k];
+		}));
+		var __exportStar = (twirp.__exportStar) || function(m, exports) {
+		    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+		};
+		Object.defineProperty(exports, "__esModule", { value: true });
+		exports.TwirpContentType = undefined;
+		__exportStar(requireContext(), exports);
+		__exportStar(requireServer(), exports);
+		__exportStar(requireInterceptors(), exports);
+		__exportStar(requireHooks(), exports);
+		__exportStar(requireErrors(), exports);
+		__exportStar(requireGateway(), exports);
+		__exportStar(requireHttp_client(), exports);
+		var request_1 = requireRequest();
+		Object.defineProperty(exports, "TwirpContentType", { enumerable: true, get: function () { return request_1.TwirpContentType; } }); 
+	} (twirp));
+	return twirp;
+}
+
+var hasRequiredArtifact_twirp;
+
+function requireArtifact_twirp () {
+	if (hasRequiredArtifact_twirp) return artifact_twirp;
+	hasRequiredArtifact_twirp = 1;
+	(function (exports) {
+		var __awaiter =
+		  (artifact_twirp.__awaiter) ||
+		  function (thisArg, _arguments, P, generator) {
+		    function adopt(value) {
+		      return value instanceof P
+		        ? value
+		        : new P(function (resolve) {
+		            resolve(value);
+		          })
+		    }
+		    return new (P || (P = Promise))(function (resolve, reject) {
+		      function fulfilled(value) {
+		        try {
+		          step(generator.next(value));
+		        } catch (e) {
+		          reject(e);
+		        }
+		      }
+		      function rejected(value) {
+		        try {
+		          step(generator['throw'](value));
+		        } catch (e) {
+		          reject(e);
+		        }
+		      }
+		      function step(result) {
+		        result.done
+		          ? resolve(result.value)
+		          : adopt(result.value).then(fulfilled, rejected);
+		      }
+		      step((generator = generator.apply(thisArg, _arguments || [])).next());
+		    })
+		  };
+		Object.defineProperty(exports, '__esModule', { value: true });
+		exports.createArtifactServiceServer =
+		  exports.ArtifactServiceMethodList =
+		  exports.ArtifactServiceMethod =
+		  exports.ArtifactServiceClientProtobuf =
+		  exports.ArtifactServiceClientJSON =
+		    undefined;
+		const twirp_ts_1 = requireTwirp();
+		const artifact_1 = requireArtifact$1();
+		class ArtifactServiceClientJSON {
+		  constructor(rpc) {
+		    this.rpc = rpc;
+		    this.CreateArtifact.bind(this);
+		    this.FinalizeArtifact.bind(this);
+		  }
+		  CreateArtifact(request) {
+		    const data = artifact_1.CreateArtifactRequest.toJson(request, {
+		      useProtoFieldName: true,
+		      emitDefaultValues: false
+		    });
+		    const promise = this.rpc.request(
+		      'github.actions.results.api.v1.ArtifactService',
+		      'CreateArtifact',
+		      'application/json',
+		      data
+		    );
+		    return promise.then((data) =>
+		      artifact_1.CreateArtifactResponse.fromJson(data, {
+		        ignoreUnknownFields: true
+		      })
+		    )
+		  }
+		  FinalizeArtifact(request) {
+		    const data = artifact_1.FinalizeArtifactRequest.toJson(request, {
+		      useProtoFieldName: true,
+		      emitDefaultValues: false
+		    });
+		    const promise = this.rpc.request(
+		      'github.actions.results.api.v1.ArtifactService',
+		      'FinalizeArtifact',
+		      'application/json',
+		      data
+		    );
+		    return promise.then((data) =>
+		      artifact_1.FinalizeArtifactResponse.fromJson(data, {
+		        ignoreUnknownFields: true
+		      })
+		    )
+		  }
+		}
+		exports.ArtifactServiceClientJSON = ArtifactServiceClientJSON;
+		class ArtifactServiceClientProtobuf {
+		  constructor(rpc) {
+		    this.rpc = rpc;
+		    this.CreateArtifact.bind(this);
+		    this.FinalizeArtifact.bind(this);
+		  }
+		  CreateArtifact(request) {
+		    const data = artifact_1.CreateArtifactRequest.toBinary(request);
+		    const promise = this.rpc.request(
+		      'github.actions.results.api.v1.ArtifactService',
+		      'CreateArtifact',
+		      'application/protobuf',
+		      data
+		    );
+		    return promise.then((data) =>
+		      artifact_1.CreateArtifactResponse.fromBinary(data)
+		    )
+		  }
+		  FinalizeArtifact(request) {
+		    const data = artifact_1.FinalizeArtifactRequest.toBinary(request);
+		    const promise = this.rpc.request(
+		      'github.actions.results.api.v1.ArtifactService',
+		      'FinalizeArtifact',
+		      'application/protobuf',
+		      data
+		    );
+		    return promise.then((data) =>
+		      artifact_1.FinalizeArtifactResponse.fromBinary(data)
+		    )
+		  }
+		}
+		exports.ArtifactServiceClientProtobuf = ArtifactServiceClientProtobuf;
+		var ArtifactServiceMethod
+		;(function (ArtifactServiceMethod) {
+		  ArtifactServiceMethod['CreateArtifact'] = 'CreateArtifact';
+		  ArtifactServiceMethod['FinalizeArtifact'] = 'FinalizeArtifact';
+		})(
+		  (ArtifactServiceMethod =
+		    exports.ArtifactServiceMethod || (exports.ArtifactServiceMethod = {}))
+		);
+		exports.ArtifactServiceMethodList = [
+		  ArtifactServiceMethod.CreateArtifact,
+		  ArtifactServiceMethod.FinalizeArtifact
+		];
+		function createArtifactServiceServer(service) {
+		  return new twirp_ts_1.TwirpServer({
+		    service,
+		    packageName: 'github.actions.results.api.v1',
+		    serviceName: 'ArtifactService',
+		    methodList: exports.ArtifactServiceMethodList,
+		    matchRoute: matchArtifactServiceRoute
+		  })
+		}
+		exports.createArtifactServiceServer = createArtifactServiceServer;
+		function matchArtifactServiceRoute(method, events) {
+		  switch (method) {
+		    case 'CreateArtifact':
+		      return (ctx, service, data, interceptors) =>
+		        __awaiter(this, undefined, undefined, function* () {
+		          ctx = Object.assign(Object.assign({}, ctx), {
+		            methodName: 'CreateArtifact'
+		          });
+		          yield events.onMatch(ctx);
+		          return handleArtifactServiceCreateArtifactRequest(
+		            ctx,
+		            service,
+		            data,
+		            interceptors
+		          )
+		        })
+		    case 'FinalizeArtifact':
+		      return (ctx, service, data, interceptors) =>
+		        __awaiter(this, undefined, undefined, function* () {
+		          ctx = Object.assign(Object.assign({}, ctx), {
+		            methodName: 'FinalizeArtifact'
+		          });
+		          yield events.onMatch(ctx);
+		          return handleArtifactServiceFinalizeArtifactRequest(
+		            ctx,
+		            service,
+		            data,
+		            interceptors
+		          )
+		        })
+		    default:
+		      events.onNotFound();
+		      const msg = `no handler found`;
+		      throw new twirp_ts_1.TwirpError(twirp_ts_1.TwirpErrorCode.BadRoute, msg)
+		  }
+		}
+		function handleArtifactServiceCreateArtifactRequest(
+		  ctx,
+		  service,
+		  data,
+		  interceptors
+		) {
+		  switch (ctx.contentType) {
+		    case twirp_ts_1.TwirpContentType.JSON:
+		      return handleArtifactServiceCreateArtifactJSON(
+		        ctx,
+		        service,
+		        data,
+		        interceptors
+		      )
+		    case twirp_ts_1.TwirpContentType.Protobuf:
+		      return handleArtifactServiceCreateArtifactProtobuf(
+		        ctx,
+		        service,
+		        data,
+		        interceptors
+		      )
+		    default:
+		      const msg = 'unexpected Content-Type';
+		      throw new twirp_ts_1.TwirpError(twirp_ts_1.TwirpErrorCode.BadRoute, msg)
+		  }
+		}
+		function handleArtifactServiceFinalizeArtifactRequest(
+		  ctx,
+		  service,
+		  data,
+		  interceptors
+		) {
+		  switch (ctx.contentType) {
+		    case twirp_ts_1.TwirpContentType.JSON:
+		      return handleArtifactServiceFinalizeArtifactJSON(
+		        ctx,
+		        service,
+		        data,
+		        interceptors
+		      )
+		    case twirp_ts_1.TwirpContentType.Protobuf:
+		      return handleArtifactServiceFinalizeArtifactProtobuf(
+		        ctx,
+		        service,
+		        data,
+		        interceptors
+		      )
+		    default:
+		      const msg = 'unexpected Content-Type';
+		      throw new twirp_ts_1.TwirpError(twirp_ts_1.TwirpErrorCode.BadRoute, msg)
+		  }
+		}
+		function handleArtifactServiceCreateArtifactJSON(
+		  ctx,
+		  service,
+		  data,
+		  interceptors
+		) {
+		  return __awaiter(this, undefined, undefined, function* () {
+		    let request;
+		    let response;
+		    try {
+		      const body = JSON.parse(data.toString() || '{}');
+		      request = artifact_1.CreateArtifactRequest.fromJson(body, {
+		        ignoreUnknownFields: true
+		      });
+		    } catch (e) {
+		      if (e instanceof Error) {
+		        const msg = 'the json request could not be decoded';
+		        throw new twirp_ts_1.TwirpError(
+		          twirp_ts_1.TwirpErrorCode.Malformed,
+		          msg
+		        ).withCause(e, true)
+		      }
+		    }
+		    if (interceptors && interceptors.length > 0) {
+		      const interceptor = (0, twirp_ts_1.chainInterceptors)(...interceptors);
+		      response = yield interceptor(ctx, request, (ctx, inputReq) => {
+		        return service.CreateArtifact(ctx, inputReq)
+		      });
+		    } else {
+		      response = yield service.CreateArtifact(ctx, request);
+		    }
+		    return JSON.stringify(
+		      artifact_1.CreateArtifactResponse.toJson(response, {
+		        useProtoFieldName: true,
+		        emitDefaultValues: false
+		      })
+		    )
+		  })
+		}
+		function handleArtifactServiceFinalizeArtifactJSON(
+		  ctx,
+		  service,
+		  data,
+		  interceptors
+		) {
+		  return __awaiter(this, undefined, undefined, function* () {
+		    let request;
+		    let response;
+		    try {
+		      const body = JSON.parse(data.toString() || '{}');
+		      request = artifact_1.FinalizeArtifactRequest.fromJson(body, {
+		        ignoreUnknownFields: true
+		      });
+		    } catch (e) {
+		      if (e instanceof Error) {
+		        const msg = 'the json request could not be decoded';
+		        throw new twirp_ts_1.TwirpError(
+		          twirp_ts_1.TwirpErrorCode.Malformed,
+		          msg
+		        ).withCause(e, true)
+		      }
+		    }
+		    if (interceptors && interceptors.length > 0) {
+		      const interceptor = (0, twirp_ts_1.chainInterceptors)(...interceptors);
+		      response = yield interceptor(ctx, request, (ctx, inputReq) => {
+		        return service.FinalizeArtifact(ctx, inputReq)
+		      });
+		    } else {
+		      response = yield service.FinalizeArtifact(ctx, request);
+		    }
+		    return JSON.stringify(
+		      artifact_1.FinalizeArtifactResponse.toJson(response, {
+		        useProtoFieldName: true,
+		        emitDefaultValues: false
+		      })
+		    )
+		  })
+		}
+		function handleArtifactServiceCreateArtifactProtobuf(
+		  ctx,
+		  service,
+		  data,
+		  interceptors
+		) {
+		  return __awaiter(this, undefined, undefined, function* () {
+		    let request;
+		    let response;
+		    try {
+		      request = artifact_1.CreateArtifactRequest.fromBinary(data);
+		    } catch (e) {
+		      if (e instanceof Error) {
+		        const msg = 'the protobuf request could not be decoded';
+		        throw new twirp_ts_1.TwirpError(
+		          twirp_ts_1.TwirpErrorCode.Malformed,
+		          msg
+		        ).withCause(e, true)
+		      }
+		    }
+		    if (interceptors && interceptors.length > 0) {
+		      const interceptor = (0, twirp_ts_1.chainInterceptors)(...interceptors);
+		      response = yield interceptor(ctx, request, (ctx, inputReq) => {
+		        return service.CreateArtifact(ctx, inputReq)
+		      });
+		    } else {
+		      response = yield service.CreateArtifact(ctx, request);
+		    }
+		    return Buffer.from(artifact_1.CreateArtifactResponse.toBinary(response))
+		  })
+		}
+		function handleArtifactServiceFinalizeArtifactProtobuf(
+		  ctx,
+		  service,
+		  data,
+		  interceptors
+		) {
+		  return __awaiter(this, undefined, undefined, function* () {
+		    let request;
+		    let response;
+		    try {
+		      request = artifact_1.FinalizeArtifactRequest.fromBinary(data);
+		    } catch (e) {
+		      if (e instanceof Error) {
+		        const msg = 'the protobuf request could not be decoded';
+		        throw new twirp_ts_1.TwirpError(
+		          twirp_ts_1.TwirpErrorCode.Malformed,
+		          msg
+		        ).withCause(e, true)
+		      }
+		    }
+		    if (interceptors && interceptors.length > 0) {
+		      const interceptor = (0, twirp_ts_1.chainInterceptors)(...interceptors);
+		      response = yield interceptor(ctx, request, (ctx, inputReq) => {
+		        return service.FinalizeArtifact(ctx, inputReq)
+		      });
+		    } else {
+		      response = yield service.FinalizeArtifact(ctx, request);
+		    }
+		    return Buffer.from(artifact_1.FinalizeArtifactResponse.toBinary(response))
+		  })
+		}
+		
+	} (artifact_twirp));
+	return artifact_twirp;
+}
+
+var hasRequiredGenerated;
+
+function requireGenerated () {
+	if (hasRequiredGenerated) return generated;
+	hasRequiredGenerated = 1;
+	(function (exports) {
+		var __createBinding =
+		  (generated.__createBinding) ||
+		  (Object.create
+		    ? function (o, m, k, k2) {
+		        if (k2 === undefined) k2 = k;
+		        var desc = Object.getOwnPropertyDescriptor(m, k);
+		        if (
+		          !desc ||
+		          ('get' in desc ? !m.__esModule : desc.writable || desc.configurable)
+		        ) {
+		          desc = {
+		            enumerable: true,
+		            get: function () {
+		              return m[k]
+		            }
+		          };
+		        }
+		        Object.defineProperty(o, k2, desc);
+		      }
+		    : function (o, m, k, k2) {
+		        if (k2 === undefined) k2 = k;
+		        o[k2] = m[k];
+		      });
+		var __exportStar =
+		  (generated.__exportStar) ||
+		  function (m, exports) {
+		    for (var p in m)
+		      if (p !== 'default' && !Object.prototype.hasOwnProperty.call(exports, p))
+		        __createBinding(exports, m, p);
+		  };
+		Object.defineProperty(exports, '__esModule', { value: true });
+		__exportStar(requireTimestamp(), exports);
+		__exportStar(requireWrappers(), exports);
+		__exportStar(requireArtifact$1(), exports);
+		__exportStar(requireArtifact_twirp(), exports);
+		
+	} (generated));
+	return generated;
+}
+
+var hasRequiredRetention;
+
+function requireRetention () {
+	if (hasRequiredRetention) return retention;
+	hasRequiredRetention = 1;
+	var __createBinding =
+	  (retention.__createBinding) ||
+	  (Object.create
+	    ? function (o, m, k, k2) {
+	        if (k2 === undefined) k2 = k;
+	        var desc = Object.getOwnPropertyDescriptor(m, k);
+	        if (
+	          !desc ||
+	          ('get' in desc ? !m.__esModule : desc.writable || desc.configurable)
+	        ) {
+	          desc = {
+	            enumerable: true,
+	            get: function () {
+	              return m[k]
+	            }
+	          };
+	        }
+	        Object.defineProperty(o, k2, desc);
+	      }
+	    : function (o, m, k, k2) {
+	        if (k2 === undefined) k2 = k;
+	        o[k2] = m[k];
+	      });
+	var __setModuleDefault =
+	  (retention.__setModuleDefault) ||
+	  (Object.create
+	    ? function (o, v) {
+	        Object.defineProperty(o, 'default', { enumerable: true, value: v });
+	      }
+	    : function (o, v) {
+	        o['default'] = v;
+	      });
+	var __importStar =
+	  (retention.__importStar) ||
+	  function (mod) {
+	    if (mod && mod.__esModule) return mod
+	    var result = {};
+	    if (mod != null)
+	      for (var k in mod)
+	        if (k !== 'default' && Object.prototype.hasOwnProperty.call(mod, k))
+	          __createBinding(result, mod, k);
+	    __setModuleDefault(result, mod);
+	    return result
+	  };
+	Object.defineProperty(retention, '__esModule', { value: true });
+	retention.getExpiration = undefined;
+	const generated_1 = requireGenerated();
+	const core = __importStar(requireCore());
+	function getExpiration(retentionDays) {
+	  if (!retentionDays) {
+	    return undefined
+	  }
+	  const maxRetentionDays = getRetentionDays();
+	  if (maxRetentionDays && maxRetentionDays < retentionDays) {
+	    core.warning(
+	      `Retention days cannot be greater than the maximum allowed retention set within the repository. Using ${maxRetentionDays} instead.`
+	    );
+	    retentionDays = maxRetentionDays;
+	  }
+	  const expirationDate = new Date();
+	  expirationDate.setDate(expirationDate.getDate() + retentionDays);
+	  return generated_1.Timestamp.fromDate(expirationDate)
+	}
+	retention.getExpiration = getExpiration;
+	function getRetentionDays() {
+	  const retentionDays = process.env['GITHUB_RETENTION_DAYS'];
+	  if (!retentionDays) {
+	    return undefined
+	  }
+	  const days = parseInt(retentionDays);
+	  if (isNaN(days)) {
+	    return undefined
+	  }
+	  return days
+	}
+	
+	return retention;
+}
+
+var pathAndArtifactNameValidation = {};
+
+var hasRequiredPathAndArtifactNameValidation;
+
+function requirePathAndArtifactNameValidation () {
+	if (hasRequiredPathAndArtifactNameValidation) return pathAndArtifactNameValidation;
+	hasRequiredPathAndArtifactNameValidation = 1;
+	Object.defineProperty(pathAndArtifactNameValidation, '__esModule', { value: true });
+	pathAndArtifactNameValidation.validateFilePath = pathAndArtifactNameValidation.validateArtifactName = undefined;
+	const core_1 = requireCore();
+	/**
+	 * Invalid characters that cannot be in the artifact name or an uploaded file. Will be rejected
+	 * from the server if attempted to be sent over. These characters are not allowed due to limitations with certain
+	 * file systems such as NTFS. To maintain platform-agnostic behavior, all characters that are not supported by an
+	 * individual filesystem/platform will not be supported on all fileSystems/platforms
+	 *
+	 * FilePaths can include characters such as \ and / which are not permitted in the artifact name alone
+	 */
+	const invalidArtifactFilePathCharacters = new Map([
+	  ['"', ' Double quote "'],
+	  [':', ' Colon :'],
+	  ['<', ' Less than <'],
+	  ['>', ' Greater than >'],
+	  ['|', ' Vertical bar |'],
+	  ['*', ' Asterisk *'],
+	  ['?', ' Question mark ?'],
+	  ['\r', ' Carriage return \\r'],
+	  ['\n', ' Line feed \\n']
+	]);
+	const invalidArtifactNameCharacters = new Map([
+	  ...invalidArtifactFilePathCharacters,
+	  ['\\', ' Backslash \\'],
+	  ['/', ' Forward slash /']
+	]);
+	/**
+	 * Validates the name of the artifact to check to make sure there are no illegal characters
+	 */
+	function validateArtifactName(name) {
+	  if (!name) {
+	    throw new Error(`Provided artifact name input during validation is empty`)
+	  }
+	  for (const [
+	    invalidCharacterKey,
+	    errorMessageForCharacter
+	  ] of invalidArtifactNameCharacters) {
+	    if (name.includes(invalidCharacterKey)) {
+	      throw new Error(`The artifact name is not valid: ${name}. Contains the following character: ${errorMessageForCharacter}
+          
+Invalid characters include: ${Array.from(invalidArtifactNameCharacters.values()).toString()}
+          
+These characters are not allowed in the artifact name due to limitations with certain file systems such as NTFS. To maintain file system agnostic behavior, these characters are intentionally not allowed to prevent potential problems with downloads on different file systems.`)
+	    }
+	  }
+(0, core_1.info)(`Artifact name is valid!`);
+	}
+	pathAndArtifactNameValidation.validateArtifactName = validateArtifactName;
+	/**
+	 * Validates file paths to check for any illegal characters that can cause problems on different file systems
+	 */
+	function validateFilePath(path) {
+	  if (!path) {
+	    throw new Error(`Provided file path input during validation is empty`)
+	  }
+	  for (const [
+	    invalidCharacterKey,
+	    errorMessageForCharacter
+	  ] of invalidArtifactFilePathCharacters) {
+	    if (path.includes(invalidCharacterKey)) {
+	      throw new Error(`The path for one of the files in artifact is not valid: ${path}. Contains the following character: ${errorMessageForCharacter}
+          
+Invalid characters include: ${Array.from(invalidArtifactFilePathCharacters.values()).toString()}
+          
+The following characters are not allowed in files that are uploaded due to limitations with certain file systems such as NTFS. To maintain file system agnostic behavior, these characters are intentionally not allowed to prevent potential problems with downloads on different file systems.
+          `)
+	    }
+	  }
+	}
+	pathAndArtifactNameValidation.validateFilePath = validateFilePath;
+	
+	return pathAndArtifactNameValidation;
+}
+
+var artifactTwirpClient = {};
+
+var config = {};
+
+var hasRequiredConfig;
+
+function requireConfig () {
+	if (hasRequiredConfig) return config;
+	hasRequiredConfig = 1;
+	Object.defineProperty(config, '__esModule', { value: true });
+	config.isGhes = config.getResultsServiceUrl = config.getRuntimeToken = undefined;
+	function getRuntimeToken() {
+	  const token = process.env['ACTIONS_RUNTIME_TOKEN'];
+	  if (!token) {
+	    throw new Error('Unable to get the ACTIONS_RUNTIME_TOKEN env variable')
+	  }
+	  return token
+	}
+	config.getRuntimeToken = getRuntimeToken;
+	function getResultsServiceUrl() {
+	  const resultsUrl = process.env['ACTIONS_RESULTS_URL'];
+	  if (!resultsUrl) {
+	    throw new Error('Unable to get the ACTIONS_RESULTS_URL env variable')
+	  }
+	  return resultsUrl
+	}
+	config.getResultsServiceUrl = getResultsServiceUrl;
+	function isGhes() {
+	  const ghUrl = new URL(
+	    process.env['GITHUB_SERVER_URL'] || 'https://github.com'
+	  );
+	  return ghUrl.hostname.toUpperCase() !== 'GITHUB.COM'
+	}
+	config.isGhes = isGhes;
+	
+	return config;
+}
+
+var hasRequiredArtifactTwirpClient;
+
+function requireArtifactTwirpClient () {
+	if (hasRequiredArtifactTwirpClient) return artifactTwirpClient;
+	hasRequiredArtifactTwirpClient = 1;
+	var __awaiter =
+	  (artifactTwirpClient.__awaiter) ||
+	  function (thisArg, _arguments, P, generator) {
+	    function adopt(value) {
+	      return value instanceof P
+	        ? value
+	        : new P(function (resolve) {
+	            resolve(value);
+	          })
+	    }
+	    return new (P || (P = Promise))(function (resolve, reject) {
+	      function fulfilled(value) {
+	        try {
+	          step(generator.next(value));
+	        } catch (e) {
+	          reject(e);
+	        }
+	      }
+	      function rejected(value) {
+	        try {
+	          step(generator['throw'](value));
+	        } catch (e) {
+	          reject(e);
+	        }
+	      }
+	      function step(result) {
+	        result.done
+	          ? resolve(result.value)
+	          : adopt(result.value).then(fulfilled, rejected);
+	      }
+	      step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    })
+	  };
+	Object.defineProperty(artifactTwirpClient, '__esModule', { value: true });
+	artifactTwirpClient.createArtifactTwirpClient = undefined;
+	const http_client_1 = requireLib();
+	const auth_1 = requireAuth();
+	const core_1 = requireCore();
+	const generated_1 = requireGenerated();
+	const config_1 = requireConfig();
+	class ArtifactHttpClient {
+	  constructor(
+	    userAgent,
+	    maxAttempts,
+	    baseRetryIntervalMilliseconds,
+	    retryMultiplier
+	  ) {
+	    this.maxAttempts = 5;
+	    this.baseRetryIntervalMilliseconds = 3000;
+	    this.retryMultiplier = 1.5;
+	    const token = (0, config_1.getRuntimeToken)();
+	    this.baseUrl = (0, config_1.getResultsServiceUrl)();
+	    if (maxAttempts) {
+	      this.maxAttempts = maxAttempts;
+	    }
+	    if (baseRetryIntervalMilliseconds) {
+	      this.baseRetryIntervalMilliseconds = baseRetryIntervalMilliseconds;
+	    }
+	    if (retryMultiplier) {
+	      this.retryMultiplier = retryMultiplier;
+	    }
+	    this.httpClient = new http_client_1.HttpClient(userAgent, [
+	      new auth_1.BearerCredentialHandler(token)
+	    ]);
+	  }
+	  // This function satisfies the Rpc interface. It is compatible with the JSON
+	  // JSON generated client.
+	  request(service, method, contentType, data) {
+	    return __awaiter(this, undefined, undefined, function* () {
+	      const url = `${this.baseUrl}/twirp/${service}/${method}`;
+	      const headers = {
+	        'Content-Type': contentType
+	      };
+	      try {
+	        const response = yield this.retryableRequest(() =>
+	          __awaiter(this, void 0, void 0, function* () {
+	            return this.httpClient.post(url, JSON.stringify(data), headers)
+	          })
+	        );
+	        const body = yield response.readBody();
+	        return JSON.parse(body)
+	      } catch (error) {
+	        throw new Error(`Failed to ${method}: ${error.message}`)
+	      }
+	    })
+	  }
+	  retryableRequest(operation) {
+	    return __awaiter(this, undefined, undefined, function* () {
+	      let attempt = 0;
+	      let errorMessage = '';
+	      while (attempt < this.maxAttempts) {
+	        let isRetryable = false;
+	        try {
+	          const response = yield operation();
+	          const statusCode = response.message.statusCode;
+	          if (this.isSuccessStatusCode(statusCode)) {
+	            return response
+	          }
+	          isRetryable = this.isRetryableHttpStatusCode(statusCode);
+	          errorMessage = `Failed request: (${statusCode}) ${response.message.statusMessage}`;
+	        } catch (error) {
+	          isRetryable = true;
+	          errorMessage = error.message;
+	        }
+	        if (!isRetryable) {
+	          throw new Error(`Received non-retryable error: ${errorMessage}`)
+	        }
+	        if (attempt + 1 === this.maxAttempts) {
+	          throw new Error(
+	            `Failed to make request after ${this.maxAttempts} attempts: ${errorMessage}`
+	          )
+	        }
+	        const retryTimeMilliseconds =
+	          this.getExponentialRetryTimeMilliseconds(attempt)
+	        ;(0, core_1.info)(
+	          `Attempt ${attempt + 1} of ${this.maxAttempts} failed with error: ${errorMessage}. Retrying request in ${retryTimeMilliseconds} ms...`
+	        );
+	        yield this.sleep(retryTimeMilliseconds);
+	        attempt++;
+	      }
+	      throw new Error(`Request failed`)
+	    })
+	  }
+	  isSuccessStatusCode(statusCode) {
+	    if (!statusCode) return false
+	    return statusCode >= 200 && statusCode < 300
+	  }
+	  isRetryableHttpStatusCode(statusCode) {
+	    if (!statusCode) return false
+	    const retryableStatusCodes = [
+	      http_client_1.HttpCodes.BadGateway,
+	      http_client_1.HttpCodes.GatewayTimeout,
+	      http_client_1.HttpCodes.InternalServerError,
+	      http_client_1.HttpCodes.ServiceUnavailable,
+	      http_client_1.HttpCodes.TooManyRequests,
+	      413 // Payload Too Large
+	    ];
+	    return retryableStatusCodes.includes(statusCode)
+	  }
+	  sleep(milliseconds) {
+	    return __awaiter(this, undefined, undefined, function* () {
+	      return new Promise((resolve) => setTimeout(resolve, milliseconds))
+	    })
+	  }
+	  getExponentialRetryTimeMilliseconds(attempt) {
+	    if (attempt < 0) {
+	      throw new Error('attempt should be a positive integer')
+	    }
+	    if (attempt === 0) {
+	      return this.baseRetryIntervalMilliseconds
+	    }
+	    const minTime =
+	      this.baseRetryIntervalMilliseconds *
+	      Math.pow(this.retryMultiplier, attempt);
+	    const maxTime = minTime * this.retryMultiplier;
+	    // returns a random number between minTime and maxTime (exclusive)
+	    return Math.trunc(Math.random() * (maxTime - minTime) + minTime)
+	  }
+	}
+	function createArtifactTwirpClient(
+	  type,
+	  maxAttempts,
+	  baseRetryIntervalMilliseconds,
+	  retryMultiplier
+	) {
+	  const client = new ArtifactHttpClient(
+	    `@actions/artifact-${type}`,
+	    maxAttempts,
+	    baseRetryIntervalMilliseconds,
+	    retryMultiplier
+	  );
+	  return new generated_1.ArtifactServiceClientJSON(client)
+	}
+	artifactTwirpClient.createArtifactTwirpClient = createArtifactTwirpClient;
+	
+	return artifactTwirpClient;
+}
+
+var uploadZipSpecification = {};
+
+var hasRequiredUploadZipSpecification;
+
+function requireUploadZipSpecification () {
+	if (hasRequiredUploadZipSpecification) return uploadZipSpecification;
+	hasRequiredUploadZipSpecification = 1;
+	var __createBinding =
+	  (uploadZipSpecification.__createBinding) ||
+	  (Object.create
+	    ? function (o, m, k, k2) {
+	        if (k2 === undefined) k2 = k;
+	        var desc = Object.getOwnPropertyDescriptor(m, k);
+	        if (
+	          !desc ||
+	          ('get' in desc ? !m.__esModule : desc.writable || desc.configurable)
+	        ) {
+	          desc = {
+	            enumerable: true,
+	            get: function () {
+	              return m[k]
+	            }
+	          };
+	        }
+	        Object.defineProperty(o, k2, desc);
+	      }
+	    : function (o, m, k, k2) {
+	        if (k2 === undefined) k2 = k;
+	        o[k2] = m[k];
+	      });
+	var __setModuleDefault =
+	  (uploadZipSpecification.__setModuleDefault) ||
+	  (Object.create
+	    ? function (o, v) {
+	        Object.defineProperty(o, 'default', { enumerable: true, value: v });
+	      }
+	    : function (o, v) {
+	        o['default'] = v;
+	      });
+	var __importStar =
+	  (uploadZipSpecification.__importStar) ||
+	  function (mod) {
+	    if (mod && mod.__esModule) return mod
+	    var result = {};
+	    if (mod != null)
+	      for (var k in mod)
+	        if (k !== 'default' && Object.prototype.hasOwnProperty.call(mod, k))
+	          __createBinding(result, mod, k);
+	    __setModuleDefault(result, mod);
+	    return result
+	  };
+	Object.defineProperty(uploadZipSpecification, '__esModule', { value: true });
+	uploadZipSpecification.getUploadZipSpecification = uploadZipSpecification.validateRootDirectory = undefined;
+	const fs = __importStar(require$$1$2);
+	const core_1 = requireCore();
+	const path_1 = require$$1$8;
+	const path_and_artifact_name_validation_1 = requirePathAndArtifactNameValidation();
+	/**
+	 * Checks if a root directory exists and is valid
+	 * @param rootDirectory an absolute root directory path common to all input files that that will be trimmed from the final zip structure
+	 */
+	function validateRootDirectory(rootDirectory) {
+	  if (!fs.existsSync(rootDirectory)) {
+	    throw new Error(
+	      `The provided rootDirectory ${rootDirectory} does not exist`
+	    )
+	  }
+	  if (!fs.statSync(rootDirectory).isDirectory()) {
+	    throw new Error(
+	      `The provided rootDirectory ${rootDirectory} is not a valid directory`
+	    )
+	  }
+(0, core_1.info)(`Root directory input is valid!`);
+	}
+	uploadZipSpecification.validateRootDirectory = validateRootDirectory;
+	/**
+	 * Creates a specification that describes how a zip file will be created for a set of input files
+	 * @param filesToZip a list of file that should be included in the zip
+	 * @param rootDirectory an absolute root directory path common to all input files that that will be trimmed from the final zip structure
+	 */
+	function getUploadZipSpecification(filesToZip, rootDirectory) {
+	  const specification = [];
+	  // Normalize and resolve, this allows for either absolute or relative paths to be used
+	  rootDirectory = (0, path_1.normalize)(rootDirectory);
+	  rootDirectory = (0, path_1.resolve)(rootDirectory);
+	  /*
+	       Example
+	       
+	       Input:
+	         rootDirectory: '/home/user/files/plz-upload'
+	         artifactFiles: [
+	           '/home/user/files/plz-upload/file1.txt',
+	           '/home/user/files/plz-upload/file2.txt',
+	           '/home/user/files/plz-upload/dir/file3.txt'
+	         ]
+	       
+	       Output:
+	         specifications: [
+	           ['/home/user/files/plz-upload/file1.txt', '/file1.txt'],
+	           ['/home/user/files/plz-upload/file1.txt', '/file2.txt'],
+	           ['/home/user/files/plz-upload/file1.txt', '/dir/file3.txt']
+	         ]
+	  
+	        The final zip that is later uploaded will look like this:
+	  
+	        my-artifact.zip
+	          - file.txt
+	          - file2.txt
+	          - dir/
+	            - file3.txt
+	    */
+	  for (let file of filesToZip) {
+	    if (!fs.existsSync(file)) {
+	      throw new Error(`File ${file} does not exist`)
+	    }
+	    if (!fs.statSync(file).isDirectory()) {
+	      // Normalize and resolve, this allows for either absolute or relative paths to be used
+	      file = (0, path_1.normalize)(file);
+	      file = (0, path_1.resolve)(file);
+	      if (!file.startsWith(rootDirectory)) {
+	        throw new Error(
+	          `The rootDirectory: ${rootDirectory} is not a parent directory of the file: ${file}`
+	        )
+	      }
+	      // Check for forbidden characters in file paths that may cause ambiguous behavior if downloaded on different file systems
+	      const uploadPath = file.replace(rootDirectory, '')
+	      ;(0, path_and_artifact_name_validation_1.validateFilePath)(uploadPath);
+	      specification.push({
+	        sourcePath: file,
+	        destinationPath: uploadPath
+	      });
+	    } else {
+	      // Empty directory
+	      const directoryPath = file.replace(rootDirectory, '')
+	      ;(0, path_and_artifact_name_validation_1.validateFilePath)(directoryPath);
+	      specification.push({
+	        sourcePath: null,
+	        destinationPath: directoryPath
+	      });
+	    }
+	  }
+	  return specification
+	}
+	uploadZipSpecification.getUploadZipSpecification = getUploadZipSpecification;
+	
+	return uploadZipSpecification;
+}
+
+var util = {};
+
+function e(e){this.message=e;}e.prototype=new Error,e.prototype.name="InvalidCharacterError";var r="undefined"!=typeof window&&window.atob&&window.atob.bind(window)||function(r){var t=String(r).replace(/=+$/,"");if(t.length%4==1)throw new e("'atob' failed: The string to be decoded is not correctly encoded.");for(var n,o,a=0,i=0,c="";o=t.charAt(i++);~o&&(n=a%4?64*n+o:o,a++%4)?c+=String.fromCharCode(255&n>>(-2*a&6)):0)o="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(o);return c};function t(e){var t=e.replace(/-/g,"+").replace(/_/g,"/");switch(t.length%4){case 0:break;case 2:t+="==";break;case 3:t+="=";break;default:throw "Illegal base64url string!"}try{return function(e){return decodeURIComponent(r(e).replace(/(.)/g,(function(e,r){var t=r.charCodeAt(0).toString(16).toUpperCase();return t.length<2&&(t="0"+t),"%"+t})))}(t)}catch(e){return r(t)}}function n(e){this.message=e;}function o(e,r){if("string"!=typeof e)throw new n("Invalid token specified");var o=true===(r=r||{}).header?0:1;try{return JSON.parse(t(e.split(".")[o]))}catch(e){throw new n("Invalid token specified: "+e.message)}}n.prototype=new Error,n.prototype.name="InvalidTokenError";
+
+var jwtDecode_esm = /*#__PURE__*/Object.freeze({
+	__proto__: null,
+	InvalidTokenError: n,
+	default: o
+});
+
+var require$$1 = /*@__PURE__*/getAugmentedNamespace(jwtDecode_esm);
+
+var hasRequiredUtil;
+
+function requireUtil () {
+	if (hasRequiredUtil) return util;
+	hasRequiredUtil = 1;
+	var __importDefault =
+	  (util.__importDefault) ||
+	  function (mod) {
+	    return mod && mod.__esModule ? mod : { default: mod }
+	  };
+	Object.defineProperty(util, '__esModule', { value: true });
+	util.getBackendIdsFromToken = undefined;
+	const config_1 = requireConfig();
+	const jwt_decode_1 = __importDefault(require$$1);
+	const InvalidJwtError = new Error(
+	  'Failed to get backend IDs: The provided JWT token is invalid'
+	);
+	// uses the JWT token claims to get the
+	// workflow run and workflow job run backend ids
+	function getBackendIdsFromToken() {
+	  const token = (0, config_1.getRuntimeToken)();
+	  const decoded = (0, jwt_decode_1.default)(token);
+	  if (!decoded.scp) {
+	    throw InvalidJwtError
+	  }
+	  /*
+	   * example decoded:
+	   * {
+	   *   scp: "Actions.ExampleScope Actions.Results:ce7f54c7-61c7-4aae-887f-30da475f5f1a:ca395085-040a-526b-2ce8-bdc85f692774"
+	   * }
+	   */
+	  const scpParts = decoded.scp.split(' ');
+	  if (scpParts.length === 0) {
+	    throw InvalidJwtError
+	  }
+	  /*
+	   * example scpParts:
+	   * ["Actions.ExampleScope", "Actions.Results:ce7f54c7-61c7-4aae-887f-30da475f5f1a:ca395085-040a-526b-2ce8-bdc85f692774"]
+	   */
+	  for (const scopes of scpParts) {
+	    const scopeParts = scopes.split(':');
+	    /*
+	     * example scopeParts:
+	     * ["Actions.Results", "ce7f54c7-61c7-4aae-887f-30da475f5f1a", "ca395085-040a-526b-2ce8-bdc85f692774"]
+	     */
+	    if (scopeParts.length !== 3) {
+	      // not the Actions.Results scope
+	      continue
+	    }
+	    if (scopeParts[0] !== 'Actions.Results') {
+	      // not the Actions.Results scope
+	      continue
+	    }
+	    return {
+	      workflowRunBackendId: scopeParts[1],
+	      workflowJobRunBackendId: scopeParts[2]
+	    }
+	  }
+	  throw InvalidJwtError
+	}
+	util.getBackendIdsFromToken = getBackendIdsFromToken;
+	
+	return util;
+}
+
+var hasRequiredUploadArtifact;
+
+function requireUploadArtifact () {
+	if (hasRequiredUploadArtifact) return uploadArtifact;
+	hasRequiredUploadArtifact = 1;
+	var __createBinding =
+	  (uploadArtifact.__createBinding) ||
+	  (Object.create
+	    ? function (o, m, k, k2) {
+	        if (k2 === undefined) k2 = k;
+	        var desc = Object.getOwnPropertyDescriptor(m, k);
+	        if (
+	          !desc ||
+	          ('get' in desc ? !m.__esModule : desc.writable || desc.configurable)
+	        ) {
+	          desc = {
+	            enumerable: true,
+	            get: function () {
+	              return m[k]
+	            }
+	          };
+	        }
+	        Object.defineProperty(o, k2, desc);
+	      }
+	    : function (o, m, k, k2) {
+	        if (k2 === undefined) k2 = k;
+	        o[k2] = m[k];
+	      });
+	var __setModuleDefault =
+	  (uploadArtifact.__setModuleDefault) ||
+	  (Object.create
+	    ? function (o, v) {
+	        Object.defineProperty(o, 'default', { enumerable: true, value: v });
+	      }
+	    : function (o, v) {
+	        o['default'] = v;
+	      });
+	var __importStar =
+	  (uploadArtifact.__importStar) ||
+	  function (mod) {
+	    if (mod && mod.__esModule) return mod
+	    var result = {};
+	    if (mod != null)
+	      for (var k in mod)
+	        if (k !== 'default' && Object.prototype.hasOwnProperty.call(mod, k))
+	          __createBinding(result, mod, k);
+	    __setModuleDefault(result, mod);
+	    return result
+	  };
+	var __awaiter =
+	  (uploadArtifact.__awaiter) ||
+	  function (thisArg, _arguments, P, generator) {
+	    function adopt(value) {
+	      return value instanceof P
+	        ? value
+	        : new P(function (resolve) {
+	            resolve(value);
+	          })
+	    }
+	    return new (P || (P = Promise))(function (resolve, reject) {
+	      function fulfilled(value) {
+	        try {
+	          step(generator.next(value));
+	        } catch (e) {
+	          reject(e);
+	        }
+	      }
+	      function rejected(value) {
+	        try {
+	          step(generator['throw'](value));
+	        } catch (e) {
+	          reject(e);
+	        }
+	      }
+	      function step(result) {
+	        result.done
+	          ? resolve(result.value)
+	          : adopt(result.value).then(fulfilled, rejected);
+	      }
+	      step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    })
+	  };
+	Object.defineProperty(uploadArtifact, '__esModule', { value: true });
+	uploadArtifact.uploadArtifact = undefined;
+	const core = __importStar(requireCore());
+	const retention_1 = requireRetention();
+	const path_and_artifact_name_validation_1 = requirePathAndArtifactNameValidation();
+	const artifact_twirp_client_1 = requireArtifactTwirpClient();
+	const upload_zip_specification_1 = requireUploadZipSpecification();
+	const util_1 = requireUtil();
+	function uploadArtifact$1(name, files, rootDirectory, options) {
+	  return __awaiter(this, undefined, undefined, function* () {
+(0, path_and_artifact_name_validation_1.validateArtifactName)(name)
+	    ;(0, upload_zip_specification_1.validateRootDirectory)(rootDirectory);
+	    const zipSpecification = (0, upload_zip_specification_1.getUploadZipSpecification)(files, rootDirectory);
+	    if (zipSpecification.length === 0) {
+	      core.warning(`No files were found to upload`);
+	      return {
+	        success: false
+	      }
+	    }
+	    // get the IDs needed for the artifact creation
+	    const backendIds = (0, util_1.getBackendIdsFromToken)();
+	    if (
+	      !backendIds.workflowRunBackendId ||
+	      !backendIds.workflowJobRunBackendId
+	    ) {
+	      core.warning(`Failed to get backend ids`);
+	      return {
+	        success: false
+	      }
+	    }
+	    core.debug(`Workflow Run Backend ID: ${backendIds.workflowRunBackendId}`);
+	    core.debug(
+	      `Workflow Job Run Backend ID: ${backendIds.workflowJobRunBackendId}`
+	    );
+	    // create the artifact client
+	    const artifactClient = (0, artifact_twirp_client_1.createArtifactTwirpClient)('upload');
+	    // create the artifact
+	    const createArtifactReq = {
+	      workflowRunBackendId: backendIds.workflowRunBackendId,
+	      workflowJobRunBackendId: backendIds.workflowJobRunBackendId,
+	      name,
+	      version: 4
+	    };
+	    // if there is a retention period, add it to the request
+	    const expiresAt = (0, retention_1.getExpiration)(
+	      options === null || options === undefined ? undefined : options.retentionDays
+	    );
+	    if (expiresAt) {
+	      createArtifactReq.expiresAt = expiresAt;
+	    }
+	    const createArtifactResp =
+	      yield artifactClient.CreateArtifact(createArtifactReq);
+	    if (!createArtifactResp.ok) {
+	      core.warning(`Failed to create artifact`);
+	      return {
+	        success: false
+	      }
+	    }
+	    // TODO - Implement upload functionality
+	    // finalize the artifact
+	    const finalizeArtifactResp = yield artifactClient.FinalizeArtifact({
+	      workflowRunBackendId: backendIds.workflowRunBackendId,
+	      workflowJobRunBackendId: backendIds.workflowJobRunBackendId,
+	      name,
+	      size: '0' // TODO - Add size
+	    });
+	    if (!finalizeArtifactResp.ok) {
+	      core.warning(`Failed to finalize artifact`);
+	      return {
+	        success: false
+	      }
+	    }
+	    const uploadResponse = {
+	      success: true,
+	      size: 0,
+	      id: parseInt(finalizeArtifactResp.artifactId) // TODO - will this be a problem due to the id being a bigint?
+	    };
+	    return uploadResponse
+	  })
+	}
+	uploadArtifact.uploadArtifact = uploadArtifact$1;
+	
+	return uploadArtifact;
+}
+
+var hasRequiredClient;
+
+function requireClient () {
+	if (hasRequiredClient) return client;
+	hasRequiredClient = 1;
+	var __awaiter =
+	  (client.__awaiter) ||
+	  function (thisArg, _arguments, P, generator) {
+	    function adopt(value) {
+	      return value instanceof P
+	        ? value
+	        : new P(function (resolve) {
+	            resolve(value);
+	          })
+	    }
+	    return new (P || (P = Promise))(function (resolve, reject) {
+	      function fulfilled(value) {
+	        try {
+	          step(generator.next(value));
+	        } catch (e) {
+	          reject(e);
+	        }
+	      }
+	      function rejected(value) {
+	        try {
+	          step(generator['throw'](value));
+	        } catch (e) {
+	          reject(e);
+	        }
+	      }
+	      function step(result) {
+	        result.done
+	          ? resolve(result.value)
+	          : adopt(result.value).then(fulfilled, rejected);
+	      }
+	      step((generator = generator.apply(thisArg, _arguments || [])).next());
+	    })
+	  };
+	Object.defineProperty(client, '__esModule', { value: true });
+	client.Client = undefined;
+	const upload_artifact_1 = requireUploadArtifact();
+	const core_1 = requireCore();
+	const config_1 = requireConfig();
+	class Client {
+	  /**
+	   * Constructs a Client
+	   */
+	  static create() {
+	    return new Client()
+	  }
+	  /**
+	   * Uploads an artifact
+	   */
+	  uploadArtifact(name, files, rootDirectory, options) {
+	    return __awaiter(this, undefined, undefined, function* () {
+	      if ((0, config_1.isGhes)()) {
+(0, core_1.warning)(
+	          `@actions/artifact v2 and upload-artifact v4 are not currently supported on GHES.`
+	        );
+	        return {
+	          success: false
+	        }
+	      }
+	      try {
+	        return (0, upload_artifact_1.uploadArtifact)(
+	          name,
+	          files,
+	          rootDirectory,
+	          options
+	        )
+	      } catch (error) {
+(0, core_1.warning)(`Artifact upload failed with error: ${error}.
+
+Errors can be temporary, so please try again and optionally run the action with debug enabled for more information.
+
+If the error persists, please check whether Actions is running normally at [https://githubstatus.com](https://www.githubstatus.com).`);
+	        return {
+	          success: false
+	        }
+	      }
+	    })
+	  }
+	}
+	client.Client = Client;
+	
+	return client;
+}
+
+var hasRequiredArtifact;
+
+function requireArtifact () {
+	if (hasRequiredArtifact) return artifact$1;
+	hasRequiredArtifact = 1;
+	Object.defineProperty(artifact$1, '__esModule', { value: true });
+	artifact$1.create = undefined;
+	const client_1 = requireClient();
+	function create() {
+	  return client_1.Client.create()
+	}
+	artifact$1.create = create;
+	
+	return artifact$1;
+}
+
+var artifactExports = requireArtifact();
 
 /**
  * The main function for the action.
@@ -27246,7 +38760,7 @@ var coreExports = requireCore();
  */
 async function run() {
   try {
-    const artifact = create();
+    const artifact = artifactExports.create();
     const artifactName = coreExports.getInput('name');
     const artifactPathsInput = coreExports.getInput('paths');
     const artifactPaths = artifactPathsInput.split(',');
