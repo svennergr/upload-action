@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import { create, DefaultArtifactClient } from '@actions/artifact'
+import { create } from '../artifact/lib/artifact-client.js'
 
 /**
  * The main function for the action.
