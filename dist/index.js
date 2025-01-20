@@ -37745,9 +37745,6 @@ function requireUploadZipSpecification () {
 	            - file3.txt
 	    */
 	    for (let file of filesToZip) {
-	        if (!fs.existsSync(file)) {
-	            throw new Error(`File ${file} does not exist`);
-	        }
 	        if (!fs.statSync(file).isDirectory()) {
 	            // Normalize and resolve, this allows for either absolute or relative paths to be used
 	            file = (0, path_1.normalize)(file);
